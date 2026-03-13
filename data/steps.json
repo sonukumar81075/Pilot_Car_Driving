@@ -1,0 +1,20 @@
+[
+  {
+    "step": "01",
+    "title": "Book Your Lesson  ",
+    "description": "Choose a training program and schedule your driving lessons at a convenient time.",
+    "image": "/images/Easy_Steps/01.png"
+  },
+  {
+    "step": "02",
+    "title": "Learn with Experts",
+    "description": "Practice real driving skills with certified instructors including highway control and parking.",
+    "image": "/images/Easy_Steps/02.png"
+  },
+  {
+    "step": "03",
+    "title": "Drive with Confidence",
+    "description": "Build confidence behind the wheel and get ready for safe and independent driving.",
+    "image": "/images/Easy_Steps/03.png"
+  }
+]

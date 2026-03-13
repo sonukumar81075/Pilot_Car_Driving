@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Beginner Licensing",
+    "image": "/images/services/unnamed.jpg",
+    "description": "Master the basics with 1-on-1 dual-control instruction designed for total confidence."
+  },
+  {
+    "title": "Defensive Driving",
+    "image": "/images/services/unnamed (1).jpg",
+    "description": "Advanced techniques to anticipate hazards and keep you safe in unpredictable traffic."
+  },
+  {
+    "title": "Highway Mastery",
+    "image": "/images/services/Highway&Mastery.png",
+    "description": "Conquer high-speed merging, lane changes, and long-distance driving with ease."
+  },
+  {
+    "title": "Parking & Precision",
+    "image": "/images/services/Parking & Precision.png",
+    "description": "Parallel parking, reverse bay parking, and tight-space maneuvering made simple."
+  },
+  {
+    "title": "Mock Road Tests",
+    "image": "/images/services/unnamed (2).jpg",
+    "description": "Simulated exams with certified instructors to ensure you pass your license test first time."
+  }  
+  
+]

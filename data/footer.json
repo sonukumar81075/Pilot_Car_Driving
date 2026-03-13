@@ -1,0 +1,83 @@
+{
+  "cta": {
+    "headline": "Get expert house help in minutes.",
+    "subtitle": "Thousands already trust us for hassle-free home upkeep.",
+    "appBadges": [
+      {
+        "label": "Get it on Google Play",
+        "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+        "icon": "google",
+        "src": "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
+      },
+      {
+        "label": "Download on the App Store",
+        "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+        "icon": "apple",
+        "src": "/images/e6aniRpuJcqluoFiHQxTzMpzOCs.avif"
+      }
+    ]
+  },
+  "columns": [
+    {
+      "title": "Support",
+      "links": [
+        {
+          "label": "Contact Us",
+          "href": "#"
+        },
+        {
+          "label": "Delete Account",
+          "href": "#"
+        }
+      ]
+    },
+    {
+      "title": "Company",
+      "links": [
+        {
+          "label": "Careers",
+          "href": "#"
+        },
+        {
+          "label": "careers@withpiloto.com",
+          "href": "mailto:careers@withpiloto.com"
+        },
+        {
+          "label": "Become a Pilot  Professional",
+          "href": "#"
+        }
+      ]
+    },
+    {
+      "title": "Legal",
+      "links": [
+        {
+          "label": "Terms & Conditions",
+          "href": "#"
+        },
+        {
+          "label": "Privacy Policy",
+          "href": "#"
+        }
+      ]
+    }
+  ],
+  "social": [
+    {
+      "label": "LinkedIn",
+      "href": "#",
+      "icon": "linkedin"
+    },
+    {
+      "label": "Facebook",
+      "href": "#",
+      "icon": "facebook"
+    },
+    {
+      "label": "Instagram",
+      "href": "#",
+      "icon": "instagram"
+    }
+  ],
+  "legal": "Pilot © 2025"
+}

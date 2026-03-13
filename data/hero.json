@@ -1,0 +1,65 @@
+{
+  "brand": "Pilot",
+  "nav": [
+    {
+      "label": "Services",
+      "href": "#services"
+    },
+    {
+      "label": "How it works",
+      "href": "#how-it-works"
+    },
+    {
+      "label": "Reviews",
+      "href": "#testimonials"
+    },
+    {
+      "label": "FAQ",
+      "href": "#faq"
+    }
+  ],
+  "headline": "Master the road, booked in minutes.",
+  "subtitle": "The modern way to learn driving. Connect with certified instructors, track your progress in real-time, and get license-ready with our on-demand booking app.",
+  "primaryCta": {
+    "label": "Start Learning",
+    "href": "#download"
+  },
+  "secondaryCta": {
+    "label": "Find an Instructor",
+    "href": "#instructors"
+  },
+  "appBadges": [
+    {
+      "label": "Get it on Google Play",
+      "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+      "icon": "google",
+      "src": "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
+    },
+    {
+      "label": "Download on the App Store",
+      "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+      "icon": "apple",
+      "src": "/images/e6aniRpuJcqluoFiHQxTzMpzOCs.avif"
+    }
+  ],
+  "heroImage": {
+    "src": "/images/Easy_Steps/02.png",
+    "alt": "Pilot driving app interface showing lesson tracking",
+    "width": 980,
+    "height": 720
+  },
+  "highlights": [
+    {
+      "title": "Certified Instructors",
+      "description": "Expert trainers with dual-control cars and full background checks."
+    },
+    {
+      "title": "Flexible Tracking",
+      "description": "Log your hours and track your skills directly in the app."
+    },
+    {
+      "title": "Instant Booking",
+      "description": "Schedule lessons that fit your life with real-time availability."
+    }
+  ]
+}
