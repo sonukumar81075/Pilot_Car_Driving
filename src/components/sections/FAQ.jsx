@@ -4,7 +4,7 @@ import { FaqAccordion } from "./FaqAccordion";
 
 export function FAQ({ items }) {
   return (
-    <section id="faq" className="md:pt-28 pt-10 bg-[#FFFFFF] font-lexend">
+    <section id="faq" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
       <Container>
 
         <div className="text-center ">

@@ -9,7 +9,7 @@ async function readJsonFile(filename) {
 }
 
 export async function getLandingData() {
-  const [hero, stats, services, steps, testimonials, faq, footer] =
+  const [hero, stats, services, steps, testimonials, faq, footer, pricing, leadModal] =
     await Promise.all([
       readJsonFile("hero.json"),
       readJsonFile("stats.json"),
@@ -18,8 +18,10 @@ export async function getLandingData() {
       readJsonFile("testimonials.json"),
       readJsonFile("faq.json"),
       readJsonFile("footer.json"),
+      readJsonFile("pricing.json"),
+      readJsonFile("leadModal.json"),
     ]);
 
-  return { hero, stats, services, steps, testimonials, faq, footer };
+  return { hero, stats, services, steps, testimonials, faq, footer, pricing, leadModal };
 }
 

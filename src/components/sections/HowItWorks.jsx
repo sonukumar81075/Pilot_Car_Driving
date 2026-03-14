@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export function HowItWorks({ steps }) {
   return (
-    <section id="how-it-works" className="md:pt-28 pt-10 bg-[#FFFFFF] font-lexend">
+    <section id="how-it-works" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
       <Container>
 
       <SectionHeading

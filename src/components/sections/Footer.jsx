@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export function Footer({ data }) {
   return (
-    <footer className="md:pt-28 pt-10 bg-[#FFFFFF] font-lexend lg:px-0 px-4 ">
+    <footer className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend lg:px-0 px-4 ">
 
       {/* CTA */}
       <Container className="  md:pb-16 pb-12 text-center">
@@ -87,7 +87,7 @@ export function Footer({ data }) {
                       <Link
                         href={l.href}
                         className={`text-[18px] font-lexend font-[500] leading-[27px]   ${l.href.startsWith("mailto:")
-                          ? "text-[#1D4ED7] underline decoration-dotted underline-offset-4 "
+                          ? "text-[#1d4ed7] underline decoration-dotted underline-offset-4 "
                           : "text-[#333333]"
                           }`}
                       >

@@ -10,7 +10,7 @@ export function Services({ services }) {
   const tickerItems = [...services, ...services];
 
   return (
-    <section id="services" className="md:pt-28 pt-10 bg-[#FFFFFF] font-lexend overflow-hidden ">
+    <section id="services" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend overflow-hidden ">
 
 <SectionHeading
   eyebrow="Pilot Driving School"

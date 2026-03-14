@@ -51,7 +51,7 @@ export function Stats({ stats }) {
   const displayStats = stats.slice(0, 3);
 
   return (
-    <section id="stats" className="md:pt-28 pt-10 bg-[#FFFFFF] font-lexend">
+    <section id="stats" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
       <Container className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <div className="md:pb-16 pb-12">
           <SectionHeading

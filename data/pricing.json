@@ -1,0 +1,31 @@
+{
+    "headline": "Driving License Assistance",
+    "subtitle": "Choose the right package for your journey. We handle the paperwork, you focus on the road.",
+    "plans": [
+      {
+        "title": "4 Wheeler License",
+        "icon": "car",
+        "description": "Complete assistance for Light Motor Vehicle (LMV) license. Includes document verification, slot booking, and test preparation guidance.",
+        "features": [
+          "Learner's License Application",
+          "RTO Slot Booking Assistance",
+          "Documentation Checklist & Review"
+        ],
+        "price": "199",
+        "isPopular": false
+      },
+      {
+        "title": "4+2 Wheeler License",
+        "icon": "dual",
+        "description": "The ultimate package for both Motorcycle and Car licenses. Comprehensive support for both categories simultaneously to save time and costs.",
+        "features": [
+          "Combined LMV + MCWG Application",
+          "Priority Test Slot Selection",
+          "Online Theory Mock Tests",
+          "Physical Document Pick-up"
+        ],
+        "price": "299",
+        "isPopular": true
+      }
+    ]
+  }

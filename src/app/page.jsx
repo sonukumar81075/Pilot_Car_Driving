@@ -7,9 +7,11 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { Footer } from "@/components/sections/Footer";
+import { PricingSection } from "@/components/sections/PricingSection"; 
+import LeadSection from "@/components/sections/LeadSection";
 
 export default async function Home() {
-  const { hero, stats, services, steps, testimonials, faq, footer } =
+  const { hero, stats, services, steps, testimonials, faq, footer, pricing, leadModal } =
     await getLandingData();
 
   return (
@@ -21,6 +23,8 @@ export default async function Home() {
         <Services services={services} />
         <HowItWorks steps={steps} />
         <Testimonials testimonials={testimonials} />
+        <PricingSection data={pricing} />
+        <LeadSection data={leadModal} />
         <FAQ items={faq} />
       </main>
       <Footer data={footer} />
