@@ -9,6 +9,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Footer } from "@/components/sections/Footer";
 import { PricingSection } from "@/components/sections/PricingSection"; 
 import LeadSection from "@/components/sections/LeadSection";
+import ProfessionalTraining from "@/components/sections/ProfessionalTraining";
 
 export default async function Home() {
   const { hero, stats, services, steps, testimonials, faq, footer, pricing, leadModal } =
@@ -20,6 +21,7 @@ export default async function Home() {
       <main>
         <Hero data={hero} />
         <Stats stats={stats} />
+        <ProfessionalTraining />
         <Services services={services} />
         <HowItWorks steps={steps} />
         <Testimonials testimonials={testimonials} />
