@@ -74,7 +74,7 @@ export function Navbar({ brand, links }) {
                 {/* Logo */}
                 <Link
                   href="/"
-                  onClick={() => pathname === "/" && window.scrollTo({ top: 0, behavior: "smooth" })}
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                   className="text-3xl font-black tracking-tighter text-[#1d4ed7] cursor-pointer"
                 >
                   {brand || "pilot"}

@@ -4,7 +4,9 @@ import { Container } from "@/components/ui/Container";
 import { MdOutlineEmail, MdDirectionsCar, MdOutlineTimer } from "react-icons/md";
 import { GiSteeringWheel } from "react-icons/gi";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FiHelpCircle } from "react-icons/fi";
 
+ 
 export default function ContactPage() {
   const contactMethods = [
     {
@@ -62,6 +64,7 @@ export default function ContactPage() {
                 eyebrow="Pilot Support Hub"
                 title="Get Support."
                 description="Your journey to the road starts with a simple conversation. Our experts are here to guide you through every turn."
+                icon={<GiSteeringWheel className="text-[18px] text-[#262626]" />}
               />
             </div>
 
