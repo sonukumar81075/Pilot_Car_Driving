@@ -52,7 +52,7 @@ export function Footer({ data }) {
           </div>
 
           {/* Social */}
-          <div className="flex md:justify-end gap-3">
+          <div className="flex md:justify-end justify-center gap-3">
             {data.social.map((s) => (
               <Link
                 key={s.label}
@@ -72,7 +72,7 @@ export function Footer({ data }) {
         </div>
 
         {/* Copyright */}
-        <div className="text-[18px] font-lexend font-[500] leading-[27px] text-[#666666] text-right">
+        <div className="text-[18px] font-lexend font-[500] leading-[27px] text-[#666666] md:text-right text-center my-4 md:my-0">
           {data.legal}
         </div>
       </Container>

@@ -40,7 +40,12 @@ const LeadModal = ({ data, isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 font-lexend">
+        <div onClick={(e) => {
+            // Only close when clicking on the backdrop, not inside the modal card
+            if (e.target === e.currentTarget) {
+                onClose();
+            }
+        }} className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 font-lexend">
             {/* Added overflow-y-auto and max-height for mobile */}
             <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[1.5rem] md:rounded-[2.5rem] bg-white shadow-2xl flex flex-col md:flex-row">
 

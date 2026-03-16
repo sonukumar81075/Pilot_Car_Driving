@@ -14,7 +14,7 @@ export default async function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen pt-28 md:pt-32 xl:pt-44 pb-16 font-lexend">
       <Container>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <SectionHeading
             title={privacy.title}
             description={privacy.description}

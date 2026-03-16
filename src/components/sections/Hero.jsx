@@ -9,8 +9,7 @@ export function Hero({ data }) {
   useEffect(() => {
     const fetchReviews = async () => {
       const res = await fetch("/api/reviews");
-      const reviews = await res.json();
-      console.log(reviews);
+      const reviews = await res.json(); 
     };
     fetchReviews();
   }, []);

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Hero1({ data }) {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-blue-100 pt-20 md:pt-24 pb-24 font-lexend">
+        <section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-blue-100 pt-16 md:pt-24 pb-24 font-lexend">
 
             {/* Dynamic Blue Background Elements */}
             <div className="absolute inset-0 -z-10">
@@ -17,10 +17,10 @@ export function Hero1({ data }) {
             <Container className="relative flex flex-col items-center text-center">
 
                 {/* Hero Text */}
-                <div className="mt-12 max-w-5xl">
+                <div className="mt-12 max-w-5xl px-2 md:px-0">
 
                     <Reveal delay={0.1}>
-                        <h1 className="text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
+                        <h1 className="text-[40px] font-lexend font-[700] leading-[48px] text-slate-900 sm:text-7xl">
                             Master the Road
                             <span className="text-[#1d4ed7] px-3">with Pilot.</span>
                         </h1>
@@ -47,7 +47,7 @@ export function Hero1({ data }) {
                                         alt={b.label}
                                         width={220}
                                         height={60}
-                                        className="w-[170px] sm:w-[200px] md:w-[220px] h-auto transition-transform duration-300 hover:scale-105"
+                                        className="w-[160px] sm:w-[180px] md:w-[220px] h-auto transition-transform duration-300 hover:scale-105"
                                     />
                                 </Link>
                             ))}

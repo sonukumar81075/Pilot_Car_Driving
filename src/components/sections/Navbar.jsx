@@ -55,7 +55,7 @@ export function Navbar({ brand, links }) {
                   : "md:shadow-sm shadow-none"
               ].join(" ")}
             >
-              <div className="flex items-center justify-between gap-8 md:gap-12">
+              <div className="flex items-center justify-between gap-8 md:gap-12 px-2">
 
                 {/* Desktop Left Links */}
                 <nav className="hidden items-center gap-8 md:flex">
@@ -63,8 +63,8 @@ export function Navbar({ brand, links }) {
                     <Link
                       key={l.href}
                       href={l.href}
-                      className="text-[15px] font-semibold text-slate-600 transition-colors hover:text-blue-600"
                       onClick={() => setOpen(false)}
+                      className="text-[15px] font-semibold text-slate-600 px-4 py-2 rounded-full transition-colors hover:text-[#1d4ed7] hover:bg-slate-100"
                     >
                       {l.label}
                     </Link>
@@ -86,8 +86,8 @@ export function Navbar({ brand, links }) {
                     <Link
                       key={l.href}
                       href={l.href}
-                      className="text-[15px] font-semibold text-slate-600 transition-colors hover:text-blue-600"
                       onClick={() => setOpen(false)}
+                      className="text-[15px] font-semibold text-slate-600 px-4 py-2 rounded-full transition-colors hover:text-[#1d4ed7] hover:bg-slate-100"
                     >
                       {l.label}
                     </Link>
