@@ -89,7 +89,7 @@ export function Hero2({ data }) {
                     </div>
 
                     {/* RIGHT PHONE */}
-                    <div className="relative lg:col-span-5 flex justify-center">
+                    <div className="relative lg:col-span-5 flex justify-center lg:top-12 top-0">
 
                         <Reveal delay={0.2} className="relative z-20">
 

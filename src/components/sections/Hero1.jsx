@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Hero1({ data }) {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-blue-100 pt-16 md:pt-24 pb-24 font-lexend">
+        <section className="relative overflow-hidden bg-gradient-to-b from-white via-blue-50 to-blue-100 pt-16 md:pt-32 pb-24 font-lexend">
 
             {/* Dynamic Blue Background Elements */}
             <div className="absolute inset-0 -z-10">
