@@ -58,7 +58,7 @@ export function Navbar({ brand, links }) {
               <div className="flex items-center justify-between gap-8 md:gap-12 px-2">
 
                 {/* Desktop Left Links */}
-                <nav className="hidden items-center gap-8 md:flex">
+                <nav className="hidden items-center gap-6 md:flex">
                   {leftLinks.map((l) => (
                     <Link
                       key={l.href}
@@ -81,7 +81,7 @@ export function Navbar({ brand, links }) {
                 </Link>
 
                 {/* Desktop Right Links */}
-                <nav className="hidden items-center gap-8 md:flex">
+                <nav className="hidden items-center gap-6 md:flex">
                   {rightLinks.map((l) => (
                     <Link
                       key={l.href}
