@@ -5,7 +5,7 @@ import PricingCard from '../ui/PricingCard';
 
 export function PricingSection({ data }) {
     return (
-        <section id="pricing" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
+        <section id="pricing" className="md:pt-16 pt-10 bg-[#FFFFFF] font-lexend">
             <div className="container mx-auto px-4 text-center">
                 {/* Header Section */}
                 <SectionHeading

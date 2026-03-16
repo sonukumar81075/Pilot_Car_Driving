@@ -24,7 +24,7 @@ const trainings = [
         icon: Zap, // Using Zap/Lightning for the bike icon per screenshot
         iconBg: "bg-orange-500",
         features: ["Safety gear provided", "Track & Road sessions"],
-        href: "#pricing",
+        href: "/pricing",
     },
     {
         id: "license",
@@ -33,7 +33,7 @@ const trainings = [
         icon: FileText,
         iconBg: "bg-[#1e293b]", // Dark slate/navy
         features: ["Documentation support", "Fast-track processing"],
-        href: "#pricing",
+        href: "/pricing",
     },
 ];
 

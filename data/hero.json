@@ -1,21 +1,21 @@
 {
   "brand": "Pilot",
-  "nav": [
+  "nav": [ 
     {
       "label": "Services",
-      "href": "#services"
+      "href": "/#services"
     },
     {
       "label": "How it works",
-      "href": "#how-it-works"
+      "href": "/#how-it-works"
     },
     {
       "label": "Reviews",
-      "href": "#testimonials"
+      "href": "/#testimonials"
     },
     {
       "label": "FAQ",
-      "href": "#faq"
+      "href": "/#faq"
     }
   ],
   "headline": "Master the road, booked in minutes.",

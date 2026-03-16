@@ -25,3 +25,13 @@ export async function getLandingData() {
   return { hero, stats, services, steps, testimonials, faq, footer, pricing, leadModal };
 }
 
+export async function getLegalData() {
+  const [terms, privacy] = await Promise.all([
+    readJsonFile("terms.json"),
+    readJsonFile("privacy.json"),
+  ]);
+
+  return { terms, privacy };
+}
+
+

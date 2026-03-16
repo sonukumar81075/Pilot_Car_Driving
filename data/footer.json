@@ -23,11 +23,11 @@
       "links": [
         {
           "label": "Contact Us",
-          "href": "#"
+          "href": "/support"
         },
         {
           "label": "Delete Account",
-          "href": "#"
+          "href": "/support"
         }
       ]
     },
@@ -36,7 +36,7 @@
       "links": [
         {
           "label": "Careers",
-          "href": "#"
+          "href": "/careers"
         },
         {
           "label": "careers@withpiloto.com",
@@ -44,7 +44,7 @@
         },
         {
           "label": "Become a Pilot  Professional",
-          "href": "#"
+          "href": "/become-a-pilot-professional"
         }
       ]
     },
@@ -53,11 +53,11 @@
       "links": [
         {
           "label": "Terms & Conditions",
-          "href": "#"
+          "href": "/tnc"
         },
         {
           "label": "Privacy Policy",
-          "href": "#"
+          "href": "/privacy-policy"
         }
       ]
     }
@@ -65,17 +65,17 @@
   "social": [
     {
       "label": "LinkedIn",
-      "href": "#",
+      "href": "https://www.linkedin.com/company/pilot-driving-app/",
       "icon": "linkedin"
     },
     {
       "label": "Facebook",
-      "href": "#",
+      "href": "https://www.facebook.com/pilotdrivingapp/",
       "icon": "facebook"
     },
     {
       "label": "Instagram",
-      "href": "#",
+      "href": "https://www.instagram.com/pilotdrivingapp/",
       "icon": "instagram"
     }
   ],

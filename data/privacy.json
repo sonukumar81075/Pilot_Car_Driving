@@ -1,0 +1,82 @@
+{
+  "title": "Privacy Policy",
+  "description": "Learn how Pilot handles your data while you use our platform to book lessons and learn car driving.",
+  "sections": [
+    {
+      "title": "1. Introduction",
+      "body": [
+        "This Privacy Policy explains how Pilot collects, uses, and protects your information when you use our app or website to book and manage car driving lessons.",
+        "By creating an account or booking a lesson with Pilot, you agree to the practices described in this policy."
+      ]
+    },
+    {
+      "title": "2. Information We Collect",
+      "body": [
+        "Contact details such as your name, email address, and phone number when you sign up or contact support.",
+        "Profile and booking information such as preferred vehicle type, lesson history, and test preparation goals.",
+        "Payment-related details processed securely by our payment partners (we do not store full card numbers).",
+        "Technical data such as device type, app version, approximate location, and usage analytics to help us improve the learning experience."
+      ]
+    },
+    {
+      "title": "3. How We Use Your Information",
+      "body": [
+        "To create and manage your Pilot account and driving lesson bookings.",
+        "To match you with suitable instructors and keep a record of your learning progress.",
+        "To send lesson reminders, important updates, and service notifications.",
+        "To improve our curriculum, app performance, and safety features based on aggregated usage insights."
+      ]
+    },
+    {
+      "title": "4. Sharing Your Information",
+      "body": [
+        "We share relevant details with your assigned instructors so they can deliver your lessons effectively and safely.",
+        "We use third‑party providers for payments, analytics, and cloud hosting; they process data on our behalf under strict confidentiality obligations.",
+        "We may disclose information if required by law, regulation, or legal process, or to protect the rights, property, or safety of Pilot, our learners, or the public.",
+        "We do not sell your personal information to third parties."
+      ]
+    },
+    {
+      "title": "5. Data Retention",
+      "body": [
+        "We keep your account and booking records for as long as you have an active relationship with Pilot and for a reasonable period afterwards for legal and reporting purposes.",
+        "You may request deletion of your account, subject to any data we must retain to comply with legal obligations."
+      ]
+    },
+    {
+      "title": "6. Your Rights",
+      "body": [
+        "You can request access to the personal data we hold about you and ask us to correct inaccurate information.",
+        "Where applicable under local law, you may request deletion of your data or restrict certain types of processing.",
+        "You can opt out of non-essential marketing communications at any time using the unsubscribe link or your notification settings."
+      ]
+    },
+    {
+      "title": "7. Security",
+      "body": [
+        "We use industry-standard safeguards such as encryption in transit, access controls, and regular monitoring to protect your information.",
+        "No system is completely secure; we encourage you to use a strong, unique password and keep your login details confidential."
+      ]
+    },
+    {
+      "title": "8. Children’s Privacy",
+      "body": [
+        "Pilot is designed for adults and older learners who are legally eligible to hold a driving licence in their region.",
+        "If you believe a minor has provided us with personal information without appropriate consent, please contact us so we can review and delete it where necessary."
+      ]
+    },
+    {
+      "title": "9. Changes to This Policy",
+      "body": [
+        "We may update this Privacy Policy from time to time. When we make material changes, we will highlight them in the app or on our website and update the effective date."
+      ]
+    },
+    {
+      "title": "10. Contact",
+      "body": [
+        "If you have any questions about this Privacy Policy or how your data is handled while you learn car driving with Pilot, please email us at help@withpilot.com."
+      ]
+    }
+  ]
+}
+

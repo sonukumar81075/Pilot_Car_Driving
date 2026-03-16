@@ -1,6 +1,9 @@
 import { Inter, Lexend, Urbanist } from "next/font/google";
 import "./globals.css";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { Navbar } from "@/components/sections/Navbar";
+import { FooterShell } from "@/components/sections/FooterShell";
+import { getLandingData } from "@/lib/data";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,14 +86,18 @@ export const metadata = {
     follow: true,
   },
 };
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const { hero, footer } = await getLandingData();
+
   return (
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${lexend.variable} ${urbanist.variable} antialiased`}
+        className={`${inter.variable} ${lexend.variable} ${urbanist.variable} antialiased bg-gradient-to-b from-slate-50 via-white to-white`}
       >
+        <Navbar brand={hero.brand} links={hero.nav} />
         {children}
+        <FooterShell footer={footer} />
         <ScrollToTop />
       </body>
     </html>

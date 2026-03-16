@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,6 +9,7 @@ import { IoMdClose } from "react-icons/io";
 
 
 export function Navbar({ brand, links }) {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
@@ -58,34 +60,37 @@ export function Navbar({ brand, links }) {
                 {/* Desktop Left Links */}
                 <nav className="hidden items-center gap-8 md:flex">
                   {leftLinks.map((l) => (
-                    <a
+                    <Link
                       key={l.href}
                       href={l.href}
                       className="text-[15px] font-semibold text-slate-600 transition-colors hover:text-blue-600"
+                      onClick={() => setOpen(false)}
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
 
                 {/* Logo */}
-                <span
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                <Link
+                  href="/"
+                  onClick={() => pathname === "/" && window.scrollTo({ top: 0, behavior: "smooth" })}
                   className="text-3xl font-black tracking-tighter text-[#1d4ed7] cursor-pointer"
                 >
                   {brand || "pilot"}
-                </span>
+                </Link>
 
                 {/* Desktop Right Links */}
                 <nav className="hidden items-center gap-8 md:flex">
                   {rightLinks.map((l) => (
-                    <a
+                    <Link
                       key={l.href}
                       href={l.href}
                       className="text-[15px] font-semibold text-slate-600 transition-colors hover:text-blue-600"
+                      onClick={() => setOpen(false)}
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
 
@@ -124,21 +129,25 @@ export function Navbar({ brand, links }) {
             </button>
 
             {/* Logo */}
-            <div className="absolute left-6 top-6 text-3xl font-black text-[#1d4ed7]">
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className="absolute left-6 top-6 text-3xl font-black text-[#1d4ed7]"
+            >
               {brand}
-            </div>
+            </Link>
 
             {/* Navigation Links */}
             <nav className="flex flex-col items-center gap-8 text-lg font-semibold text-slate-700">
               {links.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className="hover:text-[#1d4ed7] transition"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
             </nav>
 
