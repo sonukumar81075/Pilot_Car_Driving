@@ -7,7 +7,7 @@ export function AppDownloadSection({ data }) {
   if (!data) return null;
 
   return (
-    <section className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend lg:px-0 px-4">
+    <section className="md:pt-32 pt-10 bg-[#FFFFFF] pb-10 font-lexend lg:px-0 px-4">
       <Container className="  text-center">
         <div className="relative flex justify-center w-full md:pb-6">
           <Image

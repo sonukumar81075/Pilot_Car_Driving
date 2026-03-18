@@ -1,102 +1,158 @@
-"use client";
-
 import { Container } from "@/components/ui/Container";
-import { MdOutlineEmail, MdDirectionsCar, MdOutlineTimer } from "react-icons/md";
-import { GiSteeringWheel } from "react-icons/gi";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { FiHelpCircle } from "react-icons/fi";
+import { GiSteeringWheel } from "react-icons/gi";
+import { MdOutlineEmail, MdLocationPin, MdPhoneInTalk, MdOutlineTimer } from "react-icons/md";
+import contactData from "../../../data/contact.json";
+import SupportHubCard from "@/components/ui/SupportHubCard";
 
- 
 export default function ContactPage() {
-  const contactMethods = [
-    {
-      title: "Enrollment Support",
-      description: "Questions about packages, pricing, or starting your first lesson?",
-      value: "enroll@withpilot.com",
-      href: "mailto:enroll@withpilot.com",
-      icon: <GiSteeringWheel className="text-2xl" />,
-    },
-    {
-      title: "Lesson Coordination",
-      description: "Need to reschedule a session or contact your driving instructor?",
-      value: "+91 99104 83315",
-      href: "tel:+919910483315",
-      icon: <MdDirectionsCar className="text-2xl" />,
-    },
-    {
-      title: "License Assistance",
-      description: "Help with RTO documentation, slot booking, and permit queries.",
-      value: "docs@withpilot.com",
-      href: "mailto:docs@withpilot.com",
-      icon: <MdOutlineTimer className="text-2xl" />,
-    }
-  ];
-
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "DrivingSchool",
-    "name": "Pilot – Learn Car Driving",
-    "description": "Premium car driving training with certified instructors and modern vehicles.",
-    "url": "https://withpilot.com",
-    "telephone": "+91-99104-83315",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Gurugram",
-      "addressCountry": "IN"
-    }
-  };
+  const data = contactData;
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <main className="min-h-screen pb-6 font-lexend pt-28 md:pt-40 bg-[#FFFFFF]">
+      <Container>
+        {/* Header Section - Matches screenshot style */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
 
-      <div className="pb-6 font-lexend relative overflow-hidden md:pt-6 pt-6">
+          <SectionHeading
+            title={data.title}
+            description={data.description}
+            align="center"
+          />
+ 
+          {data.intro?.map((para, index) => (
+            <p
+              key={index}
+              className="text-[18px] font-lexend font-[500] leading-[27px] text-[#666666] mx-auto max-w-xl"
+            >
+              {para}
+            </p>
+          ))}
+        </div>
 
+        {/* Support Grid - 3 Columns like the screenshot */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          {/* Card 1: Office Address */}
+          <SupportHubCard
+            icon={<MdLocationPin />}
+            title={data.office.title}
+            description={data.office.lines.join(", ")}
+            actionLabel={data.office.buttonLabel ?? "View Address"}
+            actionHref="#office"
+          />
 
-        <main className="pt-28 md:pt-40">
-          <Container>
+          {/* Card 2: Phone */}
+          <SupportHubCard
+            icon={<MdPhoneInTalk />}
+            title={data.phone.title}
+            description={[data.phone.scheduleTitle, ...data.phone.scheduleLines].join(" • ")}
+            actionLabel={data.phone.number}
+            actionHref={`tel:${data.phone.number.replace(/[^+\d]/g, "")}`}
+          />
 
-            <div className="text-center max-w-3xl mx-auto mb-20">
-              <SectionHeading
-                eyebrow="Pilot Support Hub"
-                title="Get Support."
-                description="Your journey to the road starts with a simple conversation. Our experts are here to guide you through every turn."
-                icon={<GiSteeringWheel className="text-[18px] text-[#262626]" />}
-              />
+          {/* Card 3: Email */}
+          <SupportHubCard
+            icon={<MdOutlineEmail />}
+            title={data.email.title}
+            description={data.email.description}
+            actionLabel={data.email.address}
+            actionHref={`mailto:${data.email.address}`}
+          />
+        </div>
+
+        {/* Detailed Info Section: Socials + Customer Support */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-12">
+          {/* Connect With Us card (light card style) */}
+          <div className="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-3">
+                {data.connect.title}
+              </h2>
+              <p className="text-slate-600 text-base font-sans mb-4">
+                {data.connect.description}
+              </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8  ">
-              {contactMethods.map((method, idx) => (
-                <section
-                  key={idx}
-                  className="group relative bg-white border border-slate-100 p-10 rounded-[2.5rem] shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-500 flex flex-col items-center text-center"
-                >
-                  <div className="mb-8 p-5 rounded-2xl bg-slate-50 text-slate-400   group-hover:scale-110 transition-all duration-300 shadow-inner">
-                    {method.icon}
-                  </div>
-
-                  <h2 className="text-xl font-bold text-slate-900 mb-3 tracking-tight">
-                    {method.title}
-                  </h2>
-                  <p className="text-sm text-slate-500 mb-8 leading-relaxed px-2">
-                    {method.description}
-                  </p>
-
+            <div className="mt-4">
+              <div className="flex flex-wrap gap-3">
+                {data.connect.links.map((link) => (
                   <a
-                    href={method.href}
-                    className="mt-auto w-full py-4 px-6 rounded-2xl bg-slate-800 text-white font-sans text-sm tracking-widest transition-all  shadow-xl shadow-slate-200 "
+                    key={link.label}
+                    href={link.href}
+                    className="px-5 py-2.5 bg-slate-50 hover:bg-slate-900 hover:text-white rounded-xl text-slate-700 font-medium transition-all"
                   >
-                    {method.value}
+                    {link.label}
                   </a>
-                </section>
-              ))}
+                ))}
+              </div>
             </div>
-          </Container>
-        </main>
-      </div>
-    </>
+          </div>
+
+          {/* Customer Support card (match normal light card style) */}
+          <div className="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-3">
+                {data.customerSupport.title}
+              </h2>
+              <p className="text-slate-600 text-base font-sans mb-4">
+                {data.customerSupport.intro}
+              </p>
+            </div>
+            <ul className="space-y-3">
+              {data.customerSupport.points.map((point, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="mt-1 w-2 h-2 bg-blue-500 rounded-full" />
+                  <span className="text-slate-600 text-sm md:text-base font-sans">
+                    {point}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 text-xs md:text-sm text-slate-400 italic border-t border-slate-100 pt-4">
+              {data.customerSupport.note}
+            </p>
+          </div>
+        </div>
+
+        {/* Instructors + Legal & Compliance (from JSON) */}
+        <section className="bg-white p-8 md:p-10 rounded-[2.5rem] border border-slate-100 shadow-sm space-y-10">
+          <div>
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">
+              {data.instructors.title}
+            </h2>
+            <p className="text-[15px] md:text-[16px] font-sans text-slate-600 mb-3">
+              {data.instructors.intro}
+            </p>
+            <ul className="list-disc pl-5 space-y-2 mb-3">
+              {data.instructors.points.map((point) => (
+                <li
+                  key={point}
+                  className="text-[15px] md:text-[16px] font-sans text-slate-600"
+                >
+                  {point}
+                </li>
+              ))}
+            </ul>
+            <p className="text-[15px] md:text-[16px] font-sans text-slate-600">
+              {data.instructors.note}
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-3">
+              {data.legal.title}
+            </h2>
+            {data.legal.body.map((para) => (
+              <p
+                key={para}
+                className="text-[15px] md:text-[16px] font-sans text-slate-600 mb-2"
+              >
+                {para}
+              </p>
+            ))}
+          </div>
+        </section>
+      </Container>
+    </main>
   );
 }
+

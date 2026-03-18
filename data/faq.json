@@ -1,30 +1,42 @@
 [
   {
-    "question": "What is Pilot – Learn Car Driving?",
-    "answer": "Pilot is a professional driving learning platform designed to help beginners learn car driving safely and confidently. Our certified instructors guide you step-by-step through practical driving lessons, traffic rules, and real-road experience so you can become a skilled driver."
+    "question": "What is Pilot?",
+    "answer": "Pilot is a driving learning app that offers car training, bike training, and license assistance."
   },
   {
-    "question": "Who can enroll in driving lessons?",
-    "answer": "Anyone who wants to learn car driving can enroll in our program. Whether you are a complete beginner or someone who wants to improve driving skills, our lessons are designed for all experience levels."
+    "question": "Do I need prior driving experience?",
+    "answer": "No, Pilot is perfect for beginners as well as those looking to improve their skills."
   },
   {
-    "question": "How do I book a driving lesson?",
-    "answer": "Booking a driving lesson is simple. Choose your preferred training program, select a convenient time slot, and confirm your booking. Our instructor will arrive at the scheduled time to start your lesson."
+    "question": "How do I book a training session?",
+    "answer": "Download the app, choose your service, select a package, pick a time slot, and confirm your booking."
   },
   {
-    "question": "Do I need a driving license to start learning?",
-    "answer": "No, you don't need a permanent driving license to start learning. However, depending on local regulations, a learner’s license may be required for on-road practice. Our team can guide you through the process if needed."
+    "question": "Can I choose my training schedule?",
+    "answer": "Yes, you can select your preferred time and date based on availability."
   },
   {
-    "question": "Are the driving instructors experienced?",
-    "answer": "Yes, all Pilot instructors are trained professionals with extensive driving and teaching experience. They follow a structured training approach to ensure every learner understands vehicle control, road safety, and traffic rules."
+    "question": "Are the instructors professional and verified?",
+    "answer": " Yes, all instructors are trained and background-verified for safety."
   },
   {
-    "question": "Can I schedule lessons according to my availability?",
-    "answer": "Yes, we offer flexible scheduling so you can choose lesson timings that fit your routine. Whether you prefer morning, afternoon, or evening sessions, you can easily select the time that works best for you."
+    "question": "Do you provide driving license assistance?",
+    "answer": "Yes, new users can book a free trial session (subject to availability)."
   },
   {
-    "question": "What will I learn during the driving course?",
-    "answer": "During the course, you will learn basic car controls, starting and stopping the vehicle, steering techniques, parking, lane discipline, traffic rules, and real-road driving experience to help you become a confident driver."
-  } 
+    "question": "Is there a free trial available?",
+    "answer": "Yes, new users can book a free trial session (subject to availability)."
+  },
+  {
+    "question": "What payment methods are accepted?",
+    "answer": " We support UPI, debit/credit cards, and other digital payment options."
+  },
+  {
+    "question": "Can I reschedule or cancel my session?",
+    "answer": "Yes, you can reschedule or cancel based on the package terms."
+  },
+  {
+    "question": "Is there customer support available?",
+    "answer": "Yes, Pilot provides dedicated support to assist you at every step."
+  }
 ]

@@ -1,40 +1,40 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { getLegalData } from "@/lib/data";
+import { getInsurancePolicyData } from "@/lib/data";
 
 export const metadata = {
-  title: "Terms & Conditions",
+  title: "Insurance Policy & Claim Procedure",
   description:
-    "Terms and conditions for using Pilot to learn car driving, book instructors, and manage your lessons.",
+    "How every Pilot ride is insured and how to file an insurance claim through the app or insurance partner.",
 };
 
-export default async function TermsAndConditionsPage() {
-  const { terms } = await getLegalData();
+export default async function InsurancePolicyPage() {
+  const { insurance } = await getInsurancePolicyData();
 
   return (
     <main className="min-h-screen pt-28 md:pt-32 xl:pt-40 pb-6 font-lexend">
       <Container>
         <div className="max-w-4xl mx-auto">
           <SectionHeading
-            title={terms.title}
-            description={terms.description}
+            title={insurance.title}
+            description={insurance.description}
             align="center"
           />
 
           <div className="mt-10 space-y-4 text-slate-700">
-            {terms.sections.map((section) => {
-              const isContactSection = section.title === "20. Contact Information";
+            {insurance.sections.map((section) => {
+              const isSupportSection = section.isSupport === true;
 
               return (
                 <section
                   key={section.title}
                   className="space-y-4 rounded-3xl border border-slate-100 bg-white p-8 shadow-[0_8px_30px_rgba(15,23,42,0.04)]"
                 >
-                  <h2 className="text-[20px] font-lexend font-[700] leading-[28px] text-slate-900">
+                  <h2 className="text-[24px] font-sans font-[700] leading-[28px] text-slate-900">
                     {section.title}
                   </h2>
 
-                  {isContactSection ? (
+                  {isSupportSection ? (
                     <>
                       {section.body[0] && (
                         <p className="mb-6 text-[17px] font-sans font-[500] leading-[26px] text-[#4c4c4c]">
@@ -42,19 +42,23 @@ export default async function TermsAndConditionsPage() {
                         </p>
                       )}
                       <div className="flex flex-col items-start gap-2">
-                        <div
-
-                          className="text-[15px] font-sans font-[600] leading-[24px] text-slate-900 "
-                        >
-                          Email: <a href="mailto:support@pilotnow.in" className="font-sans font-[600] leading-[24px] text-[#2563eb]  hover:underline">support@pilotnow.in</a>
+                        <div className="text-[15px] font-sans font-[600] leading-[24px] text-slate-900">
+                          Email:{" "}
+                          <a
+                            href="mailto:support@pilotnow.in"
+                            className="font-sans font-[600] leading-[24px] text-[#2563eb] hover:underline"
+                          >
+                            support@pilotnow.in
+                          </a>
                         </div>
-                        <div
-
-                          className="text-[15px] font-sans font-[600] leading-[24px]  text-slate-900 "
-                        >
-                          Website: <a href="https://pilotnow.in"
-                            target="_blank"
-                            rel="noopener noreferrer" className="font-sans font-[600] leading-[24px] cursor-pointer text-[#2563eb]  hover:underline">https://pilotnow.in</a>
+                        <div className="text-[15px] font-sans font-[600] leading-[24px] text-slate-900">
+                          Phone:{" "}
+                          <a
+                            href="tel:+918065489040"
+                            className="font-sans font-[600] leading-[24px] text-[#2563eb] hover:underline"
+                          >
+                            +91 80654 89040
+                          </a>
                         </div>
                       </div>
                     </>
@@ -95,5 +99,3 @@ export default async function TermsAndConditionsPage() {
     </main>
   );
 }
-
-

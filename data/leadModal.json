@@ -1,12 +1,24 @@
 {
-    "promoTitle": "Get the full experience on our App",
-    "promoText": "Track your progress and manage your lessons directly from your mobile device.",
-    "formTitle": "Interested Lead?",
-    "formSubtitle": "Please fill out the form below and our team will get back to you shortly.",
-    "submitLabel": "Get in Touch",
-    "zones": ["Downtown Area", "North Pilot Wing", "East Driving Range"],
-    "appBadges": [
-      { "label": "App Store", "href": "https://apps.apple.com/us/app/pilot-driving-school/id6741993233", "icon": "apple" },
-      { "label": "Google Play", "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN", "icon": "google" }
-    ]
-  }
+  "promoTitle": "Get the full experience on our App",
+  "promoText": "Track your progress and manage your lessons directly from your mobile device.",
+  "formTitle": "Interested Lead?",
+  "formSubtitle": "Please fill out the form below and our team will get back to you shortly.",
+  "submitLabel": "Get in Touch",
+  "zones": [
+    "Downtown Area",
+    "North Pilot Wing",
+    "East Driving Range"
+  ],
+  "appBadges": [
+    {
+      "label": "App Store",
+      "href": "https://apps.apple.com/in/app/pilot-learner/id6756785250",
+      "icon": "apple"
+    },
+    {
+      "label": "Google Play",
+      "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&pcampaignid=web_share",
+      "icon": "google"
+    }
+  ]
+}

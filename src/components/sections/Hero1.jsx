@@ -62,7 +62,7 @@ export function Hero1({ data }) {
                     {/* LEFT PHONE */}
                     <Reveal delay={0.4}>
                         <div className="hidden md:block transform translate-y-12 scale-90 opacity-90">
-                            <div className="relative w-[320px] overflow-hidden rounded-[2rem] shadow-xl">
+                            <div className="relative w-[320px] overflow-hidden rounded-[3rem] shadow-xl">
                                 <Image
                                     src="/images/Easy_Steps/01.png"
                                     alt="Driving Instructor"
@@ -81,7 +81,7 @@ export function Hero1({ data }) {
                             {/* Glow */}
                             <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-blue-600/20 blur-3xl" />
 
-                            <div className="w-[320px] overflow-hidden rounded-[2.8rem] border-[8px] border-slate-900 bg-white shadow-2xl">
+                            <div className="w-[320px] overflow-hidden rounded-[3rem] border-[8px] border-slate-900 bg-white shadow-2xl">
                                 <Image
                                     src={data.heroImage.src}
                                     alt="Pilot App Interface"
@@ -97,7 +97,7 @@ export function Hero1({ data }) {
                     {/* RIGHT PHONE */}
                     <Reveal delay={0.4}>
                         <div className="hidden md:block transform translate-y-12 scale-90 opacity-90">
-                            <div className="relative w-[320px] overflow-hidden rounded-[2rem] shadow-xl">
+                            <div className="relative w-[320px] overflow-hidden rounded-[3rem] shadow-xl ">
                                 <Image
                                     src="/images/Easy_Steps/03.png"
                                     alt="Happy Learner"

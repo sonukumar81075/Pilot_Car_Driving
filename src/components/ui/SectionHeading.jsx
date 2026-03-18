@@ -24,7 +24,7 @@ export function SectionHeading({
       </h2>
 
       {description ? (
-        <p className="mt-5 text-[18px] font-lexend font-[500] leading-[27px] text-[#666666] mx-auto max-w-xl">
+        <p className="mt-5 text-[18px] font-sans text-slate-500 max-w-2xl mx-auto leading-relaxed mx-auto max-w-xl">
           {description}
         </p>
       ) : null}

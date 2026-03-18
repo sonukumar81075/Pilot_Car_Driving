@@ -26,7 +26,14 @@ const PricingCard = ({ data }) => {
                         <div className="flex items-center justify-between pt-6">
                             <h3 className="text-2xl font-bold text-slate-900">{plan.title}</h3>
                             <div className={`rounded-xl p-2 ${plan.isPopular ? 'bg-blue-50 text-blue-600' : 'bg-blue-50 text-blue-600'}`}>
-                                {plan.icon === 'car' ? <Car size={24} /> : <div className="flex gap-1"><Car size={18} /><Bike size={18} /></div>}
+                                {plan.icon === 'car' && <Car size={24} />}
+                                {plan.icon === 'bike' && <Bike size={24} />}
+                                {plan.icon === 'dual' && (
+                                    <div className="flex gap-1">
+                                        <Car size={18} />
+                                        <Bike size={18} />
+                                    </div>
+                                )}
                             </div>
                         </div>
 

@@ -5,78 +5,82 @@
     "appBadges": [
       {
         "label": "Get it on Google Play",
-        "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+        "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&pcampaignid=web_share",
         "icon": "google",
         "src": "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
       },
       {
         "label": "Download on the App Store",
-        "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+        "href": "https://apps.apple.com/in/app/pilot-learner/id6756785250",
         "icon": "apple",
         "src": "/images/e6aniRpuJcqluoFiHQxTzMpzOCs.avif"
       }
     ]
   },
-  "columns": [
+ "columns": [
     {
       "title": "Support",
       "links": [
-        {
-          "label": "Contact Us",
-          "href": "/support"
-        },
-        {
-          "label": "Delete Account",
-          "href": "/support"
-        }
+        { "label": "Contact Us", "href": "/support" },
+        { "label": "Delete Account", "href": "/account-deletion" }
       ]
     },
     {
       "title": "Company",
       "links": [
-        {
-          "label": "Careers",
-          "href": "/careers"
-        },
-        {
-          "label": "careers@withpiloto.com",
-          "href": "mailto:careers@withpiloto.com"
-        },
-        {
-          "label": "Become a Pilot  Professional",
-          "href": "/become-a-pilot-professional"
-        }
+        { "label": "Careers", "href": "/careers" },
+        { "label": "careers@withpiloto.com", "href": "mailto:careers@withpiloto.com" },
+        { "label": "Become a Pilot Professional", "href": "/become-a-pilot-professional" },
+        { "label": "Payments Disclosure", "href": "/payments-disclosure" },
+        { "label": "Cancellation & Refund Policy", "href": "/cancellation-refund-policy" }
       ]
     },
     {
       "title": "Legal",
       "links": [
-        {
-          "label": "Terms & Conditions",
-          "href": "/tnc"
-        },
-        {
-          "label": "Privacy Policy",
-          "href": "/privacy-policy"
-        }
+        { "label": "Terms & Conditions", "href": "/tnc" },
+        { "label": "Privacy Policy", "href": "/privacy-policy" },
+        { "label": "Insurance Policy & Claim Procedure", "href": "/insurance-policy" },
+        { "label": "Insurance Terms & Conditions", "href": "/insurance-terms" },
+        { "label": "Cookies Policy", "href": "/cookies-policy" }
       ]
     }
   ],
   "social": [
     {
       "label": "LinkedIn",
-      "href": "https://www.linkedin.com/company/pilot-driving-app/",
+      "href": "https://www.linkedin.com/company/pilot-now/",
       "icon": "linkedin"
     },
     {
       "label": "Facebook",
-      "href": "https://www.facebook.com/pilotdrivingapp/",
+      "href": "https://www.facebook.com/people/Pilotnow/61575238082650/",
       "icon": "facebook"
     },
     {
       "label": "Instagram",
-      "href": "https://www.instagram.com/pilotdrivingapp/",
+      "href": "https://www.instagram.com/pilotnow.in/",
       "icon": "instagram"
+    },
+    {
+      "label": "YouTube",
+      "href": "https://www.youtube.com/@Pilot_now",
+      "icon": "youtube"
+    },
+    {
+      "label": "Pinterest",
+      "href": "https://in.pinterest.com/pilotmobility",
+      "icon": "pinterest"
+    },
+    {
+      "label": "Twitter (X)",
+      "href": "https://x.com/pilotnow_in",
+      "icon": "twitter"
+    },
+    {
+      "label": "for Careers",
+      "href": "mailto:Hr@pilotnow.in",
+      "icon": "mail"
     }
   ],
   "legal": "Pilot © 2025"

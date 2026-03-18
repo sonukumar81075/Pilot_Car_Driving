@@ -15,7 +15,7 @@ const trainings = [
         icon: Car,
         iconBg: "bg-blue-600",
         features: ["Dual control vehicles", "Mock driving tests"],
-        href: "#how-it-works",
+        href: "/car-training",
     },
     {
         id: "bike",
@@ -24,7 +24,7 @@ const trainings = [
         icon: Zap, // Using Zap/Lightning for the bike icon per screenshot
         iconBg: "bg-orange-500",
         features: ["Safety gear provided", "Track & Road sessions"],
-        href: "/pricing",
+        href: "/bike-training",
     },
     {
         id: "license",

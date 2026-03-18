@@ -1,7 +1,6 @@
-import { FaLinkedin } from "react-icons/fa6";
+import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { BsFacebook } from "react-icons/bs";
-import { FaInstagram } from "react-icons/fa";
-
+import { FaInstagram, FaYoutube, FaPinterest, FaEnvelope } from "react-icons/fa";
 
 export function Icon({ name, className, title }) {
   const common = { className, role: "img", "aria-label": title ?? name };
@@ -77,19 +76,19 @@ export function Icon({ name, className, title }) {
         </svg>
       );
     case "facebook":
-      return (
-        <BsFacebook className={className} />
-
-      );
+      return <BsFacebook className={className} />;
     case "instagram":
-      return (
-        <FaInstagram className={className} />
-      );
+      return <FaInstagram className={className} />;
     case "linkedin":
-      return (
-        <FaLinkedin className={className} />
-
-      );
+      return <FaLinkedin className={className} />;
+    case "youtube":
+      return <FaYoutube className={className} />;
+    case "pinterest":
+      return <FaPinterest className={className} />;
+    case "twitter":
+      return <FaXTwitter className={className} />;
+    case "mail":
+      return <FaEnvelope className={className} />;
     default:
       return null;
   }

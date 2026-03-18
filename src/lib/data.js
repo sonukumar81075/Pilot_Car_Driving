@@ -20,9 +20,20 @@ export async function getLandingData() {
       readJsonFile("footer.json"),
       readJsonFile("pricing.json"),
       readJsonFile("leadModal.json"),
+
     ]);
 
   return { hero, stats, services, steps, testimonials, faq, footer, pricing, leadModal };
+}
+
+export async function getCarTrainingPricingData() {
+  const pricing = await readJsonFile("car-pricing.json");
+  return { pricing };
+}
+
+export async function getBikeTrainingPricingData() {
+  const pricing = await readJsonFile("bike-pricing.json");
+  return { pricing };
 }
 
 export async function getLegalData() {
@@ -34,4 +45,27 @@ export async function getLegalData() {
   return { terms, privacy };
 }
 
+export async function getInsurancePolicyData() {
+  const insurance = await readJsonFile("insurance.json");
+  return { insurance };
+}
 
+export async function getInsuranceTermsData() {
+  const insuranceTerms = await readJsonFile("insurance-terms.json");
+  return { insuranceTerms };
+}
+
+export async function getCookiesPolicyData() {
+  const cookies = await readJsonFile("cookies-policy.json");
+  return { cookies };
+}
+
+export async function getPaymentsDisclosureData() {
+  const paymentsDisclosure = await readJsonFile("b&P-disclosure.json");
+  return { paymentsDisclosure };
+}
+
+export async function getCancellationRefundPolicyData() {
+  const cancellationRefundPolicy = await readJsonFile("cancellation-refund-policy.json");
+  return { cancellationRefundPolicy };
+}

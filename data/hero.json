@@ -31,13 +31,13 @@
   "appBadges": [
     {
       "label": "Get it on Google Play",
-      "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+      "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&pcampaignid=web_share",
       "icon": "google",
       "src": "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
     },
     {
       "label": "Download on the App Store",
-      "href": "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&hl=en_IN",
+      "href": "https://apps.apple.com/in/app/pilot-learner/id6756785250",
       "icon": "apple",
       "src": "/images/e6aniRpuJcqluoFiHQxTzMpzOCs.avif"
     }
