@@ -62,10 +62,10 @@ const ProfessionalTraining = () => {
                         <article
                             key={item.id}
                             /* Changed to Solid Blue Background and White Text */
-                            className="group flex flex-col rounded-[2.5rem] bg-[#2D5BFF] p-8 shadow-xl transition-all duration-300 hover:-translate-y-2 lg:p-10"
+                            className="group flex flex-col rounded-[2.5rem] bg-[#1D4ED8] p-8 shadow-xl transition-all duration-300 hover:-translate-y-2 lg:p-10"
                         >
                             {/* Icon - White Circle with Blue Icon */}
-                            <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#2D5BFF] shadow-sm">
+                            <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#1D4ED8] shadow-sm">
                                 <item.icon size={26} strokeWidth={2} />
                             </div>
 
