@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { X, ChevronDown, Loader2 } from 'lucide-react';
@@ -20,6 +20,8 @@ const PlayStoreIcon = () => (
 );
 
 const LeadModal = ({ data, isOpen, onClose }) => {
+    const [submitError, setSubmitError] = useState("");
+
     const validationSchema = Yup.object({
         fullName: Yup.string().min(2, 'Too short').required('Required'),
         phoneNumber: Yup.string().min(10, 'Too short').required('Required'),
@@ -30,10 +32,27 @@ const LeadModal = ({ data, isOpen, onClose }) => {
         initialValues: { fullName: '', phoneNumber: '', zone: 'Choose a zone' },
         validationSchema,
         onSubmit: async (values, { setSubmitting }) => {
-            await new Promise((r) => setTimeout(r, 2000));
-            console.log(values);
-            setSubmitting(false);
-            onClose();
+            setSubmitError("");
+            try {
+                const res = await fetch("/api/enquiry", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify(values),
+                });
+
+                const json = await res.json().catch(() => null);
+
+                if (!res.ok || !json?.ok) {
+                    setSubmitError(json?.message || "Failed to submit enquiry. Please try again.");
+                    return;
+                }
+
+                onClose();
+            } catch (e) {
+                setSubmitError("Network error. Please try again.");
+            } finally {
+                setSubmitting(false);
+            }
         },
     });
 
@@ -91,13 +110,18 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                     <p className="mt-1 md:mt-2  font-sans font-[500] leading-[27px] text-[16px] text-slate-500">{data.formSubtitle}</p>
 
                     <form className="mt-6 md:mt-8 space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
+                        {submitError ? (
+                            <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                                {submitError}
+                            </div>
+                        ) : null}
                         <div>
                             <label className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">Full Name</label>
                             <input
                                 name="fullName"
                                 {...formik.getFieldProps('fullName')}
                                 placeholder="John Doe"
-                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-blue-500'}`}
+                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[#f8ef1d]'}`}
                             />
                         </div>
 
@@ -107,7 +131,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 name="phoneNumber"
                                 {...formik.getFieldProps('phoneNumber')}
                                 placeholder="+1 (555) 000-0000"
-                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-blue-500'}`}
+                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[#f8ef1d]'}`}
                             />
                         </div>
 
@@ -117,7 +141,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 <select
                                     name="zone"
                                     {...formik.getFieldProps('zone')}
-                                    className={`w-full appearance-none rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200'}`}
+                                    className={`w-full appearance-none rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[#f8ef1d]'}`}
                                 >
                                     <option disabled value="Choose a zone">Choose a zone</option>
                                     {data.zones.map(z => <option key={z} value={z}>{z}</option>)}
@@ -129,7 +153,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                         <button
                             type="submit"
                             disabled={formik.isSubmitting}
-                            className="w-full rounded-xl bg-[#2563eb] py-4 font-bold text-white shadow-lg hover:bg-blue-700 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl brand-fill py-4 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-60"
                         >
                             {formik.isSubmitting ? <Loader2 className="animate-spin" /> : 'Get in Touch'}
                         </button>

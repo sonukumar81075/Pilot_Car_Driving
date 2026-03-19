@@ -6,6 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
+import Image from "next/image";
 
 
 export function Navbar({ brand, links }) {
@@ -51,7 +52,7 @@ export function Navbar({ brand, links }) {
               className={[
                 "w-full md:w-auto mx-auto md:max-w-fit md:rounded-full border border-slate-100 bg-white/80 px-6 py-3 transition-all duration-300 backdrop-blur-md",
                 scrolled
-                  ? "shadow-xl shadow-blue-500/5 ring-1 ring-slate-900/5"
+                  ? "shadow-xl shadow-[rgba(248,239,29,0.08)] ring-1 ring-slate-900/5"
                   : "md:shadow-sm shadow-none"
               ].join(" ")}
             >
@@ -64,7 +65,7 @@ export function Navbar({ brand, links }) {
                       key={l.href}
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="text-[15px] font-semibold text-slate-600 px-4 py-2 rounded-full transition-colors hover:text-[#1d4ed7] hover:bg-slate-100"
+                      className="rounded-full px-4 py-2 text-[15px] font-semibold text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
                     >
                       {l.label}
                     </Link>
@@ -75,9 +76,16 @@ export function Navbar({ brand, links }) {
                 <Link
                   href="/"
                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  className="text-3xl font-black tracking-tighter text-[#1d4ed7] cursor-pointer"
+                  className="cursor-pointer flex items-center"
                 >
-                  {brand || "pilot"}
+                  <Image
+                    src="/images/logo/Pilot Logo.png"   // 👉 apna logo path
+                    alt="Pilot Logo"
+                    width={120}              // 👉 adjust size
+                    height={40}
+                    priority
+                    className="object-contain"
+                  />
                 </Link>
 
                 {/* Desktop Right Links */}
@@ -87,7 +95,7 @@ export function Navbar({ brand, links }) {
                       key={l.href}
                       href={l.href}
                       onClick={() => setOpen(false)}
-                      className="text-[15px] font-semibold text-slate-600 px-4 py-2 rounded-full transition-colors hover:text-[#1d4ed7] hover:bg-slate-100"
+                      className="rounded-full px-4 py-2 text-[15px] font-semibold text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
                     >
                       {l.label}
                     </Link>
@@ -123,7 +131,7 @@ export function Navbar({ brand, links }) {
             {/* Close Button */}
             <button
               onClick={() => setOpen(false)}
-              className="absolute right-6 top-6 flex items-center justify-center h-10 w-10 rounded-full border-2 border-blue-500 text-blue-500"
+              className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-900 text-slate-900"
             >
               <IoMdClose className="h-6 w-6" />
             </button>
@@ -132,7 +140,7 @@ export function Navbar({ brand, links }) {
             <Link
               href="/"
               onClick={() => setOpen(false)}
-              className="absolute left-6 top-6 text-3xl font-black text-[#1d4ed7]"
+              className="absolute left-6 top-6 border-b-4 border-[var(--brand)] text-3xl font-black text-slate-900"
             >
               {brand}
             </Link>
@@ -144,7 +152,7 @@ export function Navbar({ brand, links }) {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="hover:text-[#1d4ed7] transition"
+                  className="transition hover:text-slate-900"
                 >
                   {l.label}
                 </Link>

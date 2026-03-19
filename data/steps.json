@@ -1,20 +1,26 @@
 [
   {
     "step": "01",
-    "title": "Book Your Lesson  ",
-    "description": "Choose a training program and schedule your driving lessons at a convenient time.",
+    "title": "Choose Your Service",
+    "description": "Select what you want to learn — car driving classes, bike training, or license assistance. ",
     "image": "/images/Easy_Steps/01.png"
   },
   {
     "step": "02",
-    "title": "Learn with Experts",
-    "description": "Practice real driving skills with certified instructors including highway control and parking.",
+    "title": "Choose Pickup Location",
+    "description": "Choose your pickup location for door-to-door training. ",
     "image": "/images/Easy_Steps/02.png"
   },
   {
     "step": "03",
-    "title": "Drive with Confidence",
-    "description": "Build confidence behind the wheel and get ready for safe and independent driving.",
+    "title": "Select Your Package & License Type",
+    "description": "Pick a package based on your learning needs and choose license assistance if required. ",
+    "image": "/images/Easy_Steps/03.png"
+  },
+  {
+    "step": "04",
+    "title": "Choose Date & Time Slot ",
+    "description": "Select your preferred schedule and book your driving lessons instantly. ",
     "image": "/images/Easy_Steps/03.png"
   }
 ]

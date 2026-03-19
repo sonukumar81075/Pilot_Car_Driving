@@ -7,15 +7,15 @@ export function AppDownloadSection({ data }) {
   if (!data) return null;
 
   return (
-    <section className="md:pt-32 pt-10 bg-[#FFFFFF] pb-10 font-lexend lg:px-0 px-4">
-      <Container className="  text-center">
-        <div className="relative flex justify-center w-full md:pb-6">
+    <section className="bg-white pb-10 pt-10 font-lexend lg:px-0 md:pt-32">
+      <Container className="text-center">
+        <div className="relative flex w-full justify-center pb-6">
           <Image
             src="/images/Gemini_Generated_Image_f92u21f92u21f92u.png"
             alt="driving app"
             width={550}
             height={540}
-            className="hover:scale-105 transition duration-300"
+            className="h-auto w-full max-w-[550px] transition duration-300 hover:scale-[1.03]"
           />
 
           {/* Bottom Shadow Gradient */}
@@ -23,16 +23,17 @@ export function AppDownloadSection({ data }) {
         </div>
 
         <h2 className="md:text-[40px] lg:text-[56px] text-[30px] font-lexend font-[700] text-slate-900 md:leading-[45px] lg:leading-[67px] leading-[36px]">
-          Master Car Driving the Smart Way.
+          Skip searching for driving
           <br />
-          Learn with Pilot.
+          schools near me.
         </h2>
-
-        <p className="mt-4 text-[18px] font-lexend font-[500] leading-[27px] text-[#666666]">
-          Professional instructors, flexible lessons, and real-road training to help you become a confident driver.
+        {/* Skip searching for driving schools near me. 
+        Download the app and start learning to drive today */}
+        <p className="mx-auto mt-4 max-w-2xl text-[16px] font-lexend font-[500] leading-[26px] text-[#666666] md:text-[18px] md:leading-[27px]">
+          Download the app and start learning to drive today.
         </p>
 
-        <div className="flex flex-row justify-center items-center gap-4 mt-8">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           {data.appBadges?.map((b) => (
             <Link key={b.label} href={b.href} target="_blank">
               <Image
@@ -44,7 +45,7 @@ export function AppDownloadSection({ data }) {
                 alt={b.label}
                 width={220}
                 height={60}
-                className="w-[170px] sm:w-[200px] md:w-[220px] h-auto transition-transform duration-300 hover:scale-105"
+                className="h-auto w-[160px] transition-transform duration-300 hover:scale-105 sm:w-[200px] md:w-[220px]"
               />
             </Link>
           ))}

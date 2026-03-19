@@ -34,7 +34,7 @@ export function Services({ services }) {
           {tickerItems.map((s, idx) => (
             <div
               key={`${s.title}-${idx}`}
-              className="w-[250px] md:w-[350px] shrink-0 flex flex-col items-center group cursor-pointer"
+              className="group flex w-[240px] shrink-0 cursor-pointer flex-col items-center sm:w-[280px] md:w-[320px] lg:w-[350px]"
             >
               {/* Image Container */}
               <div className="relative w-full aspect-[4/5] rounded-[32px] overflow-hidden mb-6 transition-transform duration-500 group-hover:scale-[1.04]">
@@ -48,7 +48,7 @@ export function Services({ services }) {
               </div>
 
               {/* Centered Label */}
-              <h3 className="text-[20px] font-bold text-[#1c1c1c] transition-colors group-hover:text-blue-600">
+              <h3 className="text-[20px] font-bold text-[#1c1c1c] transition-colors group-hover:text-slate-900 group-hover:underline group-hover:decoration-[var(--brand)] group-hover:decoration-2">
                 {s.title}
               </h3>
             </div>

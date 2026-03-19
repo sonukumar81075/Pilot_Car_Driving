@@ -3,12 +3,17 @@
 :root {
   --background: #ffffff;
   --foreground: #0b1220;
+  /* Brand */
+  --brand: #f8ef1d;
+  --brand-on: #0b1220;
+  /* dark text on brand (readable) */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter); 
+  --color-brand: var(--brand);
+  --font-sans: var(--font-inter);
   --font-lexend: var(--font-lexend);
   --font-urbanist: var(--font-urbanist)
 }
@@ -23,20 +28,136 @@
 body {
   background: var(--background);
   color: var(--foreground);
-} 
+}
 
 html {
   scroll-behavior: smooth;
 }
 
 ::selection {
-  background: rgb(99 102 241 / 0.25);
+  background: rgb(248 239 29 / 0.45);
+}
+
+/* ----- Brand utilities (use className="brand-fill" etc.) ----- */
+
+/** Filled surface: brand yellow + dark text. Hover keeps #f8ef1d, slight darken for feedback */
+.brand-fill {
+  background-color: var(--brand);
+  color: var(--brand-on);
+  transition:
+    filter 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.brand-fill:hover {
+  background-color: var(--brand);
+  color: var(--brand-on);
+  filter: brightness(0.94);
+}
+
+.brand-fill:active {
+  filter: brightness(0.88);
+}
+
+.brand-fill:focus-visible {
+  outline: 2px solid var(--brand-on);
+  outline-offset: 2px;
+}
+
+/** Outline: dark text, brand border; hover fills with same brand + dark text */
+.brand-outline {
+  background-color: transparent;
+  color: var(--brand-on);
+  border: 2px solid var(--brand);
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    filter 0.15s ease;
+}
+
+.brand-outline:hover {
+  background-color: var(--brand);
+  color: var(--brand-on);
+  filter: none;
+}
+
+.brand-outline:focus-visible {
+  outline: 2px solid var(--brand-on);
+  outline-offset: 2px;
+}
+
+/**
+ * Link text (inline <a> / Next Link)
+ * Same as .link-brand-subtle — kept for backward compatibility.
+ */
+.brand-link {
+  color: var(--brand-on);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+
+.brand-link:hover {
+  color: var(--brand-on);
+  text-decoration-color: var(--brand);
+}
+
+.brand-link:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/** Default: dark link + soft underline; hover → #f8ef1d underline */
+.link-brand {
+  color: var(--brand-on);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(11, 18, 32, 0.28);
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
+}
+
+.link-brand:hover {
+  color: var(--brand-on);
+  text-decoration-color: var(--brand);
+}
+
+.link-brand:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/** Pehle underline nahi; hover par brand #f8ef1d underline */
+.link-brand-subtle {
+  color: var(--brand-on);
+  text-decoration: none;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration 0.15s ease;
+}
+
+.link-brand-subtle:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--brand);
+}
+
+.link-brand-subtle:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 @keyframes floatUpDown {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-6px);
   }
@@ -44,4 +165,53 @@ html {
 
 .animate-float {
   animation: floatUpDown 2s ease-in-out infinite;
+}
+
+
+
+@layer utilities {
+
+  /* Slow rotation for the dashed ring */
+  .animate-spin-slower {
+    animation: spin 20s linear infinite;
+  }
+
+  /* Custom ping that scales from the center without shifting */
+  .animate-ping-slow {
+    animation: ping-slow 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  /* Smooth floating animations for the cards */
+  .animate-bounce-slow {
+    animation: float 5s ease-in-out infinite;
+  }
+
+  .animate-bounce-slower {
+    animation: float 7s ease-in-out infinite;
+  }
+
+  @keyframes ping-slow {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.8;
+    }
+
+    80%,
+    100% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-15px);
+    }
+  }
 }

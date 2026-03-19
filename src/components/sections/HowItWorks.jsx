@@ -1,3 +1,73 @@
+// "use client";
+
+// import { Container } from "@/components/ui/Container";
+// import { SectionHeading } from "@/components/ui/SectionHeading";
+// import { motion } from "framer-motion";
+// import Image from "next/image";
+
+// export function HowItWorks({ steps }) {
+//   // Ensure we are handling exactly 4 steps
+//   const displaySteps = steps.slice(0, 4);
+
+//   return (
+//     <section id="how-it-works" className="md:pt-32 pt-16 bg-[#FFFFFF] font-lexend">
+//       <Container>
+//         <SectionHeading
+//           eyebrow="How it works"
+//           title="Learn Driving in 4 Easy Steps"
+//           description="Pilot makes learning car driving easy with professional instructors and practical road training."
+//         />
+
+//         {/* Grid adjusted to 4 columns on large screens, 2 on medium */}
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-16">
+//           {displaySteps.map((s, idx) => (
+//             <motion.div
+//               key={idx}
+//               initial={{ opacity: 0, y: 20 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               viewport={{ once: true }}
+//               transition={{ delay: idx * 0.1 }}
+//               className="group relative"
+//             >
+//               <div className="relative h-full bg-white rounded-[2.5rem] border border-slate-100 p-7 pt-12 shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(59,130,246,0.08)] flex flex-col">
+
+//                 {/* Background Large Number - Matched to Screenshot */}
+//                 <span className="absolute top-6 right-8 text-7xl font-black text-slate-50/80 group-hover:text-blue-50/50 transition-colors duration-500 select-none">
+//                   0{idx + 1}
+//                 </span>
+
+//                 {/* Text Content */}
+//                 <div className="relative z-10 mb-8 min-h-[140px]">
+//                   <h3 className="text-[22px] font-[700] text-[#1c1c1c] mb-3 leading-[30px]">
+//                     {s.title}
+//                   </h3>
+//                   <p className="text-[15px] leading-[26px] text-slate-500 font-medium">
+//                     {s.description}
+//                   </p>
+//                 </div>
+
+//                 {/* Bottom Image Container (The Light Blue "Bucket") */}
+//                 <div className="relative mt-auto pt-6 rounded-[2rem] bg-gradient-to-b from-[#f0f7ff] to-[#ffffff] border border-blue-50 overflow-hidden">
+//                   <div className="relative w-full aspect-[4/5] transform translate-y-2 group-hover:translate-y-0 transition-transform duration-700 ease-in-out">
+//                     <Image
+//                       src={s.image}
+//                       alt={s.title}
+//                       fill
+//                       className="object-contain object-top drop-shadow-xl"
+//                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+//                     />
+//                   </div>
+//                 </div>
+
+//               </div>
+//             </motion.div>
+//           ))}
+//         </div>
+//       </Container>
+//     </section>
+//   );
+// }
+
 "use client";
 
 import { Container } from "@/components/ui/Container";
@@ -6,65 +76,69 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 export function HowItWorks({ steps }) {
+  const displaySteps = steps.slice(0, 4);
+
   return (
-    <section id="how-it-works" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
-      <Container>
+    <section id="how-it-works" className="md:pt-32 pt-16 bg-[#FFFFFF] font-lexend overflow-hidden">
+      <Container className="relative">
+ 
 
-      <SectionHeading
-        eyebrow="How it works"
-        title="Learn Driving in 3 Easy Steps"
-        description="Pilot makes learning car driving easy with professional instructors and practical road training."
-      />
+        <SectionHeading
+          eyebrow="The Process"
+          title="Drive with Confidence in 4 Steps"
+          description="A structured path designed to take you from a beginner to a licensed pro seamlessly."
+        />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-18">
-          {steps.map((s, idx) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-20 bg-[#FFFFFF] pb-12">
+          {displaySteps.map((s, idx) => (
             <motion.div
-              key={s.step}
-              initial={{ opacity: 0, y: 20 }}
+              key={idx}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="group relative"
+              transition={{ delay: idx * 0.15, duration: 0.6 }}
+              /* Unique: Odd cards shifted down, even cards shifted up for a staggered look */
+              className={`relative group ${idx % 2 !== 0 ? "lg:mt-16" : ""}`}
             >
+              {/* Step Circle Badge */}
+              <div className="absolute -top-5 left-10 z-20 h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shadow-lg shadow-blue-200">
+                {idx + 1}
+              </div>
 
-              <div className="relative h-full bg-white rounded-[2.5rem] border border-slate-100 p-8 pt-12 shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_20px_50px_rgba(59,130,246,0.1)] hover:-translate-y-2">
+              <div className="relative h-full bg-white rounded-[2rem] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-slate-50 transition-all duration-500   group-hover:-translate-y-2">
 
-                <span className="absolute top-6 right-8 text-7xl font-black text-blue-50/50 select-none group-hover:text-blue-50 transition-colors">
-                  {s.step}
-                </span>
-
-                <div className="relative z-10 mb-10">
-                  <h3 className="text-[24px] font-[700] text-[#1c1c1c] mb-4 font-lexend leading-[34px] transition-colors">
+                {/* Content Area */}
+                <div className="pt-6 mb-6">
+                  <h3 className="text-[20px] font-bold text-slate-900 mb-2   transition-colors">
                     {s.title}
                   </h3>
-
-                  <p className="text-[19px] leading-[32px] text-slate-700 font-lexend tracking-tight ">
+                  <p className="text-[14px] text-slate-500 leading-relaxed">
                     {s.description}
                   </p>
                 </div>
 
-                <div className="relative mt-auto pt-4 rounded-[2rem] bg-gradient-to-b from-blue-50 to-white border border-blue-100/50 overflow-hidden">
-                  <div className="relative w-full aspect-[4/5] mt-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                {/* The "Phone Hub" - Concentric circles background effect */}
+                <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-slate-50 overflow-hidden flex items-end justify-center">
 
+                  {/* Decorative Circles behind the phone */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-40">
+                    <div className="absolute h-32 w-32 rounded-full border border-blue-200 group-hover:scale-150 transition-transform duration-1000" />
+                    <div className="absolute h-48 w-48 rounded-full border border-blue-100 group-hover:scale-125 transition-transform duration-1000" />
+                  </div>
+
+                  <div className="relative w-[85%] h-[90%] transition-transform duration-700 group-hover:scale-105">
                     <Image
                       src={s.image}
                       alt={s.title}
                       fill
-                      className="object-contain object-top drop-shadow-2xl "
-                      sizes="(max-width: 1024px) 100vw, 33vw"
+                      className="object-contain object-bottom drop-shadow-[-10px_20px_30px_rgba(0,0,0,0.15)]"
                     />
-
                   </div>
                 </div>
-
-                {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-blue-600 rounded-b-full group-hover:w-24 transition-all duration-500" /> */}
-
               </div>
-
             </motion.div>
           ))}
         </div>
-
       </Container>
     </section>
   );

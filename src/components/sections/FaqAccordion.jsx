@@ -20,7 +20,7 @@ export function FaqAccordion({ items }) {
             {/* Question */}
             <button
               onClick={() => setOpen(isOpen ? null : idx)}
-              className="flex w-full items-start justify-between gap-4 px-5 py-5 text-left cursor-pointer"
+              className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left cursor-pointer"
             >
               <span className="text-[18px] sm:text-[20px] font-urbanist font-[700] text-[#1c1c1c] leading-[28px] flex-1">
                 {item.question}
@@ -30,7 +30,7 @@ export function FaqAccordion({ items }) {
               <motion.span 
                 animate={{ 
                   rotate: isOpen ? 180 : 0,
-                  backgroundColor: isOpen ? "#3B82F6" : "#262626" 
+                  backgroundColor: isOpen ? "#64748b" : "#475569" 
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="flex items-center justify-center h-10 w-10 min-w-[40px] rounded-full text-white flex-shrink-0"

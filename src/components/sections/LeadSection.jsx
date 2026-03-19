@@ -17,10 +17,10 @@ const LeadSection = ({ data }) => {
                     description="Fill out the quick form and our team will contact you shortly to help you book your first driving lesson."
                 />
 
-                <div className="flex flex-col items-center justify-center mt-8 p-4">
+                <div className="flex flex-col items-center justify-center mt-8 p-4 border border-gray-50 rounded-3xl py-10 mb-6 bg-[#FFFFFF] shadow-md">
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="rounded-2xl bg-blue-600 px-8 py-3.5 text-[16px] cursor-pointer font-bold text-white shadow-xl shadow-blue-200 transition-all hover:bg-blue-700 active:scale-95"
+                        className="rounded-2xl bg-slate-600 hover:bg-slate-700  px-8 py-3.5 text-[16px] cursor-pointer font-bold text-white shadow-xl  transition-all   active:scale-95"
                     >
                         Book Your First Lesson
                     </button>

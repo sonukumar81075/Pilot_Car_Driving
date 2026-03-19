@@ -1,36 +1,43 @@
 [
   {
-    "name": "Maya L.",
+    "name": "— Mani K.",
     "role": "Busy parent",
-    "quote": "I booked a same-day clean in under two minutes. The pro arrived on time and my apartment looked brand new.",
+    "quote": "“I had no driving experience at all, but the instructor was very patient and explained everything clearly. Within a few sessions, I felt confident on the road.” ",
     "rating": 5,
     "avatar": "/images/avatars/BNlX2RE6wTLxUwoLsbtP5iJ6qw.avif"
   },
   {
-    "name": "Noah K.",
+    "name": "— ravi R.",
     "role": "Remote worker",
-    "quote": "Transparent pricing and super easy scheduling. I love the real-time updates and the consistency across bookings.",
+    "quote": "“The best part is the flexibility. I could book classes based on my schedule, and the pickup option made it very convenient.”",
     "rating": 5,
     "avatar": "/images/avatars/CJ3oDDuNiywhQQIxUDMXuoB3OE.avif"
   },
   {
-    "name": "Aisha R.",
+    "name": "— Hitha P. ",
     "role": "First-time homeowner",
-    "quote": "The move-in service saved me an entire weekend. Great communication, great results, and a smooth experience.",
+    "quote": "“I liked how structured the learning was. Each session had a clear focus, and I could track my progress easily.”",
     "rating": 5,
     "avatar": "/images/avatars/oCikd0D435iTXsMrhKxheng6KY.avif"
   },
   {
-    "name": "Aisha R.",
+    "name": "— vishnu  S.",
     "role": "First-time homeowner",
-    "quote": "The move-in service saved me an entire weekend. Great communication, great results, and a smooth experience.",
+    "quote": "“Cleared my driving test on the first attempt. The mock practice really helped.”",
     "rating": 5,
     "avatar": "/images/avatars/ncSY0XrjdZNp64EmAQw9HSrk.avif"
   },
   {
-    "name": "Aisha R.",
+    "name": "— Nikhil M. ",
     "role": "First-time homeowner",
-    "quote": "The move-in service saved me an entire weekend. Great communication, great results, and a smooth experience.",
+    "quote": "“Booking through the app was simple, and rescheduling was easy when I got busy. Overall a smooth experience.”",
+    "rating": 5,
+    "avatar": "/images/avatars/oCikd0D435iTXsMrhKxheng6KY.avif"
+  },
+  {
+    "name": " — Priya D.",
+    "role": "First-time homeowner",
+    "quote": "“Good instructors and very professional approach. I especially liked the door-to-door pickup and drop.”",
     "rating": 5,
     "avatar": "/images/avatars/oCikd0D435iTXsMrhKxheng6KY.avif"
   }

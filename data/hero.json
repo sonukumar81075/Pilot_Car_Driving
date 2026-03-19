@@ -18,8 +18,8 @@
       "href": "/#faq"
     }
   ],
-  "headline": "Master the road, booked in minutes.",
-  "subtitle": "The modern way to learn driving. Connect with certified instructors, track your progress in real-time, and get license-ready with our on-demand booking app.",
+  "headline": "The Smarter Way to Learn, Drive  and Get Licensed.",
+  "subtitle": "The modern way to learn driving. Connect with certified instructors, track your progress in real-time, and get license-ready with our on-demand booking app",
   "primaryCta": {
     "label": "Start Learning",
     "href": "#download"
@@ -48,18 +48,31 @@
     "width": 980,
     "height": 720
   },
-  "highlights": [
+  "whyChoose": [
     {
-      "title": "Certified Instructors",
-      "description": "Expert trainers with dual-control cars and full background checks."
+      "title": "Certified & Verified Driving Instructors",
+      "description": "Learn from trained experts you can trust"
     },
     {
-      "title": "Flexible Tracking",
-      "description": "Log your hours and track your skills directly in the app."
+      "title": "Structured Learning Approach",
+      "description": "Step-by-step training designed for beginners"
     },
     {
-      "title": "Instant Booking",
-      "description": "Schedule lessons that fit your life with real-time availability."
+      "title": "Easy App-Based Booking",
+      "description": "Book driving classes anytime, anywhere"
+    },
+    {
+      "title": "Flexible Scheduling",
+      "description": "Choose time slots that fit your routine"
+    },
+    {
+      "title": "Easy Reschedule",
+      "description": "Plans changed? Modify your sessions in seconds"
+    },
+    {
+      "title": "Complete License Assistance",
+      "description": "From learning to license — we support you end-to-end"
     }
+  
   ]
 }

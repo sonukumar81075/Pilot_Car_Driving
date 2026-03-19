@@ -24,6 +24,7 @@
     {
       "title": "Verification Information (Instructors)",
       "isList": true,
+      "listOutro": true,
       "body": [
         "For instructors registering on the Platform, we may collect verification documents and details such as:",
         "Aadhaar Card",
@@ -82,6 +83,7 @@
     {
       "title": "3. Sharing of Information",
       "isList": true,
+      "listOutro": true,
       "body": [
         "We do not sell your personal information. Information may be shared with:",
         "Assigned instructors or learners for session coordination",

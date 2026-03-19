@@ -1,15 +1,14 @@
 import React from 'react';
 import { ShoppingCart, Check, Car, Bike } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
-import PricingCard from '../ui/PricingCard';
+import { PricingCard } from '../ui/PricingCard';
 
 export function PricingSection({ data }) {
     return (
         <section id="pricing" className="md:pt-16 pt-10 bg-[#FFFFFF] font-lexend">
-            <div className="container mx-auto px-4 text-center">
+            <div className="container mx-auto px-4 text-center ">
                 {/* Header Section */}
                 <SectionHeading
-                    // eyebrow="Pricing"
                     title={data.headline}
                     description={data.subtitle}
                 />

@@ -6,86 +6,98 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+const getVariantClasses = (index) => {
+  // const variants = [
+  //   { text: "text-[#F79321]", border: "border-[#F79321]", bg: "bg-[#F79321]" },
+  //   { text: "text-[#2F99D5]", border: "border-[#2F99D5]", bg: "bg-[#2F99D5]" },
+  //   { text: "text-[#EE1F2A]", border: "border-[#EE1F2A]", bg: "bg-[#EE1F2A]" },
+  // ];
+  const variants = [
+    { text: "text-[#F79321]", border: "border-[#F4F6F8]", bg: "bg-[#F4F6F8]" },
+    { text: "text-[#2F99D5]", border: "border-[#F4F6F8]", bg: "bg-[#F4F6F8]" },
+    { text: "text-[#EE1F2A]", border: "border-[#F4F6F8]", bg: "bg-[#F4F6F8]" },
+  ];
+  return variants[index % variants.length];
+};
+
 export function TestimonialsCarousel({ testimonials }) {
   return (
-    <div className="pt-6 font-lexend">
+    <div className="py-12 bg-[#FFFFFF] font-sans">
       <Swiper
         modules={[Autoplay, Pagination]}
-        spaceBetween={32}
+        spaceBetween={30}
         slidesPerView={1}
         loop={true}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-          bulletClass: 'swiper-pagination-bullet !bg-slate-200 !opacity-100',
-          bulletActiveClass: '!bg-slate-600 !w-8 rounded-full transition-all duration-300',
-        }}
+        autoHeight={false} // Ensure Swiper doesn't change height per slide
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
         breakpoints={{
           640: { slidesPerView: 1 },
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
-        className="pb-20 !px-4"
+        // "items-stretch" forces all slides to the same height
+        className="pb-16 px-4 max-w-7xl mx-auto !flex items-stretch"
       >
-        {testimonials.map((item, i) => (
-          <SwiperSlide key={i} className="py-8">
-            <div className="group relative h-full transition-all duration-500">
+        {testimonials.map((item, i) => {
+          const variant = getVariantClasses(i);
+          return (
+            // h-full here ensures the slide fills the swiper-wrapper height
+            <SwiperSlide key={i} className="pt-12 pb-8 !h-auto">
+              <div className="relative h-full flex flex-col">
+                {/* Floating Avatar Pin */}
+                <div className="absolute -top-12 right-10 z-10">
+                  <div className={`relative w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center bg-gray-100 ${variant.text}`}>
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    </svg>
+                    <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 ${variant.bg}`} />
+                  </div>
+                </div>
 
-              {/* Background Glow Effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-400 to-indigo-500 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                {/* Main Card - flex-1 makes this grow to fill the container */}
+                <div className={`bg-white rounded-[2rem] p-8 pt-10 shadow-sm border-b-[12px] border-r-[12px] ${variant.border} relative overflow-hidden flex-1 flex flex-col`}>
 
-              {/* Main Card */}
-              <div className="relative h-full bg-white border border-slate-50/80 rounded-[2rem] p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]  transition-all duration-500 flex flex-col justify-between overflow-hidden">
-              {/* card hover css :  group-hover:shadow-[0_20px_50px_rgba(59,130,246,0.12)] */}
- 
-
-                <div className="relative">
-                  {/* Floating Icon */}
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-50 text-slate-600 group-hover:bg-slate-200 group-hover:text-slate-600 transition-colors duration-500">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  {/* Header: Quote Icon & Name */}
+                  <div className="flex gap-4 items-start mb-4">
+                    <div className="text-gray-300 shrink-0">
+                      <svg width="45" height="45" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V12C14.017 12.5523 13.5693 13 13.017 13H11.017V21H14.017ZM5.017 21L5.017 18C5.017 16.8954 5.91243 16 7.017 16H10.017C10.5693 16 11.017 15.5523 11.017 15V9C11.017 8.44772 10.5693 8 10.017 8H6.017C5.46472 8 5.017 8.44772 5.017 9V12C5.017 12.5523 4.56928 13 4.017 13H2.017V21H5.017Z" />
                       </svg>
                     </div>
-                  </div>
-
-                  <blockquote className="text-[19px] leading-[32px] text-slate-700 font-medium tracking-tight">
-                    {item.quote}
-                  </blockquote>
-                </div>
-
-                {/* Author Section */}
-                <div className="mt-10 flex items-center gap-4">
-                  <div className="relative">
-                    <Image
-                      src={item.avatar}
-                      alt={item.name}
-                      width={60}
-                      height={60}
-                      className="rounded-2xl object-cover w-14 h-14   group-hover:ring-slate-100 transition-all duration-500"
-                    />
-                    <div className="absolute -bottom-1 -right-1 h-4 w-4 bg-slate-500 rounded-full border-2 border-white" />
-                  </div>
-
-                  <div>
-                    <p className="text-[16px] font-bold text-slate-900 group-hover:text-slate-600 transition-colors">
-                      {item.name}
-                    </p>
-                    {item.title && (
-                      <p className="text-[13px] font-bold uppercase tracking-wider text-slate-500/80 mt-0.5">
-                        {item.title}
+                    <div>
+                      <h3 className={`text-xl font-black ${variant.text} leading-tight`}>
+                        {item.name || "Client Name"}
+                      </h3>
+                      <p className="text-gray-500 text-sm font-semibold italic">
+                        {item.role }
                       </p>
-                    )}
+                    </div>
+                  </div>
+
+                  {/* Testimonial Text - flex-grow ensures this takes up space so footer is pushed down */}
+                  <div className="mb-4 flex-grow">
+                    <p className="text-gray-600 text-[15px] leading-relaxed italic">
+                      {item.quote }
+                    </p>
+                  </div>
+
+                  {/* Footer: Rating - This will now always stay at the bottom */}
+                  <div className="flex items-center gap-3 mt-auto">
+                    <div className="flex gap-1">
+                      {[...Array(5)].map((_, index) => (
+                        <span key={index} className="text-orange-400 text-xl">★</span>
+                      ))}
+                    </div>
+                    <span className="bg-gray-100 px-3 py-1 rounded-full text-gray-600 text-sm font-bold">
+                      {item.rating || "4.5"}
+                    </span>
                   </div>
                 </div>
-
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
     </div>
   );

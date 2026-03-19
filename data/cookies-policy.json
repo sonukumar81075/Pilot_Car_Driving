@@ -121,7 +121,7 @@
       },
       {
         "title": "8) Contact & Support",
-        "isSupport": true,
+        "contactVariant": "address",
         "body": [
           "If you have any questions about this Cookies Policy, please contact:",
           "Pilot Mobility Private Limited",
