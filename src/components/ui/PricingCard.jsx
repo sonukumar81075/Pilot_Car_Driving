@@ -13,7 +13,7 @@ export function PricingCard({ data }) {
             key={plan.title}
             className={`relative flex w-full max-w-md flex-col overflow-hidden rounded-3xl border-2 bg-white transition-all duration-300 ${
               plan.isPopular
-                ? "border-[var(--brand,#f8ef1d)] shadow-2xl"
+                ? "border-[var(--brand)] shadow-2xl"
                 : "border-slate-100 shadow-sm"
             }`}
           >
@@ -30,7 +30,7 @@ export function PricingCard({ data }) {
             <div className="p-8 text-left">
               <div className="flex items-center justify-between pt-2">
                 <h3 className="text-2xl font-bold text-slate-900">{plan.title}</h3>
-                <div className="rounded-xl bg-[var(--brand-muted,#fefce8)] p-2 text-yellow-700">
+                <div className="rounded-xl bg-[var(--brand-muted)] p-2 text-[var(--brand)]">
                   {plan.icon === "car" && <Car size={24} />}
                   {plan.icon === "bike" && <Bike size={24} />}
                   {plan.icon === "license" && <Car size={24} />} {/* fallback icon */}
@@ -59,7 +59,7 @@ export function PricingCard({ data }) {
             {/* Price + CTA */}
             <div
               className={`mt-auto p-8 pt-0 ${
-                plan.isPopular ? "bg-[var(--brand-muted,#fefce8)]/60" : "bg-slate-50"
+                plan.isPopular ? "bg-[var(--brand-muted)]/80" : "bg-slate-50"
               }`}
             >
               <div className="mb-6 flex items-baseline gap-2 pt-6">

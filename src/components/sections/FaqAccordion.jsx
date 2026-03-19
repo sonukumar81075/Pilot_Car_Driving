@@ -27,10 +27,12 @@ export function FaqAccordion({ items }) {
               </span>
 
               {/* Animated Icon Container */}
-              <motion.span 
-                animate={{ 
+              <motion.span
+                animate={{
                   rotate: isOpen ? 180 : 0,
-                  backgroundColor: isOpen ? "#64748b" : "#475569" 
+                  backgroundColor: isOpen ? "#FFFFFF" : "#FFFFFF",
+                  color: isOpen ? "#1D4ED8" : "#1D4ED8",
+                  border: isOpen ? "1px solid #1e40af" : "1px solid #1e40af"
                 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
                 className="flex items-center justify-center h-10 w-10 min-w-[40px] rounded-full text-white flex-shrink-0"

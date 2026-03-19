@@ -5,7 +5,7 @@ import { TestimonialsCarousel } from "@/components/sections/TestimonialsCarousel
 
 export function Testimonials({ testimonials }) {
   return (
-    <section id="testimonials" className="md:pt-20 pt-10 bg-[#FFFFFF] font-lexend">
+    <section id="testimonials" className="md:pt-32 pt-10 bg-gradient-to-b from-white to-[var(--brand-muted)] font-lexend">
       <Container>
         <SectionHeading
           eyebrow="Our Testimonials"

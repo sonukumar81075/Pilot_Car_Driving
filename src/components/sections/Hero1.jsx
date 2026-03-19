@@ -5,13 +5,13 @@ import Link from "next/link";
 
 export function Hero1({ data }) {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white via-[var(--brand-muted,#fefce8)] to-[#fef9c3] pt-16 pb-24 font-lexend md:pt-32">
+        <section className="relative overflow-hidden bg-gradient-to-b from-white via-[var(--brand-muted)] to-[#eaf2ff] pt-16 pb-24 font-lexend md:pt-32">
 
             {/* Dynamic Blue Background Elements */}
             <div className="absolute inset-0 -z-10">
-                <div className="absolute left-1/2 top-[-10%] h-[560px] w-[760px] -translate-x-1/2 rounded-full bg-[var(--brand)]/15 blur-3xl" />
-                <div className="absolute -left-20 top-1/4 h-96 w-96 rounded-full bg-[var(--brand)]/18 blur-3xl" />
-                <div className="absolute -right-20 top-1/4 h-96 w-96 rounded-full bg-amber-100/30 blur-3xl" />
+                <div className="absolute left-1/2 top-[-10%] h-[560px] w-[760px] -translate-x-1/2 rounded-full bg-[var(--brand-light)]/18 blur-3xl" />
+                <div className="absolute -left-20 top-1/4 h-96 w-96 rounded-full bg-[var(--brand)]/12 blur-3xl" />
+                <div className="absolute -right-20 top-1/4 h-96 w-96 rounded-full bg-[#dbeafe]/60 blur-3xl" />
             </div>
 
             <Container className="relative flex flex-col items-center text-center">
@@ -22,7 +22,7 @@ export function Hero1({ data }) {
                     <Reveal delay={0.1}>
                         <h1 className="text-balance text-4xl font-lexend font-[700] leading-tight text-slate-900 sm:text-6xl lg:text-7xl">
                             Master the Road
-                            <span className="mx-2 inline-block rounded-xl bg-[var(--brand)] px-3 py-1 text-slate-900">with Pilot.</span>
+                            <span className="mx-2 inline-block rounded-xl bg-[var(--brand)] px-3 py-1 text-white">with Pilot.</span>
                         </h1>
                     </Reveal>
 
@@ -79,7 +79,7 @@ export function Hero1({ data }) {
                         <div className="relative z-20">
 
                             {/* Glow */}
-                            <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-[var(--brand)]/28 blur-3xl" />
+                            <div className="absolute -inset-6 -z-10 rounded-[3rem] bg-[var(--brand)]/22 blur-3xl" />
 
                             <div className="w-[260px] overflow-hidden rounded-[3rem] border-[8px] border-slate-900 bg-white shadow-2xl sm:w-[320px]">
                                 <Image
@@ -114,7 +114,7 @@ export function Hero1({ data }) {
             </Container>
 
             {/* Bottom Smooth Fade to Next Section */}
-            <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-full bg-gradient-to-b from-transparent via-[var(--brand-muted,#fefce8)]/80 to-white"></div>
+            <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-full bg-gradient-to-b from-transparent via-[var(--brand-muted)]/90 to-white"></div>
 
         </section>
     );

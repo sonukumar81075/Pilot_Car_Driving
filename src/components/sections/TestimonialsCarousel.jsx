@@ -7,22 +7,18 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const getVariantClasses = (index) => {
-  // const variants = [
-  //   { text: "text-[#F79321]", border: "border-[#F79321]", bg: "bg-[#F79321]" },
-  //   { text: "text-[#2F99D5]", border: "border-[#2F99D5]", bg: "bg-[#2F99D5]" },
-  //   { text: "text-[#EE1F2A]", border: "border-[#EE1F2A]", bg: "bg-[#EE1F2A]" },
-  // ];
+ 
   const variants = [
-    { text: "text-[#F79321]", border: "border-[#F4F6F8]", bg: "bg-[#F4F6F8]" },
-    { text: "text-[#2F99D5]", border: "border-[#F4F6F8]", bg: "bg-[#F4F6F8]" },
-    { text: "text-[#EE1F2A]", border: "border-[#F4F6F8]", bg: "bg-[#F4F6F8]" },
+    { text: "text-blue-900", border: "border-[#CBD5E1]", bg: "bg-[#CBD5E1]" },
+    { text: "text-blue-900", border: "border-[#CBD5E1]", bg: "bg-[#CBD5E1]" },
+    { text: "text-blue-900", border: "border-[#CBD5E1]", bg: "bg-[#CBD5E1]" },
   ];
   return variants[index % variants.length];
 };
 
 export function TestimonialsCarousel({ testimonials }) {
   return (
-    <div className="py-12 bg-[#FFFFFF] font-sans">
+    <div className="py-12   font-sans">
       <Swiper
         modules={[Autoplay, Pagination]}
         spaceBetween={30}
@@ -47,7 +43,7 @@ export function TestimonialsCarousel({ testimonials }) {
               <div className="relative h-full flex flex-col">
                 {/* Floating Avatar Pin */}
                 <div className="absolute -top-12 right-10 z-10">
-                  <div className={`relative w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center bg-gray-100 ${variant.text}`}>
+                  <div className={`relative w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center bg-gray-100 ${variant.text} border border-blue-900`}>
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12">
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
@@ -56,7 +52,7 @@ export function TestimonialsCarousel({ testimonials }) {
                 </div>
 
                 {/* Main Card - flex-1 makes this grow to fill the container */}
-                <div className={`bg-white rounded-[2rem] p-8 pt-10 shadow-sm border-b-[12px] border-r-[12px] ${variant.border} relative overflow-hidden flex-1 flex flex-col`}>
+                <div className={`bg-white rounded-[2rem] p-8 pt-10 shadow-sm border-b-[12px] border-r-[12px] ${variant.border} relative overflow-hidden flex-1 flex flex-col transition-all duration-300 hover:shadow-xl`}>
 
                   {/* Header: Quote Icon & Name */}
                   <div className="flex gap-4 items-start mb-4">
@@ -70,7 +66,7 @@ export function TestimonialsCarousel({ testimonials }) {
                         {item.name || "Client Name"}
                       </h3>
                       <p className="text-gray-500 text-sm font-semibold italic">
-                        {item.role }
+                        {item.role}
                       </p>
                     </div>
                   </div>
@@ -78,15 +74,15 @@ export function TestimonialsCarousel({ testimonials }) {
                   {/* Testimonial Text - flex-grow ensures this takes up space so footer is pushed down */}
                   <div className="mb-4 flex-grow">
                     <p className="text-gray-600 text-[15px] leading-relaxed italic">
-                      {item.quote }
+                      {item.quote}
                     </p>
                   </div>
 
                   {/* Footer: Rating - This will now always stay at the bottom */}
-                  <div className="flex items-center gap-3 mt-auto">
+                  <div className="flex items-center  justify-between gap-3 mt-auto">
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, index) => (
-                        <span key={index} className="text-orange-400 text-xl">★</span>
+                        <span key={index} className="text-blue-900 text-xl">★</span>
                       ))}
                     </div>
                     <span className="bg-gray-100 px-3 py-1 rounded-full text-gray-600 text-sm font-bold">

@@ -16,7 +16,7 @@ export default async function InsuranceTermsPage() {
   return (
     <main className={typo.pageLegal}>
       <Container>
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <SectionHeading
             title={insuranceTerms.title}
             description={insuranceTerms.description}

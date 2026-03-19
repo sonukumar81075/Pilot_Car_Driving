@@ -5,28 +5,31 @@ import Link from "next/link";
 
 export function Hero2({ data }) {
     return (
-        <section className="relative overflow-x-clip bg-slate-50 pb-16 pt-20 font-lexend md:pb-20 md:pt-28 lg:pb-28 lg:pt-28 xl:pb-40 xl:pt-36">
+        <section className="section-surface relative overflow-x-clip pb-16 pt-20 font-lexend md:pb-20 md:pt-28 lg:pb-28 lg:pt-28 xl:pb-40 xl:pt-36">
             {/* Background — no horizontal bleed */}
             <div
-                className="pointer-events-none absolute right-0 top-0 hidden h-full w-[min(55vw,720px)] bg-[var(--brand)]/6 lg:block"
+                className="pointer-events-none absolute right-0 top-0 hidden h-full w-[min(55vw,720px)] bg-gradient-to-b from-[var(--brand-light)]/25 to-[var(--accent)]/10 lg:block"
                 style={{ clipPath: "polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)" }}
             />
 
             <Container className="relative z-10 w-full max-w-[min(100%,1440px)] px-4 md:px-6 lg:px-8 xl:px-10">
                 <div className="mx-auto grid min-w-0 max-w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
                     {/* LEFT */}
-                    <div className="min-w-0 max-w-full text-center lg:col-span-7 lg:text-left flex flex-col items-center lg:items-start">
+
+
+                    <div className="min-w-0 max-w-full lg:col-span-7 flex flex-col items-center lg:items-start">
+                        {/* 1. Badge & Main Heading */}
                         <Reveal delay={0.1}>
-                            <h1 className="mt-4 max-w-[22ch] text-balance text-3xl font-[700] tracking-tight text-slate-900 sm:max-w-none sm:text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl">
-                                The Smarter Way to Learn
-                                <span className="bg-gradient-to-r from-[#2563eb] to-[#06b6d4] bg-clip-text text-transparent">
-                                    & Drive and Get Licensed.
-                                </span>
+
+
+                            <h1 className="max-w-[18ch] text-balance text-center lg:text-left text-4xl font-[800] tracking-tight text-slate-900 sm:text-5xl md:text-6xl xl:text-7xl leading-[1.1]">
+                                The Smarter Way to <span className="text-blue-700">Learn</span> <span className="heading-accent font-serif italic font-medium text-slate-400">& </span>  <span className="text-blue-600">Drive</span>  and Get Licensed..
                             </h1>
                         </Reveal>
 
+                        {/* 2. Subtitle with better line-height */}
                         <Reveal delay={0.2}>
-                            <p className="mx-auto mt-5 max-w-xl text-base font-[500] leading-relaxed text-[#666666] sm:text-[17px] sm:leading-[28px] lg:mx-0 lg:text-[18px] lg:leading-[30px]">
+                            <p className="mx-auto mt-6 max-w-xl text-center lg:text-left text-base font-[500] leading-relaxed text-slate-500 sm:text-lg lg:mx-0">
                                 {data.subtitle}
                             </p>
                         </Reveal>
@@ -56,38 +59,29 @@ export function Hero2({ data }) {
                                 ))}
                             </div>
                         </Reveal>
-
+                        {/* 4. Enhanced Feature Grid (The "Red Box" Fix) */}
                         <Reveal delay={0.4}>
-                            <div className="mt-8 w-full max-w-full border-t border-slate-200/80 pt-8 text-left">
-                                <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-8">
-                                    {data.whyChoose?.map((item, idx) => (
-                                        <div key={idx} className="flex min-w-0 gap-3">
-                                            <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-500 text-white">
-                                                <svg
-                                                    width="14"
-                                                    height="14"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    strokeWidth="3.5"
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    aria-hidden
-                                                >
-                                                    <polyline points="20 6 9 17 4 12" />
-                                                </svg>
-                                            </div>
-                                            <div className="min-w-0">
-                                                <p className="text-[15px] font-bold leading-snug text-slate-900 sm:text-[16px]">
-                                                    {item.title}
-                                                </p>
-                                                <p className="mt-1 text-xs font-medium leading-snug text-slate-500 sm:text-[13px]">
-                                                    {item.description}
-                                                </p>
-                                            </div>
+                            <div className="mt-14 grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+                                {data.whyChoose?.map((item, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="group flex items-center gap-4 rounded-[2rem] border border-slate-100 bg-white p-2 pr-6 transition-all duration-300  hover:bg-blue-50/30 hover:shadow-sm"
+                                    >
+                                        <div className="flex xl:h-12 h-8 w-8 xl:w-12 shrink-0 items-center justify-center rounded-full 
+                                                bg-slate-50 text-blue-900 
+                                                transition-all duration-500 ease-out 
+                                                group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-blue-800 
+                                                group-hover:text-white shadow-inner">
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                                <polyline points="20 6 9 17 4 12" />
+                                            </svg>
                                         </div>
-                                    ))}
-                                </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-[15px] font-bold text-slate-900">{item.title}</span>
+                                            <span className="text-[12px] font-medium text-slate-400 group-hover:text-slate-500">{item.description}</span>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </Reveal>
                     </div>
@@ -127,12 +121,12 @@ export function Hero2({ data }) {
 
                                     {/* Floating Card 2: Next Lesson */}
                                     <div className="absolute -right-2 bottom-[28%] z-30 hidden xl:block 2xl:-right-6 animate-bounce-slower">
-                                        <div className="max-w-[180px] rounded-2xl bg-slate-900 p-3 text-white shadow-xl 2xl:max-w-none 2xl:p-4">
+                                        <div className="max-w-[180px] rounded-2xl bg-gradient-to-r from-[var(--brand)] to-[var(--accent)] p-3 text-white shadow-xl 2xl:max-w-none 2xl:p-4">
                                             <p className="text-[10px] font-medium opacity-90 2xl:text-xs">Next Lesson</p>
                                             <p className="text-sm font-bold italic 2xl:text-lg">Today @ 4:30 PM</p>
                                             <div className="mt-2 h-1.5 w-full rounded-full bg-white/20 overflow-hidden">
                                                 {/* Animated progress bar */}
-                                                <div className="h-full w-2/3 rounded-full bg-blue-500 animate-pulse" />
+                                                <div className="h-full w-2/3 rounded-full bg-[var(--accent)] animate-pulse" />
                                             </div>
                                         </div>
                                     </div>
@@ -141,17 +135,17 @@ export function Hero2({ data }) {
                                 {/* --- ANIMATED DECORATIVE RINGS --- */}
                                 <div className="absolute left-1/2 top-1/2 -z-10 h-0 w-0">
                                     {/* Innermost Ring */}
-                                    <div className="absolute h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-yellow-500/20 animate-ping-slow" />
+                                    <div className="absolute h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--accent)]/20 animate-ping-slow" />
 
                                     {/* Middle Ring */}
-                                    <div className="absolute h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-400/20 animate-pulse" />
+                                    <div className="absolute h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--brand)]/20 animate-pulse" />
 
                                     {/* Outermost Ring (Slow Rotation) */}
-                                    <div className="absolute h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-blue-300/20 animate-spin-slower" />
+                                    <div className="absolute h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[var(--brand-light)]/30 animate-spin-slower" />
 
                                     {/* Small Glow Dots on the rings */}
-                                    <div className="absolute -top-[250px] left-0 h-2 w-2 rounded-full bg-blue-400/60 blur-sm" />
-                                    <div className="absolute top-[250px] left-[100px] h-3 w-3 rounded-full bg-blue-300/30 blur-sm" />
+                                    <div className="absolute -top-[250px] left-0 h-2 w-2 rounded-full bg-[var(--accent)]/60 blur-sm" />
+                                    <div className="absolute top-[250px] left-[100px] h-3 w-3 rounded-full bg-[var(--brand-light)]/40 blur-sm" />
                                 </div>
 
                             </Reveal>

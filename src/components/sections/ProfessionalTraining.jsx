@@ -4,37 +4,52 @@ import React from "react";
 import { SectionHeading } from "../ui/SectionHeading";
 import { Container } from "../ui/Container";
 import Link from "next/link";
-import { Car, FileText, Zap } from "lucide-react";
+import { Car, Bike, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 
 
 const trainings = [
     {
         id: "car",
-        title: " Car Driving Classes",
-        description: "Start from zero and drive with confidence on real roads. ",
+        title: "Car Driving Classes",
+        description: "Start from zero and drive with confidence on real roads.",
         icon: Car,
-        iconBg: "bg-[var(--brand)]",
-        features: ["Learn step-by-step with patient instructors", "Practice in real traffic conditions", "Get ready for your driving test"],
-        linkText: "Choose Your Driving Package  ",
+        accent: "blue",
+        colorClass: "bg-blue-50 text-blue-600  ",
+        features: [
+            "Learn step-by-step with patient instructors",
+            "Practice in real traffic conditions",
+            "Get ready for your driving test",
+        ],
+        linkText: "Choose Your Driving Package",
         drivingType: "Car",
     },
     {
         id: "bike",
         title: "Bike Training",
-        description: "Master bike riding with confidence, control, and safety. ",
-        icon: Zap, // Using Zap/Lightning for the bike icon per screenshot
-        iconBg: "bg-orange-500",
-        features: ["Hands-on training from day one", "Improve balance and road awareness", "Learn safe riding techniques"],
+        description: "Master bike riding with confidence, control, and safety.",
+        icon: Bike,
+        accent: "indigo",
+        colorClass: "bg-indigo-50 text-indigo-600  ",
+        features: [
+            "Hands-on training from day one",
+            "Improve balance and road awareness",
+            "Learn safe riding techniques",
+        ],
         linkText: "Start Your Bike Training",
         drivingType: "Bike",
     },
     {
         id: "license",
-        title: "Driving License Assistance",
-        description: "ESkip the confusion — get your license without the stress. ",
+        title: "License Assistance",
+        description: "Skip the confusion — get your license without the stress.",
         icon: FileText,
-        iconBg: "bg-[#1e293b]", // Dark slate/navy
-        features: ["Complete support for documentation", "Guidance for RTO test preparation", "Smooth and hassle-free process"],
+        accent: "emerald",
+        colorClass: "bg-emerald-50 text-emerald-600  ",
+        features: [
+            "Complete support for documentation",
+            "Guidance for RTO test preparation",
+            "Smooth and hassle-free process",
+        ],
         linkText: "Get License Support",
         drivingType: "License",
     },
@@ -44,7 +59,7 @@ const trainings = [
 const ProfessionalTraining = () => {
 
     return (
-        <section id="services" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
+        <section id="services" className="md:pt-32 pt-10 bg-gradient-to-b from-white to-[var(--brand-muted)] font-lexend">
             <Container>
                 <SectionHeading
                     title="Start Your Driving Journey Today"
@@ -54,41 +69,51 @@ const ProfessionalTraining = () => {
                     {trainings.map((item) => (
                         <article
                             key={item.id}
-                            className="flex flex-col rounded-[2.25rem] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 lg:rounded-[2.5rem] lg:p-10"
+                            className="group flex flex-col rounded-[2.25rem] border border-slate-100 bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-6 lg:rounded-[2.5rem] lg:p-10"
                         >
-                            {/* Circular Icon Container */}
-                            <div className={`mb-6 flex h-12 w-12 items-center justify-center rounded-full ${item.iconBg} ${item.iconBg.includes("brand") ? "text-slate-900" : "text-white"} shadow-lg shadow-inherit lg:mb-8`}>
-                                <item.icon size={20} strokeWidth={2.5} />
+                            {/* Icon */}
+                            <div
+                                className={`mb-8 flex h-14 w-14 items-center justify-center rounded-full ${item.colorClass} text-white transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}
+                            >
+                                <item.icon size={26} strokeWidth={2} className={item.colorClass.split(" ")[1]} />
                             </div>
 
-                            <h3 className="mb-3 font-sans text-[22px] font-[700] leading-tight text-slate-900 lg:mb-4 lg:text-[24px] lg:leading-[36px]">
+                            {/* Title */}
+                            <h3 className="mb-3 text-[22px] font-bold text-slate-900 lg:text-[24px]">
                                 {item.title}
                             </h3>
 
-                            <p className="mb-6 font-sans text-[15px] font-[500] leading-[26px] text-slate-500 lg:mb-8 lg:text-[16px] lg:leading-[27px]">
+                            {/* Description */}
+                            <p className="mb-6 text-[15px] text-slate-500 lg:text-[16px]">
                                 {item.description}
                             </p>
 
-                            <ul className="mb-8 space-y-3 lg:mb-10">
-                                {item.features.map((feature) => (
-                                    <li key={feature} className="flex items-start gap-3 font-sans text-[15px] font-[500] leading-[22px] text-slate-500 lg:text-[16px] lg:leading-[22px]">
-                                        <svg className="mt-1 h-3.5 w-3.5 text-slate-700 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                        </svg>
+                            {/* Features */}
+                            <ul className="mb-10 space-y-4">
+                                {item.features.map((feature, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex items-start gap-3 text-sm font-medium text-slate-600"
+                                    >
+                                        <CheckCircle2
+                                            className={`h-5 w-5 opacity-80 ${item.colorClass.split(" ")[1]}`}
+                                        />
                                         {feature}
                                     </li>
                                 ))}
                             </ul>
 
-                            <div className="mt-auto">
+                            {/* CTA */}
+                            <div className="mt-auto w-full">
                                 <Link
                                     href={`/packages?type=${encodeURIComponent(item.drivingType)}`}
-                                    className="group inline-flex items-center text-sm font-bold link-brand-subtle"
+                                    className="inline-flex items-center justify-center gap-2 w-full rounded-xl 
+                                    px-4 py-4 text-sm font-semibold text-blue-900 
+                                    transition-all duration-300  
+                                    group-hover:shadow-lg group-hover:text-white group-hover:bg-blue-800 group-hover:border-blue-800"
                                 >
                                     {item.linkText}
-                                    <span className="ml-1 transition-transform group-hover:translate-x-1">
-                                        →
-                                    </span>
+                                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                                 </Link>
                             </div>
                         </article>
@@ -101,6 +126,5 @@ const ProfessionalTraining = () => {
 };
 
 export default ProfessionalTraining;
-
 
 

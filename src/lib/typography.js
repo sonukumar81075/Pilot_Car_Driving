@@ -1,11 +1,11 @@
 /** Shared typography tokens for legal / policy pages */
 export const typo = {
-  pageLegal: "bg-white text-slate-900",
+  pageLegal: "md:pt-40 pt-10 bg-[#FFFFFF] font-lexend",
 
-  legalSectionsStack: "mx-auto max-w-3xl space-y-10 px-4 py-12 md:px-6",
-  legalCard: "rounded-2xl border border-slate-100 bg-white p-6 shadow-sm md:p-8",
+  legalSectionsStack: "mx-auto max-w-5xl space-y-10 px-4 py-12 md:px-6",
+  legalCard: "rounded-4xl border border-slate-100 bg-white p-6 shadow-sm md:p-8",
   legalH2:
-    "mb-4 border-b border-slate-200 pb-3 font-sans text-xl font-bold tracking-tight text-slate-900 md:text-2xl",
+    "mb-4 border-b border-slate-200 pb-3 font-sans text-xl font-bold tracking-tight text-blue-900 md:text-2xl",
 
   legalBody:
     "font-sans text-[15px] font-normal leading-[1.7] text-slate-700 md:text-base",

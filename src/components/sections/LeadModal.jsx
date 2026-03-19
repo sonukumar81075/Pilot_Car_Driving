@@ -121,7 +121,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 name="fullName"
                                 {...formik.getFieldProps('fullName')}
                                 placeholder="John Doe"
-                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[#f8ef1d]'}`}
+                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                             />
                         </div>
 
@@ -131,7 +131,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 name="phoneNumber"
                                 {...formik.getFieldProps('phoneNumber')}
                                 placeholder="+1 (555) 000-0000"
-                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[#f8ef1d]'}`}
+                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                             />
                         </div>
 
@@ -141,7 +141,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 <select
                                     name="zone"
                                     {...formik.getFieldProps('zone')}
-                                    className={`w-full appearance-none rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[#f8ef1d]'}`}
+                                    className={`w-full appearance-none rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                                 >
                                     <option disabled value="Choose a zone">Choose a zone</option>
                                     {data.zones.map(z => <option key={z} value={z}>{z}</option>)}
@@ -153,7 +153,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                         <button
                             type="submit"
                             disabled={formik.isSubmitting}
-                            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl brand-fill py-4 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-60"
+                            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl   text-white btn-gradient btn-gradient-glow py-4 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-60"
                         >
                             {formik.isSubmitting ? <Loader2 className="animate-spin" /> : 'Get in Touch'}
                         </button>

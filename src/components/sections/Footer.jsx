@@ -1,76 +1,96 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { Icon } from "@/components/ui/Icon";
+import { Icon } from "@/components/ui/Icon"; 
 
 export function Footer({ data }) {
   return (
-    <footer className="bg-white font-lexend border-t border-slate-100 mt-12">
-      <Container className="py-16">
-        {/* Top Section: Links Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+    <footer className="relative w-full  h-screen overflow-hidden pt-6 border-t border-white/10 bg-gradient-to-b from-[#0b1f45] via-[#071633] to-[#020b1b] font-lexend">
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute -top-16 left-1/2 h-72 w-[46rem] -translate-x-1/2 rounded-full bg-[var(--brand)]/20 blur-3xl" />
+      {/* <FooterCarAnimation /> */}
+
+      <Container className="relative z-10 pb-24 pt-12 md:pb-28 md:pt-16">
+        {/* Card style columns like reference */}
+        <div className="grid grid-cols-1 gap-6 pb-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
           {data.columns.map((col) => (
-            <div key={col.title} className="flex flex-col">
-              <h3 className="text-[14px] font-[500] text-[#999999] uppercase tracking-[2px] mb-6">
-                {col.title}
-              </h3>
-              <ul className="space-y-4">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className={`text-[16px] font-[500] transition-colors hover:opacity-70 ${
-                        l.href.startsWith("mailto:")
-                          ? "text-[#1d4ed7] underline decoration-dotted underline-offset-4"
-                          : "text-[#262626]"
-                      }`}
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
+            <div
+              key={col.title}
+              className="rounded-3xl  p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-sm"
+            >
+              <h3 className="text-[28px] font-semibold text-white">{col.title}</h3>
+              <div className="mb-5 mt-2 h-[2px] w-24 rounded-full bg-gradient-to-r from-[var(--brand-light)] to-transparent" />
+
+              <ul className="space-y-2.5">
+                {col.links.map((l) => {
+                  const isMailto = l.href.startsWith("mailto:");
+                  const className = isMailto
+                    ? "text-[15px] font-[500] text-[var(--brand-light)] underline decoration-dotted underline-offset-4 transition-colors hover:text-white"
+                    : "text-[15px] font-[500] text-slate-200/90 transition-colors hover:text-[var(--brand-light)]";
+
+                  return (
+                    <li key={l.label}>
+                      <Link href={l.href} className={className}>
+                        {l.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
         </div>
 
-        {/* Bottom Section: Copyright & Socials */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8">
-          {/* Copyright - Left Aligned in Design */}
-          <div className="text-[16px] font-[600] text-[#666666] order-2 md:order-1 mt-6 md:mt-0">
-            {data.legal}
+        {/* Full-width divider */}
+        {/* <div className="relative left-1/2 h-px w-screen -translate-x-1/2 bg-white/10" /> */}
+
+        {/* Bottom row */}
+        <div className="flex flex-col items-center justify-between gap-5 pb-10 pt-8 md:flex-row">
+          <div className="flex items-center gap-3 self-center md:self-center">
+            <Image
+              src="/images/logo/Pilot Logo White.png"
+              alt="Pilot logo"
+              width={108}
+              height={36}
+              className="h-12 w-auto object-contain"
+            />
           </div>
 
-          {/* Social Icons - Right Aligned in Design */}
-          <div className="flex flex-wrap justify-center gap-3 order-1 md:order-2">
-            {data.social.map((s) => {
-              let bg = "#334155";
-              switch (s.icon) {
-                case "linkedin": bg = "#0A66C2"; break;
-                case "facebook": bg = "#1877F2"; break;
-                case "instagram": bg = "linear-gradient(135deg,#F58529,#FEDA77,#DD2A7B,#8134AF,#515BD4)"; break;
-                case "youtube": bg = "#FF0000"; break;
-                case "pinterest": bg = "#E60023"; break;
-                case "twitter": bg = "#000000"; break;
-                case "mail": bg = "#3B82F6"; break;
-              }
+          <div className="text-[14px] font-[500] text-slate-400">{data.legal}</div>
 
+          <div className="flex flex-wrap justify-center gap-3">
+            {data.social.map((s) => {
               const isMailto = s.href.startsWith("mailto:");
-              const style = s.icon === "instagram" ? { backgroundImage: bg } : { backgroundColor: bg };
-              const className = "grid h-10 w-10 place-items-center rounded-full text-white transition-transform hover:-translate-y-1 shadow-sm";
+              const className =
+                "grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[var(--brand-light)] hover:bg-[var(--brand)] hover:text-white";
 
               return isMailto ? (
-                <a key={s.label} href={s.href} className={className} style={style} aria-label={s.label}>
-                  <Icon name={s.icon} className="h-5 w-5" />
+                <a key={s.label} href={s.href} className={className} aria-label={s.label}>
+                  <Icon name={s.icon} className="h-4 w-4" />
                 </a>
               ) : (
-                <Link key={s.label} href={s.href} target="_blank" rel="noopener" className={className} style={style}>
-                  <Icon name={s.icon} className="h-5 w-5" />
+                <Link key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className={className}>
+                  <Icon name={s.icon} className="h-4 w-4" />
                 </Link>
               );
             })}
           </div>
         </div>
+
+        {/* Full-width divider */}
+        <div className="relative left-1/2 h-px w-screen -translate-x-1/2 bg-white/10" />
       </Container>
+
+      {/* Watermark visual at bottom like reference */}
+      <div className="pointer-events-none absolute -bottom-6 top-140 left-1/2 z-0 -translate-x-1/2 opacity-[0.06]">
+        <Image
+          src="/images/logo/Pilot Logo White.png"
+          alt=""
+          width={860}
+          height={260}
+          className="h-auto w-[620px] blur-[0.5px] md:w-[820px] lg:w-[920px]"
+        />
+      </div>
     </footer>
   );
 }

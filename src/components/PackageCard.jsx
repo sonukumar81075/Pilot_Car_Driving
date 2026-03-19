@@ -58,7 +58,7 @@ export function PackageCard({ pkg }) {
 
         {isRecommended ? (
           <div className="absolute right-4 top-4">
-            <span className="rounded-full bg-blue-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+            <span className="rounded-full bg-[#1D4ED8] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
               Recommended
             </span>
           </div>
@@ -66,7 +66,7 @@ export function PackageCard({ pkg }) {
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="  font-sans text-[22px] font-[700] leading-tight text-slate-90 lg:text-[20px] lg:leading-[26px]">{pkg?.name}</h3>
+        <h3 className="  font-sans text-[22px] font-[700] leading-tight text-blue-900 lg:text-[20px] lg:leading-[26px]">{pkg?.name}</h3>
         {pkg?.description ? (
           <p className="  line-clamp-3 mt-2 font-sans text-[15px] font-[500] leading-[26px] text-slate-500  lg:text-[15px] lg:leading-[22px]">
             {pkg.description}
@@ -89,7 +89,7 @@ export function PackageCard({ pkg }) {
 
         <div className="mt-auto pt-6">
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-slate-900">
+            <span className="text-2xl font-extrabold text-blue-900">
               ₹{Number(finalPrice || 0).toLocaleString("en-IN")}
             </span>
             <span className="text-xs font-semibold text-slate-400 font-lexend">
@@ -98,7 +98,7 @@ export function PackageCard({ pkg }) {
           </div>
           {hasDiscount ? (
             <div className="mt-1 text-xs font-semibold text-slate-400">
-              <span className="mr-1 line-through opacity-70 text-red-400">
+              <span className="mr-3 line-through opacity-70 text-red-500">
                 ₹{Number(basePrice || 0).toLocaleString("en-IN")}
               </span>
               <span className="text-sm font-semibold text-slate-600">₹{Number(discount || 0).toLocaleString("en-IN")} off</span>
@@ -106,7 +106,7 @@ export function PackageCard({ pkg }) {
           ) : null}
           <button
             type="button"
-            className="mt-4 w-full rounded-xl  bg-blue-600 text-white py-3 text-base font-bold cursor-pointer transition font-lexend active:scale-[0.99]"
+            className="mt-4 w-full rounded-xl  btn-gradient btn-gradient-glow text-white py-3 text-base font-bold cursor-pointer transition font-lexend active:scale-[0.99]"
           >
             View details
           </button>

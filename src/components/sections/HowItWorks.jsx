@@ -79,7 +79,7 @@ export function HowItWorks({ steps }) {
   const displaySteps = steps.slice(0, 4);
 
   return (
-    <section id="how-it-works" className="md:pt-32 pt-16 bg-[#FFFFFF] font-lexend overflow-hidden">
+    <section id="how-it-works" className="md:pt-32 pt-16 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend overflow-hidden">
       <Container className="relative">
  
 
@@ -89,7 +89,7 @@ export function HowItWorks({ steps }) {
           description="A structured path designed to take you from a beginner to a licensed pro seamlessly."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-20 bg-[#FFFFFF] pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-20 pb-12">
           {displaySteps.map((s, idx) => (
             <motion.div
               key={idx}
@@ -101,11 +101,11 @@ export function HowItWorks({ steps }) {
               className={`relative group ${idx % 2 !== 0 ? "lg:mt-16" : ""}`}
             >
               {/* Step Circle Badge */}
-              <div className="absolute -top-5 left-10 z-20 h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold shadow-lg shadow-blue-200">
+              <div className="absolute -top-5 left-10 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[#F1F5F9] border border-blue-900 text-blue-900 font-bold shadow-lg shadow-[rgba(49, 5, 100, 0.35)]">
                 {idx + 1}
               </div>
 
-              <div className="relative h-full bg-white rounded-[2rem] p-6 shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-slate-50 transition-all duration-500   group-hover:-translate-y-2">
+              <div className="relative h-full rounded-[2rem]     bg-white p-6 shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[var(--accent)]/20">
 
                 {/* Content Area */}
                 <div className="pt-6 mb-6">
@@ -118,12 +118,12 @@ export function HowItWorks({ steps }) {
                 </div>
 
                 {/* The "Phone Hub" - Concentric circles background effect */}
-                <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-slate-50 overflow-hidden flex items-end justify-center">
+                <div className="relative mt-auto aspect-[1/1.2] overflow-hidden rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
 
                   {/* Decorative Circles behind the phone */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-40">
-                    <div className="absolute h-32 w-32 rounded-full border border-blue-200 group-hover:scale-150 transition-transform duration-1000" />
-                    <div className="absolute h-48 w-48 rounded-full border border-blue-100 group-hover:scale-125 transition-transform duration-1000" />
+                    <div className="absolute h-32 w-32 rounded-full border border-[var(--accent)]/30 group-hover:scale-150 transition-transform duration-1000" />
+                    <div className="absolute h-48 w-48 rounded-full border border-[var(--brand)]/20 group-hover:scale-125 transition-transform duration-1000" />
                   </div>
 
                   <div className="relative w-[85%] h-[90%] transition-transform duration-700 group-hover:scale-105">

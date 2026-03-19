@@ -93,12 +93,16 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${inter.variable} ${lexend.variable} ${urbanist.variable} antialiased bg-gradient-to-b from-slate-50 via-white to-white`}
+        className={`${inter.variable} ${lexend.variable} ${urbanist.variable} min-h-screen antialiased`}
       >
-        <Navbar brand={hero.brand} links={hero.nav} />
-        {children}
-        <FooterShell footer={footer} />
-        <ScrollToTop />
+        <div className="min-h-screen flex flex-col bg-[var(--brand-muted)]">
+          <Navbar brand={hero.brand} links={hero.nav} />
+          <main className="flex-1 bg-white">
+            {children}
+          </main>
+          <FooterShell footer={footer} />
+          <ScrollToTop />
+        </div>
       </body>
     </html>
   );

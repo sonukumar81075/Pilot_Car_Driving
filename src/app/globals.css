@@ -2,17 +2,31 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0b1220;
-  /* Brand */
-  --brand: #f8ef1d;
-  --brand-on: #0b1220;
-  /* dark text on brand (readable) */
+  --foreground: #020617;
+  /* Pilot logo palette */
+  --brand: #1d4ed8;
+  /* Pilot Blue */
+  --accent: #1D4ED8;
+  /* Vibrant Accent */
+  --brand-light: #80baff;
+  /* Guidance Blue */
+  --brand-muted: #f1f5f9;
+  /* Cloud White */
+  --brand-stroke: #cbd5e1;
+  /* Calm Grey */
+  --brand-on: #ffffff;
+  /* text on brand fill */
+  --heading: #1e3a8a;
+  /* Pilot Night */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-dark: var(--heading);
+  --color-light: var(--brand-muted);
   --font-sans: var(--font-inter);
   --font-lexend: var(--font-lexend);
   --font-urbanist: var(--font-urbanist)
@@ -25,7 +39,14 @@
   }
 }
 
+html,
 body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
 }
@@ -35,39 +56,40 @@ html {
 }
 
 ::selection {
-  background: rgb(248 239 29 / 0.45);
+  background: rgb(255 77 109 / 0.28);
 }
 
 /* ----- Brand utilities (use className="brand-fill" etc.) ----- */
 
-/** Filled surface: brand yellow + dark text. Hover keeps #f8ef1d, slight darken for feedback */
+/** Filled surface: Pilot blue + white text */
 .brand-fill {
   background-color: var(--brand);
   color: var(--brand-on);
   transition:
     filter 0.15s ease,
     box-shadow 0.15s ease;
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.24);
 }
 
 .brand-fill:hover {
   background-color: var(--brand);
   color: var(--brand-on);
-  filter: brightness(0.94);
+  filter: brightness(1.06);
 }
 
 .brand-fill:active {
-  filter: brightness(0.88);
+  filter: brightness(0.96);
 }
 
 .brand-fill:focus-visible {
-  outline: 2px solid var(--brand-on);
+  outline: 2px solid var(--brand);
   outline-offset: 2px;
 }
 
-/** Outline: dark text, brand border; hover fills with same brand + dark text */
+/** Outline: pilot blue border; hover fills with pilot blue */
 .brand-outline {
   background-color: transparent;
-  color: var(--brand-on);
+  color: var(--brand);
   border: 2px solid var(--brand);
   transition:
     background-color 0.15s ease,
@@ -82,7 +104,24 @@ html {
 }
 
 .brand-outline:focus-visible {
-  outline: 2px solid var(--brand-on);
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Accent actions */
+.accent-fill {
+  background-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.28);
+  transition: filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.accent-fill:hover {
+  filter: brightness(1.05);
+}
+
+.accent-fill:focus-visible {
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -91,7 +130,7 @@ html {
  * Same as .link-brand-subtle — kept for backward compatibility.
  */
 .brand-link {
-  color: var(--brand-on);
+  color: var(--heading);
   text-decoration: underline;
   text-decoration-color: transparent;
   text-decoration-thickness: 2px;
@@ -100,7 +139,7 @@ html {
 }
 
 .brand-link:hover {
-  color: var(--brand-on);
+  color: var(--brand);
   text-decoration-color: var(--brand);
 }
 
@@ -112,7 +151,7 @@ html {
 
 /** Default: dark link + soft underline; hover → #f8ef1d underline */
 .link-brand {
-  color: var(--brand-on);
+  color: var(--heading);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
@@ -121,7 +160,7 @@ html {
 }
 
 .link-brand:hover {
-  color: var(--brand-on);
+  color: var(--brand);
   text-decoration-color: var(--brand);
 }
 
@@ -133,7 +172,7 @@ html {
 
 /** Pehle underline nahi; hover par brand #f8ef1d underline */
 .link-brand-subtle {
-  color: var(--brand-on);
+  color: var(--heading);
   text-decoration: none;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.2em;
@@ -141,6 +180,7 @@ html {
 }
 
 .link-brand-subtle:hover {
+  color: var(--brand);
   text-decoration: underline;
   text-decoration-color: var(--brand);
 }
@@ -165,6 +205,23 @@ html {
 
 .animate-float {
   animation: floatUpDown 2s ease-in-out infinite;
+}
+
+/* Global heading helper for brand-consistent titles */
+.heading-primary {
+  color: var(--heading);
+  letter-spacing: -0.02em;
+}
+
+.heading-accent {
+  background: linear-gradient(90deg, var(--brand) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-surface {
+  background: linear-gradient(180deg, #ffffff 0%, var(--brand-muted) 100%);
 }
 
 
@@ -214,4 +271,19 @@ html {
       transform: translateY(-15px);
     }
   }
+}
+
+ 
+.btn-gradient {
+  @apply bg-gradient-to-r from-blue-600 to-blue-800 text-white transition-all duration-300;
+}
+
+/* Normal hover (no glow) */
+.btn-gradient:hover {
+  @apply from-blue-700 to-blue-900;
+}
+
+/* Optional: subtle shadow (not glow) */
+.btn-gradient-shadow:hover {
+  @apply shadow-md;
 }

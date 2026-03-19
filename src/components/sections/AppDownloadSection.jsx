@@ -2,12 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { MdOutlineEmail } from "react-icons/md";
+import { SectionHeading } from "../ui/SectionHeading";
 
 export function AppDownloadSection({ data }) {
   if (!data) return null;
 
   return (
-    <section className="bg-white pb-10 pt-10 font-lexend lg:px-0 md:pt-32">
+    <section className="pb-3 pt-10 font-lexend lg:px-0 md:pt-24 md:pb-4">
       <Container className="text-center">
         <div className="relative flex w-full justify-center pb-6">
           <Image
@@ -21,19 +22,15 @@ export function AppDownloadSection({ data }) {
           {/* Bottom Shadow Gradient */}
           <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-100" />
         </div>
+        <div className="mt-6 max-w-4xl mx-auto">
+          <SectionHeading
+            // eyebrow="Get Started"
+            title="Skip searching for driving schools near me."
+            description="Download the app and start learning to drive today."
+          />
+        </div> 
 
-        <h2 className="md:text-[40px] lg:text-[56px] text-[30px] font-lexend font-[700] text-slate-900 md:leading-[45px] lg:leading-[67px] leading-[36px]">
-          Skip searching for driving
-          <br />
-          schools near me.
-        </h2>
-        {/* Skip searching for driving schools near me. 
-        Download the app and start learning to drive today */}
-        <p className="mx-auto mt-4 max-w-2xl text-[16px] font-lexend font-[500] leading-[26px] text-[#666666] md:text-[18px] md:leading-[27px]">
-          Download the app and start learning to drive today.
-        </p>
-
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-8 pb-16 flex flex-wrap items-center justify-center gap-4">
           {data.appBadges?.map((b) => (
             <Link key={b.label} href={b.href} target="_blank">
               <Image
