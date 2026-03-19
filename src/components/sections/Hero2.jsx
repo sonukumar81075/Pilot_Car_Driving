@@ -22,8 +22,14 @@ export function Hero2({ data }) {
                         <Reveal delay={0.1}>
 
 
-                            <h1 className="max-w-[18ch] text-balance text-center lg:text-left text-4xl font-[800] tracking-tight text-slate-900 sm:text-5xl md:text-6xl xl:text-7xl leading-[1.1]">
-                                The Smarter Way to <span className="text-blue-700">Learn</span> <span className="heading-accent font-serif italic font-medium text-slate-400">& </span>  <span className="text-blue-600">Drive</span>  and Get Licensed..
+                        <h1 className="max-w-[18ch] text-balance text-center lg:text-left text-4xl font-[800] tracking-tight text-slate-900 sm:text-5xl md:text-6xl xl:text-7xl leading-[1.1]">
+                            The Smarter Way to{" "}
+                            
+                            <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                                Learn & Drive
+                            </span>
+                            
+                            {" "}and Get Licensed..
                             </h1>
                         </Reveal>
 
