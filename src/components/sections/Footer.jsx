@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { Icon } from "@/components/ui/Icon"; 
+import { Icon } from "@/components/ui/Icon";
 
 export function Footer({ data }) {
   return (
@@ -82,13 +82,16 @@ export function Footer({ data }) {
       </Container>
 
       {/* Watermark visual at bottom like reference */}
-      <div className="pointer-events-none absolute -bottom-6 top-140 left-1/2 z-0 -translate-x-1/2 opacity-[0.06]">
+      <div className="pointer-events-none absolute bottom-[60px] left-1/2 -translate-x-1/2 opacity-[0.05] z-0">
         <Image
           src="/images/logo/Pilot Logo White.png"
           alt=""
-          width={860}
-          height={260}
-          className="h-auto w-[620px] blur-[0.5px] md:w-[820px] lg:w-[920px]"
+          width={1200}
+          height={400}
+          className="h-auto w-[1000px] md:w-[1200px] lg:w-[1400px] blur-[2px] scale-125"
+          style={{
+            transform: "perspective(1000px) rotateX(65deg) rotateZ(-10deg)",
+          }}
         />
       </div>
     </footer>
