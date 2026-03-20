@@ -61,7 +61,7 @@ export function Stats({ stats }) {
         </div>
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:gap-8 sm:gap-4 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
@@ -72,7 +72,7 @@ export function Stats({ stats }) {
               className="group relative"
             >
               {/* Unique UI Card */}
-              <div className="relative z-10 h-full p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-500   group-hover:-translate-y-2">
+              <div className="relative z-10 h-full sm:p-10 p-0 px-8 py-2 bg-white sm:rounded-[2.5rem] rounded-2xl border sm:border-slate-100 border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-500   group-hover:-translate-y-2">
 
                 {/* Top Corner Icon/Accent */}
                 <div className="absolute top-6 right-8 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
@@ -85,10 +85,10 @@ export function Stats({ stats }) {
 
                 {/* Content */}
                 <div className="mt-4">
-                  <dt className="md:text-[30px] lg:text-[50px] sm:text-[24px] text-[24px] font-lexend font-[700] text-[#333333] md:leading-[45px] lg:leading-[67px] leading-[36px] mb-2">
+                  <dt className="md:text-[40px] lg:text-[50px] text-[30px] font-lexend font-[700] text-[#333333] md:leading-[45px] lg:leading-[67px] leading-[36px] mb-2">
                     <Counter value={stat.value} />
                   </dt>
-                  <dd className="text-slate-500 font-semibold uppercase tracking-widest sm:text-xs text-sm mb-6">
+                  <dd className="text-slate-500 font-semibold uppercase tracking-widest text-xs sm:mb-6 mb-2">
                     {stat.label}
                   </dd>
                 </div>

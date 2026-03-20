@@ -12,7 +12,7 @@ export function Footer({ data }) {
 
       <Container className="relative z-10 pb-14 pt-10 md:pb-16 md:pt-14">
         {/* Card style columns like reference */}
-        <div className="grid grid-cols-1 gap-5 pb-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="grid  sm:gap-5 gap-2 pb-8 grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {data.columns.map((col) => (
             <div
               key={col.title}
@@ -62,18 +62,9 @@ export function Footer({ data }) {
             </Link>
           </div>
 
-
-
-
-
-
-
-
-
-
           <div className="text-center text-[13px] font-[500] text-slate-400 md:text-[14px]">{data.legal}</div>
 
-          <div className="flex max-w-[260px] flex-wrap justify-center gap-2.5 sm:max-w-none md:justify-end">
+          <div className="flex sm:max-w-[260px] max-w-full flex-wrap justify-center gap-2.5 sm:max-w-none md:justify-end mb-6 sm:mb-0">
             {data.social.map((s) => {
               const isMailto = s.href.startsWith("mailto:");
               const className =
@@ -90,10 +81,7 @@ export function Footer({ data }) {
               );
             })}
           </div>
-        </div>
-
-        {/* Full-width divider */}
-        {/* <div className="relative left-1/2 h-px w-screen -translate-x-1/2 bg-white/10" /> */}
+        </div> 
       </Container>
 
       {/* Watermark visual at bottom like reference */}

@@ -18,7 +18,7 @@ const getVariantClasses = (index) => {
 
 export function TestimonialsCarousel({ testimonials }) {
   return (
-    <div className="py-12   font-sans">
+    <div className="sm:py-12 py-3   font-sans">
       <Swiper
         modules={[Autoplay, Pagination]}
         spaceBetween={30}
@@ -63,11 +63,9 @@ export function TestimonialsCarousel({ testimonials }) {
                     </div>
                     <div>
                       <h3 className={`text-xl font-black ${variant.text} leading-tight`}>
-                        {item.name || "Client Name"}
+                        {item.name}
                       </h3>
-                      <p className="text-gray-500 text-sm font-semibold italic">
-                        {item.role}
-                      </p>
+                   
                     </div>
                   </div>
 

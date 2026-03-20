@@ -27,7 +27,7 @@ export default function ScrollToTop() {
     return (
         <button
             onClick={scrollTop}
-            className="fixed bottom-6 right-6 z-[999] flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-300 via-blue-400 to-blue-500 text-white shadow-lg   transition cursor-pointer animate-float"
+            className="fixed bottom-6 right-6 z-[999] flex items-center justify-center w-12 h-12 sm:block hidden rounded-full bg-gradient-to-br from-blue-300 via-blue-400 to-blue-500 text-white shadow-lg   transition cursor-pointer animate-float"
             aria-label="Scroll to top"
         >
             <FaArrowUp className="w-4 h-4" />

@@ -8,11 +8,11 @@ export function AppDownloadSection({ data }) {
   if (!data) return null;
 
   return (
-    <section className="pb-3 pt-10 font-lexend lg:px-0 md:pt-24 md:pb-4">
-      <Container className="text-center">
+    <section className="pb-3 pt-10 font-lexend lg:px-0 md:pt-24 md:pb-4 bg-gradient-to-b from-[var(--brand-muted)] to-white">
+      <Container className="text-center ">
         <div className="relative flex w-full justify-center pb-6">
           <Image
-            src="/images/Gemini_Generated_Image_f92u21f92u21f92u.png"
+            src="/images/mobile_image.png"
             alt="driving app"
             width={550}
             height={540}

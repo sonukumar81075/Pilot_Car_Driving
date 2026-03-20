@@ -4,6 +4,7 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 import { Navbar } from "@/components/sections/Navbar";
 import { FooterShell } from "@/components/sections/FooterShell";
 import { getLandingData } from "@/lib/data";
+import MobileStickyBar from "@/components/ui/MobileStickyBar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -102,6 +103,7 @@ export default async function RootLayout({ children }) {
           </main>
           <FooterShell footer={footer} />
           <ScrollToTop />
+          <MobileStickyBar />
         </div>
       </body>
     </html>

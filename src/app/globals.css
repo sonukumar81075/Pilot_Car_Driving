@@ -287,3 +287,8 @@ html {
 .btn-gradient-shadow:hover {
   @apply shadow-md;
 }
+
+/* Hide Next.js dev indicator badge in development */
+nextjs-portal {
+  display: none !important;
+}

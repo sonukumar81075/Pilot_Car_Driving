@@ -18,13 +18,7 @@
     ]
   },
  "columns": [
-    {
-      "title": "Support",
-      "links": [
-        { "label": "Contact Us", "href": "/support" },
-        { "label": "Delete Account", "href": "/account-deletion" }
-      ]
-    },
+   
     {
       "title": "Company",
       "links": [
@@ -43,6 +37,13 @@
         { "label": "Insurance Policy & Claim Procedure", "href": "/insurance-policy" },
         { "label": "Insurance Terms & Conditions", "href": "/insurance-terms" },
         { "label": "Cookies Policy", "href": "/cookies-policy" }
+      ]
+    },
+    {
+      "title": "Support",
+      "links": [
+        { "label": "Contact Us", "href": "/support" },
+        { "label": "Delete Account", "href": "/account-deletion" }
       ]
     }
   ],
