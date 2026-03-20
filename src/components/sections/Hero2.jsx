@@ -29,7 +29,7 @@ export function Hero2({ data }) {
                                     Learn & Drive
                                 </span>
 
-                                {" "}and Get Licensed..
+                                {" "}and Get Licensed.
                             </h1>
                         </Reveal>
 
@@ -152,20 +152,45 @@ export function Hero2({ data }) {
                                     </div>
                                 </div>
 
-                                {/* --- ANIMATED DECORATIVE RINGS --- */}
-                                <div className="absolute left-1/2 top-1/2 -z-10 h-0 w-0">
+                                <div className="absolute left-1/2 top-1/2 -z-10">
+
                                     {/* Innermost Ring */}
-                                    <div className="absolute h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--accent)]/20 animate-ping-slow" />
+                                    <div className="
+  absolute 
+  h-[180px] w-[180px] 
+  sm:h-[250px] sm:w-[250px] 
+  md:h-[350px] md:w-[350px] 
+  -translate-x-1/2 -translate-y-1/2 
+  rounded-full border border-[var(--accent)]/20 
+  animate-ping-slow
+" />
 
                                     {/* Middle Ring */}
-                                    <div className="absolute h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--brand)]/20 animate-pulse" />
+                                    <div className="
+  absolute 
+  h-[260px] w-[260px] 
+  sm:h-[380px] sm:w-[380px] 
+  md:h-[500px] md:w-[500px] 
+  -translate-x-1/2 -translate-y-1/2 
+  rounded-full border border-[var(--brand)]/20 
+  animate-pulse
+" />
 
-                                    {/* Outermost Ring (Slow Rotation) */}
-                                    <div className="absolute h-[650px] w-[650px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-[var(--brand-light)]/30 animate-spin-slower" />
+                                    {/* Outer Ring */}
+                                    <div className="
+  absolute 
+  h-[320px] w-[320px] 
+  sm:h-[480px] sm:w-[480px] 
+  md:h-[650px] md:w-[650px] 
+  -translate-x-1/2 -translate-y-1/2 
+  rounded-full border border-dashed border-[var(--brand-light)]/30 
+  animate-spin-slower
+" />
 
-                                    {/* Small Glow Dots on the rings */}
-                                    <div className="absolute -top-[250px] left-0 h-2 w-2 rounded-full bg-[var(--accent)]/60 blur-sm" />
-                                    <div className="absolute top-[250px] left-[100px] h-3 w-3 rounded-full bg-[var(--brand-light)]/40 blur-sm" />
+                                    {/* Glow Dots */}
+                                    <div className="absolute -top-[120px] sm:-top-[180px] md:-top-[250px] left-0 h-2 w-2 rounded-full bg-[var(--accent)]/60 blur-sm" />
+                                    <div className="absolute top-[120px] sm:top-[180px] md:top-[250px] left-[60px] sm:left-[80px] md:left-[100px] h-3 w-3 rounded-full bg-[var(--brand-light)]/40 blur-sm" />
+
                                 </div>
 
                             </Reveal>
