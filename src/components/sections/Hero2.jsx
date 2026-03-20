@@ -93,16 +93,16 @@ export function Hero2({ data }) {
                     </div>
 
                     {/* RIGHT — contained so floats never cause page scroll */}
-                    <div className="relative flex min-w-0 w-full max-w-full justify-center lg:col-span-5 lg:justify-end order-1 lg:order-2 mt-8 lg:mt-0">
+                    <div className="relative flex min-w-0 w-full max-w-full justify-center lg:col-span-5 lg:justify-end order-1 lg:order-2 mt-28 lg:mt-0">
                         <div className="relative w-full max-w-[min(100%,340px)] sm:max-w-[300px] md:max-w-[320px]">
                             <Reveal delay={0.2} className="relative z-20 block">
                                 <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[300px] lg:mx-0 lg:max-w-[300px] xl:max-w-[320px] lg:rotate-3 xl:rotate-6 transition-transform duration-700 hover:rotate-0">
 
                                     {/* Main Phone Image */}
                                     {/* Mobile Image (below md) */}
-                                    <div className="block lg:hidden mb-8">
+                                    <div className="block lg:hidden mb-8 sm:mb-32">
                                         <Image
-                                            src="/images/Gemini_Generated_Image_f92u21f92u21f92u.png"
+                                            src="/images/mobile_image.png"
                                             alt="driving app"
                                             width={550}
                                             height={540}
@@ -168,8 +168,8 @@ export function Hero2({ data }) {
                                     {/* Middle Ring */}
                                     <div className="
   absolute 
-  h-[260px] w-[260px] 
-  sm:h-[380px] sm:w-[380px] 
+  h-[300px] w-[300px] 
+  sm:h-[350px] sm:w-[350px] 
   md:h-[500px] md:w-[500px] 
   -translate-x-1/2 -translate-y-1/2 
   rounded-full border border-[var(--brand)]/20 
@@ -179,7 +179,7 @@ export function Hero2({ data }) {
                                     {/* Outer Ring */}
                                     <div className="
   absolute 
-  h-[320px] w-[320px] 
+  h-[350px] w-[350px] 
   sm:h-[480px] sm:w-[480px] 
   md:h-[650px] md:w-[650px] 
   -translate-x-1/2 -translate-y-1/2 
