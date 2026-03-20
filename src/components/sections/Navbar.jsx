@@ -75,7 +75,7 @@ export function Navbar({ brand, links }) {
                 {/* Logo */}
                 <Link
                   href="/"
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  // onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                   className="cursor-pointer flex items-center"
                 >
                   <Image

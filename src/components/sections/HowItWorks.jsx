@@ -89,7 +89,7 @@ export function HowItWorks({ steps }) {
           description="A structured path designed to take you from a beginner to a licensed pro seamlessly."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-20 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-20 pb-12">
           {displaySteps.map((s, idx) => (
             <motion.div
               key={idx}

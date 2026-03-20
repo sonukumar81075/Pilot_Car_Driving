@@ -61,7 +61,7 @@ export function Stats({ stats }) {
         </div>
 
 
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-8 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:gap-8 sm:gap-4 gap-2">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
@@ -85,10 +85,10 @@ export function Stats({ stats }) {
 
                 {/* Content */}
                 <div className="mt-4">
-                  <dt className="md:text-[40px] lg:text-[50px] text-[30px] font-lexend font-[700] text-[#333333] md:leading-[45px] lg:leading-[67px] leading-[36px] mb-2">
+                  <dt className="md:text-[30px] lg:text-[50px] sm:text-[24px] text-[24px] font-lexend font-[700] text-[#333333] md:leading-[45px] lg:leading-[67px] leading-[36px] mb-2">
                     <Counter value={stat.value} />
                   </dt>
-                  <dd className="text-slate-500 font-semibold uppercase tracking-widest text-xs mb-6">
+                  <dd className="text-slate-500 font-semibold uppercase tracking-widest sm:text-xs text-sm mb-6">
                     {stat.label}
                   </dd>
                 </div>

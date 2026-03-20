@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export function Hero2({ data }) {
     return (
-        <section className="section-surface relative overflow-x-clip pb-16 pt-24 font-lexend md:pb-20 md:pt-28 lg:pb-28 lg:pt-28 xl:pb-40 xl:pt-36">
+        <section className="section-surface relative overflow-x-clip pb-16 pt-32 font-lexend md:pb-20 md:pt-28 lg:pb-28 lg:pt-28 xl:pb-40 xl:pt-36">
             {/* Background — no horizontal bleed */}
             <div
                 className="pointer-events-none absolute right-0 top-0 hidden h-full w-[min(55vw,720px)] bg-gradient-to-b from-[var(--brand-light)]/25 to-[var(--accent)]/10 lg:block"

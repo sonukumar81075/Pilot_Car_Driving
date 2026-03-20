@@ -28,7 +28,7 @@ export function TestimonialsCarousel({ testimonials }) {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         breakpoints={{
-          640: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}

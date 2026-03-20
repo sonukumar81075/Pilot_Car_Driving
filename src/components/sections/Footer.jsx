@@ -5,20 +5,20 @@ import { Icon } from "@/components/ui/Icon";
 
 export function Footer({ data }) {
   return (
-    <footer className="relative w-full  h-screen overflow-hidden pt-6 border-t border-white/10 bg-gradient-to-b from-[#0b1f45] via-[#071633] to-[#020b1b] font-lexend">
+    <footer className="relative w-full overflow-hidden border-t border-white/10 bg-gradient-to-b from-[#0b1f45] via-[#071633] to-[#020b1b] font-lexend">
       {/* Ambient glow */}
       <div className="pointer-events-none absolute -top-16 left-1/2 h-72 w-[46rem] -translate-x-1/2 rounded-full bg-[var(--brand)]/20 blur-3xl" />
       {/* <FooterCarAnimation /> */}
 
-      <Container className="relative z-10 pb-24 pt-12 md:pb-28 md:pt-16">
+      <Container className="relative z-10 pb-14 pt-10 md:pb-16 md:pt-14">
         {/* Card style columns like reference */}
-        <div className="grid grid-cols-1 gap-6 pb-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+        <div className="grid grid-cols-1 gap-5 pb-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {data.columns.map((col) => (
             <div
               key={col.title}
-              className="rounded-3xl  p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-sm"
+              className="rounded-2xl p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-sm sm:p-6"
             >
-              <h3 className="text-[28px] font-semibold text-white">{col.title}</h3>
+              <h3 className="text-[24px] font-semibold text-white sm:text-[26px]">{col.title}</h3>
               <div className="mb-5 mt-2 h-[2px] w-24 rounded-full bg-gradient-to-r from-[var(--brand-light)] to-transparent" />
 
               <ul className="space-y-2.5">
@@ -45,24 +45,39 @@ export function Footer({ data }) {
         {/* <div className="relative left-1/2 h-px w-screen -translate-x-1/2 bg-white/10" /> */}
 
         {/* Bottom row */}
-        <div className="flex flex-col items-center justify-between gap-5 pb-10 pt-8 md:flex-row">
-          <div className="flex items-center gap-3 self-center md:self-center">
-            <Image
-              src="/images/logo/Pilot Logo White.png"
-              alt="Pilot logo"
-              width={108}
-              height={36}
-              className="h-12 w-auto object-contain"
-            />
+        <div className="flex flex-col items-center justify-between gap-4 pb-8 pt-6 md:flex-row md:gap-6">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/"
+              // onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="cursor-pointer flex items-center"
+            >
+              <Image
+                src="/images/logo/Pilot Logo White.png"
+                alt="Pilot logo"
+                width={108}
+                height={36}
+                className="h-10 w-auto object-contain md:h-11"
+              />
+            </Link>
           </div>
 
-          <div className="text-[14px] font-[500] text-slate-400">{data.legal}</div>
 
-          <div className="flex flex-wrap justify-center gap-3">
+
+
+
+
+
+
+
+
+          <div className="text-center text-[13px] font-[500] text-slate-400 md:text-[14px]">{data.legal}</div>
+
+          <div className="flex max-w-[260px] flex-wrap justify-center gap-2.5 sm:max-w-none md:justify-end">
             {data.social.map((s) => {
               const isMailto = s.href.startsWith("mailto:");
               const className =
-                "grid h-9 w-9 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[var(--brand-light)] hover:bg-[var(--brand)] hover:text-white";
+                "grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/5 text-slate-300 shadow-sm transition-all hover:-translate-y-0.5 hover:border-[var(--brand-light)] hover:bg-[var(--brand)] hover:text-white md:h-9 md:w-9";
 
               return isMailto ? (
                 <a key={s.label} href={s.href} className={className} aria-label={s.label}>
@@ -78,17 +93,17 @@ export function Footer({ data }) {
         </div>
 
         {/* Full-width divider */}
-        <div className="relative left-1/2 h-px w-screen -translate-x-1/2 bg-white/10" />
+        {/* <div className="relative left-1/2 h-px w-screen -translate-x-1/2 bg-white/10" /> */}
       </Container>
 
       {/* Watermark visual at bottom like reference */}
-      <div className="pointer-events-none absolute bottom-[60px] left-1/2 -translate-x-1/2 opacity-[0.05] z-0">
+      <div className="pointer-events-none absolute -bottom-8 left-1/2 z-0 hidden -translate-x-1/2 opacity-[0.05] md:block">
         <Image
           src="/images/logo/Pilot Logo White.png"
           alt=""
           width={1200}
           height={400}
-          className="h-auto w-[1000px] md:w-[1200px] lg:w-[1400px] blur-[2px] scale-125"
+          className="h-auto w-[900px] md:w-[1050px] lg:w-[1250px] blur-[2px]"
           style={{
             transform: "perspective(1000px) rotateX(65deg) rotateZ(-10deg)",
           }}
