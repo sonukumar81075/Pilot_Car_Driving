@@ -58,7 +58,7 @@ export function PackageCard({ pkg }) {
 
         {isRecommended ? (
           <div className="absolute right-4 top-4">
-            <span className="rounded-full bg-[#1D4ED8] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+            <span className="rounded-full btn-gradient btn-gradient-glow px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
               Recommended
             </span>
           </div>

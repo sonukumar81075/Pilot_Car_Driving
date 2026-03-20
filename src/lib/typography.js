@@ -1,6 +1,6 @@
 /** Shared typography tokens for legal / policy pages */
 export const typo = {
-  pageLegal: "md:pt-40 pt-10 bg-[#FFFFFF] font-lexend",
+  pageLegal: "md:pt-40 pt-28 bg-[#FFFFFF] font-lexend",
 
   legalSectionsStack: "mx-auto max-w-5xl space-y-10 px-4 py-12 md:px-6",
   legalCard: "rounded-4xl border border-slate-100 bg-white p-6 shadow-sm md:p-8",
