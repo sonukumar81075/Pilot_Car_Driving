@@ -100,7 +100,7 @@ export function Hero2({ data }) {
 
                                     {/* Main Phone Image */}
                                     {/* Mobile Image (below md) */}
-                                    <div className="block lg:hidden">
+                                    <div className="block lg:hidden mb-8">
                                         <Image
                                             src="/images/Gemini_Generated_Image_f92u21f92u21f92u.png"
                                             alt="driving app"
