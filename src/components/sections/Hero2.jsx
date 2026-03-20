@@ -99,15 +99,29 @@ export function Hero2({ data }) {
                                 <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[300px] lg:mx-0 lg:max-w-[300px] xl:max-w-[320px] lg:rotate-3 xl:rotate-6 transition-transform duration-700 hover:rotate-0">
 
                                     {/* Main Phone Image */}
-                                    <div className="overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-white shadow-[0_40px_80px_-24px_rgba(0,0,0,0.28)] sm:rounded-[3rem] sm:border-[10px]">
+                                    {/* Mobile Image (below md) */}
+                                    <div className="block lg:hidden">
                                         <Image
-                                            src={data.heroImage.src}
-                                            alt={data.heroImage.alt}
-                                            width={320}
-                                            height={640}
-                                            className="h-auto w-full"
-                                            priority
+                                            src="/images/Gemini_Generated_Image_f92u21f92u21f92u.png"
+                                            alt="driving app"
+                                            width={550}
+                                            height={540}
+                                            className="h-auto w-full max-w-[550px] transition duration-300 hover:scale-[1.03]"
                                         />
+                                    </div>
+
+                                    {/* Desktop / Tablet Image (md and above) */}
+                                    <div className="hidden lg:block">
+                                        <div className="overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-white shadow-[0_40px_80px_-24px_rgba(0,0,0,0.28)] sm:rounded-[3rem] sm:border-[10px]">
+                                            <Image
+                                                src={data.heroImage.src}
+                                                alt={data.heroImage.alt}
+                                                width={550}
+                                                height={540}
+                                                className="h-auto w-full max-w-[650px] transition duration-300 hover:scale-[1.03]"
+                                                priority
+                                            />
+                                        </div>
                                     </div>
 
                                     {/* Floating Card 1: Lesson Status */}
@@ -157,6 +171,7 @@ export function Hero2({ data }) {
                             </Reveal>
                         </div>
                     </div>
+
                 </div>
             </Container>
         </section>
