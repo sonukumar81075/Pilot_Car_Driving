@@ -17,7 +17,7 @@ export function Hero2({ data }) {
                     {/* LEFT */}
 
 
-                    <div className="min-w-0 max-w-full lg:col-span-7 flex flex-col items-center lg:items-start">
+                    <div className="min-w-0 max-w-full lg:col-span-7 flex flex-col items-center lg:items-start order-2 lg:order-1">
                         {/* 1. Badge & Main Heading */}
                         <Reveal delay={0.1}>
 
@@ -93,7 +93,7 @@ export function Hero2({ data }) {
                     </div>
 
                     {/* RIGHT — contained so floats never cause page scroll */}
-                    <div className="relative flex min-w-0 w-full max-w-full justify-center lg:col-span-5 lg:justify-end">
+                    <div className="relative flex min-w-0 w-full max-w-full justify-center lg:col-span-5 lg:justify-end order-1 lg:order-2 mt-8 lg:mt-0">
                         <div className="relative w-full max-w-[min(100%,340px)] sm:max-w-[300px] md:max-w-[320px]">
                             <Reveal delay={0.2} className="relative z-20 block">
                                 <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[300px] lg:mx-0 lg:max-w-[300px] xl:max-w-[320px] lg:rotate-3 xl:rotate-6 transition-transform duration-700 hover:rotate-0">
