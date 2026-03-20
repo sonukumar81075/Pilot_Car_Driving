@@ -57,7 +57,7 @@ const ProfessionalTraining = () => {
                     description="Our professional training programs are designed to help you master driving skills."
                 />
 
-                <div className="grid gap-6 pt-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 lg:pt-16">
+                <div className="grid gap-6 pt-10 sm:grid-cols-1 lg:grid-cols-3 lg:gap-6 lg:pt-16">
                     {trainings.map((item) => (
                         <article
                             key={item.id}
