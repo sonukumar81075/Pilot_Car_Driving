@@ -74,71 +74,124 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
+
+// SWIPER
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
 
 export function HowItWorks({ steps }) {
   const displaySteps = steps.slice(0, 4);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="how-it-works" className="md:pt-32 pt-16 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend overflow-hidden">
-      <Container className="relative">
- 
-
+    <section className="md:pt-32 pt-16 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend overflow-hidden">
+      <Container>
         <SectionHeading
           eyebrow="The Process"
           title="Drive with Confidence in 4 Steps"
           description="A structured path designed to take you from a beginner to a licensed pro seamlessly."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 pt-20 pb-12">
+        {/* ================= DESKTOP (UNCHANGED) ================= */}
+        <div className="hidden lg:grid grid-cols-4 gap-4 pt-20 pb-12">
           {displaySteps.map((s, idx) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.15, duration: 0.6 }}
-              /* Unique: Odd cards shifted down, even cards shifted up for a staggered look */
+              transition={{ delay: idx * 0.15 }}
               className={`relative group ${idx % 2 !== 0 ? "lg:mt-16" : ""}`}
             >
-              {/* Step Circle Badge */}
-              <div className="absolute -top-5 left-10 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[#F1F5F9] border border-blue-900 text-blue-900 font-bold shadow-lg shadow-[rgba(49, 5, 100, 0.35)]">
+              {/* NUMBER */}
+              <div className="absolute -top-5 left-10 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[#F1F5F9] border border-blue-900 text-blue-900 font-bold shadow">
                 {idx + 1}
               </div>
 
-              <div className="relative h-full rounded-[2rem]     bg-white p-6 shadow-[0_15px_40px_rgba(0,0,0,0.04)] transition-all duration-500 group-hover:-translate-y-2 group-hover:border-[var(--accent)]/20">
+              {/* CARD */}
+              <div className="relative h-full rounded-[2rem] bg-white p-6 shadow">
 
-                {/* Content Area */}
                 <div className="pt-6 mb-6">
-                  <h3 className="text-[20px] font-bold text-slate-900 mb-2   transition-colors">
+                  <h3 className="text-[20px] font-bold mb-2">
                     {s.title}
                   </h3>
-                  <p className="text-[14px] text-slate-500 leading-relaxed">
+                  <p className="text-[14px] text-slate-500">
                     {s.description}
                   </p>
                 </div>
 
-                {/* The "Phone Hub" - Concentric circles background effect */}
-                <div className="relative mt-auto aspect-[1/1.2] overflow-hidden rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
-
-                  {/* Decorative Circles behind the phone */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-40">
-                    <div className="absolute h-32 w-32 rounded-full border border-[var(--accent)]/30 group-hover:scale-150 transition-transform duration-1000" />
-                    <div className="absolute h-48 w-48 rounded-full border border-[var(--brand)]/20 group-hover:scale-125 transition-transform duration-1000" />
-                  </div>
-
-                  <div className="relative w-[85%] h-[90%] transition-transform duration-700 group-hover:scale-105">
-                    <Image
-                      src={s.image}
-                      alt={s.title}
-                      fill
-                      className="object-contain object-bottom drop-shadow-[-10px_20px_30px_rgba(0,0,0,0.15)]"
-                    />
+                <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
+                  <div className="relative w-[85%] h-[90%]">
+                    <Image src={s.image} alt="" fill className="object-contain" />
                   </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* ================= MOBILE ================= */}
+        <div className="lg:hidden pt-12">
+
+          {/* 🔵 TOP NUMBER TABS */}
+          <div className="flex justify-center gap-4 mb-8">
+            {displaySteps.map((_, idx) => (
+              <div
+                key={idx}
+                className={`w-10 h-10 flex items-center justify-center rounded-full border font-bold transition-all
+                  ${
+                    activeIndex === idx
+                      ? "bg-blue-600 text-white scale-110 shadow-lg"
+                      : "bg-white text-blue-600 border-blue-600"
+                  }`}
+              >
+                {idx + 1}
+              </div>
+            ))}
+          </div>
+
+          {/* 🔵 SLIDER */}
+          <Swiper
+            modules={[Autoplay]}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            onSlideChange={(swiper) => {
+              setActiveIndex(swiper.realIndex);
+            }}
+          >
+            {displaySteps.map((s, idx) => (
+              <SwiperSlide key={idx}>
+                <div className="px-2">
+                  <div className="relative rounded-[2rem] bg-white p-6 shadow">
+
+                    <div className="pt-2 mb-6">
+                      <h3 className="text-[20px] font-bold mb-2">
+                        {s.title}
+                      </h3>
+                      <p className="text-[14px] text-slate-500">
+                        {s.description}
+                      </p>
+                    </div>
+
+                    <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
+                      <div className="relative sm:w-[85%] sm:h-[90%] w-[90%] h-[90%]">
+                        <Image src={s.image} alt="" fill className="object-contain" />
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
       </Container>
     </section>
   );

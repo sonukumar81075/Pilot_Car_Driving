@@ -64,7 +64,7 @@ export function Footer({ data }) {
 
           <div className="text-center text-[13px] font-[500] text-slate-400 md:text-[14px]">{data.legal}</div>
 
-          <div className="flex sm:max-w-[260px] max-w-full flex-wrap justify-center gap-2.5 sm:max-w-none md:justify-end mb-6 sm:mb-0">
+          <div className="flex sm:max-w-[260px] max-w-full flex-wrap justify-center gap-2.5 sm:max-w-none md:justify-end mb-12 sm:mb-0">
             {data.social.map((s) => {
               const isMailto = s.href.startsWith("mailto:");
               const className =
@@ -81,7 +81,7 @@ export function Footer({ data }) {
               );
             })}
           </div>
-        </div> 
+        </div>
       </Container>
 
       {/* Watermark visual at bottom like reference */}
