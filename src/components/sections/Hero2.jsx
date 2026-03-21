@@ -36,7 +36,7 @@ export function Hero2({ data }) {
                             <div className="md:hidden flex flex-col items-start">
 
                                 {/* 🔵 Badge */}
-                                <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-[18px] font-semibold tracking-wide mb-4">
+                                <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-[14px] font-semibold tracking-wide mb-4">
                                     <span className="w-4 h-4 bg-blue-600 rounded-full animate-pulse"></span>
                                     INDIA’S FIRST
                                 </div>
