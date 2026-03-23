@@ -1,6 +1,6 @@
 import { getLandingData } from "@/lib/data";
 import { Hero } from "@/components/sections/Hero";
-import { Stats } from "@/components/sections/Stats"; 
+import { Stats } from "@/components/sections/Stats";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
@@ -16,7 +16,7 @@ export default async function Home() {
     <main className="min-h-screen">
       <Hero data={hero} />
       <WhyChoosePilot />
-      <ProfessionalTraining /> 
+      <ProfessionalTraining />
       <HowItWorks steps={steps} />
       <Stats stats={stats} />
       <Testimonials testimonials={testimonials} />

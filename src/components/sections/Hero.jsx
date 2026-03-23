@@ -8,8 +8,7 @@ export function Hero({ data }) {
 
  
   return (
-    <>
-      {/* <Hero1 data={data} /> */}
+    <> 
       <Hero2 data={data} />
     </>
   );

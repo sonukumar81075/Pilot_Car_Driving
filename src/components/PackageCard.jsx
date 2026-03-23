@@ -1,5 +1,8 @@
+ "use client";
+
 import React from "react";
 import { Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 function toImageUrl(imageUrl) {
   if (!imageUrl) return null;
@@ -10,6 +13,7 @@ function toImageUrl(imageUrl) {
 }
 
 export function PackageCard({ pkg }) {
+  const router = useRouter();
   const img = toImageUrl(pkg?.image_url);
   const basePrice = Number(pkg?.base_price || 0);
   const discount = Number(pkg?.discounted_base_price || 0);
@@ -106,9 +110,13 @@ export function PackageCard({ pkg }) {
           ) : null}
           <button
             type="button"
+            // onClick={() => {
+            //   if (!pkg?.package_id) return;
+            //   router.push(`/packages/${pkg.package_id}`);
+            // }}
             className="mt-4 w-full rounded-xl  btn-gradient btn-gradient-glow text-white py-3 text-base font-bold cursor-pointer transition font-lexend active:scale-[0.99]"
           >
-            View details
+            Add Cart
           </button>
         </div>
       </div>
