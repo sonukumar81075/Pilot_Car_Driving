@@ -74,7 +74,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                 {/* Left Side: Branding */}
                 <div className="w-full md:w-[42%] bg-[#f8fafc] p-6 md:p-10 flex flex-col justify-center">
-                    <h3 className="text-3xl font-sans font-[700] leading-[36px] text-center sm:text-left px-6 sm:px-0 text-slate-900">{data.promoTitle}</h3>
+                    <h3 className="sm:text-3xl text-[20px] font-sans font-[700] sm:leading-[36px] leading-[24px] text-center sm:text-left px-6 sm:px-0 text-slate-900">{data.promoTitle}</h3>
                     <p className="mt-2 md:mt-4 font-sans font-[500] leading-[27px] text-[16px] text-slate-500 sm:block hidden">{data.promoText}</p>
 
                     <div className="mt-6 md:mt-8 w-full sm:block hidden">
@@ -129,7 +129,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 name="fullName"
                                 {...formik.getFieldProps('fullName')}
                                 placeholder="John Doe"
-                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
+                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                             />
                         </div>
 
@@ -139,7 +139,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 name="phoneNumber"
                                 {...formik.getFieldProps('phoneNumber')}
                                 placeholder="+1 (555) 000-0000"
-                                className={`w-full rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
+                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                             />
                         </div>
 
@@ -149,7 +149,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 <select
                                     name="zone"
                                     {...formik.getFieldProps('zone')}
-                                    className={`w-full appearance-none rounded-xl border px-4 py-3 outline-none transition-all ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
+                                    className={`w-full appearance-none rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                                 >
                                     <option disabled value="Choose a zone">Choose a zone</option>
                                     {data.zones.map(z => <option key={z} value={z}>{z}</option>)}
