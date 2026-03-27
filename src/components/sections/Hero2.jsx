@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function Hero2({ data }) {
     return (
-        <section className="section-surface relative overflow-x-clip pb-16 sm:pt-32 pt-24 font-lexend md:pb-20 md:pt-28 lg:pb-28 lg:pt-28 xl:pb-40 xl:pt-36">
+        <section className="section-surface relative overflow-x-clip pb-16 sm:pt-32 pt-28 font-lexend md:pb-20 md:pt-28 lg:pb-28 lg:pt-28 xl:pb-40 xl:pt-36">
 
             {/* Background */}
             <div
