@@ -39,12 +39,12 @@ export function PackageCard({ pkg }) {
   return (
     <article
       className={[
-        "group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm transition-all font-lexend",
+        "group flex h-full min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-all font-lexend md:rounded-3xl",
         "hover:-translate-y-0.5 hover:shadow-lg",
 
       ].join(" ")}
     >
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-50">
+      <div className="relative h-24 w-full overflow-hidden bg-slate-50 sm:h-28 md:aspect-[16/10] md:h-auto">
         {img ? (
           <img
             src={img}
@@ -54,58 +54,62 @@ export function PackageCard({ pkg }) {
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 to-slate-50">
-            <div className="rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm">
+            <div className="rounded-xl bg-white px-2 py-1 text-[10px] font-semibold text-slate-600 shadow-sm md:rounded-2xl md:px-4 md:py-2 md:text-sm">
               No image
             </div>
           </div>
         )}
 
         {isRecommended ? (
-          <div className="absolute right-4 top-4">
-            <span className="rounded-full btn-gradient btn-gradient-glow px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+          <div className="absolute right-2 top-2 md:right-4 md:top-4">
+            <span className="rounded-full btn-gradient btn-gradient-glow px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white md:px-3 md:py-1 md:text-[10px]">
               Recommended
             </span>
           </div>
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="  font-sans text-[22px] font-[700] leading-tight text-blue-900 lg:text-[20px] lg:leading-[26px]">{pkg?.name}</h3>
+      <div className="flex flex-1 flex-col p-3 sm:p-4 md:p-6">
+        <h3 className="line-clamp-3 font-sans text-base font-[700] leading-tight text-blue-900 md:text-[20px] md:leading-[26px]">
+          {pkg?.name}
+        </h3>
         {pkg?.description ? (
-          <p className="  line-clamp-3 mt-2 font-sans text-[15px] font-[500] leading-[26px] text-slate-500  lg:text-[15px] lg:leading-[22px]">
+          <p className="line-clamp-2 mt-1.5 font-sans text-xs font-[500] leading-5 text-slate-500 md:mt-2 md:line-clamp-3 md:text-[14px] md:leading-[22px]">
             {pkg.description}
           </p>
         ) : null}
 
         {/* Features section */}
         {features.length > 0 && (
-          <ul className="mt-6 space-y-1">
-            {features.map((feature) => (
-              <li key={feature} className="flex items-start gap-3">
-                <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-50">
-                  <Check size={14} className="text-emerald-500" />
+          <ul className="mt-3 space-y-1 md:mt-6">
+            {features.slice(0, 3).map((feature) => (
+              <li key={feature} className="flex items-start gap-2 md:gap-3">
+                <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-50 md:mt-1 md:h-5 md:w-5">
+                  <Check size={12} className="text-emerald-500 md:h-[14px] md:w-[14px]" />
                 </span>
-                <span className="text-sm font-[500] text-[#262626]">{feature}</span>
+                <span className="line-clamp-2 text-xs font-[500] text-[#262626] md:text-sm">{feature}</span>
               </li>
             ))}
           </ul>
         )}
 
-        <div className="mt-auto pt-6">
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-blue-900">
+        <div className="mt-auto pt-3 md:pt-6">
+          <div className="flex items-baseline gap-1.5 md:gap-2">
+            <span className="text-[30px] font-extrabold leading-none text-blue-900 md:text-2xl">
               ₹{Number(finalPrice || 0).toLocaleString("en-IN")}
             </span>
-            <span className="text-xs font-semibold text-slate-400 font-lexend">
+            <span className="text-[10px] font-semibold text-slate-400 font-lexend md:text-xs">
               one-time payment
             </span>
           </div>
           {hasDiscount ? (
-            <div className="mt-1 text-xs font-semibold text-slate-400">
-              <span className="mr-3 line-through opacity-70 text-red-500">
+            <div className="mt-1 text-[10px] font-semibold text-slate-400 md:text-xs">
+              <span className="mr-2 line-through opacity-70 text-red-500 md:mr-3">
                 ₹{Number(basePrice || 0).toLocaleString("en-IN")}
               </span>
-              <span className="text-sm font-semibold text-slate-600">₹{Number(discount || 0).toLocaleString("en-IN")} off</span>
+              <span className="text-xs font-semibold text-slate-600 md:text-sm">
+                ₹{Number(discount || 0).toLocaleString("en-IN")} off
+              </span>
             </div>
           ) : null}
           <button
@@ -114,7 +118,7 @@ export function PackageCard({ pkg }) {
               if (!pkg?.package_id) return;
               router.push(`/packages/${pkg.package_id}`);
             }}
-            className="mt-4 w-full rounded-xl  btn-gradient btn-gradient-glow text-white py-3 text-base font-bold cursor-pointer transition font-lexend active:scale-[0.99]"
+            className="mt-3 w-full rounded-lg btn-gradient btn-gradient-glow text-white py-2.5 text-xs font-bold cursor-pointer transition font-lexend active:scale-[0.99] md:mt-4 md:rounded-xl md:py-3 md:text-base"
           >
             Add Cart
           </button>

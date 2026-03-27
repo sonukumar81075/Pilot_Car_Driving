@@ -12,7 +12,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css/pagination";
+
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
 
 const trainings = [
     {
@@ -75,10 +77,33 @@ const ProfessionalTraining1 = () => {
                     ))}
                 </div>
 
-                {/* MOBILE SLIDER */}
-                <div className="lg:hidden pt-12  relative px-4">
+
+
+
+                <div
+
+                    className="
+                        lg:hidden pt-12 relative px-4
+
+                        [&_.swiper-pagination]:!bottom-0
+                        [&_.swiper-pagination]:flex
+                        [&_.swiper-pagination]:justify-center
+                        [&_.swiper-pagination]:gap-2
+
+                        [&_.swiper-pagination-bullet]:!w-8
+                        [&_.swiper-pagination-bullet]:!h-[4px]
+                        [&_.swiper-pagination-bullet]:!rounded-full 
+                        [&_.swiper-pagination-bullet]:!bg-blue-900/50
+                        [&_.swiper-pagination-bullet]:!opacity-100
+
+                        [&_.swiper-pagination-bullet-active]:!bg-blue-900/100
+                        [&_.swiper-pagination-bullet-active]:!w-10
+                        [&_.swiper-pagination-bullet-active]:transition-all
+                        [&_.swiper-pagination-bullet-active]:duration-300
+                    "
+                >
                     <Swiper
-                        modules={[Autoplay, Navigation]}
+                        modules={[Autoplay, Pagination]}
                         spaceBetween={24}
                         slidesPerView={1}
                         loop={true}
@@ -86,28 +111,22 @@ const ProfessionalTraining1 = () => {
                             delay: 3500,
                             disableOnInteraction: false,
                         }}
-                        navigation={{
-                            nextEl: ".next-btn",
-                            prevEl: ".prev-btn",
+                        pagination={{
+                            clickable: true,
                         }}
                     >
                         {trainings.map((item) => (
-                            <SwiperSlide key={item.id} className="pb-12">
+                            <SwiperSlide key={item.id} className="pb-4">
                                 <Card item={item} />
                             </SwiperSlide>
                         ))}
                     </Swiper>
-
-                    {/* CUSTOM NAVIGATION */}
-                    <div className="flex justify-center gap-6 mt-2">
-                        <button className="prev-btn w-12 h-12 rounded-full bg-slate-100 text-slate-600 transition-all hover:bg-slate-200 flex items-center justify-center">
-                            <ChevronLeft size={20} />
-                        </button>
-                        <button className="next-btn w-12 h-12 rounded-full bg-slate-900 text-white transition-all hover:bg-slate-800 flex items-center justify-center">
-                            <ChevronRight size={20} />
-                        </button>
-                    </div>
                 </div>
+
+
+
+
+
             </Container>
         </section>
     );
@@ -116,7 +135,7 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 p-8 md:p-10 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden min-h-[580px] mb-6`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 p-8 xl:p-10 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden min-h-[580px]  mb-6`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
@@ -142,7 +161,7 @@ const Card = ({ item }) => {
                 </p>
 
                 {/* FEATURE LIST */}
-                <ul className="mb-6 sm:mb-0 space-y-2 sm:space-y-4">
+                <ul className="mb-6 lg:mb-0 space-y-2 sm:space-y-4">
                     {item.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-3">
                             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${item.bgColor} border border-white shadow-sm`}>
