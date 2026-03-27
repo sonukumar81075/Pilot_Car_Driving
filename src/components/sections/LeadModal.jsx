@@ -114,7 +114,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                 {/* Right Side: Form */}
                 <div className="w-full md:w-[58%] p-6 md:p-14 bg-white">
-                    <h2 className="text-2xl md:text-3xl font-bold text-slate-900 font-sans font-[700] leading-[36px]   text-[24px]">{data.formTitle}</h2>
+                    <h2 className="text-[20px] md:text-3xl font-bold text-slate-900 font-sans font-[700] sm:leading-[36px] leading-[20px]">{data.formTitle}</h2>
                     <p className="mt-1 md:mt-2  font-sans font-[500] leading-[27px] text-[16px] text-slate-500">{data.formSubtitle}</p>
 
                     <form className="mt-6 md:mt-8 space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
