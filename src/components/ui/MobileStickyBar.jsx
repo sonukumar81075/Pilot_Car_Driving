@@ -44,7 +44,7 @@ export default function MobileStickyBar() {
     };
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white">
+        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
             {/* Main Nav Container */}
             <div className="bg-white border-t border-slate-100 px-2 pt-3 pb-8 flex items-center justify-around rounded-t-[30px] shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
 
