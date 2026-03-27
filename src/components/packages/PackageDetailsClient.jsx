@@ -50,7 +50,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
           <h2 className="mb-4 text-[24px] font-extrabold tracking-tight text-slate-900">
             1. Select Primary Package
           </h2>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-8 sm:gap-4 md:grid-cols-2">
             {packageOptions.map((pkg) => (
               <PackageOptionCard
                 key={pkg.package_id}

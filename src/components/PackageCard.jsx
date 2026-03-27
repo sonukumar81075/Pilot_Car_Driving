@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import React from "react";
 import { Check } from "lucide-react";
@@ -110,10 +110,10 @@ export function PackageCard({ pkg }) {
           ) : null}
           <button
             type="button"
-            // onClick={() => {
-            //   if (!pkg?.package_id) return;
-            //   router.push(`/packages/${pkg.package_id}`);
-            // }}
+            onClick={() => {
+              if (!pkg?.package_id) return;
+              router.push(`/packages/${pkg.package_id}`);
+            }}
             className="mt-4 w-full rounded-xl  btn-gradient btn-gradient-glow text-white py-3 text-base font-bold cursor-pointer transition font-lexend active:scale-[0.99]"
           >
             Add Cart

@@ -74,10 +74,10 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                 {/* Left Side: Branding */}
                 <div className="w-full md:w-[42%] bg-[#f8fafc] p-6 md:p-10 flex flex-col justify-center">
-                    <h3 className="text-3xl font-sans font-[700] leading-[36px]   text-slate-900">{data.promoTitle}</h3>
-                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-[27px] text-[16px] text-slate-500">{data.promoText}</p>
+                    <h3 className="text-3xl font-sans font-[700] leading-[36px] text-center sm:text-left px-6 sm:px-0 text-slate-900">{data.promoTitle}</h3>
+                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-[27px] text-[16px] text-slate-500 sm:block hidden">{data.promoText}</p>
 
-                    <div className="mt-6 md:mt-8 w-full">
+                    <div className="mt-6 md:mt-8 w-full sm:block hidden">
                         {/* Grid for badges on mobile, stack on desktop */}
                         <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
                             {data.appBadges.map((badge) => (
@@ -85,10 +85,18 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                     key={badge.label}
                                     href={badge.href}
                                     target="_blank"
-                                    className="flex items-center gap-2 md:gap-3 bg-black text-white px-3 py-2 md:px-4 md:py-3 rounded-xl hover:bg-slate-900 transition-colors border border-slate-800 shadow-sm"
+                                    className="flex items-center gap-2 md:gap-3 bg-white text-black px-3 py-3 md:px-4 md:py-4 rounded-xl hover:bg-white hover:text-black transition-colors border border-slate-100 shadow-sm"
                                 >
                                     <div className="flex-shrink-0">
-                                        {badge.icon === 'apple' ? <AppleIcon /> : <PlayStoreIcon />}
+                                        <img
+                                            src={
+                                                badge.icon === "apple"
+                                                    ? "/images/app-store.svg"
+                                                    : "/images/google-play-store-logo.svg"
+                                            }
+                                            alt={badge.label}
+                                            className="h-6 md:h-8 w-auto object-contain"
+                                        />
                                     </div>
                                     <div className="flex flex-col items-start leading-tight">
                                         <span className="text-[8px] md:text-[10px] font-medium uppercase opacity-80">

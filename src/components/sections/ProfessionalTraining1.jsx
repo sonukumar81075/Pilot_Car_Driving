@@ -38,10 +38,10 @@ const trainings = [
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "Bike",
         // New Design Tokens
-        bgColor: "bg-rose-50/50",
-        accentColor: "text-rose-600",
-        btnColor: "bg-rose-600",
-        glowColor: "bg-rose-400",
+        bgColor: "bg-indigo-50/50",
+        accentColor: "text-indigo-600",
+        btnColor: "bg-indigo-600",
+        glowColor: "bg-indigo-400",
     },
     {
         id: "license",
@@ -52,10 +52,10 @@ const trainings = [
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "License",
         // New Design Tokens
-        bgColor: "bg-amber-50/50",
-        accentColor: "text-amber-600",
-        btnColor: "bg-amber-600",
-        glowColor: "bg-amber-400",
+        bgColor: "bg-indigo-50/50",
+        accentColor: "text-indigo-600",
+        btnColor: "bg-indigo-600",
+        glowColor: "bg-indigo-400",
     },
 ];
 
@@ -116,7 +116,7 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 p-8 md:p-10 shadow-sm transition-all duration-500 hover:shadow-2xl hover:-translate-y-3 overflow-hidden min-h-[580px] mb-6`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 p-8 md:p-10 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden min-h-[580px] mb-6`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
@@ -133,16 +133,16 @@ const Card = ({ item }) => {
 
             {/* TEXT CONTENT */}
             <div className="relative z-10 flex flex-col h-full">
-                <h3 className="mb-4 text-3xl font-extrabold text-slate-900 leading-tight">
+                <h3 className="mb-4 text-[26px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
 
-                <p className="mb-8 text-[15px] text-slate-600 leading-relaxed font-medium">
+                <p className="mb-6 text-[15px] text-slate-600 leading-relaxed font-medium">
                     {item.description}
                 </p>
 
                 {/* FEATURE LIST */}
-                <ul className="  space-y-4">
+                <ul className="mb-6 sm:mb-0 space-y-2 sm:space-y-4">
                     {item.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-3">
                             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${item.bgColor} border border-white shadow-sm`}>
@@ -157,7 +157,7 @@ const Card = ({ item }) => {
                 <div className="mt-auto">
                     <Link
                         href={`/packages?type=${item.drivingType}`}
-                        className={`flex items-center justify-center w-full rounded-2xl ${item.btnColor} py-4.5 text-[13px] font-black text-white transition-all hover:brightness-110 shadow-lg uppercase tracking-[0.15em]`}
+                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   py-4.5 text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase tracking-[0.15em]`}
                     >
                         {item.linkText}
                     </Link>

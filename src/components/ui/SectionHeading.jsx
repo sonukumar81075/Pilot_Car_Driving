@@ -23,7 +23,7 @@ export function SectionHeading({
       </h2>
 
       {description ? (
-        <p className="mt-5 text-lg text-[#1e3a8a] max-w-2xl mx-auto leading-relaxed font-sans">
+        <p className="sm:mt-5 mt-2 text-lg text-[#1e3a8a] max-w-2xl mx-auto leading-relaxed font-sans">
           {description}
         </p>
       ) : null}

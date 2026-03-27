@@ -10,7 +10,7 @@ export function PaymentSummary({ baseLabel, basePrice, addonsTotal, taxRate }) {
   const total = subtotal + taxAmount;
 
   return (
-    <aside className="font-sans rounded-3xl border border-slate-200/90 bg-white/95 p-6 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.35)] backdrop-blur">
+    <aside className="font-sans rounded-3xl border border-slate-200/90 bg-white/95 p-6 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.35)] backdrop-blur sm:mt-12 mt-6">
       <h3 className="text-[32px] font-extrabold leading-tight tracking-tight font-sans text-slate-900">
         Payment Summary
       </h3>

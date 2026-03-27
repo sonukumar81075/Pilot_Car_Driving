@@ -52,7 +52,7 @@ export function Stats({ stats }) {
 
   return (
     <section id="stats" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
-      <Container className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <Container className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="md:pb-16 pb-12">
           <SectionHeading
             title="Professional Driving Lessons"
@@ -76,8 +76,8 @@ export function Stats({ stats }) {
 
                 {/* Top Corner Icon/Accent */}
                 <div className="absolute top-6 right-8 opacity-10 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="w-12 h-12 rounded-2xl bg-[#066fa9] flex items-center justify-center text-white rotate-12 group-hover:rotate-0 transition-transform">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-12 h-12 rounded-2xl btn-gradient btn-gradient-glow flex items-center justify-center text-white rotate-12 group-hover:rotate-0 transition-transform">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="white" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
@@ -94,8 +94,8 @@ export function Stats({ stats }) {
                 </div>
 
                 {/* Bottom Interactive Bar */}
-                <div className="w-12 h-1.5 bg-[#066fa9]/20 rounded-full overflow-hidden">
-                  <div className="h-full bg-[#066fa9] w-0 group-hover:w-full transition-all duration-700 ease-out" />
+                <div className="w-12 h-1.5 bg-blue-500/20 rounded-full overflow-hidden">
+                  <div className="h-full btn-gradient btn-gradient-glow w-0 group-hover:w-full transition-all duration-700 ease-out" />
                 </div>
 
                 {/* Subtle Geometric Pattern Overlay */}

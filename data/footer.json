@@ -17,33 +17,68 @@
       }
     ]
   },
- "columns": [
-   
+  "columns": [
     {
       "title": "Company",
       "links": [
-        { "label": "Careers", "href": "/careers" },
-        { "label": "careers@withpiloto.com", "href": "mailto:careers@withpiloto.com" },
-        { "label": "Become a Pilot Professional", "href": "/become-a-pilot-professional" },
-        { "label": "Payments Disclosure", "href": "/payments-disclosure" },
-        { "label": "Cancellation & Refund Policy", "href": "/cancellation-refund-policy" }
+        {
+          "label": "Careers",
+          "href": "/careers"
+        },
+        {
+          "label": "careers@withpiloto.com",
+          "href": "mailto:careers@withpiloto.com"
+        },
+        {
+          "label": "Become a Pilot Professional",
+          "href": "/become-a-pilot-professional"
+        },
+        {
+          "label": "Payments Disclosure",
+          "href": "/payments-disclosure"
+        },
+        {
+          "label": "Cancellation & Refund Policy",
+          "href": "/cancellation-refund-policy"
+        }
       ]
     },
     {
       "title": "Legal",
       "links": [
-        { "label": "Terms & Conditions", "href": "/tnc" },
-        { "label": "Privacy Policy", "href": "/privacy-policy" },
-        { "label": "Insurance Policy & Claim Procedure", "href": "/insurance-policy" },
-        { "label": "Insurance Terms & Conditions", "href": "/insurance-terms" },
-        { "label": "Cookies Policy", "href": "/cookies-policy" }
+        {
+          "label": "Terms & Conditions",
+          "href": "/tnc"
+        },
+        {
+          "label": "Privacy Policy",
+          "href": "/privacy-policy"
+        },
+        {
+          "label": "Insurance Policy & Claim Procedure",
+          "href": "/insurance-policy"
+        },
+        {
+          "label": "Insurance Terms & Conditions",
+          "href": "/insurance-terms"
+        },
+        {
+          "label": "Cookies Policy",
+          "href": "/cookies-policy"
+        }
       ]
     },
     {
       "title": "Support",
       "links": [
-        { "label": "Contact Us", "href": "/support" },
-        { "label": "Delete Account", "href": "/account-deletion" }
+        {
+          "label": "Contact Us",
+          "href": "/support"
+        },
+        {
+          "label": "Delete Account",
+          "href": "/account-deletion"
+        }
       ]
     }
   ],
