@@ -106,56 +106,58 @@ export default function PackagesClient() {
           }
         />
 
-        {/* Desktop tabs */}
-        <div className="mx-auto mt-12 hidden items-center justify-center gap-3 rounded-xl bg-slate-50 py-4 md:flex">
-          {tabs.map((tab) => {
-            const active = tab.id === activeType;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => handleTabChange(tab.id)}
-                className={[
-                  "group relative flex items-center gap-2.5 rounded-full px-5 py-2.5 cursor-pointer text-sm font-bold transition-all duration-300",
-                  active
-                    ? "btn-gradient btn-gradient-glow text-white scale-105"
-                    : "bg-white border border-slate-200 text-slate-600 hover:border-[#2D5BFF]/30 hover:bg-slate-50",
-                ].join(" ")}
-              >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full transition-colors duration-300">
-                  <tab.icon className="h-5 w-5" />
-                </span>
-                <span className="tracking-wide">{tab.label}</span>
-              </button>
-            );
-          })}
-        </div>
+        <div className="sticky top-0 z-30 mt-8 border-b border-slate-100 bg-white/95 py-3 backdrop-blur md:mt-12">
+          {/* Desktop tabs */}
+          <div className="mx-auto hidden items-center justify-center gap-3 rounded-xl bg-slate-50 py-4 md:flex">
+            {tabs.map((tab) => {
+              const active = tab.id === activeType;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => handleTabChange(tab.id)}
+                  className={[
+                    "group relative flex items-center gap-2.5 rounded-full px-5 py-2.5 cursor-pointer text-sm font-bold transition-all duration-300",
+                    active
+                      ? "btn-gradient btn-gradient-glow text-white scale-105"
+                      : "bg-white border border-slate-200 text-slate-600 hover:border-[#2D5BFF]/30 hover:bg-slate-50",
+                  ].join(" ")}
+                >
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full transition-colors duration-300">
+                    <tab.icon className="h-5 w-5" />
+                  </span>
+                  <span className="tracking-wide">{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
 
-        {/* Mobile one-line infinite auto-scroll tabs */}
-        <div className="mx-auto mt-8 rounded-xl bg-slate-50 py-3 md:hidden">
-          <div className="overflow-hidden">
-            <div className="mobile-tabs-track flex w-max items-center gap-3 px-3">
-              {[...tabs, ...tabs].map((tab, idx) => {
-                const active = tab.id === activeType;
-                return (
-                  <button
-                    key={`${tab.id}-${idx}`}
-                    type="button"
-                    onClick={() => handleTabChange(tab.id)}
-                    className={[
-                      "shrink-0 whitespace-nowrap group relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-all duration-300",
-                      active
-                        ? "btn-gradient btn-gradient-glow text-white"
-                        : "bg-white border border-slate-200 text-slate-600",
-                    ].join(" ")}
-                  >
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full">
-                      <tab.icon className="h-4 w-4" />
-                    </span>
-                    <span>{tab.label}</span>
-                  </button>
-                );
-              })}
+          {/* Mobile one-line infinite auto-scroll tabs */}
+          <div className="mx-auto rounded-xl bg-slate-50 py-3 md:hidden">
+            <div className="overflow-hidden">
+              <div className="mobile-tabs-track flex w-max items-center gap-3 px-3">
+                {[...tabs, ...tabs].map((tab, idx) => {
+                  const active = tab.id === activeType;
+                  return (
+                    <button
+                      key={`${tab.id}-${idx}`}
+                      type="button"
+                      onClick={() => handleTabChange(tab.id)}
+                      className={[
+                        "shrink-0 whitespace-nowrap group relative flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold transition-all duration-300",
+                        active
+                          ? "btn-gradient btn-gradient-glow text-white"
+                          : "bg-white border border-slate-200 text-slate-600",
+                      ].join(" ")}
+                    >
+                      <span className="flex h-5 w-5 items-center justify-center rounded-full">
+                        <tab.icon className="h-4 w-4" />
+                      </span>
+                      <span>{tab.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
