@@ -125,40 +125,57 @@ export function Navbar({ brand, links }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[999] w-screen h-screen bg-white font-lexend flex flex-col items-center pt-28"
+            className="fixed inset-0 z-[999] w-screen h-screen bg-slate-900/30 backdrop-blur-[2px] font-sans"
+            onClick={() => setOpen(false)}
           >
-
-            {/* Close Button */}
-            <button
-              onClick={() => setOpen(false)}
-              className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border-2 border-slate-900 text-slate-900"
+            <motion.aside
+              initial={{ x: -40, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -40, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative   h-[calc(100%)] w-[78vw] max-w-[270px] overflow-hidden  bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 shadow-2xl"
             >
-              <IoMdClose className="h-6 w-6" />
-            </button>
+              <div className="absolute right-0 top-0 h-full w-12 rounded-l-2xl bg-white/95" />
 
-            {/* Logo */}
-            <Link
-              href="/"
-              onClick={() => setOpen(false)}
-              className="absolute left-6 top-6 border-b-4 border-[var(--brand)] text-3xl font-black text-slate-900"
-            >
-              {brand}
-            </Link>
+              <button
+                onClick={() => setOpen(false)}
+                className="absolute right-2 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-blue-900 bg-white text-slate-700"
+              >
+                <IoMdClose className="h-5 w-5 text-blue-900" />
+              </button>
 
-            {/* Navigation Links */}
-            <nav className="flex flex-col items-center gap-8 text-lg font-semibold text-slate-700">
-              {links.map((l) => (
+              <div className="relative z-10 flex h-full flex-col p-4 pr-16">
                 <Link
-                  key={l.href}
-                  href={l.href}
+                  href="/"
                   onClick={() => setOpen(false)}
-                  className="transition hover:text-slate-900"
+                  className="mb-4 flex items-center gap-2 text-white"
                 >
-                  {l.label}
+                  <Image
+                    src="/images/logo/Pilot%20Logo%20White.png"
+                    alt="Pilot"
+                    width={90}
+                    height={28}
+                    className="object-contain"
+                  />
                 </Link>
-              ))}
-            </nav>
 
+                <div className="mb-3 h-px bg-white/15" />
+
+                <nav className="flex flex-col gap-1">
+                  {links.map((l) => (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="rounded-lg px-2 py-2 text-[14px] font-[700] leading-[20px] text-white/80 transition hover:bg-white/10 hover:text-white"
+                    >
+                      {l.label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+            </motion.aside>
           </motion.div>
         )}
       </AnimatePresence>
