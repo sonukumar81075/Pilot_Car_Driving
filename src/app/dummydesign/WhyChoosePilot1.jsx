@@ -32,10 +32,13 @@ export function WhyChoosePilot1() {
       <Container>
         {/* HEADER */}
         <div className="sm:mb-14 mb-8 text-center">
+
           <SectionHeading
             title="Why Choose Pilot?"
             description="Premium driving education simplified."
           />
+
+
         </div>
         {/* ✅ MOBILE GRID POINTS */}
         {/* ✅ MOBILE SIMPLE GRID LIST */}

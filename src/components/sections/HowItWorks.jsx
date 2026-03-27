@@ -90,7 +90,7 @@ export function HowItWorks({ steps }) {
     <section className="md:pt-32 pt-16 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend overflow-hidden">
       <Container>
         <SectionHeading
-          eyebrow="The Process"
+          // eyebrow="The Process"
           title="Drive with Confidence in 4 Steps"
           description="A structured path designed to take you from a beginner to a licensed pro seamlessly."
         />

@@ -8,7 +8,7 @@ export function Testimonials({ testimonials }) {
     <section id="testimonials" className="md:pt-32 pt-10 bg-gradient-to-b from-white to-[var(--brand-muted)] font-lexend">
       <Container>
         <SectionHeading
-          eyebrow="Our Testimonials"
+          // eyebrow="Our Testimonials"
           title="User reviews and feedback"
           description="See how Pronto has transformed users' experiences through their own words"
         />

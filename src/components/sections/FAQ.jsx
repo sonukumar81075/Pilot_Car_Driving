@@ -9,7 +9,7 @@ export function FAQ({ items }) {
       <Container>
 
         <SectionHeading
-          eyebrow="FAQ’s"
+          // eyebrow="FAQ’s"
           title="Frequently Asked Questions"
           description="Answers to common questions about our driving school and services."
         /> 
