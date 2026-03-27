@@ -336,7 +336,7 @@ export function Navbar({ links }) {
                       onClick={() => setOpen(false)}
                       className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100 group active:bg-blue-600 transition-colors"
                     >
-                      <span className="text-mg font-black text-slate-900 group-active:text-white uppercase tracking-tight font-sans font-[700] leading-[20px]">
+                      <span className="text-sm font-black text-slate-900 group-active:text-white uppercase tracking-tight font-sans font-[700] leading-[20px]">
                         {l.label}
                       </span>
                       <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-blue-600">
