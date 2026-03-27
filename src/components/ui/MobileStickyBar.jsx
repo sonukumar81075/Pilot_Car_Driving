@@ -11,6 +11,7 @@ const navItems = [
         label: "HOME",
         href: "/",
         icon: <HiHome size={22} />,
+        isHome: true, // Marker for scroll-to-top logic
     },
     {
         label: "PLAY STORE",
@@ -26,7 +27,7 @@ const navItems = [
     },
     {
         label: "WHATSAPP",
-        href: "https://wa.me/...",
+        href: "https://wa.me/+918065489040",
         icon: <FaWhatsapp size={22} />,
         isExternal: true,
     },
@@ -35,10 +36,17 @@ const navItems = [
 export default function MobileStickyBar() {
     const pathname = usePathname();
 
+    const handleHomeClick = (e, href, isHome) => {
+        // If it's the home button and we're already home, just scroll up
+        if (isHome && pathname === href) {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+    };
+
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden px-0">
-            {/* The Container with the specific UI curve and shadow */}
-            <div className="bg-white border-t border-slate-50 px-2 pt-4 pb-8 flex items-center justify-around rounded-t-[35px] shadow-[0_-15px_50px_-12px_rgba(0,0,0,0.1)]">
+        <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
+            {/* Main Nav Container */}
+            <div className="bg-white border-t border-slate-100 px-2 pt-3 pb-8 flex items-center justify-around rounded-t-[30px] shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
 
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
@@ -48,15 +56,16 @@ export default function MobileStickyBar() {
                             key={item.label}
                             href={item.href}
                             target={item.isExternal ? "_blank" : "_self"}
-                            className="flex flex-col items-center justify-center gap-1.5 min-w-[70px] transition-all active:scale-95"
+                            onClick={(e) => handleHomeClick(e, item.href, item.isHome)}
+                            className="flex flex-col items-center justify-center gap-1.5 min-w-[75px] transition-all active:scale-90"
                         >
-                            {/* Icon Color Logic: Navy for Active, Muted Gray for others */}
-                            <div className={`${isActive ? "text-[#1a237e]" : "text-[#94a3b8]"}`}>
+                            {/* Icon Styling */}
+                            <div className={`${isActive ? "text-[#1e3a8a]" : "text-[#94a3b8] opacity-80"}`}>
                                 {item.icon}
                             </div>
 
-                            {/* Label: Bold, Uppercase, and specifically spaced */}
-                            <span className={`text-[9px] font-black tracking-widest ${isActive ? "text-[#1a237e]" : "text-[#cbd5e1]"
+                            {/* Label Styling - matching your screenshot's faded gray vs dark blue */}
+                            <span className={`text-[9px] font-black tracking-widest ${isActive ? "text-[#1e3a8a]" : "text-[#cbd5e1]"
                                 }`}>
                                 {item.label}
                             </span>
