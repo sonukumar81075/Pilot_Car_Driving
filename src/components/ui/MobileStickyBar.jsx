@@ -62,8 +62,4 @@ export default function MobileStickyBar() {
             </div>
         </div>
     );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 05a00dc (updated code)
