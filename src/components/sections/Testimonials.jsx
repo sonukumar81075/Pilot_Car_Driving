@@ -9,8 +9,8 @@ export function Testimonials({ testimonials }) {
       <Container>
         <SectionHeading
           // eyebrow="Our Testimonials"
-          title="User reviews and feedback"
-          description="See how Pronto has transformed users' experiences through their own words"
+          title="What Our Learners Say Testimonials"
+          description="Real experiences from people who started their driving journey with Pilot."
         />
         <Reveal className="mt-8">
           <TestimonialsCarousel testimonials={testimonials} />

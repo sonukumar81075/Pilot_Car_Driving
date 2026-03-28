@@ -18,12 +18,12 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 const features = [
-  { title: "Certified Instructors", description: "Verified safety experts.", icon: UserCheck },
-  { title: "Structured Learning", description: "Data-driven curriculum.", icon: BookOpen },
-  { title: "App-Based Booking", description: "Manage on our mobile app.", icon: Smartphone },
-  { title: "Flexible Scheduling", description: "Slots that fit your life.", icon: Calendar },
-  { title: "Easy Reschedule", description: "One-tap session changes.", icon: RefreshCcw },
-  { title: "License Assistance", description: "We handle RTO paperwork.", icon: BadgeCheck },
+  { title: "Doorstep Learning", description: "Get picked up from your preferred location and start learning with ease.", icon: UserCheck },
+  { title: "Flexible Time Slots", description: "Learn when it works for you, not when a driving school says so.", icon: BookOpen },
+  { title: "Trusted Instructors", description: "Learn from verified professionals who help you build confidence behind the wheel.", icon: Smartphone },
+  { title: "Reschedule Anytime", description: "Plans changed? Easily reschedule your lessons without hassle.", icon: Calendar },
+  { title: "License Assistance", description: "Get end-to-end support for your driving license journey.", icon: RefreshCcw },
+  { title: "Start with a Free Trial", description: "Experience your first lesson before committing to a full learning package.", icon: BadgeCheck },
 ];
 
 export function WhyChoosePilot1() {
@@ -35,12 +35,11 @@ export function WhyChoosePilot1() {
 
           <SectionHeading
             title="Why Choose Pilot?"
-            description="Premium driving education simplified."
+            description="Because learning driving should feel easy — not stressful."
           />
 
 
         </div>
-        {/* ✅ MOBILE GRID POINTS */}
         {/* ✅ MOBILE SIMPLE GRID LIST */}
         <div className="block md:hidden grid grid-cols-2 gap-x-4 gap-y-2">
           {features.map((feature, idx) => (
@@ -78,18 +77,19 @@ export function WhyChoosePilot1() {
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-blue-50 via-transparent to-blue-100 blur-2xl"></div>
 
               {/* CONTENT */}
+
+              {/* ICON */}
+              <div className="absolute top-3 left-4 w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center text-blue-900   group-hover:bg-blue-100 transition">
+                <feature.icon
+                  strokeWidth={1.5}
+                  className="text-blue-900 size-7  transition-transform duration-300"
+                />
+              </div>
               <div className="relative z-10 flex flex-col items-center">
 
-                {/* ICON */}
-                <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center text-blue-900 mb-4 group-hover:bg-blue-100 transition">
-                  <feature.icon
-                    strokeWidth={1.5}
-                    className="text-blue-900 size-8 group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
 
                 {/* TITLE */}
-                <h3 className="text-[18px] font-semibold text-slate-900 mb-2 group-hover:text-blue-900 transition-colors">
+                <h3 className="text-[18px] font-semibold text-slate-900 mb-2 mt-10 group-hover:text-blue-900 transition-colors">
                   {feature.title}
                 </h3>
 
@@ -99,13 +99,18 @@ export function WhyChoosePilot1() {
                 </p>
               </div>
 
+
               {/* NUMBER */}
               <span className="absolute top-3 right-4 opacity-[0.02] text-5xl font-black transition-all duration-500 group-hover:opacity-20 group-hover:text-blue-900">
                 0{idx + 1}
               </span>
+
             </motion.div>
           ))}
         </div>
+
+
+
       </Container>
     </section>
   );

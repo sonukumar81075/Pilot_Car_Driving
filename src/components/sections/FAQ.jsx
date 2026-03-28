@@ -11,8 +11,8 @@ export function FAQ({ items }) {
         <SectionHeading
           // eyebrow="FAQ’s"
           title="Frequently Asked Questions"
-          description="Answers to common questions about our driving school and services."
-        /> 
+          description="Everything you need to know before you start learning with Pilot."
+        />
         <div className="mt-14 max-w-4xl mx-auto">
           <FaqAccordion items={items} />
         </div>
