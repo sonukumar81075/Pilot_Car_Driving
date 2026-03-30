@@ -176,7 +176,7 @@ const Card = ({ item }) => {
                 <div className="mt-auto">
                     <Link
                         href={`/packages?type=${item.drivingType}`}
-                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   py-4.5 text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase tracking-[0.15em]`}
+                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   py-4.5 text-[12px] xl:text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
                     >
                         {item.linkText}
                     </Link>

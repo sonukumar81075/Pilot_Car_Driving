@@ -28,7 +28,7 @@ const features = [
 
 export function WhyChoosePilot1() {
   return (
-    <section className="md:pt-20 sm:pt-16 pt-4 sm:pb-10 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend">
+    <section className="md:pt-20 sm:pt-16 pt-4 sm:pb-10 bg-gradient-to-b from-[var(--brand-muted)] to-white font-sans">
       <Container>
         {/* HEADER */}
         <div className="sm:mb-14 mb-8 text-center">
@@ -85,23 +85,23 @@ export function WhyChoosePilot1() {
                   className="text-blue-900 size-7  transition-transform duration-300"
                 />
               </div>
-              <div className="relative z-10 flex flex-col items-center">
+              <div className="relative z-10 flex flex-col items-start">
 
 
                 {/* TITLE */}
-                <h3 className="text-[18px] font-semibold text-slate-900 mb-2 mt-10 group-hover:text-blue-900 transition-colors">
+                <h3 className="text-[20px] font-semibold text-slate-900 mb-2 mt-14 font-lexend text-left    group-hover:text-blue-900 transition-colors">
                   {feature.title}
                 </h3>
 
                 {/* DESCRIPTION */}
-                <p className="text-slate-500 text-[14px] font-medium leading-relaxed">
+                <p className="text-slate-500 text-[14px] font-medium font-sans tracking-wide text-left  leading-relaxed">
                   {feature.description}
                 </p>
               </div>
 
 
               {/* NUMBER */}
-              <span className="absolute top-3 right-4 opacity-[0.02] text-5xl font-black transition-all duration-500 group-hover:opacity-20 group-hover:text-blue-900">
+              <span className="absolute top-3 right-4 opacity-[0.04] text-5xl font-black transition-all duration-500 group-hover:opacity-20 group-hover:text-blue-900">
                 0{idx + 1}
               </span>
 

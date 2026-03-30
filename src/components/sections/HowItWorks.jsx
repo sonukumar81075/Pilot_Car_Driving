@@ -87,7 +87,7 @@ export function HowItWorks({ steps }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section className="md:pt-32 pt-16 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend overflow-hidden">
+    <section id="how-it-works" className="md:pt-32 pt-16 bg-gradient-to-b from-[var(--brand-muted)] to-white font-lexend overflow-hidden">
       <Container>
         <SectionHeading
           // eyebrow="The Process"
@@ -96,7 +96,7 @@ export function HowItWorks({ steps }) {
         />
 
         {/* ================= DESKTOP (UNCHANGED) ================= */}
-        <div className="hidden lg:grid grid-cols-4 gap-4 pt-20 pb-12">
+        <div className="hidden md:grid  lg:grid-cols-4 md:grid-cols-2 gap-12 lg:gap-4 pt-20 pb-12">
           {displaySteps.map((s, idx) => (
             <motion.div
               key={idx}
@@ -133,7 +133,7 @@ export function HowItWorks({ steps }) {
         </div>
 
         {/* ================= MOBILE ================= */}
-        <div className="lg:hidden pt-12">
+        <div className="md:hidden pt-12">
 
           {/* 🔵 TOP NUMBER TABS */}
           <div className="flex justify-center gap-4 mb-8">
@@ -141,10 +141,9 @@ export function HowItWorks({ steps }) {
               <div
                 key={idx}
                 className={`w-10 h-10 flex items-center justify-center rounded-full border font-bold transition-all
-                  ${
-                    activeIndex === idx
-                      ? "bg-blue-600 text-white scale-110 shadow-lg"
-                      : "bg-white text-blue-600 border-blue-600"
+                  ${activeIndex === idx
+                    ? "bg-blue-600 text-white scale-110 shadow-lg"
+                    : "bg-white text-blue-600 border-blue-600"
                   }`}
               >
                 {idx + 1}
@@ -168,13 +167,13 @@ export function HowItWorks({ steps }) {
             {displaySteps.map((s, idx) => (
               <SwiperSlide key={idx}>
                 <div className="px-2">
-                  <div className="relative rounded-[2rem] bg-white p-6 shadow">
+                  <div className="relative rounded-[2rem] bg-white p-5 sm:p-6 shadow">
 
-                    <div className="pt-2 mb-6">
-                      <h3 className="text-[20px] font-bold mb-2">
+                    <div className="pt-2 mb-5 sm:mb-6">
+                      <h3 className="text-[18px] sm:text-[20px] font-bold mb-2">
                         {s.title}
                       </h3>
-                      <p className="text-[14px] text-slate-500">
+                      <p className="text-[13px] sm:text-[14px] text-slate-500 leading-6">
                         {s.description}
                       </p>
                     </div>

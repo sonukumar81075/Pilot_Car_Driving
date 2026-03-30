@@ -17,12 +17,12 @@ export function AddonItem({ addon, checked, onToggle }) {
         className="mt-1 h-6 w-6 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
       />
       <div className="flex-1">
-        <p className="text-[20px] font-extrabold leading-tight text-slate-800">{addon.title}</p>
+        <p className="text-[17px] sm:text-[18px] md:text-[20px] font-extrabold leading-tight text-slate-800">{addon.title}</p>
         {addon.description ? (
-          <p className="text-sm font-medium leading-6 text-slate-500">{addon.description}</p>
+          <p className="text-xs sm:text-sm font-medium leading-6 text-slate-500">{addon.description}</p>
         ) : null}
       </div>
-      <div className="text-[24px] font-black tracking-tight text-slate-800">
+      <div className="text-[18px] sm:text-[20px] md:text-[24px] font-black tracking-tight text-slate-800">
         +${Number(addon.price || 0).toFixed(0)}
       </div>
     </label>

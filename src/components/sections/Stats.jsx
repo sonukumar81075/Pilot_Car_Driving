@@ -85,7 +85,7 @@ export function Stats({ stats }) {
 
                 {/* Content */}
                 <div className="mt-4">
-                  <dt className="md:text-[40px] lg:text-[50px] text-[30px] font-lexend font-[700] text-[#333333] md:leading-[45px] lg:leading-[67px] leading-[36px] mb-2">
+                  <dt className="text-[24px] sm:text-[28px] md:text-[40px] lg:text-[50px] font-lexend font-[700] text-[#333333] leading-[32px] sm:leading-[34px] md:leading-[45px] lg:leading-[67px] mb-2">
                     <Counter value={stat.value} />
                   </dt>
                   <dd className="text-slate-500 font-semibold uppercase tracking-widest text-xs sm:mb-6 mb-2">

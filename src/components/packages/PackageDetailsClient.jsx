@@ -38,16 +38,16 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
 
   return (
     <div className="mx-auto w-full max-w-7xl px-4">
-      <h1 className="text-4xl font-extrabold tracking-tight text-blue-900 sm:text-5xl">
+      <h1 className="text-3xl font-extrabold tracking-tight text-blue-900 sm:text-4xl md:text-5xl">
         {packageTypeLabel} Training Packages
       </h1>
-      <p className="mt-2 text-base font-medium text-blue-900">
+      <p className="mt-2 text-sm sm:text-base font-medium text-blue-900">
         Select the best path for your driving journey
       </p>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_340px]">
         <section>
-          <h2 className="mb-4 text-[24px] font-extrabold tracking-tight text-slate-900">
+          <h2 className="mb-4 text-[20px] sm:text-[22px] md:text-[24px] font-extrabold tracking-tight text-slate-900">
             1. Select Primary Package
           </h2>
           <div className="grid gap-8 sm:gap-4 md:grid-cols-2">
@@ -61,7 +61,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
             ))}
           </div>
 
-          <h3 className="mb-4 mt-8 text-[28px] font-extrabold tracking-tight text-slate-900">
+          <h3 className="mb-4 mt-8 text-[22px] sm:text-[24px] md:text-[28px] font-extrabold tracking-tight text-slate-900">
             2. Available Add-ons
           </h3>
           <div className="space-y-3">

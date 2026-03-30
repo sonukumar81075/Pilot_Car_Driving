@@ -17,14 +17,14 @@ export function Hero2({ data }) {
 
             <Container className="relative z-10 w-full max-w-[min(100%,1440px)] px-4 md:px-6 lg:px-8 xl:px-10">
 
-                <div className="mx-auto grid min-w-0 max-w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-16">
+                <div className="mx-auto grid min-w-0 max-w-full grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-8 lg:gap-10 xl:gap-16">
 
                     {/* LEFT CONTENT */}
-                    <div className="min-w-0 max-w-full lg:col-span-7 flex flex-col items-center lg:items-start order-1 text-center lg:text-left">
+                    <div className="min-w-0 max-w-full md:col-span-7 flex flex-col items-center md:items-start order-1 text-center md:text-left">
 
                         {/* Heading */}
                         <Reveal delay={0.1}>
-                            <h1 className="max-w-[20ch] text-balance text-center md:block hidden lg:text-left text-3xl sm:text-4xl md:text-5xl xl:text-6xl leading-[1.1] font-[800] text-slate-900 md:pt-10 pt-0">
+                            <h1 className="max-w-[20ch] text-balance text-center md:block hidden md:text-left text-3xl sm:text-4xl md:text-[44px] lg:text-5xl xl:text-6xl leading-[1.1] font-[800] text-slate-900 md:pt-6 lg:pt-10 pt-0">
                                 The Smarter Way to{" "}
                                 <span className="bg-[#1D4ED8] bg-clip-text text-transparent">
                                     Learn & Drive
@@ -42,7 +42,7 @@ export function Hero2({ data }) {
                                 </div>
 
                                 {/* 🔥 Main Heading (ONE LINE) */}
-                                <h1 className="text-[40px] sm:text-4xl font-black tracking-tight leading-[1.2] flex flex-wrap justify-center">
+                                <h1 className="text-[30px] sm:text-4xl font-black tracking-tight leading-[1.2] flex flex-wrap justify-center">
 
                                     <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent italic mr-2">
                                         Smart
@@ -75,18 +75,18 @@ export function Hero2({ data }) {
 
                         {/* Subtitle */}
                         <Reveal delay={0.2}>
-                            <p className="mx-auto mt-5 max-w-md text-center lg:text-left text-[15px] font-medium leading-relaxed text-slate-500 lg:mx-0 md:block hidden">
+                            <p className="mx-auto mt-4 lg:mt-5 max-w-md text-center md:text-left text-[14px] lg:text-[15px] font-medium leading-relaxed text-slate-500 md:mx-0 md:block hidden">
                                 {data.subtitle}
                             </p>
 
-                            <p className="mx-auto mt-4 max-w-md text-center text-[17px] font-medium leading-relaxed text-blue-900 md:hidden">
+                            <p className="mx-auto mt-4 max-w-md text-center text-[15px] sm:text-[16px] font-medium leading-relaxed text-blue-900 md:hidden">
                                 Modern driving lessons with certified instructors and easy booking.
                             </p>
                         </Reveal>
 
                         {/* App Buttons */}
                         <Reveal delay={0.3}>
-                            <div className="mt-6 flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4 lg:justify-start">
+                            <div className="mt-5 md:mt-6 flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4 md:justify-start">
                                 {data?.appBadges?.map((b) => (
                                     <Link
                                         key={b.label}
@@ -104,7 +104,7 @@ export function Hero2({ data }) {
                                             alt={b.label}
                                             width={220}
                                             height={60}
-                                            className="h-[44px] w-auto sm:h-[50px] md:h-[56px] lg:h-[60px] transition-transform duration-300 hover:scale-[1.05]"
+                                            className="h-[44px] w-auto sm:h-[50px] md:h-[48px] lg:h-[56px] xl:h-[60px] transition-transform duration-300 hover:scale-[1.05]"
                                         />
                                     </Link>
                                 ))}
@@ -112,16 +112,16 @@ export function Hero2({ data }) {
                         </Reveal>
                     </div>
                     {/* RIGHT IMAGE */}
-                    <div className="relative flex min-w-0 w-full max-w-full justify-center lg:col-span-5 lg:justify-end order-2 sm:mt-10 mt-0 lg:mt-0">
+                    <div className="relative flex min-w-0 w-full max-w-full justify-center md:col-span-5 md:justify-end order-2 sm:mt-10 mt-0 md:mt-6 lg:mt-0">
 
-                        <div className="relative w-full max-w-[min(100%,340px)] sm:max-w-[300px] md:max-w-[320px] md:pt-10 pt-0">
+                        <div className="relative w-full max-w-[min(100%,340px)] sm:max-w-[300px] md:max-w-[340px] lg:max-w-[320px] md:pt-4 lg:pt-10 pt-0">
 
                             <Reveal delay={0.2} className="relative z-20 block">
 
-                                <div className="relative mx-auto w-full max-w-[350px] sm:max-w-[300px] lg:mx-0 lg:max-w-[300px] xl:max-w-[320px] lg:rotate-3 xl:rotate-6 transition-transform duration-700 hover:rotate-0">
+                                <div className="relative mx-auto w-full max-w-[350px] sm:max-w-[300px] md:mx-0 md:max-w-[260px] lg:max-w-[300px] xl:max-w-[320px] md:rotate-2 lg:rotate-3 xl:rotate-6 transition-transform duration-700 hover:rotate-0">
 
                                     {/* ✅ MOBILE IMAGE */}
-                                    <div className="block lg:hidden mt-10">
+                                    <div className="block md:hidden mt-10">
                                         <Image
                                             src="/images/mobile_view_image.png"
                                             alt="driving app"
@@ -132,14 +132,14 @@ export function Hero2({ data }) {
                                     </div>
 
                                     {/* ✅ DESKTOP IMAGE */}
-                                    <div className="hidden lg:block">
-                                        <div className="overflow-hidden rounded-[2.5rem] border-[8px] border-slate-900 bg-white shadow-[0_40px_80px_-24px_rgba(0,0,0,0.28)] sm:rounded-[3rem] sm:border-[10px]">
+                                    <div className="hidden md:block">
+                                        <div className="overflow-hidden rounded-[2.2rem] border-[7px] border-slate-900 bg-white shadow-[0_30px_60px_-24px_rgba(0,0,0,0.28)] md:rounded-[2.6rem] md:border-[8px] lg:rounded-[3rem] lg:border-[10px]">
                                             <Image
                                                 src={data.heroImage.src}
                                                 alt={data.heroImage.alt}
-                                                width={550}
-                                                height={540}
-                                                className="h-auto w-full max-w-[650px] transition duration-300 hover:scale-[1.03]"
+                                                width={800}
+                                                height={800}
+                                                className="h-auto w-full max-w-[400px] lg:max-w-[650px] transition duration-300 hover:scale-[1.03]"
                                                 priority
                                             />
                                         </div>

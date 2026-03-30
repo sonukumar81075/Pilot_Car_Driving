@@ -28,7 +28,7 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
       type="button"
       onClick={() => onSelect(pkg.package_id)}
       className={[
-        "font-sans relative w-full rounded-3xl border bg-white/95 p-6 text-left shadow-sm backdrop-blur transition-all duration-300",
+        "font-sans relative w-full rounded-3xl border bg-white/95 p-4 sm:p-5 md:p-6 text-left shadow-sm backdrop-blur transition-all duration-300",
         // ❌ overflow-hidden removed
         selected
           ? "border-blue-500 ring-2 ring-blue-100 shadow-[0_10px_35px_-18px_rgba(37,99,235,0.8)]"
@@ -67,13 +67,13 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
       </div>
 
       {/* TITLE */}
-      <h3 className="relative text-[32px] font-extrabold leading-tight tracking-tight font-sans text-slate-900">
+      <h3 className="relative text-[24px] sm:text-[26px] md:text-[32px] font-extrabold leading-tight tracking-tight font-sans text-slate-900">
         {pkg?.uiTier || pkg?.name}
       </h3>
 
       {/* DESCRIPTION */}
       {pkg?.description ? (
-        <p className="relative mt-2 text-[15px] font-medium leading-6 text-slate-500">
+        <p className="relative mt-2 text-[13px] sm:text-[14px] md:text-[15px] font-medium leading-6 text-slate-500">
           {pkg.description}
         </p>
       ) : null}
@@ -83,7 +83,7 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
         {features.slice(0, 3).map((feature) => (
           <li
             key={feature}
-            className="flex items-start gap-2 text-sm font-medium text-slate-700"
+            className="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-700"
           >
             {/* PERFECT CENTER ICON */}
             <div className="flex items-center justify-center w-5 h-5 border border-green-600 bg-white rounded-full shrink-0">
@@ -98,7 +98,7 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
       {/* PRICE */}
       <div className="relative mt-6 border-t border-slate-100 pt-4">
         <div className="flex items-end gap-1">
-          <span className="text-4xl font-black tracking-tight text-slate-900">
+          <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
             ${finalPrice.toFixed(0)}
           </span>
           <span className="pb-1 text-xs font-bold uppercase tracking-wide text-slate-400">

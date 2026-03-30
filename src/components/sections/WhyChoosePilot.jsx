@@ -3,7 +3,7 @@ import { WhyChoosePilot1 } from "@/app/dummydesign/WhyChoosePilot1"
 
 export const WhyChoosePilot = () => {
   return (
-    <div>
+    <div id="services">
       <WhyChoosePilot1 /> 
       {/* <WhyChoosePilot3 /> */}
       </div>

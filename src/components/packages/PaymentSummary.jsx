@@ -11,7 +11,7 @@ export function PaymentSummary({ baseLabel, basePrice, addonsTotal, taxRate }) {
 
   return (
     <aside className="font-sans rounded-3xl border border-slate-200/90 bg-white/95 p-6 shadow-[0_16px_40px_-24px_rgba(15,23,42,0.35)] backdrop-blur sm:mt-12 mt-6">
-      <h3 className="text-[32px] font-extrabold leading-tight tracking-tight font-sans text-slate-900">
+      <h3 className="text-[24px] sm:text-[28px] md:text-[32px] font-extrabold leading-tight tracking-tight font-sans text-slate-900">
         Payment Summary
       </h3>
       <div className="mt-6 space-y-3 text-sm">
@@ -39,11 +39,11 @@ export function PaymentSummary({ baseLabel, basePrice, addonsTotal, taxRate }) {
       <div className="mt-5 rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50 p-4">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold uppercase tracking-wide text-slate-500">Total Amount</span>
-          <span className="text-4xl font-black tracking-tight text-slate-900">{money(total)}</span>
+          <span className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-slate-900">{money(total)}</span>
         </div>
       </div>
 
-      <button className="btn-gradient btn-gradient-glow mt-6 w-full rounded-2xl py-3.5 text-base font-extrabold text-white transition hover:opacity-95">
+      <button className="btn-gradient btn-gradient-glow mt-6 w-full rounded-2xl py-3 text-sm sm:py-3.5 sm:text-base font-extrabold text-white transition hover:opacity-95">
         Interested
       </button>
       <p className="mt-3 text-center text-xs font-medium text-slate-400">

@@ -64,7 +64,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
             if (e.target === e.currentTarget) {
                 onClose();
             }
-        }} className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 font-lexend">
+        }} className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 font-sans">
             {/* Added overflow-y-auto and max-height for mobile */}
             <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[1.5rem] md:rounded-[2.5rem] bg-white shadow-2xl flex flex-col md:flex-row">
 
@@ -74,8 +74,8 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                 {/* Left Side: Branding */}
                 <div className="w-full md:w-[42%] bg-[#f8fafc] p-6 md:p-10 flex flex-col justify-center">
-                    <h3 className="sm:text-3xl text-[20px] font-sans font-[700] sm:leading-[36px] leading-[24px] text-center sm:text-left px-6 sm:px-0 text-slate-900">{data.promoTitle}</h3>
-                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-[27px] text-[16px] text-slate-500 sm:block hidden">{data.promoText}</p>
+                    <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-6 sm:px-0 text-slate-900">{data.promoTitle}</h3>
+                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 sm:block hidden">{data.promoText}</p>
 
                     <div className="mt-6 md:mt-8 w-full sm:block hidden">
                         {/* Grid for badges on mobile, stack on desktop */}
@@ -114,8 +114,8 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                 {/* Right Side: Form */}
                 <div className="w-full md:w-[58%] p-6 md:p-14 bg-white">
-                    <h2 className="text-[20px] md:text-3xl font-bold text-slate-900 font-sans font-[700] sm:leading-[36px] leading-[20px]">{data.formTitle}</h2>
-                    <p className="mt-1 md:mt-2  font-sans font-[500] leading-[27px] text-[16px] text-slate-500">{data.formSubtitle}</p>
+                    <h2 className="text-[20px] sm:text-2xl md:text-3xl font-bold text-slate-900 font-sans font-[700] leading-[1.2]">{data.formTitle}</h2>
+                    <p className="mt-1 md:mt-2 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500">{data.formSubtitle}</p>
 
                     <form className="mt-6 md:mt-8 space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
                         {submitError ? (
