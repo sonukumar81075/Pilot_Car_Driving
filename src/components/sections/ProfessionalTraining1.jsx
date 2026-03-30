@@ -152,7 +152,7 @@ const Card = ({ item }) => {
             </div>
 
             {/* TEXT CONTENT */}
-            <div className="relative z-10 flex flex-col h-full">
+            <div className="relative z-10 flex flex-col h-full flex-grow">
                 <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[18px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
@@ -162,13 +162,13 @@ const Card = ({ item }) => {
                 </p>
 
                 {/* FEATURE LIST */}
-                <ul className="sm:mb-6 mb-4 lg:mb-0 space-y-1 sm:space-y-4">
+                <ul className="sm:mb-6 mb-4 lg:mb-0 space-y-1 sm:space-y-2">
                     {item.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-3">
                             <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm`}>
                                 <CheckCircle2 className={`h-3 w-3 sm:h-4 sm:w-4 ${item.accentColor}`} />
                             </div>
-                            <span className="sm:text-sm text-[12px] sm:font-bold font-medium text-slate-700 sm:uppercase tracking-tight">{feature}</span>
+                            <span className="sm:text-sm text-[12px] sm:font-bold font-medium text-slate-700   tracking-tight">{feature}</span>
                         </li>
                     ))}
                 </ul>

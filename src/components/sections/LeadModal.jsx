@@ -73,8 +73,8 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                 </button>
 
                 {/* Left Side: Branding */}
-                <div className="w-full md:w-[42%] bg-[#f8fafc] p-6 md:p-10 flex flex-col justify-center">
-                    <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-6 sm:px-0 text-slate-900">{data.promoTitle}</h3>
+                <div className="w-full md:w-[42%] sm:bg-[#f8fafc] bg-white sm:p-6 p-2 md:p-10 flex flex-col justify-center">
+                    <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-6 sm:px-0 text-slate-900 sm:block hidden">{data.promoTitle}</h3>
                     <p className="mt-2 md:mt-4 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 sm:block hidden">{data.promoText}</p>
 
                     <div className="mt-6 md:mt-8 w-full sm:block hidden">
@@ -114,8 +114,8 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                 {/* Right Side: Form */}
                 <div className="w-full md:w-[58%] p-6 md:p-14 bg-white">
-                    <h2 className="text-[20px] sm:text-2xl md:text-3xl font-bold text-slate-900 font-sans font-[700] leading-[1.2]">{data.formTitle}</h2>
-                    <p className="mt-1 md:mt-2 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500">{data.formSubtitle}</p>
+                    <h2 className="text-[20px] sm:text-2xl md:text-3xl font-bold text-slate-900 font-sans font-[700] leading-[1.2] ">{data.formTitle}</h2>
+                    <p className="mt-1 md:mt-2 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 sm:block hidden">{data.formSubtitle}</p>
 
                     <form className="mt-6 md:mt-8 space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
                         {submitError ? (
