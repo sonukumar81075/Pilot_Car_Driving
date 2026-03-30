@@ -152,11 +152,11 @@ const Card = ({ item }) => {
 
             {/* TEXT CONTENT */}
             <div className="relative z-10 flex flex-col h-full">
-                <h3 className="sm:mb-4 mb-2 text-[26px] font-extrabold text-slate-900 leading-tight">
+                <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[22px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
 
-                <p className="sm:mb-6 mb-4 text-[15px] text-slate-600 leading-relaxed font-medium">
+                <p className="sm:mb-6 mb-4 sm:text-[15px] text-[14px] text-slate-600 leading-relaxed font-medium">
                     {item.description}
                 </p>
 

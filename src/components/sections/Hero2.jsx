@@ -36,20 +36,20 @@ export function Hero2({ data }) {
                             <div className="md:hidden flex flex-col items-start">
 
                                 {/* 🔵 Badge */}
-                                <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-[14px] font-semibold tracking-wide mb-4">
+                                <div className="inline-flex items-center justify-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-[12px] font-semibold tracking-wide mb-4">
                                     <span className="w-4 h-4 bg-blue-600 rounded-full animate-pulse"></span>
                                     INDIA’S FIRST
                                 </div>
 
                                 {/* 🔥 Main Heading (ONE LINE) */}
-                                <h1 className="text-[30px] sm:text-4xl font-black tracking-tight leading-[1.2] flex flex-wrap justify-center">
+                                <h1 className="overflow-visible pb-2 text-[30px] sm:text-4xl font-black tracking-tight leading-[1.28] flex flex-wrap justify-center">
 
-                                    <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent italic mr-2">
-                                        Smart
+                                    <span className="inline-block bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent italic mr-2 px-[2px] -mx-[2px]">
+                                        Driving
                                     </span>
 
                                     <span className="text-slate-900 mr-2">
-                                        Driving
+                                        Learning
                                     </span>
 
                                     <span className="relative text-slate-900">
@@ -80,7 +80,7 @@ export function Hero2({ data }) {
                             </p>
 
                             <p className="mx-auto mt-4 max-w-md text-center text-[15px] sm:text-[16px] font-medium leading-relaxed text-blue-900 md:hidden">
-                                Modern driving lessons with certified instructors and easy booking.
+                                Book doorstep driving lessons with verified instructors, flexible time slots, and structured learning made easy.
                             </p>
                         </Reveal>
 

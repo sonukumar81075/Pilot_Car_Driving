@@ -30,7 +30,7 @@ export function SectionHeading({ eyebrow, title, description, align = "center" }
       </h2>
 
       {description && (
-        <div className={`mt-4 flex sm:items-center items-start gap-3 ${isRight ? "flex-row-reverse" : "flex-row"}`}>
+        <div className={`sm:mt-4 mt-1 flex sm:items-center items-start gap-3 ${isRight ? "flex-row-reverse" : "flex-row"}`}>
           <div className="w-[3px] h-5 bg-blue-600 rounded-full flex-shrink-0 mt-1 sm:mt-0" />
           <p className="text-slate-500 text-sm sm:text-base md:text-lg font-medium tracking-tight">
             {description}
