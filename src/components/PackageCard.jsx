@@ -44,7 +44,7 @@ export function PackageCard({ pkg }) {
 
       ].join(" ")}
     >
-      <div className="relative h-28 w-full overflow-hidden bg-slate-50 sm:h-28 md:aspect-[16/10] md:h-auto">
+      <div className="relative h-44 w-full overflow-hidden bg-slate-50 sm:h-28 md:aspect-[16/10] md:h-auto">
         {img ? (
           <img
             src={img}
