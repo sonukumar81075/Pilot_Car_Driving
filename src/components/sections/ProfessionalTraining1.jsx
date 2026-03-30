@@ -91,7 +91,8 @@ const ProfessionalTraining1 = () => {
                         [&_.swiper-pagination]:gap-2
 
                         [&_.swiper-pagination-bullet]:!w-8
-                        [&_.swiper-pagination-bullet]:!h-[4px]
+                        sm:[&_.swiper-pagination-bullet]:!h-[4px]
+                        [&_.swiper-pagination-bullet]:!h-[3px]
                         [&_.swiper-pagination-bullet]:!rounded-full 
                         [&_.swiper-pagination-bullet]:!bg-blue-900/50
                         [&_.swiper-pagination-bullet]:!opacity-100
@@ -152,11 +153,11 @@ const Card = ({ item }) => {
 
             {/* TEXT CONTENT */}
             <div className="relative z-10 flex flex-col h-full">
-                <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[22px] font-extrabold text-slate-900 leading-tight">
+                <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[18px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
 
-                <p className="sm:mb-6 mb-4 sm:text-[15px] text-[14px] text-slate-600 leading-relaxed font-medium">
+                <p className="sm:mb-6 mb-4 sm:text-[15px] text-[13px] text-slate-600 leading-relaxed font-medium">
                     {item.description}
                 </p>
 

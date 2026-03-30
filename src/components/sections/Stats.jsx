@@ -50,8 +50,8 @@ export function Stats({ stats }) {
   // We use the first 3 to match the screenshot exactly
   const displayStats = stats.slice(0, 3);
 
-  return (
-    <section id="stats" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend">
+  return ( 
+    <section id="stats" className="md:pt-32 pt-10 bg-[#FFFFFF] font-lexend sm:pb-0 pb-10">
       <Container className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <div className="md:pb-16 pb-12">
           <SectionHeading
