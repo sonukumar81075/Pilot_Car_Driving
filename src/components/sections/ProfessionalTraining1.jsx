@@ -135,7 +135,7 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 p-8 xl:p-10 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden    mb-6`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 sm:py-8 py-6 sm:px-8 px-6 xl:py-10 xl:px-10 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden    mb-6`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
@@ -167,7 +167,7 @@ const Card = ({ item }) => {
                             <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm`}>
                                 <CheckCircle2 className={`h-3 w-3 sm:h-4 sm:w-4 ${item.accentColor}`} />
                             </div>
-                            <span className="sm:text-sm text-[12px] font-bold text-slate-700 sm:uppercase tracking-tight">{feature}</span>
+                            <span className="sm:text-sm text-[12px] sm:font-bold font-medium text-slate-700 sm:uppercase tracking-tight">{feature}</span>
                         </li>
                     ))}
                 </ul>
@@ -176,7 +176,7 @@ const Card = ({ item }) => {
                 <div className="mt-auto">
                     <Link
                         href={`/packages?type=${item.drivingType}`}
-                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   sm:py-4.5 py-3 sm:text-[12px] text-[10px] xl:text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
+                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   sm:py-4.5 py-3 text-[12px] xl:text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
                     >
                         {item.linkText}
                     </Link>
