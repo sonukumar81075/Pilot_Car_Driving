@@ -72,7 +72,7 @@ export function Stats({ stats }) {
               className="group relative"
             >
               {/* Unique UI Card */}
-              <div className="relative z-10 h-full sm:p-10 p-0 px-8 py-2 bg-white sm:rounded-[2.5rem] rounded-2xl border sm:border-slate-100 border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-500   group-hover:-translate-y-2">
+              <div className="relative z-10 h-full p-5 sm:p-10 bg-white sm:rounded-[2.5rem] rounded-2xl border sm:border-slate-100 border-slate-100 shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-500 group-hover:-translate-y-2">
 
                 {/* Top Corner Icon/Accent */}
                 <div className="absolute top-6 right-8 opacity-10 group-hover:opacity-100 transition-opacity duration-500">

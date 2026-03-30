@@ -152,7 +152,7 @@ const Card = ({ item }) => {
             </div>
 
             {/* TEXT CONTENT */}
-            <div className="relative z-10 flex flex-col h-full flex-grow">
+            <div className="relative z-10 flex flex-col">
                 <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[18px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
@@ -162,7 +162,7 @@ const Card = ({ item }) => {
                 </p>
 
                 {/* FEATURE LIST */}
-                <ul className="sm:mb-6 mb-4 lg:mb-0 space-y-1 sm:space-y-2">
+                <ul className="sm:mb-4 mb-3 space-y-1 sm:space-y-2">
                     {item.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-3">
                             <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm`}>
@@ -174,7 +174,7 @@ const Card = ({ item }) => {
                 </ul>
 
                 {/* CTA BUTTON */}
-                <div className="mt-auto">
+                <div className="mt-1 sm:mt-2">
                     <Link
                         href={`/packages?type=${item.drivingType}`}
                         className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   sm:py-4.5 py-3 text-[12px] xl:text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}

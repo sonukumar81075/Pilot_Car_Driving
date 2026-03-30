@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { X, ChevronDown, Loader2 } from 'lucide-react';
@@ -19,8 +19,34 @@ const PlayStoreIcon = () => (
     </svg>
 );
 
+const ZONES_API_URL = "https://devapi.pilotadmin.site/zones/zones-list";
+
+function extractZones(payload) {
+    const source = Array.isArray(payload?.data)
+        ? payload.data
+        : Array.isArray(payload?.zones)
+            ? payload.zones
+            : Array.isArray(payload)
+                ? payload
+                : [];
+
+    const mapped = source
+        .map((item) => {
+            if (typeof item === "string") return item.trim();
+            if (item && typeof item === "object") {
+                return String(item.zone_name || item.zoneName || item.name || item.zone || "").trim();
+            }
+            return "";
+        })
+        .filter(Boolean);
+
+    return Array.from(new Set(mapped));
+}
+
 const LeadModal = ({ data, isOpen, onClose }) => {
     const [submitError, setSubmitError] = useState("");
+    const [zones, setZones] = useState(Array.isArray(data?.zones) ? data.zones : []);
+    const [zonesLoading, setZonesLoading] = useState(false);
 
     const validationSchema = Yup.object({
         fullName: Yup.string().min(2, 'Too short').required('Required'),
@@ -56,6 +82,39 @@ const LeadModal = ({ data, isOpen, onClose }) => {
         },
     });
 
+    useEffect(() => {
+        if (!isOpen) return;
+        let cancelled = false;
+        const controller = new AbortController();
+
+        async function loadZones() {
+            setZonesLoading(true);
+            try {
+                const res = await fetch(ZONES_API_URL, {
+                    method: "GET",
+                    signal: controller.signal,
+                    cache: "no-store",
+                });
+                const json = await res.json().catch(() => null);
+                const nextZones = extractZones(json);
+
+                if (!cancelled && nextZones.length > 0) {
+                    setZones(nextZones);
+                }
+            } catch {
+                // Keep fallback zones from props if API fails.
+            } finally {
+                if (!cancelled) setZonesLoading(false);
+            }
+        }
+
+        loadZones();
+        return () => {
+            cancelled = true;
+            controller.abort();
+        };
+    }, [isOpen]);
+
     if (!isOpen) return null;
 
     return (
@@ -72,14 +131,18 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                     <X size={20} />
                 </button>
 
-                {/* Left Side: Branding */}
-                <div className="w-full md:w-[42%] sm:bg-[#f8fafc] bg-white sm:p-6 p-2 md:p-10 flex flex-col justify-center">
-                    <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-6 sm:px-0 text-slate-900 sm:block hidden">{data.promoTitle}</h3>
-                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 sm:block hidden">{data.promoText}</p>
+                {/* Left Side: Branding (hidden on mobile) */}
+                <div className="hidden md:flex w-full md:w-[42%] bg-[#f8fafc] p-6 md:p-10 flex-col justify-center">
+                    <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-0 text-slate-900">
+                        {data.promoTitle}
+                    </h3>
+                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 text-center sm:text-left">
+                        {data.promoText}
+                    </p>
 
-                    <div className="mt-6 md:mt-8 w-full sm:block hidden">
+                    <div className="mt-6 md:mt-8 w-full block">
                         {/* Grid for badges on mobile, stack on desktop */}
-                        <div className="grid grid-cols-2 md:grid-cols-1 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-1 gap-3">
                             {data.appBadges.map((badge) => (
                                 <Link
                                     key={badge.label}
@@ -99,10 +162,10 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                         />
                                     </div>
                                     <div className="flex flex-col items-start leading-tight">
-                                        <span className="text-[8px] md:text-[10px] font-medium uppercase opacity-80">
+                                        <span className="text-[9px] md:text-[10px] font-medium uppercase opacity-80">
                                             {badge.icon === 'apple' ? 'App Store' : 'Google Play'}
                                         </span>
-                                        <span className="font-bold text-[12px] md:text-[16px] whitespace-nowrap">
+                                        <span className="font-bold text-[13px] md:text-[16px] whitespace-nowrap">
                                             {badge.icon === 'apple' ? 'Download' : 'Get it on'}
                                         </span>
                                     </div>
@@ -113,9 +176,11 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                 </div>
 
                 {/* Right Side: Form */}
-                <div className="w-full md:w-[58%] p-6 md:p-14 bg-white">
+                <div className="w-full md:w-[58%] p-4 sm:p-6 md:p-14 bg-white">
                     <h2 className="text-[20px] sm:text-2xl md:text-3xl font-bold text-slate-900 font-sans font-[700] leading-[1.2] ">{data.formTitle}</h2>
-                    <p className="mt-1 md:mt-2 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 sm:block hidden">{data.formSubtitle}</p>
+                    <p className="mt-1 md:mt-2 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500">
+                        {data.formSubtitle}
+                    </p>
 
                     <form className="mt-6 md:mt-8 space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
                         {submitError ? (
@@ -149,10 +214,24 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 <select
                                     name="zone"
                                     {...formik.getFieldProps('zone')}
+                                    disabled={zonesLoading}
                                     className={`w-full appearance-none rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-slate-900 ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                                 >
-                                    <option disabled value="Choose a zone">Choose a zone</option>
-                                    {data.zones.map(z => <option key={z} value={z}>{z}</option>)}
+                                    {zonesLoading ? (
+                                        <option value="Choose a zone">Loading zones...</option>
+                                    ) : (
+                                        <option disabled value="Choose a zone">Choose a zone</option>
+                                    )}
+                                    {!zonesLoading && zones.length > 0
+                                        ? zones.map((z) => (
+                                            <option key={z} value={z}>
+                                                {z}
+                                            </option>
+                                        ))
+                                        : null}
+                                    {!zonesLoading && zones.length === 0 ? (
+                                        <option value="Choose a zone" disabled>No zones available</option>
+                                    ) : null}
                                 </select>
                                 <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
                             </div>
