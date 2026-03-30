@@ -6,11 +6,18 @@ import { Footer } from "@/components/sections/Footer";
 
 export function FooterShell({ footer }) {
   const pathname = usePathname();
+  const isPackageDetailsPage = /^\/packages\/[^/]+$/.test(pathname || "");
 
   return (
     <>
       {pathname === "/" && <AppDownloadSection data={footer.cta} />}
-      <Footer data={footer} />
+      {isPackageDetailsPage ? (
+        <div className="hidden md:block">
+          <Footer data={footer} />
+        </div>
+      ) : (
+        <Footer data={footer} />
+      )}
     </>
   );
 }

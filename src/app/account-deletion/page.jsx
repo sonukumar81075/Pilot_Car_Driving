@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useState } from "react";
 import { MdCheckCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
@@ -14,6 +15,8 @@ const AccountDeletionSchema = Yup.object().shape({
 });
 
 export default function AccountDeletionPage() {
+    const [submitStatus, setSubmitStatus] = useState({ type: "", message: "" });
+
     return (
         <main className="min-h-screen pt-32 md:pt-40 pb-6 bg-[#FFFFFF] font-lexend">
             <Container>
@@ -45,10 +48,61 @@ export default function AccountDeletionPage() {
                         <Formik
                             initialValues={{ accountType: "", phone: "", email: "", reason: "", confirmation: false }}
                             validationSchema={AccountDeletionSchema}
-                            onSubmit={(values) => console.log(values)}
+                            onSubmit={async (values, { setSubmitting, resetForm }) => {
+                                setSubmitStatus({ type: "", message: "" });
+                                try {
+                                    const payload = {
+                                        accountType: values.accountType,
+                                        feedback: values.reason,
+                                        email: values.email || "",
+                                        contactInfo: values.phone,
+                                    };
+
+                                    const res = await fetch("/api/account-deletion", {
+                                        method: "POST",
+                                        headers: { "content-type": "application/json" },
+                                        body: JSON.stringify(payload),
+                                    });
+
+                                    const json = await res.json().catch(() => null);
+                                    if (!res.ok || !json?.ok) {
+                                        setSubmitStatus({
+                                            type: "error",
+                                            message: json?.message || "Unable to submit deletion request.",
+                                        });
+                                        return;
+                                    }
+
+                                    setSubmitStatus({
+                                        type: "success",
+                                        message: json?.message || "Deletion request submitted successfully.",
+                                    });
+                                    resetForm();
+                                } catch {
+                                    setSubmitStatus({
+                                        type: "error",
+                                        message: "Network error. Please try again.",
+                                    });
+                                } finally {
+                                    setSubmitting(false);
+                                }
+                            }}
                         >
-                            {({ values, setFieldValue }) => (
+                            {({ values, setFieldValue, isSubmitting }) => (
                                 <Form className="space-y-8">
+                                    {submitStatus.type ? (
+                                        <div
+                                            className={[
+                                                "rounded-xl px-4 py-3 text-sm font-semibold border",
+                                                submitStatus.type === "success"
+                                                    ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                                                    : "border-rose-200 bg-rose-50 text-rose-700",
+                                            ].join(" ")}
+                                        >
+                                            {submitStatus.message}
+                                        </div>
+                                    ) : null}
+
                                     {/* Account Type Selection */}
                                     <div className="space-y-4">
                                         <label className="text-sm font-bold text-slate-800">
@@ -123,9 +177,10 @@ export default function AccountDeletionPage() {
 
                                     <button
                                         type="submit"
+                                        disabled={isSubmitting}
                                         className="w-full py-4.5 bg-[#2563eb]  text-white rounded-full font-bold text-lg shadow-[0_12px_24px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                                     >
-                                        Submit Deletion Request
+                                        {isSubmitting ? "Submitting..." : "Submit Deletion Request"}
                                     </button>
                                 </Form>
                             )}

@@ -178,7 +178,7 @@ export function HowItWorks({ steps }) {
                       </p>
                     </div>
 
-                    <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
+                    <div className="relative mt-auto sm:aspect-[1/1.2] aspect-[1.1/1.1] rounded-2xl sm:bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
                       <div className="relative sm:w-[85%] sm:h-[90%] w-[90%] h-[90%]">
                         <Image src={s.image} alt="" fill className="object-contain" />
                       </div>

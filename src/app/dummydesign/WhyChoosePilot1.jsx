@@ -41,22 +41,28 @@ export function WhyChoosePilot1() {
 
         </div>
         {/* ✅ MOBILE SIMPLE GRID LIST */}
-        <div className="block md:hidden grid grid-cols-2 gap-x-4 gap-y-2">
+        <div className="block md:hidden grid grid-cols-2 gap-x-2 gap-y-2 px-4 ">
           {features.map((feature, idx) => (
-            <div key={idx} className="flex items-start gap-2">
-
-              {/* ✅ CHECK ICON */}
-              <span className="text-blue-600 text-[12px] mt-[2px] flex items-center justify-center w-6 h-6 rounded-full bg-slate-100">✓</span>
-
-              <div className="flex flex-col text-left">
-                <h3 className="text-[13px] font-semibold text-slate-900 leading-tight">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-500 text-[12px] font-medium leading-snug">
-                  {feature.description}
-                </p>
+            <div key={idx} className="flex items-center gap-2">
+              {/* ✅ REFINED CHECK ICON */}
+              <div className="flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-[#f0f7ff]">
+                <svg
+                  className="w-3 h-3 text-blue-500"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="3.5"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
               </div>
 
+              {/* ✅ TEXT CONTENT - FORCED TO ONE LINE */}
+              <div className="flex flex-col text-left min-w-0">
+                <h3 className="text-[13px] font-medium text-[#475569] leading-none tracking-tight whitespace-nowrap">
+                  {feature.title}
+                </h3>
+              </div>
             </div>
           ))}
         </div>
