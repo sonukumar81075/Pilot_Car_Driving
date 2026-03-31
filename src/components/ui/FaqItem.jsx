@@ -19,9 +19,9 @@ export function FaqItem({ item, isOpen, onClick }) {
                 <motion.span
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center justify-center h-9 sm:h-10 w-9 sm:w-10 sm:min-w-[40px] min-w-[30px] rounded-full border border-blue-800 text-blue-700 bg-white"
+                    className="flex items-center justify-center h-6 sm:h-10 w-6 sm:w-10 sm:min-w-[40px] min-w-[20px] rounded-full border border-blue-800 text-blue-700 bg-white"
                 >
-                    <FiChevronDown size={20} />
+                    <FiChevronDown   className="sm:size-6 size-4" />
                 </motion.span>
             </button>
 

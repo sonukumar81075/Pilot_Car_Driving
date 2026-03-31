@@ -82,7 +82,7 @@ export function FaqAccordion({ items }) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="px-6 py-2.5 rounded-full   text-blue-900 border border-blue-900  font-semibold hover:bg-[#2D5BFF] transition"
+            className="px-6 sm:py-2.5 py-1.5 sm:text-base text-sm rounded-full   text-blue-900 border border-blue-900  font-semibold hover:bg-[#2D5BFF] transition"
           >
             {showAll ? "Show Less" : "Load More"}
           </button>
