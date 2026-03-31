@@ -136,7 +136,7 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 sm:py-8 py-6 sm:px-8 px-6 xl:py-10 xl:px-10 shadow-sm transition-all duration-500 hover:shadow-xl hover:-translate-y-2 overflow-hidden    mb-6`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 sm:py-8 py-6 sm:px-8 px-6 xl:py-10 xl:px-10 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-hidden mb-6`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
@@ -147,12 +147,12 @@ const Card = ({ item }) => {
                     src={item.image}
                     alt={item.title}
                     fill
-                    className="object-contain drop-shadow-2xl transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-3"
+                    className="object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-110 group-hover:-rotate-3"
                 />
             </div>
 
             {/* TEXT CONTENT */}
-            <div className="relative z-10 flex flex-col">
+            <div className="relative z-10 flex flex-col h-full  ">
                 <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[18px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
@@ -164,8 +164,8 @@ const Card = ({ item }) => {
                 {/* FEATURE LIST */}
                 <ul className="sm:mb-4 mb-3 space-y-1 sm:space-y-2">
                     {item.features.map((feature, index) => (
-                        <li key={index} className="flex items-center gap-3">
-                            <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm`}>
+                        <li key={index} className="flex items-center gap-3 transition-transform duration-500 ease-out group-hover:translate-x-0.5">
+                            <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm transition-all duration-500 ease-out group-hover:shadow-md`}>
                                 <CheckCircle2 className={`h-3 w-3 sm:h-4 sm:w-4 ${item.accentColor}`} />
                             </div>
                             <span className="sm:text-sm text-[12px] sm:font-bold font-medium text-slate-700   tracking-tight">{feature}</span>
@@ -174,10 +174,10 @@ const Card = ({ item }) => {
                 </ul>
 
                 {/* CTA BUTTON */}
-                <div className="mt-1 sm:mt-2">
+                <div className=" mt-auto">
                     <Link
                         href={`/packages?type=${item.drivingType}`}
-                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow   sm:py-4.5 py-3 text-[12px] xl:text-[13px] font-black  transition-all hover:brightness-110 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
+                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow sm:py-4.5 py-3 text-[12px] xl:text-[13px] font-black transition-all duration-500 ease-out hover:brightness-110 hover:shadow-xl hover:-translate-y-0.5 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
                     >
                         {item.linkText}
                     </Link>

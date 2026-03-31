@@ -8,9 +8,9 @@ export function AppDownloadSection({ data }) {
   if (!data) return null;
 
   return (
-    <section className="pb-3 pt-10 font-lexend lg:px-0 md:pt-24 md:pb-4 bg-gradient-to-b from-[var(--brand-muted)] to-white">
+    <section className="pb-3 pt-8 sm:pt-10 font-lexend lg:px-0 md:pt-24 md:pb-4 bg-gradient-to-b from-[var(--brand-muted)] to-white">
       <Container className="text-center ">
-        <div className="relative flex w-full justify-center pb-6">
+        <div className="relative flex w-full justify-center pb-4 sm:pb-6">
           <Image
             src="/images/mobile_image.png"
             alt="driving app"
@@ -30,7 +30,7 @@ export function AppDownloadSection({ data }) {
           />
         </div> 
 
-        <div className="mt-8 pb-16 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 pb-14 sm:pb-16 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           {data.appBadges?.map((b) => (
             <Link key={b.label} href={b.href} target="_blank">
               <Image
@@ -42,7 +42,7 @@ export function AppDownloadSection({ data }) {
                 alt={b.label}
                 width={220}
                 height={60}
-                className="h-auto w-[160px] transition-transform duration-300 hover:scale-105 sm:w-[200px] md:w-[220px]"
+                className="h-auto w-[140px] sm:w-[200px] md:w-[220px] transition-transform duration-300 hover:scale-105"
               />
             </Link>
           ))}

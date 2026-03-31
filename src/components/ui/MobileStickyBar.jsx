@@ -46,7 +46,7 @@ export default function MobileStickyBar() {
     return (
         <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden">
             {/* Main Nav Container */}
-            <div className="bg-white border-t border-slate-100 px-2 pt-3 pb-8 flex items-center justify-around rounded-t-[30px] shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
+            <div className="bg-white border-t border-slate-100 px-2 pt-2.5 pb-7 flex items-center justify-around rounded-t-[26px] shadow-[0_-10px_30px_rgba(0,0,0,0.08)]">
 
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
@@ -57,7 +57,7 @@ export default function MobileStickyBar() {
                             href={item.href}
                             target={item.isExternal ? "_blank" : "_self"}
                             onClick={(e) => handleHomeClick(e, item.href, item.isHome)}
-                            className="flex flex-col items-center justify-center gap-1.5 min-w-[75px] transition-all active:scale-90"
+                            className="flex flex-col items-center justify-center gap-1.5 min-w-[68px] transition-all active:scale-90"
                         >
                             {/* Icon Styling */}
                             <div className={`${isActive ? "text-[#1e3a8a]" : "text-[#94a3b8] opacity-80"}`}>
@@ -65,7 +65,7 @@ export default function MobileStickyBar() {
                             </div>
 
                             {/* Label Styling - matching your screenshot's faded gray vs dark blue */}
-                            <span className={`text-[9px] font-black tracking-widest ${isActive ? "text-[#1e3a8a]" : "text-[#cbd5e1]"
+                            <span className={`text-[10px] font-black tracking-wide ${isActive ? "text-[#1e3a8a]" : "text-[#cbd5e1]"
                                 }`}>
                                 {item.label}
                             </span>

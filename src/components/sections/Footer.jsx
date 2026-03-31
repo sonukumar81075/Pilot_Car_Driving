@@ -12,21 +12,21 @@ export function Footer({ data }) {
 
       <Container className="relative z-10 pb-14 pt-10 md:pb-16 md:pt-14">
         {/* Card style columns like reference */}
-        <div className="grid  sm:gap-5 gap-2 pb-8 grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        <div className="grid gap-3 sm:gap-5 pb-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
           {data.columns.map((col) => (
             <div
               key={col.title}
-              className="rounded-2xl p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-sm sm:p-6"
+              className="rounded-2xl p-4 sm:p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur-sm"
             >
-              <h3 className="text-[24px] font-semibold text-white sm:text-[26px]">{col.title}</h3>
-              <div className="mb-5 mt-2 h-[2px] w-24 rounded-full bg-gradient-to-r from-[var(--brand-light)] to-transparent" />
+              <h3 className="text-[20px] sm:text-[26px] font-semibold text-white">{col.title}</h3>
+              <div className="mb-4 mt-2 h-[2px] w-20 sm:w-24 rounded-full bg-gradient-to-r from-[var(--brand-light)] to-transparent" />
 
               <ul className="space-y-2.5">
                 {col.links.map((l) => {
                   const isMailto = l.href.startsWith("mailto:");
                   const className = isMailto
-                    ? "text-[15px] font-[500] text-[var(--brand-light)] underline decoration-dotted underline-offset-4 transition-colors hover:text-white"
-                    : "text-[15px] font-[500] text-slate-200/90 transition-colors hover:text-[var(--brand-light)]";
+                    ? "text-[14px] sm:text-[15px] font-[500] text-[var(--brand-light)] underline decoration-dotted underline-offset-4 transition-colors hover:text-white"
+                    : "text-[14px] sm:text-[15px] font-[500] text-slate-200/90 transition-colors hover:text-[var(--brand-light)]";
 
                   return (
                     <li key={l.label}>

@@ -11,7 +11,7 @@ export function FaqItem({ item, isOpen, onClick }) {
                 onClick={onClick}
                 className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
             >
-                <span className="text-[15px] sm:text-[17px] font-[700] text-[#1c1c1c] leading-[28px] flex-1">
+                <span className="text-[14px] sm:text-[17px] font-[700] text-[#1c1c1c] leading-[22px] sm:leading-[28px] flex-1">
                     {item.question}
                 </span>
 
@@ -37,7 +37,7 @@ export function FaqItem({ item, isOpen, onClick }) {
                     >
                         <div className="border-t border-slate-200 mx-6"></div>
 
-                        <p className="px-6 pb-6 sm:pt-6 pt-3 text-[15px] sm:text-[17px] font-[500] text-[#4c4c4c] leading-[26px]">
+                        <p className="px-5 sm:px-6 pb-5 sm:pb-6 sm:pt-6 pt-3 text-[14px] sm:text-[17px] font-[500] text-[#4c4c4c] leading-[22px] sm:leading-[26px]">
                             {item.answer}
                         </p>
                     </motion.div>

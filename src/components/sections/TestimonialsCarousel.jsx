@@ -18,7 +18,7 @@ const getVariantClasses = (index) => {
 
 export function TestimonialsCarousel({ testimonials }) {
   return (
-    <div className="sm:py-12 py-3   font-sans">
+    <div className="py-4 sm:py-12 font-sans">
       <Swiper
         modules={[Autoplay, Pagination]}
         spaceBetween={30}
@@ -33,18 +33,18 @@ export function TestimonialsCarousel({ testimonials }) {
           1024: { slidesPerView: 3 },
         }}
         // "items-stretch" forces all slides to the same height
-        className="pb-16 px-4 max-w-7xl mx-auto !flex items-stretch"
+        className="pb-12 sm:pb-16 px-3 sm:px-4 max-w-7xl mx-auto !flex items-stretch"
       >
         {testimonials.map((item, i) => {
           const variant = getVariantClasses(i);
           return (
             // h-full here ensures the slide fills the swiper-wrapper height
-            <SwiperSlide key={i} className="pt-12 pb-8 !h-auto">
+            <SwiperSlide key={i} className="pt-10 sm:pt-12 pb-6 sm:pb-8 !h-auto">
               <div className="relative h-full flex flex-col">
                 {/* Floating Avatar Pin */}
-                <div className="absolute -top-12 right-10 z-10">
-                  <div className={`relative w-20 h-20 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center bg-gray-100 ${variant.text} border border-blue-900`}>
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-12 h-12">
+                <div className="absolute -top-10 sm:-top-12 right-7 sm:right-10 z-10">
+                  <div className={`relative w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 border-white shadow-lg overflow-hidden flex items-center justify-center bg-gray-100 ${variant.text} border border-blue-900`}>
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 sm:w-12 sm:h-12">
                       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
                     </svg>
                     <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 ${variant.bg}`} />
@@ -52,7 +52,7 @@ export function TestimonialsCarousel({ testimonials }) {
                 </div>
 
                 {/* Main Card - flex-1 makes this grow to fill the container */}
-                <div className={`bg-white rounded-[2rem] p-8 pt-10 shadow-sm border-b-[12px] border-r-[12px] ${variant.border} relative overflow-hidden flex-1 flex flex-col transition-all duration-300 hover:shadow-xl`}>
+                <div className={`bg-white rounded-[1.5rem] sm:rounded-[2rem] p-5 sm:p-8 pt-8 sm:pt-10 shadow-sm border-b-[10px] sm:border-b-[12px] border-r-[10px] sm:border-r-[12px] ${variant.border} relative overflow-hidden flex-1 flex flex-col transition-all duration-300 hover:shadow-xl`}>
 
                   {/* Header: Quote Icon & Name */}
                   <div className="flex gap-4 items-start mb-4">
@@ -62,7 +62,7 @@ export function TestimonialsCarousel({ testimonials }) {
                       </svg>
                     </div>
                     <div>
-                      <h3 className={`text-xl font-black ${variant.text} leading-tight`}>
+                      <h3 className={`text-lg sm:text-xl font-black ${variant.text} leading-tight`}>
                         {item.name}
                       </h3>
                    
@@ -71,7 +71,7 @@ export function TestimonialsCarousel({ testimonials }) {
 
                   {/* Testimonial Text - flex-grow ensures this takes up space so footer is pushed down */}
                   <div className="mb-4 flex-grow">
-                    <p className="text-gray-600 text-[15px] leading-relaxed italic">
+                    <p className="text-gray-600 text-[14px] sm:text-[15px] leading-relaxed italic">
                       {item.quote}
                     </p>
                   </div>
@@ -80,10 +80,10 @@ export function TestimonialsCarousel({ testimonials }) {
                   <div className="flex items-center  justify-between gap-3 mt-auto">
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, index) => (
-                        <span key={index} className="text-blue-900 text-xl">★</span>
+                        <span key={index} className="text-blue-900 text-lg sm:text-xl">★</span>
                       ))}
                     </div>
-                    <span className="bg-gray-100 px-3 py-1 rounded-full text-gray-600 text-sm font-bold">
+                    <span className="bg-gray-100 px-2.5 sm:px-3 py-1 rounded-full text-gray-600 text-xs sm:text-sm font-bold">
                       {item.rating || "4.5"}
                     </span>
                   </div>
