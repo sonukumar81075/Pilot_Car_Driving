@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { X, ChevronDown, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Icon components remain the same as yours...
 const AppleIcon = () => (
@@ -142,6 +143,27 @@ const LeadModal = ({ data, isOpen, onClose }) => {
 
                     <div className="mt-6 md:mt-8 w-full block">
                         {/* Grid for badges on mobile, stack on desktop */}
+
+
+                        <div className="   flex   items-center justify-center gap-3 sm:gap-3">
+                            {data.appBadges?.map((b) => (
+                                <Link key={b.label} href={b.href} target="_blank">
+                                    <Image
+                                        src={
+                                            b.icon === "google"
+                                                ? "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
+                                                : "/images/XFHvXmLh07GYeJbajNiemQLI9MY.avif"
+                                        }
+                                        alt={b.label}
+                                        width={220}
+                                        height={60}
+                                        className="h-auto w-[140px] sm:w-[200px] md:w-[220px] transition-transform duration-300 hover:scale-105"
+                                    />
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/*                         
                         <div className="grid grid-cols-1 md:grid-cols-1 gap-3">
                             {data.appBadges.map((badge) => (
                                 <Link
@@ -172,6 +194,11 @@ const LeadModal = ({ data, isOpen, onClose }) => {
                                 </Link>
                             ))}
                         </div>
+ */}
+
+
+
+
                     </div>
                 </div>
 
