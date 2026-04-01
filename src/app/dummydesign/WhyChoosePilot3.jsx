@@ -73,7 +73,7 @@ export function WhyChoosePilot3() {
               key={idx}
               className="bg-white rounded-2xl   p-4  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
             > 
-              <div className="w-full h-24 rounded-2xl   bg-[#F1F5F9] flex items-center justify-center p-3 mb-3 overflow-hidden">
+              <div className="w-full h-26 rounded-2xl   bg-[#F1F5F9] flex items-center justify-center p-3 mb-3 overflow-hidden">
                 <img
                   src={feature.image}
                   alt={feature.title}
