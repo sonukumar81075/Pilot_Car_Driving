@@ -90,13 +90,13 @@ export function WhyChoosePilot3() {
           ))}
         </div> */}
 
- 
+
         <div className="flex md:hidden  grid grid-cols-2 gap-3  ">
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-tl-[17%] rounded-br-[17%] p-2  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
-            > 
+              className="bg-white rounded-tl-[17%] rounded-br-[17%] p-4  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
+            >
               <div className="w-full h-24 rounded-tl-[17%] rounded-br-[17%] bg-[#F1F5F9] flex items-center justify-center p-3 mb-3 overflow-hidden">
                 <img
                   src={feature.image}
@@ -104,9 +104,9 @@ export function WhyChoosePilot3() {
                   className="max-w-full max-h-full object-contain rounded-tl-[17%] rounded-br-[17%]"
                 />
               </div>
- 
+
               <div className="text-center pb-2">
-                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-4 font-lexend">
+                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-2 font-lexend">
                   {feature.title}
                 </h3>
               </div>
