@@ -15,6 +15,23 @@ function getFinalPrice(pkg) {
   return finalPrice > 0 ? finalPrice : base;
 }
 
+function getPackageFeatures(pkg) {
+  const features = [];
+  if (pkg?.duration && pkg.duration > 0) {
+    features.push(`${pkg.duration} Hours Practical Driving`);
+  }
+  if (pkg?.trialSessions && pkg?.trialSessionsCount) {
+    features.push(`Trial sessions: ${pkg.trialSessionsCount}`);
+  }
+  if (pkg?.allowLicenseAddOns) {
+    features.push("License add-on available");
+  }
+  if (pkg?.secondOnly) {
+    features.push("Second training available");
+  }
+  return features;
+}
+
 export function PackageDetailsClient({ packageOptions, initialPackageId, addons, packageTypeLabel }) {
   const [selectedPackageId, setSelectedPackageId] = useState(Number(initialPackageId));
   const [selectedAddonIds, setSelectedAddonIds] = useState([]);
@@ -47,29 +64,32 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
   const basePrice = getFinalPrice(selectedPackage);
   const subtotal = basePrice + addonsTotal;
   const taxRate = 0.08;
-  const totalPrice = subtotal + subtotal * taxRate;
+  const taxAmount = subtotal * taxRate;
+  const totalPrice = subtotal + taxAmount;
 
   const isLicensePackage = String(packageTypeLabel || "").toLowerCase().includes("license");
   const actionLabel = isLicensePackage ? "Pay Now" : "Interested";
   const razorpayLink = process.env.NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK || "";
 
   const leadModalData = {
-    promoTitle: "Get the full experience on our App",
-    promoText: "Track your progress and manage your lessons directly from your mobile device.",
+    checkoutSummary: true,
+    promoTitle: selectedPackage?.uiTier || selectedPackage?.name || "Selected Package",
+    promoText: selectedPackage?.description || "You are almost done. Confirm your details to continue.",
     formTitle: "Interested Lead?",
     formSubtitle: "Please fill out the form below and our team will get back to you shortly.",
-    appBadges: [
-      {
-        label: "App Store",
-        href: "https://apps.apple.com/in/app/pilot-learner/id6756785250",
-        icon: "apple",
-      },
-      {
-        label: "Google Play",
-        href: "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&pcampaignid=web_share",
-        icon: "google",
-      },
-    ],
+    packageDetails: {
+      badge: selectedPackage?.uiBadge || "Essentials",
+      name: selectedPackage?.uiTier || selectedPackage?.name || "Selected Package",
+      description: selectedPackage?.description || "",
+      features: getPackageFeatures(selectedPackage),
+      price: basePrice,
+      hours: selectedPackage?.duration || 0,
+      taxRate,
+      taxAmount,
+      addons: selectedAddons,
+      total: totalPrice,
+    },
+    appBadges: [],
     zones: [],
   };
 
@@ -120,7 +140,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
 
         <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-6 lg:grid-cols-[1fr_340px]">
           <section>
-            <h2 className="mb-4 text-xs font-black uppercase tracking-[0.22em] text-slate-600">
+            <h2 className="mb-4 text-xs font-black uppercase sm:tracking-[0.10em] tracking-[1px] text-slate-600">
               1 - Select Primary Package
             </h2>
             <div className="grid gap-6 sm:gap-4 md:grid-cols-2">
@@ -134,7 +154,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
               ))}
             </div>
 
-            <h3 className="mb-4 mt-8 text-xs font-black uppercase tracking-[0.22em] text-slate-600">
+            <h3 className="mb-4 mt-8 text-xs font-black uppercase sm:tracking-[0.10em] tracking-[1px] text-slate-600">
               2 - Available Add-ons
             </h3>
             <div className="space-y-3">

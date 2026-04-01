@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { X, ChevronDown, Loader2 } from 'lucide-react';
+import { X, ChevronDown, Loader2, Check } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -48,6 +48,7 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
     const [submitError, setSubmitError] = useState("");
     const [zones, setZones] = useState(Array.isArray(data?.zones) ? data.zones : []);
     const [zonesLoading, setZonesLoading] = useState(false);
+    const isCheckoutSummary = Boolean(data?.checkoutSummary);
 
     const validationSchema = Yup.object({
         fullName: Yup.string().min(2, 'Too short').required('Required'),
@@ -140,74 +141,115 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                     <X size={20} />
                 </button>
 
-                {/* Left Side: Branding (hidden on mobile) */}
-                <div className="hidden md:flex w-full md:w-[42%] bg-[#f8fafc] p-6 md:p-10 flex-col justify-center">
-                    <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-0 text-slate-900">
-                        {data.promoTitle}
-                    </h3>
-                    <p className="mt-2 md:mt-4 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 text-center sm:text-left">
-                        {data.promoText}
-                    </p>
+                {/* Left Side: Branding / Checkout Summary (hidden on mobile) */}
+                <div className="hidden md:flex w-full md:w-[42%] bg-[#f1f5f9] p-5 md:p-6 flex-col items-center justify-center">
+                    {isCheckoutSummary ? (
+                        <div className="w-full max-w-[340px] min-h-[520px] rounded-2xl border-b-2   border-slate-200  bg-[#f1f5f9] p-5   flex flex-col">
+                            <div className="mb-2 flex items-center justify-between">
+                                <span className="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold uppercase border border-blue-800 tracking-wider text-blue-800">
+                                    {data?.packageDetails?.badge}
+                                </span>
+                                <span className="flex h-4 w-4 items-center justify-center rounded-full border border-blue-500 bg-blue-500">
+                                    <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                                </span>
+                            </div>
+                            <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-0 text-slate-900">
+                                {data?.packageDetails?.name || data?.promoTitle}
+                            </h3>
+                            <p className="mt-2 text-sm text-slate-500 line-clamp-2">
+                                {data?.packageDetails?.description || data?.promoText}
+                            </p>
 
-                    <div className="mt-6 md:mt-8 w-full block">
-                        {/* Grid for badges on mobile, stack on desktop */}
+                            {Array.isArray(data?.packageDetails?.features) && data.packageDetails.features.length > 0 ? (
+                                <ul className="mt-10 space-y-2.5">
+                                    {data.packageDetails.features.slice(0, 4).map((feature) => (
+                                        <li key={feature} className="flex items-start gap-2 text-sm font-medium text-slate-700 line-clamp-1">
+                                            <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-blue-600">
+                                                <Check className="h-2.5 w-2.5 text-white" />
+                                            </span>
+                                            <span className="line-clamp-1">{feature}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : null}
 
+                            <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 space-y-2 text-sm">
 
-                        <div className="   flex   items-center justify-center gap-3 sm:gap-3">
-                            {data.appBadges?.map((b) => (
-                                <Link key={b.label} href={b.href} target="_blank">
-                                    <Image
-                                        src={
-                                            b.icon === "google"
-                                                ? "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
-                                                : "/images/XFHvXmLh07GYeJbajNiemQLI9MY.avif"
-                                        }
-                                        alt={b.label}
-                                        width={220}
-                                        height={60}
-                                        className="h-auto w-[140px] sm:w-[200px] md:w-[220px] transition-transform duration-300 hover:scale-105"
-                                    />
-                                </Link>
-                            ))}
+                                <div className="flex items-center justify-between">
+                                    <span className="text-slate-500">Base Price</span>
+                                    <span className="font-semibold text-slate-900">${Number(data?.packageDetails?.price || 0).toFixed(2)}</span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-slate-500">Tax ({Math.round(Number(data?.packageDetails?.taxRate || 0) * 100)}%)</span>
+                                    <span className="font-semibold text-slate-900">
+                                        ${Number(data?.packageDetails?.taxAmount || 0).toFixed(2)}
+                                    </span>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-slate-500">Add-ons Total</span>
+                                    <span className="font-semibold text-slate-900">
+                                        ${Number((data?.packageDetails?.addons || []).reduce((sum, addon) => sum + Number(addon?.price || 0), 0)).toFixed(2)}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="mt-6 border-t border-slate-100 ">
+                                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">Selected Add-ons</p>
+                                {Array.isArray(data?.packageDetails?.addons) && data.packageDetails.addons.length > 0 ? (
+                                    <ul className="space-y-1.5">
+                                        {data.packageDetails.addons.map((addon) => (
+                                            <li key={addon.id || addon.title} className="flex items-center justify-between text-sm">
+                                                <span className="text-slate-600">{addon.title}</span>
+                                                <span className="font-semibold text-slate-900">${Number(addon.price || 0).toFixed(2)}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <p className="text-sm text-slate-500">No add-ons selected.</p>
+                                )}
+                            </div>
+
+                            <div className="mt-4 border-t border-slate-100 pt-3">
+                                <div className="flex items-center justify-between gap-1">
+                                    <span className="pb-1 text-[12px] sm:text-[14px] font-bold uppercase tracking-wide text-slate-400">
+                                        Total
+                                    </span>
+                                    <span className="text-[28px] sm:text-[30px] leading-none font-extrabold tracking-tight text-slate-900">
+                                        ${Number(data?.packageDetails?.total || 0).toFixed(0)}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+                    ) : (
+                        <>
+                            <h3 className="text-[20px] sm:text-[24px] md:text-3xl font-sans font-[700] leading-[1.25] text-center sm:text-left px-0 text-slate-900">
+                                {data.promoTitle}
+                            </h3>
+                            <p className="mt-2 md:mt-4 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500 text-center sm:text-left">
+                                {data.promoText}
+                            </p>
 
-                        {/*                         
-                        <div className="grid grid-cols-1 md:grid-cols-1 gap-3">
-                            {data.appBadges.map((badge) => (
-                                <Link
-                                    key={badge.label}
-                                    href={badge.href}
-                                    target="_blank"
-                                    className="flex items-center gap-2 md:gap-3 bg-white text-black px-3 py-3 md:px-4 md:py-4 rounded-xl hover:bg-white hover:text-black transition-colors border border-slate-100 shadow-sm"
-                                >
-                                    <div className="flex-shrink-0">
-                                        <img
-                                            src={
-                                                badge.icon === "apple"
-                                                    ? "/images/app-store.svg"
-                                                    : "/images/google-play-store-logo.svg"
-                                            }
-                                            alt={badge.label}
-                                            className="h-6 md:h-8 w-auto object-contain"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col items-start leading-tight">
-                                        <span className="text-[9px] md:text-[10px] font-medium uppercase opacity-80">
-                                            {badge.icon === 'apple' ? 'App Store' : 'Google Play'}
-                                        </span>
-                                        <span className="font-bold text-[13px] md:text-[16px] whitespace-nowrap">
-                                            {badge.icon === 'apple' ? 'Download' : 'Get it on'}
-                                        </span>
-                                    </div>
-                                </Link>
-                            ))}
-                        </div>
- */}
-
-
-
-
-                    </div>
+                            <div className="mt-6 md:mt-8 w-full block">
+                                <div className="flex items-center justify-center gap-3 sm:gap-3">
+                                    {data.appBadges?.map((b) => (
+                                        <Link key={b.label} href={b.href} target="_blank">
+                                            <Image
+                                                src={
+                                                    b.icon === "google"
+                                                        ? "/images/3P1ckGuQQEInpODdTv3kJOEgnYQ.avif"
+                                                        : "/images/XFHvXmLh07GYeJbajNiemQLI9MY.avif"
+                                                }
+                                                alt={b.label}
+                                                width={220}
+                                                height={60}
+                                                className="h-auto w-[140px] sm:w-[200px] md:w-[220px] transition-transform duration-300 hover:scale-105"
+                                            />
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 {/* Right Side: Form */}

@@ -74,7 +74,7 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
             key={feature}
             className="flex items-start gap-2 text-[11px] sm:text-sm font-medium text-slate-700"
           >
-            <div className="flex h-3 w-3 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border border-emerald-400 bg-emerald-50">
+            <div className="flex h-3 w-3 sm:h-4 sm:w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400  ">
               <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600" />
             </div>
 

@@ -55,7 +55,7 @@ export function PaymentSummary({
         onClick={onActionClick}
         className="mt-5 sm:mt-6 w-full rounded-xl sm:rounded-2xl btn-gradient btn-gradient-glow py-2.5 sm:py-3.5 text-xs sm:text-base font-extrabold text-white cursor-pointer shadow-lg transition hover:opacity-95"
       >
-        {actionLabel === "Interested" ? "Interested   \u2192" : actionLabel}
+        {actionLabel === "Interested" ? "Interested   " : actionLabel}
       </button>
       <p className="mt-3 text-center text-xs font-medium text-slate-400">
         No immediate payment required. We will contact you to finalize the schedule.
