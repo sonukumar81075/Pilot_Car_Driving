@@ -2,11 +2,11 @@ export function SectionHeading({ eyebrow, title, description, align = "center" }
   const isLeft = align === "left";
   const isRight = align === "right";
 
-  const alignmentClasses = isLeft 
-    ? "items-start text-left" 
-    : isRight 
-    ? "items-end text-right" 
-    : "items-center text-center mx-auto";
+  const alignmentClasses = isLeft
+    ? "items-start text-left"
+    : isRight
+      ? "items-end text-right"
+      : "items-center text-center mx-auto";
 
   return (
     <header className={`flex flex-col ${alignmentClasses} max-w-4xl w-full`}>
@@ -17,14 +17,9 @@ export function SectionHeading({ eyebrow, title, description, align = "center" }
         </div>
       )}
 
-      <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-lexend font-black text-[#1e293b] leading-tight pb-2">
-        {title.split(' ').slice(0, -1).join(' ')} 
-        <span className="relative inline-block italic ml-2 bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent px-2 -mr-2">
-          {/* Added: 
-            1. px-2: To give the italic letters space so they don't cut off.
-            2. -mr-2: To offset the padding so the spacing looks natural.
-            3. pb-2: On the H2 to prevent the bottom of the letters from cutting.
-          */}
+      <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-lexend font-black text-[#1e293b] uppercase sm:capitalize leading-tight pb-2">
+        {title.split(' ').slice(0, -1).join(' ')}
+        <span className="relative inline-block  bg-gradient-to-r from-blue-600 to-indigo-500 uppercase sm:capitalize bg-clip-text text-transparent px-2 -mr-2">
           {title.split(' ').pop()}
         </span>
       </h2>

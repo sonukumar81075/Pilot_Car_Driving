@@ -28,33 +28,25 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
       type="button"
       onClick={() => onSelect(pkg.package_id)}
       className={[
-        "font-sans relative w-full rounded-3xl border bg-white/95 p-4 sm:p-5 md:p-6 text-left shadow-sm backdrop-blur transition-all duration-300",
-        // ❌ overflow-hidden removed
+        "font-sans relative w-full rounded-2xl sm:rounded-3xl border bg-white p-3 sm:p-5 md:p-6 text-left shadow-sm transition-all duration-300",
         selected
-          ? "border-blue-500 ring-2 ring-blue-100 shadow-[0_10px_35px_-18px_rgba(37,99,235,0.8)]"
-          : "border-slate-200/90 hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-[0_12px_36px_-22px_rgba(15,23,42,0.35)]",
+          ? "border-blue-500 ring-2 ring-blue-100"
+          : "border-slate-200 hover:border-slate-300 hover:-translate-y-0.5",
       ].join(" ")}
     >
-      {/* TOP GRADIENT */}
-      <span className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-blue-50/80 to-transparent rounded-t-3xl" />
-
-      {/* MOST POPULAR BADGE */}
       {pkg?.uiMostPopular ? (
-        <span className="absolute -top-4 left-6 z-20 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow-lg">
-          Most Popular
+        <span className="absolute -top-3 left-6 z-20 rounded-full bg-blue-600 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white shadow">
+          ★ Most Popular
         </span>
       ) : null}
 
-      {/* HEADER */}
       <div className="relative mb-2 flex items-center justify-between">
-        <span className="rounded-md bg-blue-50 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-blue-600">
+        <span className="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
           {pkg?.uiBadge}
         </span>
-
-        {/* RADIO DOT */}
         <span
           className={[
-            "flex items-center justify-center h-4 w-4 rounded-full border transition-colors",
+            "flex h-4 w-4 items-center justify-center rounded-full border transition-colors",
             selected
               ? "border-blue-500 bg-blue-500"
               : "border-slate-300 bg-white",
@@ -66,28 +58,24 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
         </span>
       </div>
 
-      {/* TITLE */}
-      <h3 className="relative text-[24px] sm:text-[26px] md:text-[32px] font-extrabold leading-tight tracking-tight font-sans text-slate-900">
+      <h3 className="relative text-[17px] sm:text-[24px] md:text-[28px] font-semibold leading-tight tracking-tight font-sans text-slate-900">
         {pkg?.uiTier || pkg?.name}
       </h3>
 
-      {/* DESCRIPTION */}
       {pkg?.description ? (
-        <p className="relative mt-2 text-[13px] sm:text-[14px] md:text-[15px] font-medium leading-6 text-slate-500">
+        <p className="relative mt-1.5 text-[12px] sm:text-[14px] md:text-[15px] font-medium leading-5 sm:leading-6 text-slate-500">
           {pkg.description}
         </p>
       ) : null}
 
-      {/* FEATURES */}
-      <ul className="relative mt-5 space-y-2.5">
+      <ul className="relative mt-3 sm:mt-5 space-y-1.5 sm:space-y-2.5">
         {features.slice(0, 3).map((feature) => (
           <li
             key={feature}
-            className="flex items-start gap-2 text-xs sm:text-sm font-medium text-slate-700"
+            className="flex items-start gap-2 text-[11px] sm:text-sm font-medium text-slate-700"
           >
-            {/* PERFECT CENTER ICON */}
-            <div className="flex items-center justify-center w-5 h-5 border border-green-600 bg-white rounded-full shrink-0">
-              <Check className="w-3 h-3 text-green-600" />
+            <div className="flex h-3 w-3 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border border-emerald-400 bg-emerald-50">
+              <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600" />
             </div>
 
             <span>{feature}</span>
@@ -95,14 +83,13 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
         ))}
       </ul>
 
-      {/* PRICE */}
-      <div className="relative mt-6 border-t border-slate-100 pt-4">
+      <div className="relative mt-4 sm:mt-6 border-t border-slate-100 pt-3 sm:pt-4">
         <div className="flex items-end gap-1">
-          <span className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900">
+          <span className="text-[20px] leading-none sm:text-3xl font-extrabold tracking-tight text-slate-900">
             ${finalPrice.toFixed(0)}
           </span>
           <span className="pb-1 text-xs font-bold uppercase tracking-wide text-slate-400">
-            / total
+            / Total
           </span>
         </div>
       </div>

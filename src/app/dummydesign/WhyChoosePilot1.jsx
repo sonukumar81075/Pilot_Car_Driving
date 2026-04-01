@@ -12,10 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 
-// ✅ Swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
+// ✅ Swiper  
 
 const features = [
   { title: "Doorstep Learning", description: "Get picked up from your preferred location and start learning with ease.", icon: UserCheck },

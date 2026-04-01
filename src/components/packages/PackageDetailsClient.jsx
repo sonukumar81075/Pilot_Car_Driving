@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 import { AddonItem } from "./AddonItem";
 import { PackageOptionCard } from "./PackageOptionCard";
 import { PaymentSummary } from "./PaymentSummary";
+import LeadModal from "@/components/sections/LeadModal";
+import { Container } from "../ui/Container";
 
 function getFinalPrice(pkg) {
   if (!pkg) return 0;
@@ -16,6 +18,7 @@ function getFinalPrice(pkg) {
 export function PackageDetailsClient({ packageOptions, initialPackageId, addons, packageTypeLabel }) {
   const [selectedPackageId, setSelectedPackageId] = useState(Number(initialPackageId));
   const [selectedAddonIds, setSelectedAddonIds] = useState([]);
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
 
   const selectedPackage = useMemo(
     () => packageOptions.find((pkg) => pkg.package_id === selectedPackageId) || packageOptions[0],
@@ -30,67 +33,147 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     [addons, selectedAddonIds]
   );
 
+  const selectedAddons = useMemo(
+    () => addons.filter((addon) => selectedAddonIds.includes(addon.id)),
+    [addons, selectedAddonIds]
+  );
+
   function toggleAddon(addonId) {
     setSelectedAddonIds((current) =>
       current.includes(addonId) ? current.filter((id) => id !== addonId) : [...current, addonId]
     );
   }
 
+  const basePrice = getFinalPrice(selectedPackage);
+  const subtotal = basePrice + addonsTotal;
+  const taxRate = 0.08;
+  const totalPrice = subtotal + subtotal * taxRate;
+
+  const isLicensePackage = String(packageTypeLabel || "").toLowerCase().includes("license");
+  const actionLabel = isLicensePackage ? "Pay Now" : "Interested";
+  const razorpayLink = process.env.NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK || "";
+
+  const leadModalData = {
+    promoTitle: "Get the full experience on our App",
+    promoText: "Track your progress and manage your lessons directly from your mobile device.",
+    formTitle: "Interested Lead?",
+    formSubtitle: "Please fill out the form below and our team will get back to you shortly.",
+    appBadges: [
+      {
+        label: "App Store",
+        href: "https://apps.apple.com/in/app/pilot-learner/id6756785250",
+        icon: "apple",
+      },
+      {
+        label: "Google Play",
+        href: "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&pcampaignid=web_share",
+        icon: "google",
+      },
+    ],
+    zones: [],
+  };
+
+  const submissionMeta = {
+    selectedPackage: {
+      package_id: selectedPackage?.package_id,
+      name: selectedPackage?.name,
+      title: selectedPackage?.uiTier || selectedPackage?.name,
+      description: selectedPackage?.description,
+      hours: selectedPackage?.duration || 0,
+      price: basePrice,
+      packageType: packageTypeLabel,
+    },
+    selectedAddons: selectedAddons.map((addon) => ({
+      id: addon.id,
+      title: addon.title,
+      price: Number(addon.price || 0),
+    })),
+    totalPrice,
+    sourcePage: "package-details",
+  };
+
+  function handleActionClick() {
+    if (isLicensePackage) {
+      if (razorpayLink) {
+        window.open(razorpayLink, "_blank", "noopener,noreferrer");
+      } else {
+        // eslint-disable-next-line no-console
+        console.warn("Set NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK to enable Pay Now.");
+      }
+      return;
+    }
+    setIsLeadModalOpen(true);
+  }
+
   return (
-    <div className="mx-auto w-full max-w-7xl px-4">
-      <h1 className="text-3xl font-extrabold tracking-tight text-blue-900 sm:text-4xl md:text-5xl">
-        {packageTypeLabel} Training Packages
-      </h1>
-      <p className="mt-2 text-sm sm:text-base font-medium text-blue-900">
-        Select the best path for your driving journey
-      </p>
-
-      <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_340px]">
-        <section>
-          <h2 className="mb-4 text-[20px] sm:text-[22px] md:text-[24px] font-extrabold tracking-tight text-slate-900">
-            1. Select Primary Package
-          </h2>
-          <div className="grid gap-8 sm:gap-4 md:grid-cols-2">
-            {packageOptions.map((pkg) => (
-              <PackageOptionCard
-                key={pkg.package_id}
-                pkg={pkg}
-                selected={selectedPackage?.package_id === pkg.package_id}
-                onSelect={setSelectedPackageId}
-              />
-            ))}
-          </div>
-
-          <h3 className="mb-4 mt-8 text-[22px] sm:text-[24px] md:text-[28px] font-extrabold tracking-tight text-slate-900">
-            2. Available Add-ons
-          </h3>
-          <div className="space-y-3">
-            {addons.length === 0 ? (
-              <div className="rounded-2xl border border-slate-200/80 bg-white/90 p-5 text-sm text-slate-500 shadow-sm backdrop-blur">
-                No add-ons available for this package right now.
-              </div>
-            ) : (
-              addons.map((addon) => (
-                <AddonItem
-                  key={addon.id}
-                  addon={addon}
-                  checked={selectedAddonIds.includes(addon.id)}
-                  onToggle={toggleAddon}
-                />
-              ))
-            )}
-          </div>
-        </section>
-
-        <div className="lg:sticky lg:top-24 lg:h-fit">
-          <PaymentSummary
-            baseLabel={selectedPackage?.name || "Selected Package"}
-            basePrice={getFinalPrice(selectedPackage)}
-            addonsTotal={addonsTotal}
-            taxRate={0.08}
-          />
+    <Container>
+      <div className="mx-auto w-full  ">
+        <div className="sm:mb-4 mb-1 inline-flex rounded-full bg-blue-600 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white">
+          Checkout
         </div>
+        <h1 className="text-[26px] sm:text-4xl md:text-5xl font-semibold tracking-tight text-slate-900">
+          {packageTypeLabel} Training <span className="relative inline-block  bg-gradient-to-r from-blue-600 to-indigo-500 uppercase sm:capitalize  py-1.5 bg-clip-text text-transparent   ">Packages</span>
+        </h1>
+        <p className="mt-1.5 text-[13px] sm:text-base font-medium text-slate-600">
+          Select the best path for your driving journey
+        </p>
+
+        <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-6 lg:grid-cols-[1fr_340px]">
+          <section>
+            <h2 className="mb-4 text-xs font-black uppercase tracking-[0.22em] text-slate-600">
+              1 - Select Primary Package
+            </h2>
+            <div className="grid gap-6 sm:gap-4 md:grid-cols-2">
+              {packageOptions.map((pkg) => (
+                <PackageOptionCard
+                  key={pkg.package_id}
+                  pkg={pkg}
+                  selected={selectedPackage?.package_id === pkg.package_id}
+                  onSelect={setSelectedPackageId}
+                />
+              ))}
+            </div>
+
+            <h3 className="mb-4 mt-8 text-xs font-black uppercase tracking-[0.22em] text-slate-600">
+              2 - Available Add-ons
+            </h3>
+            <div className="space-y-3">
+              {addons.length === 0 ? (
+                <div className="rounded-2xl border border-slate-200/80 bg-white/90 p-5 text-sm text-slate-500 shadow-sm backdrop-blur">
+                  No add-ons available for this package right now.
+                </div>
+              ) : (
+                addons.map((addon) => (
+                  <AddonItem
+                    key={addon.id}
+                    addon={addon}
+                    checked={selectedAddonIds.includes(addon.id)}
+                    onToggle={toggleAddon}
+                  />
+                ))
+              )}
+            </div>
+          </section>
+
+          <div className="lg:sticky lg:top-24 lg:h-fit">
+            <PaymentSummary
+              baseLabel={selectedPackage?.name || "Selected Package"}
+              basePrice={basePrice}
+              addonsTotal={addonsTotal}
+              taxRate={taxRate}
+              actionLabel={actionLabel}
+              onActionClick={handleActionClick}
+            />
+          </div>
+        </div>
+
+        <LeadModal
+          data={leadModalData}
+          isOpen={isLeadModalOpen}
+          onClose={() => setIsLeadModalOpen(false)}
+          submissionMeta={submissionMeta}
+        />
       </div>
-    </div>
+    </Container>
   );
 }

@@ -44,7 +44,7 @@ function extractZones(payload) {
     return Array.from(new Set(mapped));
 }
 
-const LeadModal = ({ data, isOpen, onClose }) => {
+const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
     const [submitError, setSubmitError] = useState("");
     const [zones, setZones] = useState(Array.isArray(data?.zones) ? data.zones : []);
     const [zonesLoading, setZonesLoading] = useState(false);
@@ -59,27 +59,35 @@ const LeadModal = ({ data, isOpen, onClose }) => {
         initialValues: { fullName: '', phoneNumber: '', zone: 'Choose a zone' },
         validationSchema,
         onSubmit: async (values, { setSubmitting }) => {
+            console.log(values);
+            console.log(submissionMeta);
             setSubmitError("");
-            try {
-                const res = await fetch("/api/enquiry", {
-                    method: "POST",
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify(values),
-                });
+            // try {
+            //     const res = await fetch("/api/enquiry", {
+            //         method: "POST",
+            //         headers: { "content-type": "application/json" },
+            //         body: JSON.stringify({
+            //             ...values,
+            //             packageMeta: submissionMeta?.selectedPackage || null,
+            //             selectedAddons: submissionMeta?.selectedAddons || [],
+            //             totalPrice: submissionMeta?.totalPrice ?? null,
+            //             sourcePage: submissionMeta?.sourcePage || null,
+            //         }),
+            //     });
 
-                const json = await res.json().catch(() => null);
+            //     const json = await res.json().catch(() => null);
 
-                if (!res.ok || !json?.ok) {
-                    setSubmitError(json?.message || "Failed to submit enquiry. Please try again.");
-                    return;
-                }
+            //     if (!res.ok || !json?.ok) {
+            //         setSubmitError(json?.message || "Failed to submit enquiry. Please try again.");
+            //         return;
+            //     }
 
-                onClose();
-            } catch (e) {
-                setSubmitError("Network error. Please try again.");
-            } finally {
-                setSubmitting(false);
-            }
+            //     onClose();
+            // } catch (e) {
+            //     setSubmitError("Network error. Please try again.");
+            // } finally {
+            //     setSubmitting(false);
+            // }
         },
     });
 
@@ -126,7 +134,7 @@ const LeadModal = ({ data, isOpen, onClose }) => {
             }
         }} className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 font-sans">
             {/* Added overflow-y-auto and max-height for mobile */}
-            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[1.5rem] md:rounded-[2.5rem] bg-white shadow-2xl flex flex-col md:flex-row">
+            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[1.5rem] md:rounded-[2.5rem] bg-white shadow-2xl flex py-2 sm:py-0 flex-col md:flex-row">
 
                 <button onClick={onClose} className="absolute right-4 top-4 md:right-6 md:top-6 z-20 text-slate-400 hover:text-slate-600 cursor-pointer bg-white rounded-full p-1 shadow-sm">
                     <X size={20} />
