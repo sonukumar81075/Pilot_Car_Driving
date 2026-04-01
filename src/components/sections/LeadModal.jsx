@@ -211,7 +211,7 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                 </div>
 
                 {/* Right Side: Form */}
-                <div className="w-full md:w-[58%] p-4 sm:p-6 md:p-14 bg-white">
+                <div className="w-full md:w-[58%] p-8 sm:p-6 md:p-14 bg-white">
                     <h2 className="text-[20px] sm:text-2xl md:text-3xl font-bold text-slate-900 font-sans font-[700] leading-[1.2] ">{data.formTitle}</h2>
                     <p className="mt-1 md:mt-2 font-sans font-[500] leading-6 md:leading-[27px] text-[14px] md:text-[16px] text-slate-500">
                         {data.formSubtitle}
