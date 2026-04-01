@@ -15,39 +15,39 @@ import { motion } from "framer-motion";
 const features = [
   {
     title: "Doorstep Learning",
-    description: "Verified Instructors Pick You Up From Home",
+    description: "Get picked up from your preferred location and start learning with ease.",
     icon: UserCheck,
-    image: "/images/whyChooseimage.png",
+    image: "/images/whyChoose/Doorstep-Learning.png",
   },
   {
     title: "Flexible Time Slots",
-    description: "Freedom to Book, Cancel or Reschedule",
+    description: "Learn when it works for you, not when a driving school says so.",
     icon: Calendar,
-    image: "/images/whyChooseimage.png",
+    image: "/images/whyChoose/Flexible-Time-Slots.jpg.jpeg",
   },
   {
-    title: "Trusted App Experience",
-    description: "Professionally Tracked Driving Progress",
+    title: "Trusted Instructors",
+    description: "Learn from verified professionals who help you build confidence behind the wheel.",
     icon: Smartphone,
-    image: "/images/whyChooseimage.png",
+    image: "/images/whyChoose/Trusted-Instructors.png",
   },
   {
-    title: "Expert Female Instructors",
-    description: "Powered By Strong Women Workforce",
+    title: "Reschedule Anytime",
+    description: "Plans changed? Easily reschedule your lessons without hassle.",
     icon: BookOpen,
-    image: "/images/whyChooseimage.png",
+    image: "/images/whyChoose/Reschedule-Anytime.jpg.jpeg",
   },
   {
-    title: "Top Rated Service",
-    description: "Average Rating 4.8/5 From Learners",
+    title: "License Assistance",
+    description: "Get end-to-end support for your driving license journey.",
     icon: RefreshCcw,
-    image: "/images/whyChooseimage.png",
+    image: "/images/whyChoose/License-Assistance.jpg.jpeg",
   },
   {
-    title: "Massive Community",
-    description: "Trusted By 6000+ Happy Learners",
+    title: "Start with a Free Trial",
+    description: "Experience your first lesson before committing to a full learning package.",
     icon: BadgeCheck,
-    image: "/images/whyChooseimage.png",
+    image: "/images/whyChoose/Start-with-a-Free-Trial.png",
   },
 ];
 
@@ -67,25 +67,47 @@ export function WhyChoosePilot3() {
 
 
         {/* ✅ MOBILE CARD STACK (Visible on Mobile Only) */}
+        {/* <div className="flex md:hidden  grid grid-cols-2 gap-3  ">
+          {features.map((feature, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-2xl   p-2  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
+            > 
+              <div className="w-full h-24 rounded-2xl   bg-[#F1F5F9] flex items-center justify-center p-3 mb-3 overflow-hidden">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="max-w-full max-h-full object-contain rounded-lg  "
+                />
+              </div>
+ 
+              <div className="text-center pb-2">
+                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-4 font-lexend">
+                  {feature.title}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div> */}
+
+ 
         <div className="flex md:hidden  grid grid-cols-2 gap-3  ">
           {features.map((feature, idx) => (
             <div
               key={idx}
               className="bg-white rounded-tl-[17%] rounded-br-[17%] p-2  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
-            >
-              {/* IMAGE CONTAINER - Gray box style from your reference */}
-              <div className="w-full h-24 rounded-tl-[17%] rounded-br-[17%] bg-[#F1F5F9] flex items-center justify-center p-4 mb-3 overflow-hidden">
+            > 
+              <div className="w-full h-24 rounded-tl-[17%] rounded-br-[17%] bg-[#F1F5F9] flex items-center justify-center p-3 mb-3 overflow-hidden">
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-full max-h-full object-contain rounded-tl-[17%] rounded-br-[17%]"
                 />
               </div>
-
-              {/* TEXT CONTENT */}
+ 
               <div className="text-center pb-2">
-                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-2 font-lexend">
-                  {feature.description}
+                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-4 font-lexend">
+                  {feature.title}
                 </h3>
               </div>
             </div>
