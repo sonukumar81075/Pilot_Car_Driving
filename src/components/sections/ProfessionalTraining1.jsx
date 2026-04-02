@@ -30,7 +30,7 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
-        imageOffsetMobile: "top-3",
+        imageOffsetMobile: "-top-5",
         imageOffset: "md:-top-14 lg:-top-20",
     },
     {
@@ -46,7 +46,7 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
-        imageOffsetMobile: "top-3",
+        imageOffsetMobile: "-top-0",
         imageOffset: "md:-top-16 lg:-top-20",
     },
     {
@@ -148,13 +148,13 @@ const Card = ({ item }) => {
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
 
             {/* IMAGE CONTAINER */}
-            <div className="relative w-full sm:h-48 h-36 sm:mb-10 mb-8 overflow-hidden md:overflow-visible sm:bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
+            <div className="relative w-full sm:h-48 h-40 sm:mb-10 mb-8 overflow-hidden md:overflow-visible  bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
                 <Image
                     src={item.image}
                     alt={item.title}
                     width={220}
                     height={140}
-                    className={`h-auto min-w-[130px] w-[145px] sm:min-w-[220px] sm:w-[238px] object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 absolute ${item.imageOffsetMobile || "-top-3"} md:top-0 ${item.imageOffset} z-20`}
+                    className={`h-auto min-w-[130px] w-[190px] sm:min-w-[220px] sm:w-[238px] object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 absolute ${item.imageOffsetMobile || "-top-3"} md:top-0 ${item.imageOffset} z-20`}
                 />
             </div>
 

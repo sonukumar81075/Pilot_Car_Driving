@@ -1,10 +1,12 @@
 "use client";
 
+import { Check } from "lucide-react";
+
 export function AddonItem({ addon, checked, onToggle }) {
   return (
     <label
       className={[
-        "font-sans group flex cursor-pointer items-start gap-3 rounded-xl sm:rounded-2xl border bg-white p-3 sm:p-4 shadow-sm transition-all duration-200",
+        "font-sans group flex cursor-pointer items-center gap-3 rounded-xl sm:rounded-2xl border bg-white p-3 sm:p-4 shadow-sm transition-all duration-200",
         checked
           ? "border-blue-300 ring-2 ring-blue-100"
           : "border-slate-200 hover:border-slate-300",
@@ -14,8 +16,11 @@ export function AddonItem({ addon, checked, onToggle }) {
         type="checkbox"
         checked={checked}
         onChange={() => onToggle(addon.id)}
-        className="mt-1 h-4 w-4 sm:h-5 sm:w-5 appearance-none rounded-full border border-blue-300 bg-white checked:border-blue-600 checked:bg-blue-600 focus:ring-blue-500"
+        className="sr-only"
       />
+      <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full   text-white shadow-sm">
+        {checked ? <Check className="h-3 w-3 sm:h-6 sm:w-6 text-white bg-blue-600 rounded-full p-1 border border-blue-600" strokeWidth={2} /> : null}
+      </span>
       <div className="flex-1">
         <p className="text-[14px] sm:text-[18px] md:text-[18px] font-bold leading-tight text-slate-800">{addon.title}</p>
         {addon.description ? (

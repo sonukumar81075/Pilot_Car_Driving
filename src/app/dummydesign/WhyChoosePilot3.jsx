@@ -59,7 +59,7 @@ const features = [
 ];
 export function WhyChoosePilot3() {
   return (
-    <section className="md:pt-20 pt-10 pb-16 bg-[#F8FAFC] font-sans">
+    <section className="md:pt-20 pt-10 pb-16 bg-gradient-to-b from-[var(--brand-muted)] to-whitefont-sans">
       <Container>
         {/* HEADER */}
         <div className="mb-10 text-center">
