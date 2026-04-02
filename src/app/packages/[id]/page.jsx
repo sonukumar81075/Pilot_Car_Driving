@@ -42,32 +42,47 @@ function normalizeAddon(raw, index) {
   return { id, title, description, price };
 }
 
-function extractAddons(input) {
-  const candidates = [input?.addons, input?.add_ons, input?.package_addons];
-  for (const candidate of candidates) {
-    if (Array.isArray(candidate)) {
-      const parsed = candidate.map((item, index) => normalizeAddon(item, index)).filter(Boolean);
-      if (parsed.length > 0) return parsed;
-    }
+function addonFromId(id) {
+  const key = String(id || "").toLowerCase();
+  if (key === "license") {
+    return {
+      id: "license",
+      title: "License",
+      description: "Standard license support and processing assistance.",
+      price: 150,
+    };
   }
+
+  if (key === "4-plus-4-wheeler-license") {
+    return {
+      id: "4-plus-4-wheeler-license",
+      title: "4 + 2 wheeler License",
+      description: "Combined 4-wheeler and 2-wheeler license guidance package.",
+      price: 225,
+    };
+  }
+
+  return null;
+}
+
+function extractAddons(input) {
+  // Business requirement: show only these 2 add-ons on checkout.
+  const desiredIds = ["license", "4-plus-4-wheeler-license"];
+  const forcedAddons = desiredIds.map(addonFromId).filter(Boolean);
+  if (forcedAddons.length > 0) return forcedAddons;
+
   return [
     {
-      id: "mock-driving-test",
-      title: "Mock Driving Test",
-      description: "Practice under exam conditions with a certified examiner.",
-      price: 45,
+      id: "license",
+      title: "License",
+      description: "Standard license support and processing assistance.",
+      price: 150,
     },
     {
-      id: "defensive-driving",
-      title: "Defensive Driving Module",
-      description: "Advanced techniques for emergency situation management.",
-      price: 80,
-    },
-    {
-      id: "highway-practice",
-      title: "Highway Practice",
-      description: "Master merging, lane changes, and high-speed safety on major highways.",
-      price: 50,
+      id: "4-plus-4-wheeler-license",
+      title: "4+4 wheeler License",
+      description: "Combined 4-wheeler and 2-wheeler license guidance package.",
+      price: 225,
     },
   ];
 }
@@ -160,12 +175,12 @@ export default async function PackageDetailsPage({ params }) {
   return (
     <section className="md:pt-40 pt-32 pb-24 bg-gradient-to-b from-white to-[var(--brand-muted)] font-lexend">
       {/* <Container>  */}
-        <PackageDetailsClient
-          packageOptions={packageOptions}
-          initialPackageId={initialPackageId}
-          packageTypeLabel={packageTypeLabel}
-          addons={addons}
-        />
+      <PackageDetailsClient
+        packageOptions={packageOptions}
+        initialPackageId={initialPackageId}
+        packageTypeLabel={packageTypeLabel}
+        addons={addons}
+      />
       {/* </Container> */}
     </section>
   );

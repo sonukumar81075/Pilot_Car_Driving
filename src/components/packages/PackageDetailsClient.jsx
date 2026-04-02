@@ -125,6 +125,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     setIsLeadModalOpen(true);
   }
 
+ 
   return (
     <Container>
       <div className="mx-auto w-full  ">

@@ -21,7 +21,7 @@ const trainings = [
         id: "car",
         title: "Car Driving Classes",
         description: "Master the art of executive driving with our signature sedan curriculum.",
-        image: "/images/realistic-isolated-hands-driver-car_1284-17520-removebg-preview.png",
+        image: "/images/car-removebg-preview.png",
         features: ["Learn step-by-step", "Practice in traffic", "Get ready for test"],
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "Car",
@@ -30,12 +30,13 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
+        imageOffset: "-top-12 sm:-top-16",
     },
     {
         id: "bike",
         title: "Bike Training",
         description: "Agile movement and high-performance safety for two-wheeled enthusiasts.",
-        image: "/images/Man-riding-motorcycle-on-transparent-background-PNG-removebg-preview.png",
+        image: "/images/Bike-removebg-preview.png",
         features: ["Dynamic balance tech", "Defensive maneuvering", "Track-ready precision"],
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "Bike",
@@ -44,12 +45,13 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
+        imageOffset: "-top-14 sm:-top-14",
     },
     {
         id: "license",
         title: "License Assistance",
         description: "Bureaucracy managed. We handle the paperwork, you handle the road.",
-        image: "/images/license.png",
+        image: "/images/license-removebg-preview.png",
         features: ["Document verification", "Slot booking priority", "Zero-stress filing"],
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "License",
@@ -58,6 +60,7 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
+        imageOffset: "-top-13 sm:-top-14",
     },
 ];
 
@@ -136,23 +139,24 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 sm:py-8 py-6 sm:px-8 px-6 xl:py-10 xl:px-10 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-hidden mb-6`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-visible mb-6 mt-20 z-20`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
 
             {/* IMAGE CONTAINER */}
-            <div className="relative w-full sm:h-44 h-32 sm:mb-10 mb-8 overflow-visible">
+            <div className="relative w-full sm:h-44 h-22 sm:mb-8 mb-6 overflow-visible bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
                 <Image
                     src={item.image}
                     alt={item.title}
-                    fill
-                    className="object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-110 group-hover:-rotate-3"
+                    width={220}
+                    height={140}
+                    className={`h-auto w-[150px] sm:w-[190px] object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 absolute ${item.imageOffset || "-top-12 sm:-top-14"} z-20`}
                 />
             </div>
 
             {/* TEXT CONTENT */}
-            <div className="relative z-10 flex flex-col h-full  ">
+            <div className="relative z-10 flex flex-col h-full sm:pb-8 pb-6 sm:px-8 px-6 xl:pb-10 xl:px-10 ">
                 <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[18px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
