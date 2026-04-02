@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PackageCard } from "@/components/PackageCard";
 import { Car, Bike, FileText } from "lucide-react";
 
-const API_URL = "https://devapi.pilotadmin.site/packages/get-packages";
+const API_URL = "/api/packages";
 
 function normalizeType(type) {
   const t = String(type || "").trim();
@@ -193,7 +193,7 @@ export default function PackagesClient() {
             </div>
           </div>
         ) : (
-          <div className="mt-10 grid grid-cols-1 gap-3 transition-all duration-300 md:grid-cols-3 md:gap-5 lg:grid-cols-3 lg:gap-6 px-4 md:px-0">
+          <div className="mt-10 grid grid-cols-1 gap-3 transition-all border-none duration-300 md:grid-cols-3 md:gap-5 lg:grid-cols-3 lg:gap-6 px-4 md:px-0">
             {filtered.map((pkg) => (
               <PackageCard key={pkg.package_id || `${pkg.name}-${pkg.show_order}`} pkg={pkg} />
             ))}

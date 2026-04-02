@@ -40,7 +40,7 @@ function packagesToPricingData(packages, { headline, subtitle, icon } = {}) {
 }
 
 export async function getPackages({ drivingType } = {}) {
-  const res = await fetch("https://devapi.pilotadmin.site/packages/get-packages", {
+  const res = await fetch("https://api.pilotadmin.site/packages/get-packages", {
     cache: "no-store",
   });
   if (!res.ok) {

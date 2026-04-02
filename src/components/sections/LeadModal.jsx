@@ -20,7 +20,8 @@ const PlayStoreIcon = () => (
     </svg>
 );
 
-const ZONES_API_URL = "https://devapi.pilotadmin.site/zones/zones-list";
+const ZONES_API_URL = "/api/zones";
+
 
 function extractZones(payload) {
     const source = Array.isArray(payload?.data)
@@ -63,32 +64,32 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
             console.log(values);
             console.log(submissionMeta);
             setSubmitError("");
-            // try {
-            //     const res = await fetch("/api/enquiry", {
-            //         method: "POST",
-            //         headers: { "content-type": "application/json" },
-            //         body: JSON.stringify({
-            //             ...values,
-            //             packageMeta: submissionMeta?.selectedPackage || null,
-            //             selectedAddons: submissionMeta?.selectedAddons || [],
-            //             totalPrice: submissionMeta?.totalPrice ?? null,
-            //             sourcePage: submissionMeta?.sourcePage || null,
-            //         }),
-            //     });
+            try {
+                const res = await fetch("/api/enquiry", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        ...values,
+                        packageMeta: submissionMeta?.selectedPackage || null,
+                        selectedAddons: submissionMeta?.selectedAddons || [],
+                        totalPrice: submissionMeta?.totalPrice ?? null,
+                        sourcePage: submissionMeta?.sourcePage || null,
+                    }),
+                });
 
-            //     const json = await res.json().catch(() => null);
+                const json = await res.json().catch(() => null);
 
-            //     if (!res.ok || !json?.ok) {
-            //         setSubmitError(json?.message || "Failed to submit enquiry. Please try again.");
-            //         return;
-            //     }
+                if (!res.ok || !json?.ok) {
+                    setSubmitError(json?.message || "Failed to submit enquiry. Please try again.");
+                    return;
+                }
 
-            //     onClose();
-            // } catch (e) {
-            //     setSubmitError("Network error. Please try again.");
-            // } finally {
-            //     setSubmitting(false);
-            // }
+                onClose();
+            } catch (e) {
+                setSubmitError("Network error. Please try again.");
+            } finally {
+                setSubmitting(false);
+            }
         },
     });
 

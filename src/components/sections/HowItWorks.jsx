@@ -92,6 +92,7 @@ export function HowItWorks({ steps }) {
         <SectionHeading
           // eyebrow="The Process"
           title="Drive with Confidence in 4 Steps"
+          highlightText="Confidence in 4 Steps"
           description="A structured path designed to take you from a beginner to a licensed pro seamlessly."
         />
 

@@ -73,6 +73,7 @@ const ProfessionalTraining1 = () => {
             <Container>
                 <SectionHeading
                     title="Start Your Driving Journey Today"
+                    highlightText="Driving Journey"
                     description="Professional courses tailored for your success."
                 />
 
@@ -142,7 +143,7 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-hidden md:overflow-visible mb-6 mt-8 md:mt-20 z-20`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-hidden md:overflow-visible mb-6 mt-0 md:mt-20  z-20`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>

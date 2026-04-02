@@ -26,6 +26,7 @@ export function AppDownloadSection({ data }) {
           <SectionHeading
             // eyebrow="Get Started"
             title="Skip searching for driving schools near me."
+            highlightText="driving schools near me"
             description="Download the app and start learning to drive today."
           />
         </div> 

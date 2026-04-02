@@ -15,13 +15,13 @@ const navItems = [
     },
     {
         label: "PLAY STORE",
-        href: "https://play.google.com/store/apps/details?id=com.pilot.pilotlearner&pcampaignid=web_share",
+        href: "https://abr.ge/l1v7n8",
         icon: <FaGooglePlay size={20} />,
         isExternal: true,
     },
     {
         label: "APP STORE",
-        href: "https://apps.apple.com/in/app/pilot-learner/id6756785250",
+        href: "https://abr.ge/l1v7n8",
         icon: <FaApple size={22} />,
         isExternal: true,
     },

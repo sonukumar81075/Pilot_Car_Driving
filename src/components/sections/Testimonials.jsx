@@ -9,7 +9,8 @@ export function Testimonials({ testimonials }) {
       <Container>
         <SectionHeading
           // eyebrow="Our Testimonials"
-          title="What Our Learners Say Testimonials"
+          title="What Our Learners Say"
+          highlightText="Learners"
           description="Real experiences from people who started their driving journey with Pilot."
         />
         <Reveal className="mt-8">

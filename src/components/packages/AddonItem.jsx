@@ -3,6 +3,11 @@
 import { Check } from "lucide-react";
 
 export function AddonItem({ addon, checked, onToggle }) {
+  const finalPrice = Number(addon?.price || 0);
+  const basePrice = Number(addon?.base_price || 0);
+  const discountAmount = Number(addon?.discounted_base_price || 0);
+  const hasDiscount = discountAmount > 0 && basePrice > finalPrice;
+
   return (
     <label
       className={[
@@ -27,8 +32,18 @@ export function AddonItem({ addon, checked, onToggle }) {
           <p className="text-[11px] sm:text-sm font-medium leading-5 sm:leading-6 text-slate-500">{addon.description}</p>
         ) : null}
       </div>
-      <div className="text-[20px] leading-none sm:text-[20px] md:text-[24px] font-black tracking-tight text-slate-800">
-        +${Number(addon.price || 0).toFixed(0)}
+      <div className="text-right leading-none">
+        <div className="text-[20px] sm:text-[20px] md:text-[24px] font-black tracking-tight text-slate-800">
+          +₹{finalPrice.toLocaleString("en-IN")}
+        </div>
+        {hasDiscount ? (
+          <div className="mt-1 text-[11px] sm:text-xs font-semibold text-slate-500">
+            <span className="mr-2 text-red-500 line-through">
+              ₹{basePrice.toLocaleString("en-IN")}
+            </span>
+            <span>₹{discountAmount.toLocaleString("en-IN")} off</span>
+          </div>
+        ) : null}
       </div>
     </label>
   );

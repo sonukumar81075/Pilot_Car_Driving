@@ -4,12 +4,12 @@ import { FiChevronDown } from "react-icons/fi";
 
 export function FaqItem({ item, isOpen, onClick }) {
     return (
-        <div className="rounded-2xl bg-[#EEF1F6] border border-slate-200">
+        <div className="rounded-2xl bg-[#EEF1F6] border border-slate-200 ">
 
             {/* Question */}
             <button
                 onClick={onClick}
-                className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left"
+                className="flex w-full items-start justify-between gap-4 px-5 py-4 text-left cursor-pointer"
             >
                 <span className="text-[14px] sm:text-[17px] font-[700] text-[#1c1c1c] leading-[22px] sm:leading-[28px] flex-1">
                     {item.question}
@@ -19,9 +19,9 @@ export function FaqItem({ item, isOpen, onClick }) {
                 <motion.span
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center justify-center h-6 sm:h-10 w-6 sm:w-10 sm:min-w-[40px] min-w-[20px] rounded-full border border-blue-800 text-blue-700 bg-white"
+                    className="flex items-center justify-center h-6 sm:h-10 w-6 sm:w-10 sm:min-w-[40px]  min-w-[20px] rounded-full border border-blue-800 text-blue-700 bg-white"
                 >
-                    <FiChevronDown   className="sm:size-6 size-4" />
+                    <FiChevronDown className="sm:size-6 size-4" />
                 </motion.span>
             </button>
 

@@ -9,7 +9,7 @@ function toImageUrl(imageUrl) {
   if (typeof imageUrl !== "string") return null;
   if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) return imageUrl;
   // API returns paths like /uploads/...
-  return `https://devapi.pilotadmin.site${imageUrl}`;
+  return `https://api.pilotadmin.site${imageUrl}`;
 }
 
 export function PackageCard({ pkg }) {

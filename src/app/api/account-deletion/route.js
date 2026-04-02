@@ -1,6 +1,6 @@
 export const runtime = "nodejs";
 
-const BASE_URL = "https://devapi.pilotadmin.site";
+const BASE_URL = "https://api.pilotadmin.site";
 const ENDPOINTS = {
   instructor: "/auth/delete-pilot-req",
   learner: "/auth/delete-learner-req",

@@ -14,6 +14,7 @@ const LeadSection = ({ data }) => {
                 <SectionHeading
                     // eyebrow="Get Started"
                     title="Start Your Driving Journey Today"
+                    highlightText="Driving Journey"
                     description="Fill out the quick form and our team will contact you shortly to help you book your first driving lesson."
                 />
 

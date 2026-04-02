@@ -56,6 +56,7 @@ export function Stats({ stats }) {
         <div className="md:pb-16 pb-12">
           <SectionHeading
             title="Professional Driving Lessons"
+            highlightText="Driving Lessons"
             description="Learn safe and confident driving with Pilot’s certified instructors. From beginner basics to advanced highway and parking skills."
           />
         </div>

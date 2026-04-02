@@ -1,4 +1,46 @@
-export function SectionHeading({ eyebrow, title, description, align = "center" }) {
+function renderHighlightedTitle(title, highlightText) {
+  const text = String(title || "");
+  const highlight = String(highlightText || "").trim();
+
+  if (highlight) {
+    const lowerTitle = text.toLowerCase();
+    const lowerHighlight = highlight.toLowerCase();
+    const start = lowerTitle.indexOf(lowerHighlight);
+
+    if (start !== -1) {
+      const end = start + highlight.length;
+      const before = text.slice(0, start);
+      const match = text.slice(start, end);
+      const after = text.slice(end);
+
+      return (
+        <>
+          {before}
+          <span className="relative inline-block bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
+            {match}
+          </span>
+          {after}
+        </>
+      );
+    }
+  }
+
+  const words = text.split(" ");
+  const lastWord = words.pop() || "";
+  const leadingText = words.join(" ");
+
+  return (
+    <>
+      {leadingText}
+      {leadingText ? " " : ""}
+      <span className="relative inline-block bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
+        {lastWord}
+      </span>
+    </>
+  );
+}
+
+export function SectionHeading({ eyebrow, title, description, align = "center", highlightText }) {
   const isLeft = align === "left";
   const isRight = align === "right";
 
@@ -18,10 +60,7 @@ export function SectionHeading({ eyebrow, title, description, align = "center" }
       )}
 
       <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-lexend font-black text-[#1e293b] uppercase sm:capitalize leading-tight pb-2">
-        {title.split(' ').slice(0, -1).join(' ')}
-        <span className="relative inline-block  bg-gradient-to-r from-blue-600 to-indigo-500 uppercase sm:capitalize bg-clip-text text-transparent px-2 -mr-2">
-          {title.split(' ').pop()}
-        </span>
+        {renderHighlightedTitle(title, highlightText)}
       </h2>
 
       {description && (

@@ -1,8 +1,24 @@
 import { notFound } from "next/navigation";
 import { PackageDetailsClient } from "@/components/packages/PackageDetailsClient";
-import { Container } from "@/components/ui/Container";
 
-const API_URL = "https://devapi.pilotadmin.site/packages/get-packages";
+const API_URL = "https://api.pilotadmin.site/packages/get-packages";
+const ADDON_API_URL = "https://api.pilotadmin.site/packages/get-add-ons";
+
+async function safeFetchJson(url) {
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    const res = await fetch(url, {
+      cache: "no-store",
+      signal: controller.signal,
+      headers: { Accept: "application/json" },
+    }).finally(() => clearTimeout(timeout));
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
 
 function toNumber(value) {
   const n = Number(value);
@@ -35,70 +51,56 @@ function getFinalPrice(pkg) {
 
 function normalizeAddon(raw, index) {
   if (!raw || typeof raw !== "object") return null;
-  const id = String(raw.id || raw.addon_id || raw.name || `addon-${index}`);
+  const id = String(raw.id || raw.add_on_id || raw.addon_id || raw.name || `addon-${index}`);
   const title = String(raw.title || raw.name || `Add-on ${index + 1}`);
   const description = raw.description ? String(raw.description) : "";
-  const price = toNumber(raw.price || raw.amount || raw.addon_price);
-  return { id, title, description, price };
+  const base = toNumber(raw.base_price || raw.price || raw.amount || raw.addon_price);
+  const discount = toNumber(raw.discounted_base_price);
+  const finalPrice = Math.max(base - discount, 0);
+  const price = finalPrice > 0 ? finalPrice : base;
+  return {
+    id,
+    title,
+    description,
+    price,
+    base_price: base,
+    discounted_base_price: discount,
+  };
 }
 
-function addonFromId(id) {
-  const key = String(id || "").toLowerCase();
-  if (key === "license") {
-    return {
-      id: "license",
-      title: "License",
-      description: "Standard license support and processing assistance.",
-      price: 150,
-    };
-  }
-
-  if (key === "4-plus-4-wheeler-license") {
-    return {
-      id: "4-plus-4-wheeler-license",
-      title: "4 + 2 wheeler License",
-      description: "Combined 4-wheeler and 2-wheeler license guidance package.",
-      price: 225,
-    };
-  }
-
-  return null;
+function mapDrivingTypeToAddonType(drivingType) {
+  const key = String(drivingType || "").toLowerCase().trim();
+  if (key === "bike") return "BikeLicense";
+  if (key === "car") return "License";
+  if (key === "license") return "License";
+  return "";
 }
 
-function extractAddons(input) {
-  // Business requirement: show only these 2 add-ons on checkout.
-  const desiredIds = ["license", "4-plus-4-wheeler-license"];
-  const forcedAddons = desiredIds.map(addonFromId).filter(Boolean);
-  if (forcedAddons.length > 0) return forcedAddons;
+async function fetchAddonsByType(drivingType) {
+  const type = mapDrivingTypeToAddonType(drivingType);
+  const withTypeUrl = `${ADDON_API_URL}?status=AC${type ? `&type=${encodeURIComponent(type)}` : ""}`;
 
-  return [
-    {
-      id: "license",
-      title: "License",
-      description: "Standard license support and processing assistance.",
-      price: 150,
-    },
-    {
-      id: "4-plus-4-wheeler-license",
-      title: "4+4 wheeler License",
-      description: "Combined 4-wheeler and 2-wheeler license guidance package.",
-      price: 225,
-    },
-  ];
+  const withTypeJson = await safeFetchJson(withTypeUrl);
+  const withTypeData = Array.isArray(withTypeJson?.data) ? withTypeJson.data : [];
+
+  // If filter returns data, use it. Otherwise retry with status-only for safer compatibility.
+  if (withTypeData.length > 0 || !type) {
+    return withTypeData.map(normalizeAddon).filter(Boolean);
+  }
+
+  const fallbackJson = await safeFetchJson(`${ADDON_API_URL}?status=AC`);
+  const fallbackData = Array.isArray(fallbackJson?.data) ? fallbackJson.data : [];
+  return fallbackData.map(normalizeAddon).filter(Boolean);
 }
 
 async function fetchPackagesById(packageId) {
   const url = `${API_URL}?package_id=${packageId}`;
-  const res = await fetch(url, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to fetch package (${res.status})`);
-  const json = await res.json();
+  const json = await safeFetchJson(url);
   return Array.isArray(json?.data) ? json.data : [];
 }
 
 async function fetchAllPackages() {
-  const res = await fetch(API_URL, { cache: "no-store" });
-  if (!res.ok) throw new Error(`Failed to fetch packages (${res.status})`);
-  const json = await res.json();
+  const json = await safeFetchJson(API_URL);
   return Array.isArray(json?.data) ? json.data : [];
 }
 
@@ -108,12 +110,14 @@ export default async function PackageDetailsPage({ params }) {
   if (!Number.isFinite(packageId)) notFound();
 
   const selectedMatches = await fetchPackagesById(packageId);
-  const selectedRaw = selectedMatches.find((pkg) => toNumber(pkg?.package_id) === packageId);
+  const all = await fetchAllPackages();
+  const selectedRaw =
+    selectedMatches.find((pkg) => toNumber(pkg?.package_id) === packageId) ||
+    all.find((pkg) => toNumber(pkg?.package_id) === packageId);
   if (!selectedRaw) notFound();
 
   const selected = toPackageOption(selectedRaw);
-  const selectedDrivingType = String(selectedMatches[0]?.driving_type || "");
-  const all = await fetchAllPackages();
+  const selectedDrivingType = String(selectedRaw?.driving_type || "");
 
   const sameTypePackages = all
     .filter(
@@ -169,7 +173,7 @@ export default async function PackageDetailsPage({ params }) {
   }
 
   const initialPackageId = selected.package_id;
-  const addons = extractAddons(selectedRaw);
+  const addons = await fetchAddonsByType(selectedDrivingType);
   const packageTypeLabel = selectedDrivingType || "Car";
 
   return (

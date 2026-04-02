@@ -1,6 +1,6 @@
 export const runtime = "nodejs";
 
-const ENDPOINT = "https://devapi.pilotadmin.site/users/pilot-enquiry";
+const ENDPOINT = "https://api.pilotadmin.site/users/pilot-enquiry";
 
 // Prefer env var; fallback keeps current behavior.
 // IMPORTANT: do not commit real tokens long-term.
