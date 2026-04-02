@@ -68,11 +68,11 @@ export function WhyChoosePilot3() {
 
         {/* ✅ MOBILE CARD STACK (Visible on Mobile Only) */}
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-[#F9F9F9]">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-[#F9F9F9] ">
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="group bg-gray-200 rounded-[1rem] overflow-hidden shadow-sm border border-gray-100 flex flex-col transition-all duration-300 hover:shadow-md active:scale-95 animate-in fade-in zoom-in-95   "
+              className="group bg-gray-200 rounded-[1rem] overflow-hidden shadow-sm border border-gray-300 flex flex-col transition-all duration-300 hover:shadow-md active:scale-95 animate-in fade-in zoom-in-95   "
               style={{
                 animationDelay: `${idx * 100}ms`,
                 animationFillMode: 'both'
