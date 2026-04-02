@@ -68,7 +68,7 @@ export function WhyChoosePilot3() {
 
         {/* ✅ MOBILE CARD STACK (Visible on Mobile Only) */}
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-[#F9F9F9] ">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-[#F9F9F9] sm:hidden">
           {features.map((feature, idx) => (
             <div
               key={idx}
