@@ -68,145 +68,82 @@ export function WhyChoosePilot3() {
 
         {/* ✅ MOBILE CARD STACK (Visible on Mobile Only) */}
 
-        <h1 className="text-2xl font-bold text-center sm:hidden">1</h1>
-        <div className="flex sm:hidden  grid grid-cols-2 gap-3  ">
-          {features.slice(0, 2).map((feature, idx) => (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-[#F9F9F9]">
+          {features.map((feature, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl   p-4  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
+              className="group bg-gray-200 rounded-[1rem] overflow-hidden shadow-sm border border-gray-100 flex flex-col transition-all duration-300 hover:shadow-md active:scale-95 animate-in fade-in zoom-in-95   "
+              style={{
+                animationDelay: `${idx * 100}ms`,
+                animationFillMode: 'both'
+              }}
             >
-              <div className="w-full h-26 rounded-2xl   bg-[#F1F5F9] flex items-center justify-center p-3 mb-3 overflow-hidden">
+              {/* 1. Inner Image Container (The Light Gray Area) */}
+              <div className="relative aspect-[4/3] w-full bg-[#F5F5F5] flex items-center justify-center p-2 rounded-t-[1rem]">
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="max-w-full max-h-full object-contain rounded-lg  "
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105 rounded-t-[1rem]"
                 />
+
+                {/* Subtle Overlay on hover */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-colors duration-300" />
               </div>
 
-              <div className="text-center pb-2">
-                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-2 font-lexend">
+              {/* 2. Text Area (The White Area) */}
+              <div className="py-2 px-2 flex flex-col items-center justify-center min-h-[70px] bg-white">
+                <h3 className="text-[13px] sm:text-[14px] font-medium text-[#1A1A1A] text-center leading-relaxed font-lexend max-w-[140px]">
                   {feature.title}
                 </h3>
+
+                {/* Animated accent line */}
+                <div className="mt-2 h-0.5 w-0 bg-blue-700 transition-all duration-300 group-hover:w-8 rounded-full" />
               </div>
             </div>
           ))}
         </div>
-        <h1 className="text-2xl font-bold text-center sm:hidden">2</h1>
-        <div className="flex sm:hidden grid grid-cols-2 gap-4 px-4 py-2">
-          {features.slice(0, 2).map((feature, idx) => (
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-3 bg-[#F8F9F5] sm:hidden">
+          {features.map((feature, idx) => (
             <div
               key={idx}
-              className="group relative bg-white rounded-[1.5rem] p-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-50 flex flex-col items-center transition-all duration-300 active:scale-95"
+              className="group relative h-[220px] sm:h-[400px] w-full overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-1 active:scale-95 animate-in fade-in slide-in-from-bottom-4"
+              style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'both' }}
             >
-              <div className="relative w-full aspect-square rounded-[2rem] bg-gradient-to-b from-slate-50 to-blue-50/50 flex items-center justify-center p-3 mb-4 overflow-hidden">
+              {/* Background Image with Zoom Effect */}
+              <img
+                src={feature.image}
+                alt={feature.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+              />
 
-                <div className="absolute inset-0 bg-white/40 rounded-full scale-150 blur-2xl group-hover:bg-blue-100/50 transition-colors" />
+              {/* Dynamic Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-80" />
 
-                <img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="relative z-10 w-full h-full object-cover rounded-[0.5rem] shadow-sm transform transition-transform duration-500 group-hover:scale-110"
-                />
+              {/* Floating Glass Badge */}
+              <div className="absolute right-2 top-2 sm:right-4 sm:top-4 flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-3 h-3 sm:w-4 sm:h-4"
+                >
+                  <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clipRule="evenodd" />
+                </svg>
               </div>
 
-              <div className="text-center pb-3">
-                <h3 className="text-[13px] font-bold text-slate-700 leading-tight tracking-tight font-lexend px-1 group-hover:text-blue-600 transition-colors">
+              {/* Animated Text Content */}
+              <div className="absolute bottom-0 left-0 w-full p-3 sm:p-6 text-white transition-transform duration-300 group-hover:-translate-y-1">
+                <h3 className="text-sm sm:text-2xl font-bold tracking-tight font-lexend leading-tight mb-1">
                   {feature.title}
                 </h3>
+                <p className="text-[10px] sm:text-sm font-light text-gray-200 line-clamp-1 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
+                  {feature.description || "Dramatic coastlines"}
+                </p>
 
-                <div className="mt-2 w-1 h-1 bg-blue-400 rounded-full mx-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                {/* Animated Underline */}
+                <div className="h-0.5 w-0 bg-white/60 transition-all duration-500 group-hover:w-12 mt-2 rounded-full" />
               </div>
-            </div>
-          ))}
-        </div>
-        <h1 className="text-2xl font-bold text-center sm:hidden">3</h1>
-        <div className="flex sm:hidden  grid grid-cols-2 gap-3  ">
-          {features.slice(0, 2).map((feature, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-tl-[17%] rounded-br-[17%] p-4  shadow-sm border-b-2 border-l-2 border-r-2 border-blue-100 flex flex-col items-center"
-            >
-              <div className="w-full h-24 rounded-tl-[17%] rounded-br-[17%] bg-[#F1F5F9] flex items-center justify-center   mb-3 overflow-hidden">
-                <img
-                  src={feature.image}
-                  alt={feature.title}
-                  className="max-w-full max-h-full object-contain rounded-tl-[17%] rounded-br-[17%]"
-                />
-              </div>
-
-              <div className="text-center pb-2">
-                <h3 className="text-[12px] font-[500] text-slate-600 leading-tight text-center px-2 font-lexend">
-                  {feature.title}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h1 className="text-2xl font-bold text-center sm:hidden">4</h1>
-        <div className="grid grid-cols-2 sm:hidden  gap-5 px-4 py-4">
-          {features.slice(0, 2).map((feature, idx) => (
-            <div key={idx} className="relative group">
-              {/* Decorative back layer */}
-              <div className="absolute inset-0 bg-blue-100 rounded-2xl rotate-3  rotate-6 group-hover:rotate-8 transition-transform" />
-              {/* Main Card */}
-              <div className="relative bg-white rounded-2xl p-3 border border-blue-50 flex flex-col items-center">
-                <div className="w-full aspect-video rounded-xl bg-slate-50 mb-3 overflow-hidden">
-                  <img src={feature.image} className="w-full h-full object-cover" />
-                </div>
-                <h3 className="text-[13px] font-bold text-slate-700 font-lexend leading-none mb-1">
-                  {feature.title}
-                </h3>
-                <div className="h-1 w-8 bg-blue-600 rounded-full" />
-              </div>
-            </div>
-          ))}
-        </div>
-        <h1 className="text-2xl font-bold text-center sm:hidden">5</h1>
-
-        <div className="grid grid-cols-2 sm:hidden  gap-6 px-5">
-          {features.slice(0, 2).map((feature, idx) => (
-            <div key={idx} className="flex flex-col items-center group">
-              <div className="relative w-full aspect-square rounded-full p-1 bg-white shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff] transition-all group-hover:shadow-inner">
-                <div className="w-full h-full rounded-full overflow-hidden border-4 border-white">
-                  <img src={feature.image} className="w-full h-full object-cover" />
-                </div>
-              </div>
-              <h3 className="mt-4 text-[13px] font-semibold text-slate-600 font-lexend text-center group-hover:text-blue-600 transition-colors">
-                {feature.title}
-              </h3>
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-2 sm:hidden  gap-3 px-4">
-          {features.slice(0, 2).map((feature, idx) => (
-            <div key={idx} className="bg-white border-2 border-slate-900 rounded-xl p-0 overflow-hidden shadow-[4px_4px_0px_#0f172a] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all">
-              <div className="h-24 bg-slate-100 border-b-2 border-slate-900">
-                <img src={feature.image} className="w-full h-full object-cover" />
-              </div>
-              <div className="p-3 bg-white">
-                <h3 className="text-[12px] font-black text-slate-900 leading-tight">
-                  {feature.title}
-                </h3>
-              </div>
-            </div>
-          ))}
-        </div>
-        <h1 className="text-2xl font-bold text-center sm:hidden">6</h1>
-        <div className="grid grid-cols-2 sm:hidden  gap-4 px-4 py-2">
-          {features.slice(0, 2).map((feature, idx) => (
-            <div key={idx} className="flex flex-col items-center  rounded-tl-[17%] rounded-br-[17%]">
-              <div className="relative w-full overflow-hidden rounded-tl-[17%] rounded-br-[17%]   p-1 group">
-                <div className="bg-white rounded-tl-[17%] rounded-br-[17%]   overflow-hidden aspect-[4/5]">
-                  <img src={feature.image} className="w-full h-full object-cover   group-hover:grayscale-0 transition-all duration-500" />
-                </div>
-                {/* Animated Badge */}
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white px-2 py-1  rounded-tl-[17%] rounded-br-[17%] shadow-md">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-ping" />
-                </div>
-              </div>
-              <h3 className="mt-2 text-[12px] font-bold text-slate-500 font-lexend text-center">
-                {feature.title}
-              </h3>
             </div>
           ))}
         </div>

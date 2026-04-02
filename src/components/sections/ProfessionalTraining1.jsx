@@ -30,7 +30,8 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
-        imageOffset: "-top-12 sm:-top-16",
+        imageOffsetMobile: "-top-2",
+        imageOffset: "md:-top-14 lg:-top-20",
     },
     {
         id: "bike",
@@ -45,7 +46,8 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
-        imageOffset: "-top-14 sm:-top-14",
+        imageOffsetMobile: "-top-0",
+        imageOffset: "md:-top-16 lg:-top-20",
     },
     {
         id: "license",
@@ -60,7 +62,8 @@ const trainings = [
         accentColor: "text-indigo-600",
         btnColor: "bg-indigo-600",
         glowColor: "bg-indigo-400",
-        imageOffset: "-top-13 sm:-top-14",
+        imageOffsetMobile: "-top-2",
+        imageOffset: "md:-top-15 lg:-top-20",
     },
 ];
 
@@ -74,7 +77,7 @@ const ProfessionalTraining1 = () => {
                 />
 
                 {/* DESKTOP GRID */}
-                <div className="hidden lg:grid gap-8 pt-16 lg:grid-cols-3">
+                <div className="hidden lg:grid gap-8 pt-16 lg:grid-cols-3 ">
                     {trainings.map((item) => (
                         <Card item={item} key={item.id} />
                     ))}
@@ -139,19 +142,19 @@ const ProfessionalTraining1 = () => {
 // CLEANER, MODERN CARD COMPONENT
 const Card = ({ item }) => {
     return (
-        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-visible mb-6 mt-20 z-20`}>
+        <article className={`group relative flex flex-col rounded-[2.5rem] ${item.bgColor} border border-slate-100 shadow-sm transition-all duration-700 ease-out hover:shadow-xl hover:-translate-y-2 overflow-hidden md:overflow-visible mb-6 mt-8 md:mt-20 z-20`}>
 
             {/* Decorative Blur Background */}
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
 
             {/* IMAGE CONTAINER */}
-            <div className="relative w-full sm:h-44 h-22 sm:mb-8 mb-6 overflow-visible bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
+            <div className="relative w-full sm:h-48 h-28 sm:mb-10 mb-8 overflow-hidden md:overflow-visible bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
                 <Image
                     src={item.image}
                     alt={item.title}
                     width={220}
                     height={140}
-                    className={`h-auto w-[150px] sm:w-[190px] object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 absolute ${item.imageOffset || "-top-12 sm:-top-14"} z-20`}
+                    className={`h-auto min-w-[130px] w-[125px] sm:min-w-[220px] sm:w-[238px] object-contain drop-shadow-2xl transition-transform duration-700 ease-out group-hover:scale-105 group-hover:-translate-y-1 absolute ${item.imageOffsetMobile || "-top-3"} md:top-0 ${item.imageOffset} z-20`}
                 />
             </div>
 
