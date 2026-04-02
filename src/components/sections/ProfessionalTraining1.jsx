@@ -20,9 +20,9 @@ const trainings = [
     {
         id: "car",
         title: "Car Driving Classes",
-        description: "Master the art of executive driving with our signature sedan curriculum.",
+        description: "Learn to drive with confidence through structured lessons, real-road practice, and expert guidance designed for beginners and learners of all levels",
         image: "/images/car-removebg-preview.png",
-        features: ["Learn step-by-step", "Practice in traffic", "Get ready for test"],
+        features: ["Step-by-step practical learning", "Real traffic driving practice", "Test-ready training support"],
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "Car",
         // New Design Tokens
@@ -36,9 +36,9 @@ const trainings = [
     {
         id: "bike",
         title: "Bike Training",
-        description: "Agile movement and high-performance safety for two-wheeled enthusiasts.",
+        description: "Build control, balance, and road confidence with guided bike training that helps you ride safely and independently in real traffic conditions.",
         image: "/images/Bike-removebg-preview.png",
-        features: ["Dynamic balance tech", "Defensive maneuvering", "Track-ready precision"],
+        features: ["Balance and control practice", "Safe riding techniques", "Traffic-ready confidence building"],
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "Bike",
         // New Design Tokens
@@ -52,9 +52,9 @@ const trainings = [
     {
         id: "license",
         title: "License Assistance",
-        description: "Bureaucracy managed. We handle the paperwork, you handle the road.",
+        description: "Get complete support for your driving license process with expert help for documentation, slot booking, and application guidance.",
         image: "/images/license-removebg-preview.png",
-        features: ["Document verification", "Slot booking priority", "Zero-stress filing"],
+        features: ["Document guidance support", "Slot booking assistance", "Smooth and stress-free process"],
         linkText: "CHOOSE YOUR PACKAGE",
         drivingType: "License",
         // New Design Tokens
@@ -164,18 +164,18 @@ const Card = ({ item }) => {
                     {item.title}
                 </h3>
 
-                <p className="sm:mb-6 mb-4 sm:text-[15px] text-[13px] text-slate-600 leading-relaxed font-medium">
+                <p className="sm:mb-6 mb-4 sm:text-[15px] text-[13px] text-slate-500 leading-relaxed font-medium">
                     {item.description}
                 </p>
 
                 {/* FEATURE LIST */}
-                <ul className="sm:mb-4 mb-3 space-y-1 sm:space-y-4">
+                <ul className="  space-y-1 sm:space-y-3">
                     {item.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-3 transition-transform duration-500 ease-out group-hover:translate-x-0.5">
                             <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm transition-all duration-500 ease-out group-hover:shadow-md`}>
                                 <CheckCircle2 className={`h-3 w-3 sm:h-4 sm:w-4 ${item.accentColor}`} />
                             </div>
-                            <span className="sm:text-sm text-[12px] sm:font-bold font-medium text-slate-700   tracking-tight">{feature}</span>
+                            <span className="sm:text-sm text-[12px] sm:font-bold font-medium text-slate-600 font-lexend  tracking-tight">{feature}</span>
                         </li>
                     ))}
                 </ul>
