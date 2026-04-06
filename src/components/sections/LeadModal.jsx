@@ -67,7 +67,7 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
             try {
                 const res = await fetch("/api/enquiry", {
                     method: "POST",
-                    headers: { "content-type": "application/json" },
+                    headers: { "content-type": "application/json" },    
                     body: JSON.stringify({
                         ...values,
                         packageMeta: submissionMeta?.selectedPackage || null,
@@ -178,18 +178,18 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
 
                                 <div className="flex items-center justify-between">
                                     <span className="text-slate-500">Base Price</span>
-                                    <span className="font-semibold text-slate-900">${Number(data?.packageDetails?.price || 0).toFixed(2)}</span>
+                                    <span className="font-semibold text-slate-900">₹{Number(data?.packageDetails?.price || 0).toFixed(2)}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="text-slate-500">Tax ({Math.round(Number(data?.packageDetails?.taxRate || 0) * 100)}%)</span>
                                     <span className="font-semibold text-slate-900">
-                                        ${Number(data?.packageDetails?.taxAmount || 0).toFixed(2)}
+                                        ₹{Number(data?.packageDetails?.taxAmount || 0).toFixed(2)}
                                     </span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="text-slate-500">Add-ons Total</span>
                                     <span className="font-semibold text-slate-900">
-                                        ${Number((data?.packageDetails?.addons || []).reduce((sum, addon) => sum + Number(addon?.price || 0), 0)).toFixed(2)}
+                                        ₹{Number((data?.packageDetails?.addons || []).reduce((sum, addon) => sum + Number(addon?.price || 0), 0)).toFixed(2)}
                                     </span>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                                         {data.packageDetails.addons.map((addon) => (
                                             <li key={addon.id || addon.title} className="flex items-center justify-between text-sm">
                                                 <span className="text-slate-600">{addon.title}</span>
-                                                <span className="font-semibold text-slate-900">${Number(addon.price || 0).toFixed(2)}</span>
+                                                <span className="font-semibold text-slate-900">₹{Number(addon.price || 0).toFixed(2)}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -216,7 +216,7 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                                         Total
                                     </span>
                                     <span className="text-[28px] sm:text-[30px] leading-none font-extrabold tracking-tight text-slate-900">
-                                        ${Number(data?.packageDetails?.total || 0).toFixed(0)}
+                                        ₹{Number(data?.packageDetails?.total || 0).toFixed(0)}
                                     </span>
                                 </div>
                             </div>

@@ -1,12 +1,10 @@
 "use client";
 
-import { Check } from "lucide-react";
-
 export function AddonItem({ addon, checked, onToggle }) {
   const finalPrice = Number(addon?.price || 0);
   const basePrice = Number(addon?.base_price || 0);
-  const discountAmount = Number(addon?.discounted_base_price || 0);
-  const hasDiscount = discountAmount > 0 && basePrice > finalPrice;
+  const offAmount = Math.max(basePrice - finalPrice, 0);
+  const hasDiscount = offAmount > 0;
 
   return (
     <label
@@ -23,8 +21,13 @@ export function AddonItem({ addon, checked, onToggle }) {
         onChange={() => onToggle(addon.id)}
         className="sr-only"
       />
-      <span className="flex h-5 w-5 sm:h-6 sm:w-6 items-center justify-center rounded-full   text-white shadow-sm">
-        {checked ? <Check className="h-3 w-3 sm:h-6 sm:w-6 text-white bg-blue-600 rounded-full p-1 border border-blue-600" strokeWidth={2} /> : null}
+      <span
+        className={[
+          "flex h-5 w-5 shrink-0 self-center items-center justify-center rounded-full border",
+          checked ? "border-blue-600 bg-blue-600" : "border-slate-200 bg-white",
+        ].join(" ")}
+      >
+        {checked ? <span className="h-1.5 w-1.5 rounded-full bg-white" /> : null}
       </span>
       <div className="flex-1">
         <p className="text-[14px] sm:text-[18px] md:text-[18px] font-bold leading-tight text-slate-800">{addon.title}</p>
@@ -32,7 +35,7 @@ export function AddonItem({ addon, checked, onToggle }) {
           <p className="text-[11px] sm:text-sm font-medium leading-5 sm:leading-6 text-slate-500">{addon.description}</p>
         ) : null}
       </div>
-      <div className="text-right leading-none">
+      <div className="shrink-0 self-center text-right leading-none">
         <div className="text-[20px] sm:text-[20px] md:text-[24px] font-black tracking-tight text-slate-800">
           +₹{finalPrice.toLocaleString("en-IN")}
         </div>
@@ -41,7 +44,7 @@ export function AddonItem({ addon, checked, onToggle }) {
             <span className="mr-2 text-red-500 line-through">
               ₹{basePrice.toLocaleString("en-IN")}
             </span>
-            <span>₹{discountAmount.toLocaleString("en-IN")} off</span>
+            <span>₹{offAmount.toLocaleString("en-IN")} off</span>
           </div>
         ) : null}
       </div>

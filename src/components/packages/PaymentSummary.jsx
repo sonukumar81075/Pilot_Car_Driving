@@ -1,7 +1,7 @@
 "use client";
 
 function money(value) {
-  return `$${Number(value || 0).toFixed(2)}`;
+  return `₹${Number(value || 0).toFixed(2)}`;
 }
 
 export function PaymentSummary({
@@ -23,7 +23,7 @@ export function PaymentSummary({
       </h3>
       <div className="mt-4 sm:mt-6 space-y-2.5 sm:space-y-3 text-xs sm:text-sm">
         <div className="flex items-center justify-between text-slate-700">
-          <span className="font-medium">{baseLabel}</span>
+          <span className="font-medium">Package</span>
           <span className="font-semibold text-slate-900">{money(basePrice)}</span>
         </div>
         <div className="flex items-center justify-between text-slate-700">
@@ -38,7 +38,7 @@ export function PaymentSummary({
           <span className="font-semibold text-slate-900">{money(subtotal)}</span>
         </div>
         <div className="flex items-center justify-between text-slate-700">
-          <span className="font-medium">Tax ({Math.round(Number(taxRate || 0) * 100)}%)</span>
+          <span className="font-medium">Taxes and Fees</span>
           <span className="font-semibold text-slate-900">{money(taxAmount)}</span>
         </div>
       </div>

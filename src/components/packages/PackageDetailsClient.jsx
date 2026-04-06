@@ -10,9 +10,8 @@ import { Container } from "../ui/Container";
 function getFinalPrice(pkg) {
   if (!pkg) return 0;
   const base = Number(pkg.base_price || 0);
-  const discount = Number(pkg.discounted_base_price || 0);
-  const finalPrice = Math.max(base - discount, 0);
-  return finalPrice > 0 ? finalPrice : base;
+  const discounted = Number(pkg.discounted_base_price || 0);
+  return discounted > 0 ? discounted : base;
 }
 
 function getPackageFeatures(pkg) {
@@ -34,7 +33,7 @@ function getPackageFeatures(pkg) {
 
 export function PackageDetailsClient({ packageOptions, initialPackageId, addons, packageTypeLabel }) {
   const [selectedPackageId, setSelectedPackageId] = useState(Number(initialPackageId));
-  const [selectedAddonIds, setSelectedAddonIds] = useState([]);
+  const [selectedAddonId, setSelectedAddonId] = useState(null);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
 
   const selectedPackage = useMemo(
@@ -43,22 +42,20 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
   );
 
   const addonsTotal = useMemo(
-    () =>
-      addons
-        .filter((addon) => selectedAddonIds.includes(addon.id))
-        .reduce((acc, addon) => acc + Number(addon.price || 0), 0),
-    [addons, selectedAddonIds]
+    () => {
+      const selectedAddon = addons.find((addon) => addon.id === selectedAddonId);
+      return Number(selectedAddon?.price || 0);
+    },
+    [addons, selectedAddonId]
   );
 
   const selectedAddons = useMemo(
-    () => addons.filter((addon) => selectedAddonIds.includes(addon.id)),
-    [addons, selectedAddonIds]
+    () => addons.filter((addon) => addon.id === selectedAddonId),
+    [addons, selectedAddonId]
   );
 
   function toggleAddon(addonId) {
-    setSelectedAddonIds((current) =>
-      current.includes(addonId) ? current.filter((id) => id !== addonId) : [...current, addonId]
-    );
+    setSelectedAddonId((current) => (current === addonId ? null : addonId));
   }
 
   const basePrice = getFinalPrice(selectedPackage);
@@ -125,7 +122,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     setIsLeadModalOpen(true);
   }
 
- 
+
   return (
     <Container>
       <div className="mx-auto w-full  ">
@@ -144,7 +141,13 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
             <h2 className="mb-4 text-xs font-black uppercase sm:tracking-[0.10em] tracking-[1px] text-slate-600">
               1 - Select Primary Package
             </h2>
-            <div className="grid gap-6 sm:gap-4 md:grid-cols-2">
+            <div
+              className={
+                packageOptions.length === 1
+                  ? "grid grid-cols-1 gap-6 sm:gap-4"
+                  : "grid gap-6 sm:gap-4 md:grid-cols-2"
+              }
+            >
               {packageOptions.map((pkg) => (
                 <PackageOptionCard
                   key={pkg.package_id}
@@ -155,25 +158,29 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
               ))}
             </div>
 
-            <h3 className="mb-4 mt-8 text-xs font-black uppercase sm:tracking-[0.10em] tracking-[1px] text-slate-600">
-              2 - Available Add-ons
-            </h3>
-            <div className="space-y-3">
-              {addons.length === 0 ? (
-                <div className="rounded-2xl border border-slate-200/80 bg-white/90 p-5 text-sm text-slate-500 shadow-sm backdrop-blur">
-                  No add-ons available for this package right now.
+            {!isLicensePackage ? (
+              <>
+                <h3 className="mb-4 mt-8 text-xs font-black uppercase sm:tracking-[0.10em] tracking-[1px] text-slate-600">
+                  2 - Available Add-ons
+                </h3>
+                <div className="space-y-3">
+                  {addons.length === 0 ? (
+                    <div className="rounded-2xl border border-slate-200/80 bg-white/90 p-5 text-sm text-slate-500 shadow-sm backdrop-blur">
+                      No add-ons available for this package right now.
+                    </div>
+                  ) : (
+                    addons.map((addon) => (
+                      <AddonItem
+                        key={addon.id}
+                        addon={addon}
+                        checked={selectedAddonId === addon.id}
+                        onToggle={toggleAddon}
+                      />
+                    ))
+                  )}
                 </div>
-              ) : (
-                addons.map((addon) => (
-                  <AddonItem
-                    key={addon.id}
-                    addon={addon}
-                    checked={selectedAddonIds.includes(addon.id)}
-                    onToggle={toggleAddon}
-                  />
-                ))
-              )}
-            </div>
+              </>
+            ) : null}
           </section>
 
           <div className="lg:sticky lg:top-24 lg:h-fit">

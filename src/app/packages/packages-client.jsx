@@ -81,9 +81,10 @@ export default function PackagesClient() {
 
   const filtered = useMemo(() => {
     const list = Array.isArray(packages) ? packages : [];
+    const activeOnly = list.filter((p) => String(p?.status || "").toUpperCase() === "AC");
     const byType = activeType
-      ? list.filter((p) => String(p?.driving_type).toLowerCase() === activeType.toLowerCase())
-      : list;
+      ? activeOnly.filter((p) => String(p?.driving_type).toLowerCase() === activeType.toLowerCase())
+      : activeOnly;
 
     // Sort by show_order asc (bonus)
     const sorted = [...byType].sort((a, b) => (a?.show_order ?? 999) - (b?.show_order ?? 999));

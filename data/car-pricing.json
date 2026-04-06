@@ -13,19 +13,6 @@
       ],
       "price": "149",
       "isPopular": false
-    },
-    {
-      "title": "Premium Car Training",
-      "icon": "car",
-      "description": "Extended training with additional practice time, night driving, and mock driving tests for complete exam readiness.",
-      "features": [
-        "15+ practical driving sessions",
-        "Highway & night driving practice",
-        "Mock driving test with feedback",
-        "Personalized improvement checklist"
-      ],
-      "price": "219",
-      "isPopular": true
     }
   ]
 }

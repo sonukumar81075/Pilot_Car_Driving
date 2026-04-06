@@ -16,9 +16,10 @@ export function PackageCard({ pkg }) {
   const router = useRouter();
   const img = toImageUrl(pkg?.image_url);
   const basePrice = Number(pkg?.base_price || 0);
-  const discount = Number(pkg?.discounted_base_price || 0);
-  const finalPrice = Math.max(basePrice - discount, 0) || basePrice;
-  const hasDiscount = discount > 0 && finalPrice < basePrice;
+  const discountedPrice = Number(pkg?.discounted_base_price || 0);
+  const finalPrice = discountedPrice > 0 ? discountedPrice : basePrice;
+  const offAmount = Math.max(basePrice - finalPrice, 0);
+  const hasDiscount = offAmount > 0;
   const duration = typeof pkg?.duration === "number" ? pkg.duration : Number(pkg?.duration);
   const isRecommended = Boolean(pkg?.recommended);
 
@@ -108,7 +109,7 @@ export function PackageCard({ pkg }) {
                 ₹{Number(basePrice || 0).toLocaleString("en-IN")}
               </span>
               <span className="text-xs font-semibold text-slate-600 md:text-sm">
-                ₹{Number(discount || 0).toLocaleString("en-IN")} off
+                ₹{Number(offAmount || 0).toLocaleString("en-IN")} off
               </span>
             </div>
           ) : null}

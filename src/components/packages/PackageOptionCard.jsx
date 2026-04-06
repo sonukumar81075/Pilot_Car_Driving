@@ -4,9 +4,8 @@ import { Check } from "lucide-react";
 
 function getFinalPrice(pkg) {
   const base = Number(pkg?.base_price || 0);
-  const discount = Number(pkg?.discounted_base_price || 0);
-  const finalPrice = Math.max(base - discount, 0);
-  return finalPrice > 0 ? finalPrice : base;
+  const discounted = Number(pkg?.discounted_base_price || 0);
+  return discounted > 0 ? discounted : base;
 }
 
 export function PackageOptionCard({ pkg, selected, onSelect }) {
@@ -86,7 +85,7 @@ export function PackageOptionCard({ pkg, selected, onSelect }) {
       <div className="relative mt-4 sm:mt-6 border-t border-slate-100 pt-3 sm:pt-4">
         <div className="flex items-end gap-1">
           <span className="text-[20px] leading-none sm:text-3xl font-extrabold tracking-tight text-slate-900">
-            ${finalPrice.toFixed(0)}
+            ₹{finalPrice.toFixed(0)}
           </span>
           <span className="pb-1 text-xs font-bold uppercase tracking-wide text-slate-400">
             / Total

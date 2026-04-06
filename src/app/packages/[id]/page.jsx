@@ -44,9 +44,8 @@ function toPackageOption(input) {
 
 function getFinalPrice(pkg) {
   const base = toNumber(pkg?.base_price);
-  const discount = toNumber(pkg?.discounted_base_price);
-  const finalPrice = Math.max(base - discount, 0);
-  return finalPrice > 0 ? finalPrice : base;
+  const discounted = toNumber(pkg?.discounted_base_price);
+  return discounted > 0 ? discounted : base;
 }
 
 function normalizeAddon(raw, index) {
@@ -55,16 +54,15 @@ function normalizeAddon(raw, index) {
   const title = String(raw.title || raw.name || `Add-on ${index + 1}`);
   const description = raw.description ? String(raw.description) : "";
   const base = toNumber(raw.base_price || raw.price || raw.amount || raw.addon_price);
-  const discount = toNumber(raw.discounted_base_price);
-  const finalPrice = Math.max(base - discount, 0);
-  const price = finalPrice > 0 ? finalPrice : base;
+  const discounted = toNumber(raw.discounted_base_price);
+  const price = discounted > 0 ? discounted : base;
   return {
     id,
     title,
     description,
     price,
     base_price: base,
-    discounted_base_price: discount,
+    discounted_base_price: discounted,
   };
 }
 
@@ -115,6 +113,7 @@ export default async function PackageDetailsPage({ params }) {
     selectedMatches.find((pkg) => toNumber(pkg?.package_id) === packageId) ||
     all.find((pkg) => toNumber(pkg?.package_id) === packageId);
   if (!selectedRaw) notFound();
+  if (String(selectedRaw?.status || "").toUpperCase() !== "AC") notFound();
 
   const selected = toPackageOption(selectedRaw);
   const selectedDrivingType = String(selectedRaw?.driving_type || "");
@@ -127,53 +126,12 @@ export default async function PackageDetailsPage({ params }) {
     )
     .map(toPackageOption);
 
-  // Keep 2 cards, but always include the clicked/selected package id.
-  const isTwoPlanType = ["car", "bike"].includes(String(selectedDrivingType).toLowerCase());
-  let packageOptions = [{ ...selected }];
-
-  if (isTwoPlanType) {
-    const uniqueSameType = Array.from(
-      new Map(sameTypePackages.map((pkg) => [pkg.package_id, pkg])).values()
-    );
-    const selectedFromType =
-      uniqueSameType.find((pkg) => pkg.package_id === selected.package_id) || selected;
-
-    const byPrice = [...uniqueSameType].sort((a, b) => getFinalPrice(a) - getFinalPrice(b));
-    const basic = byPrice[0];
-    const premium = byPrice.length > 1 ? byPrice[byPrice.length - 1] : byPrice[0];
-
-    let twoPlans;
-    const selectedIsEdge =
-      selectedFromType?.package_id === basic?.package_id ||
-      selectedFromType?.package_id === premium?.package_id;
-
-    if (selectedIsEdge) {
-      twoPlans = [basic, premium].filter(Boolean);
-    } else {
-      const counterpart = getFinalPrice(selectedFromType) >= getFinalPrice(premium) ? basic : premium;
-      twoPlans = [selectedFromType, counterpart].filter(Boolean);
-    }
-
-    const byDisplayedPrice = [...twoPlans].sort((a, b) => getFinalPrice(a) - getFinalPrice(b));
-    packageOptions = byDisplayedPrice.map((pkg, index) => ({
-      ...pkg,
-      uiTier: index === 0 ? "Basic Training" : "Premium Training",
-      uiBadge: index === 0 ? "Essentials" : "Advanced",
-      uiMostPopular: index === 1,
-    }));
-  } else {
-    packageOptions = [
-      {
-        ...selected,
-        uiTier: selected.name || "Selected Package",
-        uiBadge: "Essentials",
-        uiMostPopular: false,
-      },
-    ];
-  }
+  // Show only the selected package on package details page.
+  const packageOptions = [{ ...selected }];
 
   const initialPackageId = selected.package_id;
-  const addons = await fetchAddonsByType(selectedDrivingType);
+  const isLicenseType = String(selectedDrivingType || "").toLowerCase().includes("license");
+  const addons = isLicenseType ? [] : await fetchAddonsByType(selectedDrivingType);
   const packageTypeLabel = selectedDrivingType || "Car";
 
   return (
