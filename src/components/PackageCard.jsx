@@ -49,16 +49,17 @@ export function PackageCard({ pkg }) {
         {img ? (
           <img
             src={img}
-            alt={pkg?.name || "Package image"}
+            alt={pkg?.name}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-100 to-slate-50">
-            <div className="rounded-xl bg-white px-2 py-1 text-[10px] font-semibold text-slate-600 shadow-sm md:rounded-2xl md:px-4 md:py-2 md:text-sm">
-              No image
-            </div>
-          </div>
+          <img
+            src="/images/No image available placeholder.png"
+            alt={pkg?.name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
         )}
 
         {isRecommended ? (
