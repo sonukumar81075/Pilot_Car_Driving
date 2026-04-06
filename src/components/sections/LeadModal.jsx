@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { X, ChevronDown, Loader2, Check } from 'lucide-react';
@@ -45,8 +45,26 @@ function extractZones(payload) {
     return Array.from(new Set(mapped));
 }
 
+const SUBMIT_DELAY_MS = 2000;
+/** Time to show the success message before auto-closing the modal */
+const SUCCESS_CLOSE_DELAY_MS = 2500;
+/** Backdrop + panel fade/scale duration (must match CSS transition duration) */
+const MODAL_EXIT_MS = 320;
+
+function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
+    const onCloseRef = useRef(onClose);
+    onCloseRef.current = onClose;
+
+    const closingRef = useRef(false);
+    const [isClosing, setIsClosing] = useState(false);
+    const [entered, setEntered] = useState(false);
+
     const [submitError, setSubmitError] = useState("");
+    const [submitSuccess, setSubmitSuccess] = useState(false);
     const [zones, setZones] = useState(Array.isArray(data?.zones) ? data.zones : []);
     const [zonesLoading, setZonesLoading] = useState(false);
     const isCheckoutSummary = Boolean(data?.checkoutSummary);
@@ -60,14 +78,15 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
     const formik = useFormik({
         initialValues: { fullName: '', phoneNumber: '', zone: 'Choose a zone' },
         validationSchema,
-        onSubmit: async (values, { setSubmitting }) => {
-            console.log(values);
-            console.log(submissionMeta);
+        onSubmit: async (values, { setSubmitting, resetForm }) => {
             setSubmitError("");
+            setSubmitSuccess(false);
             try {
+                await delay(SUBMIT_DELAY_MS);
+
                 const res = await fetch("/api/enquiry", {
                     method: "POST",
-                    headers: { "content-type": "application/json" },    
+                    headers: { "content-type": "application/json" },
                     body: JSON.stringify({
                         ...values,
                         packageMeta: submissionMeta?.selectedPackage || null,
@@ -84,7 +103,8 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                     return;
                 }
 
-                onClose();
+                setSubmitSuccess(true);
+                resetForm({ values: { fullName: "", phoneNumber: "", zone: "Choose a zone" } });
             } catch (e) {
                 setSubmitError("Network error. Please try again.");
             } finally {
@@ -92,6 +112,46 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
             }
         },
     });
+
+    const closeWithAnimation = useCallback(() => {
+        if (!isOpen || closingRef.current) return;
+        closingRef.current = true;
+        setIsClosing(true);
+        window.setTimeout(() => {
+            onCloseRef.current();
+            closingRef.current = false;
+            setIsClosing(false);
+        }, MODAL_EXIT_MS);
+    }, [isOpen]);
+
+    const closeWithAnimationRef = useRef(closeWithAnimation);
+    closeWithAnimationRef.current = closeWithAnimation;
+
+    useEffect(() => {
+        if (!isOpen) {
+            setEntered(false);
+            setIsClosing(false);
+            closingRef.current = false;
+            return;
+        }
+        setSubmitError("");
+        setSubmitSuccess(false);
+        setIsClosing(false);
+        closingRef.current = false;
+        setEntered(false);
+        const id = requestAnimationFrame(() => {
+            requestAnimationFrame(() => setEntered(true));
+        });
+        return () => cancelAnimationFrame(id);
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (!submitSuccess || !isOpen) return;
+        const id = setTimeout(() => {
+            closeWithAnimationRef.current();
+        }, SUCCESS_CLOSE_DELAY_MS);
+        return () => clearTimeout(id);
+    }, [submitSuccess, isOpen]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -128,17 +188,39 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
 
     if (!isOpen) return null;
 
-    return (
-        <div onClick={(e) => {
-            // Only close when clicking on the backdrop, not inside the modal card
-            if (e.target === e.currentTarget) {
-                onClose();
-            }
-        }} className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 font-sans">
-            {/* Added overflow-y-auto and max-height for mobile */}
-            <div className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[1.5rem] md:rounded-[2.5rem] bg-white shadow-2xl flex py-2 sm:py-0 flex-col md:flex-row">
+    const panelVisible = entered && !isClosing;
+    const backdropInteractive = panelVisible;
 
-                <button onClick={onClose} className="absolute right-4 top-4 md:right-6 md:top-6 z-20 text-slate-400 hover:text-slate-600 cursor-pointer bg-white rounded-full p-1 shadow-sm">
+    return (
+        <div
+            onClick={(e) => {
+                if (!backdropInteractive) return;
+                if (e.target === e.currentTarget) {
+                    closeWithAnimation();
+                }
+            }}
+            style={{ transitionDuration: `${MODAL_EXIT_MS}ms` }}
+            className={`fixed inset-0 z-50 flex items-center justify-center p-4 font-sans transition-[opacity,backdrop-filter] ease-out ${
+                panelVisible ? "bg-slate-900/60 backdrop-blur-sm opacity-100" : "bg-slate-900/60 opacity-0 backdrop-blur-none"
+            } ${backdropInteractive ? "" : "pointer-events-none"}`}
+            aria-hidden={!panelVisible}
+        >
+            {/* Added overflow-y-auto and max-height for mobile */}
+            <div
+                style={{ transitionDuration: `${MODAL_EXIT_MS}ms` }}
+                className={`relative w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-[1.5rem] md:rounded-[2.5rem] bg-white shadow-2xl flex py-2 sm:py-0 flex-col md:flex-row transition-[opacity,transform] ease-out will-change-[opacity,transform] ${
+                    panelVisible
+                        ? "translate-y-0 scale-100 opacity-100"
+                        : "translate-y-3 scale-[0.97] opacity-0"
+                }`}
+            >
+
+                <button
+                    type="button"
+                    onClick={closeWithAnimation}
+                    disabled={!backdropInteractive}
+                    className="absolute right-4 top-4 md:right-6 md:top-6 z-20 text-slate-400 hover:text-slate-600 cursor-pointer bg-white rounded-full p-1 shadow-sm disabled:pointer-events-none disabled:opacity-50"
+                >
                     <X size={20} />
                 </button>
 
@@ -261,6 +343,11 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                     </p>
 
                     <form className="mt-6 md:mt-8 space-y-4 md:space-y-6" onSubmit={formik.handleSubmit}>
+                        {submitSuccess ? (
+                            <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
+                                Thank you! Your enquiry was submitted successfully. Our team will contact you shortly.
+                            </div>
+                        ) : null}
                         {submitError ? (
                             <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
                                 {submitError}
@@ -271,8 +358,9 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                             <input
                                 name="fullName"
                                 {...formik.getFieldProps('fullName')}
+                                disabled={formik.isSubmitting || submitSuccess}
                                 placeholder="Enter your full name"
-                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-slate-900 ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)] '}`}
+                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-slate-900 disabled:cursor-not-allowed disabled:bg-slate-50 ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)] '}`}
                             />
                         </div>
 
@@ -281,8 +369,9 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                             <input
                                 name="phoneNumber"
                                 {...formik.getFieldProps('phoneNumber')}
+                                disabled={formik.isSubmitting || submitSuccess}
                                 placeholder="Enter your phone number"
-                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all  text-slate-900 ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
+                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all  text-slate-900 disabled:cursor-not-allowed disabled:bg-slate-50 ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                             />
                         </div>
 
@@ -292,7 +381,7 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                                 <select
                                     name="zone"
                                     {...formik.getFieldProps('zone')}
-                                    disabled={zonesLoading}
+                                    disabled={zonesLoading || formik.isSubmitting || submitSuccess}
                                     className={`w-full appearance-none rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-slate-900 ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
                                 >
                                     {zonesLoading ? (
@@ -317,10 +406,19 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
 
                         <button
                             type="submit"
-                            disabled={formik.isSubmitting}
+                            disabled={formik.isSubmitting || submitSuccess}
                             className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl   text-white btn-gradient btn-gradient-glow sm:py-4 py-2.5 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-60"
                         >
-                            {formik.isSubmitting ? <Loader2 className="animate-spin" /> : 'Get in Touch'}
+                            {formik.isSubmitting ? (
+                                <>
+                                    <Loader2 className="animate-spin" />
+                                    <span>Submitting…</span>
+                                </>
+                            ) : submitSuccess ? (
+                                "Submitted"
+                            ) : (
+                                "Get in Touch"
+                            )}
                         </button>
                     </form>
                 </div>

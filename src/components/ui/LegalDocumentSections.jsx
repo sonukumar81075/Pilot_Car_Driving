@@ -122,50 +122,54 @@ export function LegalDocumentSections({ sections }) {
 
   return (
     <div className={typo.legalSectionsStack}>
-      {sections.map((section) => {
-        const kind = contactKind(section);
+      <div className={typo.legalCard}>
+        <div className="space-y-10 md:space-y-12">
+          {sections.map((section) => {
+            const kind = contactKind(section);
 
-        return (
-          <section key={section.title} className={typo.legalCard}>
-            <h2 className={typo.legalH2}>{section.title}</h2>
+            return (
+              <section key={section.title} className="space-y-4">
+                <h2 className={typo.legalH2}>{section.title}</h2>
 
-            {kind === "privacy" ? (
-              <PrivacyContactBlock intro={section.body?.[0]} />
-            ) : kind === "support" ? (
-              <SupportContactBlock intro={section.body?.[0]} />
-            ) : kind === "address" ? (
-              <AddressContactBlock body={section.body} />
-            ) : section.isList ? (
-              <>
-                {section.body[0] ? (
-                  <p className={typo.legalListIntro}>{section.body[0]}</p>
-                ) : null}
-                <ul className={typo.legalUl}>
-                  {(section.listOutro
-                    ? section.body.slice(1, -1)
-                    : section.body.slice(1)
-                  ).map((item) => (
-                    <li key={item} className={typo.legalListItem}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                {section.listOutro && section.body.length > 1 ? (
-                  <p className={`mt-4 ${typo.legalBody}`}>
-                    {section.body[section.body.length - 1]}
-                  </p>
-                ) : null}
-              </>
-            ) : (
-              section.body?.map((para) => (
-                <p key={para} className={typo.legalBody}>
-                  {para}
-                </p>
-              ))
-            )}
-          </section>
-        );
-      })}
+                {kind === "privacy" ? (
+                  <PrivacyContactBlock intro={section.body?.[0]} />
+                ) : kind === "support" ? (
+                  <SupportContactBlock intro={section.body?.[0]} />
+                ) : kind === "address" ? (
+                  <AddressContactBlock body={section.body} />
+                ) : section.isList ? (
+                  <>
+                    {section.body[0] ? (
+                      <p className={typo.legalListIntro}>{section.body[0]}</p>
+                    ) : null}
+                    <ul className={typo.legalUl}>
+                      {(section.listOutro
+                        ? section.body.slice(1, -1)
+                        : section.body.slice(1)
+                      ).map((item) => (
+                        <li key={item} className={typo.legalListItem}>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    {section.listOutro && section.body.length > 1 ? (
+                      <p className={`mt-4 ${typo.legalBody}`}>
+                        {section.body[section.body.length - 1]}
+                      </p>
+                    ) : null}
+                  </>
+                ) : (
+                  section.body?.map((para) => (
+                    <p key={para} className={typo.legalBody}>
+                      {para}
+                    </p>
+                  ))
+                )}
+              </section>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }

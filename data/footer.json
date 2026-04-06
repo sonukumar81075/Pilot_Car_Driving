@@ -30,10 +30,6 @@
           "href": "mailto:careers@withpiloto.com"
         },
         {
-          "label": "Become a Pilot Professional",
-          "href": "/become-a-pilot-professional"
-        },
-        {
           "label": "Payments Disclosure",
           "href": "/payments-disclosure"
         },
@@ -55,16 +51,16 @@
           "href": "/privacy-policy"
         },
         {
-          "label": "Insurance Policy & Claim Procedure",
-          "href": "/insurance-policy"
+          "label": "Cookies Policy",
+          "href": "/cookies-policy"
         },
         {
           "label": "Insurance Terms & Conditions",
           "href": "/insurance-terms"
         },
         {
-          "label": "Cookies Policy",
-          "href": "/cookies-policy"
+          "label": "Insurance Policy & Claim Procedure",
+          "href": "/insurance-policy"
         }
       ]
     },

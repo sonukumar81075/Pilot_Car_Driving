@@ -175,13 +175,22 @@ export default function AccountDeletionPage() {
                                         </span>
                                     </label>
 
-                                    <button
+                                    {/* <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full py-4.5 bg-[#2563eb]  text-white rounded-full font-bold text-lg shadow-[0_12px_24px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                                        className="w-full py-4.5   text-white rounded-full font-bold text-lg shadow-[0_12px_24px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer  btn-gradient btn-gradient-glow r"
                                     >
                                         {isSubmitting ? "Submitting..." : "Submit Deletion Request"}
-                                    </button>
+                                    </button> */}
+                                    <div className="flex justify-center">
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className=" sm:w-[350px] w-full px-10 py-4.5   text-white rounded-full font-bold text-md shadow-[0_12px_24px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer  btn-gradient btn-gradient-glow r"
+                                        >
+                                            {isSubmitting ? "Submitting..." : "Submit Deletion Request"}
+                                        </button>
+                                    </div>
                                 </Form>
                             )}
                         </Formik>

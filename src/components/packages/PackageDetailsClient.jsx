@@ -7,6 +7,10 @@ import { PaymentSummary } from "./PaymentSummary";
 import LeadModal from "@/components/sections/LeadModal";
 import { Container } from "../ui/Container";
 
+/** Razorpay checkout for License Training Packages only (Car/Bike use the lead modal). */
+const LICENSE_TRAINING_RAZORPAY_URL =
+  process.env.NEXT_PUBLIC_RAZORPAY_LICENSE_PAYMENT_LINK || "https://rzp.io/rzp/6VNm6uEi";
+
 function getFinalPrice(pkg) {
   if (!pkg) return 0;
   const base = Number(pkg.base_price || 0);
@@ -66,7 +70,6 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
 
   const isLicensePackage = String(packageTypeLabel || "").toLowerCase().includes("license");
   const actionLabel = isLicensePackage ? "Pay Now" : "Interested";
-  const razorpayLink = process.env.NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK || "";
 
   const leadModalData = {
     checkoutSummary: true,
@@ -111,12 +114,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
 
   function handleActionClick() {
     if (isLicensePackage) {
-      if (razorpayLink) {
-        window.open(razorpayLink, "_blank", "noopener,noreferrer");
-      } else {
-        // eslint-disable-next-line no-console
-        console.warn("Set NEXT_PUBLIC_RAZORPAY_PAYMENT_LINK to enable Pay Now.");
-      }
+      window.open(LICENSE_TRAINING_RAZORPAY_URL, "_blank", "noopener,noreferrer");
       return;
     }
     setIsLeadModalOpen(true);

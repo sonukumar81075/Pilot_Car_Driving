@@ -2,7 +2,8 @@
 export const typo = {
   pageLegal: "md:pt-40 pt-28 bg-[#FFFFFF] font-lexend",
 
-  legalSectionsStack: "mx-auto max-w-5xl space-y-10 px-4 py-12 md:px-6",
+  /** Page padding around the legal document (single card sits inside). */
+  legalSectionsStack: "mx-auto max-w-5xl px-4 py-12 md:px-6",
   legalCard: "rounded-4xl border border-slate-100 bg-white p-6 shadow-sm md:p-8",
   legalH2:
     "mb-4 border-b border-slate-200 pb-3 font-sans text-xl font-bold tracking-tight text-blue-900 md:text-2xl",
