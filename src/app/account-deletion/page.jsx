@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/Container";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { MdCheckCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
@@ -89,7 +89,7 @@ export default function AccountDeletionPage() {
                             }}
                         >
                             {({ values, setFieldValue, isSubmitting }) => (
-                                <Form className="space-y-8">
+                                <Form className="space-y-4 md:space-y-6">
                                     {submitStatus.type ? (
                                         <div
                                             className={[
@@ -104,8 +104,8 @@ export default function AccountDeletionPage() {
                                     ) : null}
 
                                     {/* Account Type Selection */}
-                                    <div className="space-y-4">
-                                        <label className="text-sm font-bold text-slate-800">
+                                    <div>
+                                        <label className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">
                                             Type of Account <span className="text-rose-500">*</span>
                                         </label>
                                         <div className="grid grid-cols-2 gap-4">
@@ -129,35 +129,23 @@ export default function AccountDeletionPage() {
                                         />
                                     </div>
 
-                                    {/* Input Group */}
-                                    <div className="space-y-5">
+                                    {/* Input Group — matches Interested Lead? modal field styling */}
+                                    <div className="space-y-4 md:space-y-6">
                                         <CustomInput
                                             label="Registered Mobile Number"
                                             name="phone"
+                                            type="tel"
                                             placeholder="10-digit number"
                                             prefix="+91"
                                         />
                                         <CustomInput
                                             label="Registered Email ID (optional)"
                                             name="email"
+                                            type="email"
                                             placeholder="email@example.com"
                                         />
 
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold text-slate-800">Reason for leaving</label>
-                                            <Field
-                                                as="textarea"
-                                                name="reason"
-                                                rows={4}
-                                                className="w-full rounded-2xl border border-slate-200 p-5 text-sm font-sans focus:ring-4 focus:ring-blue-50 focus:border-blue-400 outline-none transition-all resize-none bg-[#fdfdfd]"
-                                                placeholder="Tell us how we can improve..."
-                                            />
-                                            <ErrorMessage
-                                                name="reason"
-                                                component="p"
-                                                className="text-xs text-rose-500"
-                                            />
-                                        </div>
+                                        <ReasonTextarea />
                                     </div>
 
                                     {/* Checkbox Warning Card */}
@@ -182,11 +170,11 @@ export default function AccountDeletionPage() {
                                     >
                                         {isSubmitting ? "Submitting..." : "Submit Deletion Request"}
                                     </button> */}
-                                    <div className="flex justify-center">
+                                    <div className="flex justify-center pt-2">
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className=" sm:w-[350px] w-full px-10 py-4.5   text-white rounded-full font-bold text-md shadow-[0_12px_24px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer  btn-gradient btn-gradient-glow r"
+                                            className="flex w-full max-w-[350px] cursor-pointer items-center justify-center gap-2 rounded-xl px-10 py-3.5 text-base font-bold text-white btn-gradient btn-gradient-glow shadow-lg transition-all hover:brightness-105 active:scale-[0.99] disabled:opacity-60 sm:py-4"
                                         >
                                             {isSubmitting ? "Submitting..." : "Submit Deletion Request"}
                                         </button>
@@ -270,22 +258,66 @@ function AccountTypeBtn({ active, onClick, title, sub }) {
     );
 }
 
-function CustomInput({ label, prefix, ...props }) {
+/** Input styling aligned with Lead modal (Interested Lead?) */
+const leadInputBase =
+    "w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-sm font-sans text-slate-900";
+
+function CustomInput({ label, prefix, name, type = "text", placeholder }) {
+    const [field, meta] = useField(name);
+    const hasError = meta.touched && meta.error;
+    const autoComplete =
+        name === "email" ? "email" : name === "phone" ? "tel" : "off";
+
     return (
-        <div className="space-y-2.5">
-            <label className="text-sm font-bold text-slate-800">{label}</label>
+        <div>
+            <label htmlFor={name} className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">
+                {label}
+            </label>
             <div className="relative flex items-center">
-                {prefix && (
-                    <div className="absolute left-5 text-sm font-bold text-slate-400 border-r border-slate-100 pr-4 mr-4 leading-none">
+                {prefix ? (
+                    <div className="pointer-events-none absolute left-4 z-[1] text-sm font-bold text-slate-400 border-r border-slate-100 pr-3 leading-none">
                         {prefix}
                     </div>
-                )}
-                <Field
-                    {...props}
-                    className={`w-full rounded-2xl border border-slate-200 py-4 text-sm font-sans focus:ring-4 focus:ring-blue-50 focus:border-blue-400 outline-none transition-all ${prefix ? 'pl-[4.5rem]' : 'pl-5'} pr-5 bg-[#fdfdfd]`}
+                ) : null}
+                <input
+                    {...field}
+                    id={name}
+                    type={type}
+                    placeholder={placeholder}
+                    autoComplete={autoComplete}
+                    className={`${leadInputBase} pr-5 ${prefix ? "pl-[4.25rem]" : "pl-5"} ${
+                        hasError
+                            ? "border-red-500 bg-red-50"
+                            : "border-slate-200 focus:border-[var(--brand)]"
+                    }`}
                 />
             </div>
-            <ErrorMessage name={props.name} component="p" className="text-xs text-rose-500 font-medium" />
+            {hasError ? <p className="text-xs text-rose-500 font-medium mt-1">{meta.error}</p> : null}
+        </div>
+    );
+}
+
+function ReasonTextarea() {
+    const [field, meta] = useField("reason");
+    const hasError = meta.touched && meta.error;
+
+    return (
+        <div>
+            <label htmlFor="reason" className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">
+                Reason for leaving
+            </label>
+            <textarea
+                {...field}
+                id="reason"
+                rows={4}
+                placeholder="Tell us how we can improve..."
+                className={`${leadInputBase} min-h-[110px] resize-none ${
+                    hasError
+                        ? "border-red-500 bg-red-50"
+                        : "border-slate-200 focus:border-[var(--brand)]"
+                }`}
+            />
+            {hasError ? <p className="text-xs text-rose-500 font-medium mt-1">{meta.error}</p> : null}
         </div>
     );
 }

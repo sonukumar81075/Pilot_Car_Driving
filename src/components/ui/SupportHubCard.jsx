@@ -18,7 +18,7 @@ function SupportHubCard({ icon, title, description, actionLabel, actionHref }) {
         {/* 🔥 Important: mt-auto */}
         <a
           href={actionHref}
-          className="mt-auto w-full py-4 bg-[#1e293b] text-white rounded-2xl font-bold tracking-tight hover:bg-[#0f172a] transition-colors shadow-lg shadow-slate-200"
+          className="mt-auto inline-flex w-full items-center justify-center py-4 rounded-2xl font-bold tracking-tight text-white btn-gradient btn-gradient-glow shadow-lg transition-all hover:brightness-105 active:scale-[0.99]"
         >
           {actionLabel}
         </a>

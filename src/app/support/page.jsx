@@ -19,11 +19,11 @@ export default function ContactPage() {
             description={data.description}
             align="center"
           />
- 
+
           {data.intro?.map((para, index) => (
             <p
               key={index}
-              className="text-[18px] font-lexend font-[500] leading-[27px] text-[#666666] mx-auto max-w-xl"
+              className="text-slate-500 text-sm sm:text-base md:text-lg font-medium tracking-tight mt-4 mx-auto max-w-xl"
             >
               {para}
             </p>

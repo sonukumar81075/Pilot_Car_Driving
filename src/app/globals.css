@@ -288,6 +288,15 @@ html {
   @apply shadow-md;
 }
 
+/** Blue glow under gradient CTAs (pairs with .btn-gradient) */
+.btn-gradient-glow {
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.32);
+}
+
+.btn-gradient-glow:hover {
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.38);
+}
+
 /* Hide Next.js dev indicator badge in development */
 nextjs-portal {
   display: none !important;
