@@ -1,16 +1,19 @@
 export const runtime = "nodejs";
 
+// Shared upstream host for account-deletion requests.
 const BASE_URL = "https://api.pilotadmin.site";
+// Route lookup by account type submitted from the client.
 const ENDPOINTS = {
   instructor: "/auth/delete-pilot-req",
   learner: "/auth/delete-learner-req",
 };
 
-// Prefer env var. Fallback token is for local testing only.
+// Uses env token in production; fallback token supports local testing only.
 const AUTH_TOKEN =
   process.env.PILOT_DELETE_AUTH_TOKEN ||
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBpbG90MkBnbWFpbC5jb20iLCJuYW1lIjoiUGlsb3QgMiIsInJvbGUiOiJQaWxvdCIsInBpbG90SUQiOjIsImlhdCI6MTc2MDMzNTk2NSwiZXhwIjoxNzYyOTI3OTY1fQ.5jpZpZq0FqaQP3kwTlz5bKxxPK0DMxbYzOwwnLcX2NU";
 
+// Standard JSON response helper for this route.
 function jsonResponse(data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
@@ -21,13 +24,16 @@ function jsonResponse(data, status = 200) {
 export async function POST(req) {
   try {
     const body = await req.json();
+    // Normalize account type to ensure predictable endpoint lookup.
     const accountType = String(body?.accountType || "").trim().toLowerCase();
     const endpoint = ENDPOINTS[accountType];
 
+    // Reject unsupported account types early.
     if (!endpoint) {
       return jsonResponse({ ok: false, message: "Invalid account type." }, 400);
     }
 
+    // Normalize and validate request payload.
     const feedback = String(body?.feedback || "").trim();
     const email = String(body?.email || "").trim();
     const contactInfo = String(body?.contactInfo || "").trim();
@@ -39,11 +45,13 @@ export async function POST(req) {
       return jsonResponse({ ok: false, message: "Contact info is required." }, 400);
     }
 
+    // Upstream expects x-www-form-urlencoded body.
     const params = new URLSearchParams();
     params.set("feedback", feedback);
     params.set("email", email);
     params.set("contactInfo", contactInfo);
 
+    // Abort long-running upstream requests.
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
 
@@ -58,6 +66,7 @@ export async function POST(req) {
       cache: "no-store",
     }).finally(() => clearTimeout(timeout));
 
+    // Parse response safely because upstream output format may vary.
     const text = await upstream.text();
     let data;
     try {
@@ -66,6 +75,7 @@ export async function POST(req) {
       data = { raw: text };
     }
 
+    // Propagate upstream error details with consistent API shape.
     if (!upstream.ok) {
       return jsonResponse(
         {
@@ -78,6 +88,7 @@ export async function POST(req) {
       );
     }
 
+    // Return a stable success structure for frontend consumption.
     return jsonResponse(
       {
         ok: true,
@@ -88,6 +99,7 @@ export async function POST(req) {
     );
   } catch (err) {
     const isAbort = err?.name === "AbortError";
+    // Distinguish timeout from generic server failures.
     return jsonResponse(
       {
         ok: false,

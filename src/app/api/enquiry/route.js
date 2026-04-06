@@ -1,13 +1,14 @@
 export const runtime = "nodejs";
 
-const ENDPOINT = "https://api.pilotadmin.site/users/pilot-enquiry";
+// Upstream endpoint for learner enquiries.
+const ENDPOINT = "https://api.pilotadmin.site/users/learner-enquiry";
 
-// Prefer env var; fallback keeps current behavior.
-// IMPORTANT: do not commit real tokens long-term.
+// Uses env token in production; fallback is only for local continuity.
 const AUTH_TOKEN =
     process.env.PILOTADMIN_AUTH_TOKEN ||
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmlrYW50YXNpdmEyOEBnbWFpbC5jb20iLCJuYW1lIjoibWFuaWthbnRhIiwicm9sZSI6IlBpbG90IiwicGlsb3RJRCI6MSwiaWF0IjoxNzQ3MzgxNzI3LCJleHAiOjE3NDk5NzM3Mjd9.Zl_hzUtCHFpFn6C-MMk2owKfWcOKYjoYi6sDjaOaL4Y";
 
+// Standard JSON response helper for this route.
 function jsonResponse(data, status = 200) {
     return new Response(JSON.stringify(data), {
         status,
@@ -19,12 +20,12 @@ export async function POST(req) {
     try {
         const body = await req.json();
 
+        // Normalize incoming values to avoid undefined/null handling downstream.
         const fullName = (body?.fullName ?? "").toString().trim();
         const phoneNumber = (body?.phoneNumber ?? body?.phone ?? "").toString().trim();
         const zone = (body?.zone ?? "").toString().trim();
 
-        // Postman requires at least: phone, zone, service, message, source
-        // (fullName/email/enquiryType are accepted by the API but may be optional)
+        // Minimum fields required by the upstream API contract.
         if (!phoneNumber || !zone || zone === "Choose a zone") {
             return jsonResponse(
                 { ok: false, message: "phoneNumber (phone) and zone are required." },
@@ -32,11 +33,9 @@ export async function POST(req) {
             );
         }
 
-        // Map to upstream expected fields (x-www-form-urlencoded):
-        // enquiryType: 'Pilot' | 'Learner'
-        // fullName, email, phone, zone, service, message, source: 'Web' | 'App' | ...
+        // Build x-www-form-urlencoded payload expected by upstream service.
         const params = new URLSearchParams();
-        params.set("enquiryType", "Pilot");
+        params.set("enquiryType", "Learner");
         if (fullName) params.set("fullName", fullName);
         const email = (body?.email ?? "").toString().trim();
         if (email) params.set("email", email);
@@ -47,9 +46,10 @@ export async function POST(req) {
             "message",
             (body?.message ?? "Interested in joining as pilot").toString().trim()
         );
-        // IMPORTANT: backend column is enum-like; must be one of: Web/App/Phone/Other
+        // Source is enum-like upstream and must remain a valid value.
         params.set("source", "Web");
 
+        // Guard against slow upstream responses.  
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 15000);
 
@@ -64,6 +64,7 @@ export async function POST(req) {
             cache: "no-store",
         }).finally(() => clearTimeout(timeout));
 
+        // Parse response defensively: upstream may occasionally return non-JSON.
         const text = await upstream.text();
         let data;
         try {
@@ -72,6 +73,7 @@ export async function POST(req) {
             data = { raw: text };
         }
 
+        // Treat upstream HTTP failures and explicit success=false as request failures.
         if (!upstream.ok || data?.success === false) {
             return jsonResponse(
                 {
@@ -86,9 +88,11 @@ export async function POST(req) {
             );
         }
 
+        // Return normalized success payload to frontend consumers.
         return jsonResponse({ ok: true, data }, 200);
     } catch (err) {
         const isAbort = err?.name === "AbortError";
+        // Surface timeout explicitly for better client-side messaging.
         return jsonResponse(
             {
                 ok: false,
