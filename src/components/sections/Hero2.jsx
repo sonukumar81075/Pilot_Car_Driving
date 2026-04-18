@@ -50,11 +50,6 @@ export function Hero2({ data }) {
                                     `}</style>
                                 </div>
 
-
-
-
-
-
                                 <h1 className="overflow-visible pb-2 text-[30px] sm:text-4xl font-black tracking-tight leading-[1.28] flex flex-wrap justify-center">
 
                                     <span className="inline-block bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent italic mr-2 px-[2px] -mx-[2px]">
@@ -75,7 +70,6 @@ export function Hero2({ data }) {
                                 <div className="relative mt-6 w-full flex items-end justify-end">
 
                                     <span className="absolute w-6 h-6 rounded-full bg-blue-400 opacity-30 animate-ping"></span>
-
                                     <span className="w-4 h-4 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 shadow-md"></span>
 
                                 </div>

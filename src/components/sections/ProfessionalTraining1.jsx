@@ -78,19 +78,15 @@ const ProfessionalTraining1 = () => {
                 />
 
                 {/* DESKTOP GRID */}
-                <div className="hidden lg:grid gap-8 pt-16 lg:grid-cols-3 ">
+                <div className="hidden lg:grid xl:gap-8 md:gap-6 gap-4 pt-16 lg:grid-cols-3 mb-6 ">
                     {trainings.map((item) => (
                         <Card item={item} key={item.id} />
                     ))}
                 </div>
-
-
-
-
                 <div
 
                     className="
-                        lg:hidden pt-12 relative px-4
+                        lg:hidden pt-12 relative px-2
 
                         [&_.swiper-pagination]:!bottom-0
                         [&_.swiper-pagination]:flex
@@ -115,7 +111,8 @@ const ProfessionalTraining1 = () => {
                         modules={[Autoplay, Pagination]}
                         spaceBetween={24}
                         slidesPerView={1}
-                        loop={true}
+                        loop={false}
+                        rewind={true}
                         autoplay={{
                             delay: 3500,
                             disableOnInteraction: false,
@@ -150,7 +147,7 @@ const Card = ({ item }) => {
             <div className={`absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[80px] opacity-20 ${item.glowColor}`}></div>
 
             {/* IMAGE CONTAINER */}
-            <div className="relative w-full sm:h-48 h-28 sm:mb-10 mb-4 overflow-visible bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
+            <div className="relative w-full sm:h-48 h-28 xl:mb-10 md:mb-6 mb-4 overflow-visible bg-[#1C4FD8] rounded-t-[2.5rem] flex items-start justify-center">
                 <Image
                     src={item.image}
                     alt={item.title}
@@ -161,7 +158,7 @@ const Card = ({ item }) => {
             </div>
 
             {/* TEXT CONTENT */}
-            <div className="relative z-10 flex flex-col h-full sm:pb-8 pb-6 sm:px-8 px-6 xl:pb-10 xl:px-10 pt-1 sm:pt-0">
+            <div className="relative z-10 flex flex-col h-full sm:pb-8 pb-6 sm:px-4 px-6 xl:pb-10 xl:px-10 pt-1 sm:pt-0">
                 <h3 className="sm:mb-4 mb-2 sm:text-[26px] text-[18px] font-extrabold text-slate-900 leading-tight">
                     {item.title}
                 </h3>
@@ -171,7 +168,7 @@ const Card = ({ item }) => {
                 </p>
 
                 {/* FEATURE LIST */}
-                <ul className=" sm:mb-0 mb-6  space-y-1 sm:space-y-3">
+                <ul className=" sm:mb-0 mb-6 space-y-1 xl:space-y-3 md:space-y-2">
                     {item.features.map((feature, index) => (
                         <li key={index} className="flex items-center gap-3 transition-transform duration-500 ease-out group-hover:translate-x-0.5">
                             <div className={`flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 rounded-full ${item.bgColor} border border-white shadow-sm transition-all duration-500 ease-out group-hover:shadow-md`}>
@@ -186,7 +183,7 @@ const Card = ({ item }) => {
                 <div className=" mt-auto">
                     <Link
                         href={`/packages?type=${item.drivingType}`}
-                        className={`flex items-center justify-center w-full rounded-2xl btn-gradient btn-gradient-glow sm:py-4.5 py-3 text-[12px] xl:text-[13px] font-black transition-all duration-500 ease-out hover:brightness-110 hover:shadow-xl hover:-translate-y-0.5 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
+                        className={`flex items-center justify-center w-full sm:rounded-2xl rounded-full btn-gradient btn-gradient-glow sm:py-4.5 py-3 text-[12px] xl:text-[13px] font-black transition-all duration-500 ease-out hover:brightness-110 hover:shadow-xl hover:-translate-y-0.5 shadow-lg uppercase xl:tracking-[0.15em] tracking-[0.1em] `}
                     >
                         {item.linkText}
                     </Link>

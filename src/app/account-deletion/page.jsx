@@ -6,6 +6,8 @@ import * as Yup from "yup";
 import { useState } from "react";
 import { MdCheckCircleOutline, MdOutlineWarningAmber } from "react-icons/md";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import Input from "@/components/ui/Input";
+import { FormCheckbox, FormError, FormLabel } from "@/components/ui/FormField";
 
 const AccountDeletionSchema = Yup.object().shape({
     accountType: Yup.string().oneOf(["learner", "instructor"]).required("Please select account type"),
@@ -35,8 +37,8 @@ export default function AccountDeletionPage() {
 
                     {/* Request Details Form (full-width, below notice) */}
                     <div className="bg-white rounded-[2.5rem] border border-slate-200 shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-8 md:p-12">
-                        <div className="flex justify-between items-center mb-10">
-                            <h2 className="text-2xl font-bold text-slate-900">Request Details</h2>
+                        <div className="sm:flex  justify-between items-center mb-10">
+                            <h2 className="text-2xl font-bold text-slate-900 mb-2 sm:mb-0">Request Details</h2>
                             <div className="flex items-center gap-2 px-3 py-1 bg-slate-50 border border-slate-100 rounded-full">
                                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
                                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
@@ -108,7 +110,7 @@ export default function AccountDeletionPage() {
                                         <label className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">
                                             Type of Account <span className="text-rose-500">*</span>
                                         </label>
-                                        <div className="grid grid-cols-2 gap-4">
+                                        <div className="grid sm:grid-cols-2 grid-cols-1 gap-4">
                                             <AccountTypeBtn
                                                 active={values.accountType === "learner"}
                                                 onClick={() => setFieldValue("accountType", "learner")}
@@ -153,7 +155,8 @@ export default function AccountDeletionPage() {
                                         <Field
                                             type="checkbox"
                                             name="confirmation"
-                                            className="mt-1 w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                                            as={FormCheckbox}
+                                            className="mt-1 h-5 w-5"
                                         />
                                         <span className="text-xs text-slate-500 leading-relaxed font-sans">
                                             I understand that deleting my account is{" "}
@@ -258,10 +261,6 @@ function AccountTypeBtn({ active, onClick, title, sub }) {
     );
 }
 
-/** Input styling aligned with Lead modal (Interested Lead?) */
-const leadInputBase =
-    "w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-sm font-sans text-slate-900";
-
 function CustomInput({ label, prefix, name, type = "text", placeholder }) {
     const [field, meta] = useField(name);
     const hasError = meta.touched && meta.error;
@@ -270,29 +269,26 @@ function CustomInput({ label, prefix, name, type = "text", placeholder }) {
 
     return (
         <div>
-            <label htmlFor={name} className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">
+            <FormLabel htmlFor={name} className="mb-1.5 text-xs md:text-sm">
                 {label}
-            </label>
+            </FormLabel>
             <div className="relative flex items-center">
                 {prefix ? (
                     <div className="pointer-events-none absolute left-4 z-[1] text-sm font-bold text-slate-400 border-r border-slate-100 pr-3 leading-none">
                         {prefix}
                     </div>
                 ) : null}
-                <input
+                <Input
                     {...field}
                     id={name}
                     type={type}
                     placeholder={placeholder}
                     autoComplete={autoComplete}
-                    className={`${leadInputBase} pr-5 ${prefix ? "pl-[4.25rem]" : "pl-5"} ${
-                        hasError
-                            ? "border-red-500 bg-red-50"
-                            : "border-slate-200 focus:border-[var(--brand)]"
-                    }`}
+                    hasError={Boolean(hasError)}
+                    className={`pr-5 text-sm ${prefix ? "pl-[4.25rem]" : "pl-4"} sm:py-3 py-2`}
                 />
             </div>
-            {hasError ? <p className="text-xs text-rose-500 font-medium mt-1">{meta.error}</p> : null}
+            <FormError className="mt-1 text-xs">{hasError ? meta.error : ""}</FormError>
         </div>
     );
 }
@@ -303,21 +299,19 @@ function ReasonTextarea() {
 
     return (
         <div>
-            <label htmlFor="reason" className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">
+            <FormLabel htmlFor="reason" className="mb-1.5 text-xs md:text-sm">
                 Reason for leaving
-            </label>
-            <textarea
+            </FormLabel>
+            <Input
+                as="textarea"
                 {...field}
                 id="reason"
                 rows={4}
                 placeholder="Tell us how we can improve..."
-                className={`${leadInputBase} min-h-[110px] resize-none ${
-                    hasError
-                        ? "border-red-500 bg-red-50"
-                        : "border-slate-200 focus:border-[var(--brand)]"
-                }`}
+                hasError={Boolean(hasError)}
+                className="min-h-[110px] resize-none rounded-xl text-sm sm:py-3 py-2"
             />
-            {hasError ? <p className="text-xs text-rose-500 font-medium mt-1">{meta.error}</p> : null}
+            <FormError className="mt-1 text-xs">{hasError ? meta.error : ""}</FormError>
         </div>
     );
 }

@@ -195,8 +195,14 @@ export default function PackagesClient() {
           </div>
         ) : (
           <div className="mt-10 grid grid-cols-1 gap-3 transition-all border-none duration-300 md:grid-cols-2 md:gap-5 lg:grid-cols-3 lg:gap-6 px-4 md:px-0">
-            {filtered.map((pkg) => (
-              <PackageCard key={pkg.package_id || `${pkg.name}-${pkg.show_order}`} pkg={pkg} />
+            {filtered.map((pkg, index) => (
+              <PackageCard
+                key={
+                  pkg.package_id ||
+                  `${pkg.name || "package"}-${pkg.show_order ?? "na"}-${pkg.driving_type || "type"}-${index}`
+                }
+                pkg={pkg}
+              />
             ))}
           </div>
         )}

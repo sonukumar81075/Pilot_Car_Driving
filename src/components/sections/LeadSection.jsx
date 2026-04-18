@@ -21,7 +21,7 @@ const LeadSection = ({ data }) => {
                 <div className="  sm:mt-12 mt-6 mb-10 sm:mb-0  flex flex-col items-center justify-center rounded-3xl    ">
                     <button
                         onClick={() => setIsModalOpen(true)}
-                        className="cursor-pointer sm:rounded-2xl sm:border sm:border-gray-100 rounded-xl btn-gradient btn-gradient-glow  sm:px-32 px-6 sm:py-12 py-4 sm:text-[16px] text-[14px] font-bold text-white   transition-all hover:brightness-105 active:scale-95"
+                        className="cursor-pointer sm:rounded-2xl rounded-full sm:border sm:border-gray-100  btn-gradient btn-gradient-glow  sm:px-32 px-6 sm:py-12 py-3 sm:text-[16px] text-[13px] font-bold text-white   transition-all hover:brightness-105 active:scale-95"
                     >
                         Book Your Free Trial
                     </button>

@@ -191,7 +191,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { IoMdClose } from "react-icons/io";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiApps2Line } from "react-icons/ri"; // Modern icon for mobile
@@ -225,15 +224,11 @@ export function Navbar({ links }) {
 
   return (
     <>
-      <AnimatePresence>
-        {visible && (
-          <motion.header
-            initial={{ y: -100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -100, opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed top-0 z-50 w-full font-lexend"
-          >
+      <header
+        className={`fixed top-0 z-50 w-full font-lexend transition-all duration-300 ease-out ${
+          visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        }`}
+      >
             {/* --- DESKTOP VIEW --- */}
             <div className="hidden md:flex mt-6 px-4 justify-center w-full">
               <div className={`
@@ -263,15 +258,15 @@ export function Navbar({ links }) {
             </div>
 
             {/* --- MOBILE VIEW (New Look) --- */}
-            <div className="md:hidden w-full px-4 pt-4">
+            {/* <div className="md:hidden w-full px-4 pt-4">
               <div
                 className={`
       flex items-center justify-between px-5 py-3 rounded-2xl 
-      border border-transparent
+      border border-white/25
       transition-all duration-300
       ${scrolled
-                    ? "bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-slate-200"
-                    : "bg-white shadow-[0_4px_15px_rgba(0,0,0,0.05)]"}
+                    ? "bg-white/25 backdrop-blur-xl shadow-[0_8px_30px_rgba(2,6,23,0.22)]"
+                    : "bg-white/15 backdrop-blur-lg shadow-[0_4px_18px_rgba(2,6,23,0.16)]"}
     `}
               >
                 <Link href="/">
@@ -287,76 +282,102 @@ export function Navbar({ links }) {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setOpen(true)}
-                    className="p-2 bg-slate-900 text-white rounded-xl 
-        shadow-[0_4px_15px_rgba(0,0,0,0.2)]
+                    className="p-2 rounded-xl bg-[#0f2f86]/90 text-white border border-white/20
+        shadow-[0_4px_15px_rgba(15,47,134,0.35)]
         hover:scale-105 active:scale-90 transition-all duration-200"
                   >
                     <RiApps2Line size={20} />
                   </button>
                 </div>
               </div>
+            </div> */}
+            <div className="md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300">
+              <div
+                className={`
+              flex items-center justify-between px-7 py-4
+              transition-all duration-500 ease-in-out
+              ${scrolled
+                    ? "bg-white/80 backdrop-blur-md shadow-sm  "
+                    : "bg-transparent"}
+    `}
+              > 
+                <Link href="/" className="flex items-center group">
+                  <div className="relative">
+                    <Image
+                      src="/images/logo/Pilot Logo.png"
+                      alt="Logo"
+                      width={85}
+                      height={28}
+                      className="object-contain transition-transform duration-300 group-hover:scale-105"
+                    />
+                  </div>
+                </Link>
+ 
+                <div className="flex items-center gap-4"> 
+                  <button
+                    onClick={() => setOpen(true)}
+                    className={`
+          relative flex items-center justify-center p-2.5 rounded-full
+          transition-all duration-300 active:scale-90
+          ${scrolled
+                        ? "btn-gradient btn-gradient-glow text-white shadow-lg shadow-[#0f2f86]/20"
+                        : "bg-white text-[#0f2f86] shadow-md"}
+        `}
+                  >
+                    <RiApps2Line size={22} />
+                    
+                  </button>
+                </div>
+              </div>
             </div>
-          </motion.header>
-        )}
-      </AnimatePresence>
+
+
+
+
+            
+      </header>
 
       {/* --- MOBILE BOTTOM DRAWER MENU --- */}
-      <AnimatePresence>
-        {open && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setOpen(false)}
-              className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm"
-            />
+      {open && (
+        <>
+          {/* Backdrop */}
+          <div
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm"
+          />
 
-            {/* Drawer */}
-            <motion.div
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed bottom-0 left-0 right-0 z-[101] bg-white rounded-t-[40px] p-8 pb-12 shadow-2xl"
-            >
-              <div className="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-8" />
+          {/* Drawer */}
+          <div className="fixed bottom-0 left-0 right-0 z-[101] rounded-t-[40px] bg-white p-8 pb-12 shadow-2xl">
+            <div className="mx-auto mb-8 h-1.5 w-12 rounded-full bg-slate-200" />
 
-              <div className="flex flex-col gap-4">
-                {links.map((l, i) => (
-                  <motion.div
-                    key={l.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
+            <div className="flex flex-col gap-4">
+              {links.map((l) => (
+                <div key={l.href}>
+                  <Link
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className="group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-colors active:bg-blue-600"
                   >
-                    <Link
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100 group active:bg-blue-600 transition-colors"
-                    >
-                      <span className="text-[13px] font-black text-slate-900 group-active:text-white uppercase tracking-tight font-sans font-[700] leading-[20px]">
-                        {l.label}
-                      </span>
-                      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-white text-blue-600">
-                        →
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
+                    <span className="font-sans text-[13px] font-[700] font-black uppercase leading-[20px] tracking-tight text-slate-900 group-active:text-white">
+                      {l.label}
+                    </span>
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-blue-600">
+                      →
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
 
-              <button
-                onClick={() => setOpen(false)}
-                className="mt-8 w-full py-4 bg-slate-100 text-slate-500 font-bold rounded-2xl"
-              >
-                Close Menu
-              </button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            <button
+              onClick={() => setOpen(false)}
+              className="mt-8 w-full rounded-2xl bg-slate-100 py-4 font-bold text-slate-500"
+            >
+              Close Menu
+            </button>
+          </div>
+        </>
+      )}
 
 
 

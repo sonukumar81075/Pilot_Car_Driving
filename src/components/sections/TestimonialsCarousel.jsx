@@ -23,7 +23,8 @@ export function TestimonialsCarousel({ testimonials }) {
         modules={[Autoplay, Pagination]}
         spaceBetween={30}
         slidesPerView={1}
-        loop={true}
+        loop={false}
+        rewind={true}
         autoHeight={false} // Ensure Swiper doesn't change height per slide
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{ clickable: true }}

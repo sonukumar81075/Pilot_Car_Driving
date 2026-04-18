@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 import { X, ChevronDown, Loader2, Check } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import Input from '@/components/ui/Input';
+import { FormError, FormLabel } from '@/components/ui/FormField';
 
 // Icon components remain the same as yours...
 const AppleIcon = () => (
@@ -354,35 +356,45 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                             </div>
                         ) : null}
                         <div>
-                            <label className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">Full Name</label>
-                            <input
+                            <FormLabel className="mb-1.5 text-xs md:text-sm">Full Name</FormLabel>
+                            <Input
                                 name="fullName"
                                 {...formik.getFieldProps('fullName')}
                                 disabled={formik.isSubmitting || submitSuccess}
                                 placeholder="Enter your full name"
-                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-slate-900 disabled:cursor-not-allowed disabled:bg-slate-50 ${formik.touched.fullName && formik.errors.fullName ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)] '}`}
+                                hasError={Boolean(formik.touched.fullName && formik.errors.fullName)}
+                                className="sm:rounded-xl rounded-full sm:py-3 py-2"
                             />
+                            <FormError className="mt-1 text-xs">
+                                {formik.touched.fullName && formik.errors.fullName ? formik.errors.fullName : ""}
+                            </FormError>
                         </div>
 
                         <div>
-                            <label className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">Phone Number</label>
-                            <input
+                            <FormLabel className="mb-1.5 text-xs md:text-sm">Phone Number</FormLabel>
+                            <Input
                                 name="phoneNumber"
                                 {...formik.getFieldProps('phoneNumber')}
                                 disabled={formik.isSubmitting || submitSuccess}
                                 placeholder="Enter your phone number"
-                                className={`w-full rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all  text-slate-900 disabled:cursor-not-allowed disabled:bg-slate-50 ${formik.touched.phoneNumber && formik.errors.phoneNumber ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
+                                hasError={Boolean(formik.touched.phoneNumber && formik.errors.phoneNumber)}
+                                className="sm:rounded-xl rounded-full sm:py-3 py-2"
                             />
+                            <FormError className="mt-1 text-xs">
+                                {formik.touched.phoneNumber && formik.errors.phoneNumber ? formik.errors.phoneNumber : ""}
+                            </FormError>
                         </div>
 
                         <div>
-                            <label className="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">Select Zone</label>
+                            <FormLabel className="mb-1.5 text-xs md:text-sm">Select Zone</FormLabel>
                             <div className="relative">
-                                <select
+                                <Input
+                                    as="select"
                                     name="zone"
                                     {...formik.getFieldProps('zone')}
                                     disabled={zonesLoading || formik.isSubmitting || submitSuccess}
-                                    className={`w-full appearance-none rounded-xl border px-4 sm:py-3 py-2 outline-none transition-all text-slate-900 ${formik.touched.zone && formik.errors.zone ? 'border-red-500 bg-red-50' : 'border-slate-200 focus:border-[var(--brand)]'}`}
+                                    hasError={Boolean(formik.touched.zone && formik.errors.zone)}
+                                    className="sm:rounded-xl rounded-full sm:py-3 py-2"
                                 >
                                     {zonesLoading ? (
                                         <option value="Choose a zone">Loading zones...</option>
@@ -399,15 +411,18 @@ const LeadModal = ({ data, isOpen, onClose, submissionMeta }) => {
                                     {!zonesLoading && zones.length === 0 ? (
                                         <option value="Choose a zone" disabled>No zones available</option>
                                     ) : null}
-                                </select>
+                                </Input>
                                 <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={18} />
                             </div>
+                            <FormError className="mt-1 text-xs">
+                                {formik.touched.zone && formik.errors.zone ? formik.errors.zone : ""}
+                            </FormError>
                         </div>
 
                         <button
                             type="submit"
                             disabled={formik.isSubmitting || submitSuccess}
-                            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl   text-white btn-gradient btn-gradient-glow sm:py-4 py-2.5 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-60"
+                            className="flex w-full cursor-pointer items-center justify-center gap-2 sm:rounded-xl rounded-full   text-white btn-gradient btn-gradient-glow sm:py-4 py-2.5 font-bold shadow-lg transition-all active:scale-95 disabled:opacity-60"
                         >
                             {formik.isSubmitting ? (
                                 <>

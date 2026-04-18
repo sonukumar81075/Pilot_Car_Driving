@@ -120,7 +120,7 @@ export function PackageCard({ pkg }) {
               if (!pkg?.package_id) return;
               router.push(`/packages/${pkg.package_id}`);
             }}
-            className="  w-full rounded-lg btn-gradient btn-gradient-glow text-white mt-6 sm:mt-0 sm:mb-0 mb-2 py-2.5 text-xs font-bold cursor-pointer transition font-lexend active:scale-[0.99] md:mt-4 md:rounded-xl md:py-3 md:text-base"
+            className="  w-full sm:rounded-xl rounded-full btn-gradient btn-gradient-glow text-white mt-6 sm:mt-0 sm:mb-0 mb-2 py-2.5 text-xs font-bold cursor-pointer transition font-lexend active:scale-[0.99] md:mt-4 md:py-3 md:text-base"
           >
             Add Cart
           </button>

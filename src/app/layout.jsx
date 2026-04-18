@@ -1,10 +1,7 @@
 import { Inter, Lexend, Urbanist } from "next/font/google";
 import "./globals.css";
-import ScrollToTop from "@/components/ui/ScrollToTop";
-import { Navbar } from "@/components/sections/Navbar";
-import { FooterShell } from "@/components/sections/FooterShell";
 import { getLandingData } from "@/lib/data";
-import MobileStickyBar from "@/components/ui/MobileStickyBar";
+import AppShell from "@/components/layout/AppShell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -96,15 +93,9 @@ export default async function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${inter.variable} ${lexend.variable} ${urbanist.variable} min-h-screen antialiased`}
       >
-        <div className="min-h-screen flex flex-col bg-[var(--brand-muted)]">
-          <Navbar brand={hero.brand} links={hero.nav} />
-          <main className="flex-1 bg-white">
-            {children}
-          </main>
-          <FooterShell footer={footer} />
-          <ScrollToTop />
-          <MobileStickyBar />
-        </div>
+        <AppShell heroBrand={hero.brand} heroLinks={hero.nav} footer={footer}>
+          {children}
+        </AppShell>
       </body>
     </html>
   );

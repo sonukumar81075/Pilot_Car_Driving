@@ -156,7 +156,8 @@ export function HowItWorks({ steps }) {
           <Swiper
             modules={[Autoplay]}
             slidesPerView={1}
-            loop={true}
+            loop={false}
+            rewind={true}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
