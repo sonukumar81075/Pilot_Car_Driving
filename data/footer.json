@@ -74,6 +74,10 @@
         {
           "label": "Delete Account",
           "href": "/account-deletion"
+        },
+        {
+          "label": "My Account",
+          "href": "/my-account"
         }
       ]
     }

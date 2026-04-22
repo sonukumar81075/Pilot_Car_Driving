@@ -14,12 +14,14 @@ const Input = React.forwardRef(function Input(
   ref
 ) {
   const Component = as;
+  const isSelect = Component === "select";
   return (
     <Component
       ref={ref}
       className={cn(
         baseClassName,
         withIcon ? "pl-12" : "pl-4",
+        isSelect ? "appearance-none pr-10" : "",
         hasError
           ? "border-rose-400 bg-rose-50/60 focus:border-rose-500 focus:ring-rose-100"
           : "border-slate-200",

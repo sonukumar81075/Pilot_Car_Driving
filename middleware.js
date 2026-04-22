@@ -6,8 +6,11 @@ export function middleware(request) {
   const { pathname } = request.nextUrl;
   const isAuthenticated = request.cookies.get(AUTH_COOKIE_KEY)?.value === "1";
 
-  // Block unauthenticated users from home and dashboard.
-  if (!isAuthenticated && (pathname === "/" || pathname.startsWith("/dashboard"))) {
+  // Block unauthenticated users from protected routes.
+  if (
+    !isAuthenticated &&
+    (pathname === "/" || pathname.startsWith("/dashboard") || pathname.startsWith("/my-account"))
+  ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
@@ -20,5 +23,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/dashboard/:path*"],
+  matcher: ["/", "/login", "/dashboard/:path*", "/my-account/:path*"],
 };

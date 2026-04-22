@@ -1,0 +1,73 @@
+# All API Call List
+
+1) Page/Component: `src/components/OtpLogin.jsx` (Login Page)
+- Method/Endpoint: `PATCH /auth/update-otp` (via `src/services/auth.js` + `src/services/api.js`)
+- Use case: Send OTP to mobile number for login.
+
+2) Page/Component: `src/components/OtpLogin.jsx` (Login Page)
+- Method/Endpoint: `PATCH /auth/verify-otp` (via `src/services/auth.js` + `src/services/api.js`)
+- Use case: Verify entered OTP and complete login.
+
+3) API Route: `src/app/api/auth/update-otp/route.js`
+- Method/Endpoint: `PATCH ${BACKEND_BASE_URL}${BACKEND_SEND_OTP_PATH}` (default `https://devapi.pilotadmin.site/auth/update-otp`)
+- Use case: Proxy Send OTP request from frontend to backend.
+
+4) API Route: `src/app/api/auth/verify-otp/route.js`
+- Method/Endpoint: `PATCH ${BACKEND_BASE_URL}${BACKEND_VERIFY_OTP_PATH}` (default `https://devapi.pilotadmin.site/auth/verify-otp`)
+- Use case: Proxy Verify OTP request from frontend to backend.
+
+5) Page/Component: `src/components/sections/LeadModal.jsx`
+- Method/Endpoint: `POST /api/enquiry`
+- Use case: Submit learner enquiry form.
+
+6) Page/Component: `src/components/sections/LeadModal.jsx`
+- Method/Endpoint: `GET /api/zones`
+- Use case: Load available zones in enquiry form dropdown.
+
+7) API Route: `src/app/api/enquiry/route.js`
+- Method/Endpoint: `POST https://api.pilotadmin.site/users/learner-enquiry`
+- Use case: Forward enquiry payload to upstream learner-enquiry API.
+
+8) API Route: `src/app/api/zones/route.js`
+- Method/Endpoint: `GET https://api.pilotadmin.site/zones/zones-list`
+- Use case: Fetch zones list from upstream service.
+
+9) Page/Component: `src/app/packages/packages-client.jsx`
+- Method/Endpoint: `GET /api/packages`
+- Use case: Fetch package list for package tabs (Car/Bike/License).
+
+10) API Route: `src/app/api/packages/route.js`
+- Method/Endpoint: `GET https://api.pilotadmin.site/packages/get-packages`
+- Use case: Proxy package catalog request from frontend.
+
+11) Page: `src/app/packages/[id]/page.jsx`
+- Method/Endpoint: `GET https://api.pilotadmin.site/packages/get-packages?package_id={id}`
+- Use case: Fetch selected package details by package id.
+
+12) Page: `src/app/packages/[id]/page.jsx`
+- Method/Endpoint: `GET https://api.pilotadmin.site/packages/get-packages`
+- Use case: Fetch all packages for fallback/related package data.
+
+13) Page: `src/app/packages/[id]/page.jsx`
+- Method/Endpoint: `GET https://api.pilotadmin.site/packages/get-add-ons?status=AC&type={type}` (fallback: `?status=AC`)
+- Use case: Fetch add-ons for selected driving type/package details page.
+
+14) Data Layer: `src/lib/data.js` (`getPackages`)
+- Method/Endpoint: `GET https://api.pilotadmin.site/packages/get-packages`
+- Use case: Server-side fetch for pricing/landing package sections.
+
+15) Page: `src/app/account-deletion/page.jsx`
+- Method/Endpoint: `POST /api/account-deletion`
+- Use case: Submit account deletion request form.
+
+16) API Route: `src/app/api/account-deletion/route.js`
+- Method/Endpoint: `POST https://api.pilotadmin.site/auth/delete-pilot-req`
+- Use case: Forward account deletion request for instructor accounts.
+
+17) API Route: `src/app/api/account-deletion/route.js`
+- Method/Endpoint: `POST https://api.pilotadmin.site/auth/delete-learner-req`
+- Use case: Forward account deletion request for learner accounts.
+
+18) Component: `src/components/sections/FooterCarAnimation.jsx`
+- Method/Endpoint: `GET https://assets1.lottiefiles.com/packages/lf20_vf6g7n5f.json`
+- Use case: Load footer car animation JSON.
