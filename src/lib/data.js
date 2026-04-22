@@ -90,6 +90,7 @@ export async function getCarTrainingPricingData() {
       "Choose the right car training program. We provide structured lessons, certified instructors, and complete test preparation.",
     icon: "car",
   });
+  console.log("Car Training Pricing Data", pricing);
   return { pricing };
 }
 
