@@ -294,8 +294,8 @@ export default function MyAccountPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] lg:gap-7">
-          <aside className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-[0_18px_50px_rgba(37,99,235,0.08)] sm:p-6 lg:flex lg:h-full lg:flex-col">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] lg:gap-7 ">
+          <aside className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-[0_18px_50px_rgba(37,99,235,0.08)] sm:p-6 lg:flex lg:h-full lg:flex-col order-2 lg:order-1">
             <div className="flex items-center gap-4">
               <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-violet-50 text-xl font-bold text-slate-700">
                 {profileInitial}
@@ -352,7 +352,7 @@ export default function MyAccountPage() {
             </button>
           </aside>
 
-          <section className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-[0_20px_60px_rgba(37,99,235,0.08)] sm:p-8">
+          <section className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-[0_20px_60px_rgba(37,99,235,0.08)] sm:p-8 order-1 lg:order-2">
             <div className="rounded-2xl border border-slate-100 bg-slate-50/60 p-4 sm:p-5">
               <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">Complete Profile</h2>
               <p className="mt-1 text-sm font-medium text-slate-500">

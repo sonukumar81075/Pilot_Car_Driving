@@ -289,14 +289,14 @@ export default function OtpLogin() {
               value={mobile}
               onChange={(event) => setMobile(event.target.value)}
               placeholder="+91 9876543210"
-              className="w-full rounded-xl border border-blue-100 px-4 py-2.5 text-sm outline-none transition focus:border-blue-500"
+              className="w-full sm:rounded-xl rounded-full  border border-blue-100 sm:px-4 px-5 sm:py-2.5 py-3.5 text-sm outline-none transition focus:border-blue-500"
             />
 
             <button
               type="button"
               onClick={handleSendOtp}
               disabled={isSendingOtp}
-              className="btn-gradient btn-gradient-glow mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-bold text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 font-sans mt-4"
+              className="btn-gradient btn-gradient-glow mt-3 flex w-full items-center justify-center gap-2 rounded-full sm:py-2.5 py-3.5 text-sm font-bold text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 font-sans mt-4"
             >
               {isSendingOtp ? "Sending..." : "Send OTP"}
             </button>
@@ -331,7 +331,7 @@ export default function OtpLogin() {
               type="button"
               onClick={handleVerifyOtp}
               disabled={isVerifyingOtp}
-              className="btn-gradient btn-gradient-glow mt-3 flex w-full items-center justify-center gap-2 rounded-full py-2.5 text-sm font-bold text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 font-sans mt-6"
+              className="btn-gradient btn-gradient-glow mt-3 flex w-full items-center justify-center gap-2 rounded-full sm:py-2.5 py-3.5 text-sm font-bold text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70 font-sans mt-6"
             >
               {isVerifyingOtp ? "Verifying..." : "Verify OTP"}
             </button>
@@ -430,7 +430,7 @@ export default function OtpLogin() {
               type="button"
               onClick={handleVerifyOtp}
               disabled={isVerifyingOtp}
-              className="btn-gradient btn-gradient-glow group flex w-full items-center justify-center gap-2 rounded-full py-3 text-sm font-bold text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+              className="btn-gradient btn-gradient-glow group flex w-full items-center justify-center gap-2 rounded-full sm:py-2.5 py-4 text-sm font-bold text-white transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
             >
               {isVerifyingOtp ? "Verifying..." : "Verify OTP"}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

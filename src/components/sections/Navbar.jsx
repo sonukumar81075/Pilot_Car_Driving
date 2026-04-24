@@ -258,7 +258,7 @@ export function Navbar({ links }) {
             >
               <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white/95 px-3 py-3 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
                 <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-[11px] font-bold text-blue-900">
-                  Hi
+                  {loggedInUser.initials}
                   <span className="absolute right-0.5 -top-1 flex h-3 w-3">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
                     <span className="relative inline-flex h-3 w-3 rounded-full border border-white bg-blue-600" />
@@ -360,7 +360,20 @@ export function Navbar({ links }) {
               </div>
             </Link>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {loggedInUser ? (
+                <Link
+                  href="/my-account"
+                  className="relative flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-[14px] font-bold text-blue-900 shadow-sm"
+                  aria-label="Go to my profile"
+                >
+                  {loggedInUser.initials}
+                  <span className="absolute right-0 top-0 flex h-3 w-3 rounded-full">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
+                    <span className="relative inline-flex h-3 w-3 rounded-full border border-white bg-blue-600" />
+                  </span>
+                </Link>
+              ) : null}
               <button
                 onClick={() => setOpen(true)}
                 className={`
