@@ -2,6 +2,8 @@ import "server-only";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
+const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL;
+
 async function readJsonFile(filename) {
   const filePath = path.join(process.cwd(), "data", filename);
   const raw = await readFile(filePath, "utf8");
@@ -40,7 +42,7 @@ function packagesToPricingData(packages, { headline, subtitle, icon } = {}) {
 }
 
 export async function getPackages({ drivingType } = {}) {
-  const res = await fetch("https://api.pilotadmin.site/packages/get-packages", {
+  const res = await fetch(`${BACKEND_BASE_URL}/packages/get-packages`, {
     cache: "no-store",
   });
   if (!res.ok) {

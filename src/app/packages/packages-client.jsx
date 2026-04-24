@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PackageCard } from "@/components/PackageCard";
 import { Car, Bike, FileText } from "lucide-react";
+import { isProfileComplete, normalizeLearnerProfile } from "@/lib/profile";
 
 const API_URL = "/api/packages";
 
@@ -49,6 +50,26 @@ export default function PackagesClient() {
     params.set("type", nextType);
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
+
+  useEffect(() => {
+    const rawUser = sessionStorage.getItem("pilotUser");
+    if (!rawUser) {
+      router.replace("/login");
+      return;
+    }
+
+    try {
+      const parsedUser = JSON.parse(rawUser);
+      const profile = normalizeLearnerProfile(parsedUser);
+      if (!isProfileComplete(profile)) {
+        router.replace("/my-account");
+        return;
+      }
+    } catch {
+      router.replace("/login");
+      return;
+    }
+  }, [router]);
 
   useEffect(() => {
     let cancelled = false;

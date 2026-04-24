@@ -4,12 +4,15 @@ import React from "react";
 import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+const PUBLIC_BACKEND_BASE_URL =
+  process.env.NEXT_PUBLIC_BACKEND_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL;
+
 function toImageUrl(imageUrl) {
   if (!imageUrl) return null;
   if (typeof imageUrl !== "string") return null;
   if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) return imageUrl;
   // API returns paths like /uploads/...
-  return `https://api.pilotadmin.site${imageUrl}`;
+  return `${PUBLIC_BACKEND_BASE_URL}${imageUrl}`;
 }
 
 export function PackageCard({ pkg }) {

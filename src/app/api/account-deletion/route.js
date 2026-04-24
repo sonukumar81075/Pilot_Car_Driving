@@ -1,7 +1,7 @@
 export const runtime = "nodejs";
 
 // Shared upstream host for account-deletion requests.
-const BASE_URL = "https://api.pilotadmin.site";
+const BASE_URL = process.env.BACKEND_BASE_URL ;
 // Route lookup by account type submitted from the client.
 const ENDPOINTS = {
   instructor: "/auth/delete-pilot-req",

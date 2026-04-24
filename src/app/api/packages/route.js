@@ -1,7 +1,8 @@
 export const runtime = "nodejs";
 
+const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL ;
 // Upstream endpoint for package catalog retrieval.
-const UPSTREAM_URL = "https://api.pilotadmin.site/packages/get-packages";
+const UPSTREAM_URL = `${BACKEND_BASE_URL}/packages/get-packages`;
 
 // Standard JSON response helper for this route.
 function jsonResponse(data, status = 200) {

@@ -1,7 +1,8 @@
 export const runtime = "nodejs";
 
+const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL ;
 // Upstream endpoint for learner enquiries.
-const ENDPOINT = "https://api.pilotadmin.site/users/learner-enquiry";
+const ENDPOINT = `${BACKEND_BASE_URL}/users/learner-enquiry`;
 
 // Uses env token in production; fallback is only for local continuity.
 const AUTH_TOKEN =

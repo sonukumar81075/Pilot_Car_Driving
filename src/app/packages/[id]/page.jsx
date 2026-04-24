@@ -1,8 +1,9 @@
 import { notFound } from "next/navigation";
 import { PackageDetailsClient } from "@/components/packages/PackageDetailsClient";
 
-const API_URL = "https://api.pilotadmin.site/packages/get-packages";
-const ADDON_API_URL = "https://api.pilotadmin.site/packages/get-add-ons";
+const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL ;
+const API_URL = `${BACKEND_BASE_URL}/packages/get-packages`;
+const ADDON_API_URL = `${BACKEND_BASE_URL}/packages/get-add-ons`;
 
 async function safeFetchJson(url) {
   try {

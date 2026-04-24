@@ -195,12 +195,14 @@ import { IoMdClose } from "react-icons/io";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiApps2Line } from "react-icons/ri"; // Modern icon for mobile
 import Image from "next/image";
+import { getStoredAuthContext, normalizeLearnerProfile } from "@/lib/profile";
 
 export function Navbar({ links }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -219,46 +221,91 @@ export function Navbar({ links }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const auth = getStoredAuthContext();
+    if (!auth?.token || !auth?.learnerID) {
+      setLoggedInUser(null);
+      return;
+    }
+
+    const profile = normalizeLearnerProfile(auth.parsedUser);
+    const displayName = profile.name || "Learner";
+    const displayEmail = profile.email || "";
+    const initials = displayName.trim().charAt(0).toUpperCase();
+
+    setLoggedInUser({
+      name: displayName,
+      email: displayEmail,
+      learnerID: auth.learnerID,
+      initials: initials || "L",
+    });
+  }, [pathname]);
+
   const leftLinks = links.slice(0, 2);
   const rightLinks = links.slice(2, 4);
 
   return (
     <>
       <header
-        className={`fixed top-0 z-50 w-full font-lexend transition-all duration-300 ease-out ${
-          visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        }`}
+        className={`fixed top-0 z-50 w-full font-lexend transition-all duration-300 ease-out ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+          }`}
       >
-            {/* --- DESKTOP VIEW --- */}
-            <div className="hidden md:flex mt-6 px-4 justify-center w-full">
-              <div className={`
-                flex items-center justify-between gap-12 px-8 py-3 rounded-full border border-slate-100 bg-white/80 backdrop-blur-md transition-all duration-300
-                ${scrolled ? "shadow-xl ring-1 ring-slate-900/5" : "shadow-sm"}
-              `}>
-                <nav className="flex items-center gap-6">
-                  {leftLinks.map((l) => (
-                    <Link key={l.href} href={l.href} className="px-4 py-2 text-[15px] font-bold text-blue-900 hover:text-blue-600 transition-colors">
-                      {l.label}
-                    </Link>
-                  ))}
-                </nav>
-
-                <Link href="/" className="flex items-center">
-                  <Image src="/images/logo/Pilot Logo.png" alt="Pilot Logo" width={110} height={35} priority />
-                </Link>
-
-                <nav className="flex items-center gap-6">
-                  {rightLinks.map((l) => (
-                    <Link key={l.href} href={l.href} className="px-4 py-2 text-[15px] font-bold text-blue-900 hover:text-blue-600 transition-colors">
-                      {l.label}
-                    </Link>
-                  ))}
-                </nav>
+        {loggedInUser ? (
+          <div className="pointer-events-none absolute right-4 top-[25px] hidden md:block">
+            <Link
+              href="/my-account"
+              className="pointer-events-auto block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
+            >
+              <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white/95 px-3 py-3 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
+                <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-[11px] font-bold text-blue-900">
+                  Hi
+                  <span className="absolute right-0.5 -top-1 flex h-3 w-3">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
+                    <span className="relative inline-flex h-3 w-3 rounded-full border border-white bg-blue-600" />
+                  </span>
+                </div>
+                <div className="min-w-0">
+                  <p className="truncate text-sm font-semibold leading-tight text-slate-900">
+                    {loggedInUser.name}
+                  </p>
+                  <p className="truncate text-[11px] font-medium text-slate-500">{loggedInUser.email}</p>
+                </div>
               </div>
-            </div>
+            </Link>
+          </div>
+        ) : null}
+        {/* --- DESKTOP VIEW --- */}
+        <div className="hidden md:flex mt-6 px-4 w-full">
+          <div className="relative mx-auto w-full max-w-[1280px]">
+            <div className={`
+                flex items-center justify-between gap-12 px-8 py-3 rounded-full border border-slate-100 bg-white/80 backdrop-blur-md transition-all duration-300
+                ${scrolled ? "shadow-xl ring-1 ring-slate-900/5" : "shadow-sm"} mx-auto w-fit
+              `}>
+              <nav className="flex items-center gap-6">
+                {leftLinks.map((l) => (
+                  <Link key={l.href} href={l.href} className="px-4 py-2 text-[15px] font-bold text-blue-900 hover:text-blue-600 transition-colors">
+                    {l.label}
+                  </Link>
+                ))}
+              </nav>
 
-            {/* --- MOBILE VIEW (New Look) --- */}
-            {/* <div className="md:hidden w-full px-4 pt-4">
+              <Link href="/" className="flex items-center">
+                <Image src="/images/logo/Pilot Logo.png" alt="Pilot Logo" width={110} height={35} priority />
+              </Link>
+
+              <nav className="flex items-center gap-6">
+                {rightLinks.map((l) => (
+                  <Link key={l.href} href={l.href} className="px-4 py-2 text-[15px] font-bold text-blue-900 hover:text-blue-600 transition-colors">
+                    {l.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        {/* --- MOBILE VIEW (New Look) --- */}
+        {/* <div className="md:hidden w-full px-4 pt-4">
               <div
                 className={`
       flex items-center justify-between px-5 py-3 rounded-2xl 
@@ -291,50 +338,50 @@ export function Navbar({ links }) {
                 </div>
               </div>
             </div> */}
-            <div className="md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300">
-              <div
-                className={`
+        <div className="md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300">
+          <div
+            className={`
               flex items-center justify-between px-7 py-4
               transition-all duration-500 ease-in-out
               ${scrolled
-                    ? "bg-white/80 backdrop-blur-md shadow-sm  "
-                    : "bg-transparent"}
+                ? "bg-white/80 backdrop-blur-md shadow-sm  "
+                : "bg-transparent"}
     `}
-              > 
-                <Link href="/" className="flex items-center group">
-                  <div className="relative">
-                    <Image
-                      src="/images/logo/Pilot Logo.png"
-                      alt="Logo"
-                      width={85}
-                      height={28}
-                      className="object-contain transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                </Link>
- 
-                <div className="flex items-center gap-4"> 
-                  <button
-                    onClick={() => setOpen(true)}
-                    className={`
+          >
+            <Link href="/" className="flex items-center group">
+              <div className="relative">
+                <Image
+                  src="/images/logo/Pilot Logo.png"
+                  alt="Logo"
+                  width={85}
+                  height={28}
+                  className="object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            </Link>
+
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => setOpen(true)}
+                className={`
           relative flex items-center justify-center p-2.5 rounded-full
           transition-all duration-300 active:scale-90
           ${scrolled
-                        ? "btn-gradient btn-gradient-glow text-white shadow-lg shadow-[#0f2f86]/20"
-                        : "bg-white text-[#0f2f86] shadow-md"}
+                    ? "btn-gradient btn-gradient-glow text-white shadow-lg shadow-[#0f2f86]/20"
+                    : "bg-white text-[#0f2f86] shadow-md"}
         `}
-                  >
-                    <RiApps2Line size={22} />
-                    
-                  </button>
-                </div>
-              </div>
+              >
+                <RiApps2Line size={22} />
+
+              </button>
             </div>
+          </div>
+        </div>
 
 
 
 
-            
+
       </header>
 
       {/* --- MOBILE BOTTOM DRAWER MENU --- */}

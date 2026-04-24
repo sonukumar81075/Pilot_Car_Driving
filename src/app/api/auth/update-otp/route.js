@@ -1,7 +1,7 @@
 export const runtime = "nodejs";
 
 // Backend host used by this proxy route.
-const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL || "https://devapi.pilotadmin.site";
+const BACKEND_BASE_URL = process.env.BACKEND_BASE_URL ;
 const BACKEND_SEND_OTP_PATH = process.env.BACKEND_SEND_OTP_PATH || "/auth/update-otp";
 
 function jsonResponse(data, status = 200) {

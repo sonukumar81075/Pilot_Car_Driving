@@ -6,10 +6,9 @@ import { PackageOptionCard } from "./PackageOptionCard";
 import { PaymentSummary } from "./PaymentSummary";
 import LeadModal from "@/components/sections/LeadModal";
 import { Container } from "../ui/Container";
+import { getStoredAuthContext, normalizeLearnerProfile } from "@/lib/profile";
 
-/** Razorpay checkout for License Training Packages only (Car/Bike use the lead modal). */
-const LICENSE_TRAINING_RAZORPAY_URL =
-  process.env.NEXT_PUBLIC_RAZORPAY_LICENSE_PAYMENT_LINK || "https://rzp.io/rzp/6VNm6uEi";
+const PACKAGE_BOOKING_API_URL = "/api/packages/package-booking";
 
 function getFinalPrice(pkg) {
   if (!pkg) return 0;
@@ -39,6 +38,9 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
   const [selectedPackageId, setSelectedPackageId] = useState(Number(initialPackageId));
   const [selectedAddonId, setSelectedAddonId] = useState(null);
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const [isBookingSubmitting, setIsBookingSubmitting] = useState(false);
+  const [bookingError, setBookingError] = useState("");
+  const [bookingSuccess, setBookingSuccess] = useState("");
 
   const selectedPackage = useMemo(
     () => packageOptions.find((pkg) => pkg.package_id === selectedPackageId) || packageOptions[0],
@@ -112,12 +114,110 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     sourcePage: "package-details",
   };
 
-  function handleActionClick() {
-    if (isLicensePackage) {
-      window.open(LICENSE_TRAINING_RAZORPAY_URL, "_blank", "noopener,noreferrer");
+  async function loadRazorpayScript() {
+    if (window.Razorpay) return true;
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  }
+
+  async function handleActionClick() {
+    if (!isLicensePackage) {
+      setIsLeadModalOpen(true);
       return;
     }
-    setIsLeadModalOpen(true);
+
+    setBookingError("");
+    setBookingSuccess("");
+
+    const authContext = getStoredAuthContext();
+    const token = authContext.token;
+    const learnerID = authContext.learnerID;
+    const profile = normalizeLearnerProfile(authContext.parsedUser);
+
+    if (!token || !learnerID) {
+      setBookingError("Please login to continue booking.");
+      return;
+    }
+
+    setIsBookingSubmitting(true);
+    try {
+      const payload = {
+        learnerID,
+        package_id: selectedPackage?.package_id,
+        add_ons: JSON.stringify(
+          selectedAddons
+            .map((addon) => Number(addon.id))
+            .filter((id) => Number.isFinite(id) && id > 0)
+        ),
+        address: profile.address || "",
+        lat: "10:20:00",
+        long: "75.7873",
+        pickupAddress: profile.address || "",
+        gateway: "RZPAY",
+        discounted_base_price: Number(basePrice || 0).toFixed(2),
+        add_ons_total: Number(addonsTotal || 0).toFixed(2),
+        price_adjustment: "0.00",
+        subtotal: Number(subtotal || 0).toFixed(2),
+        cgst_amount: "0.00",
+        sgst_amount: "0.00",
+        total_price: Number(totalPrice || 0).toFixed(2),
+        payment_source: "web",
+      };
+
+      const response = await fetch(PACKAGE_BOOKING_API_URL, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || result?.success === false) {
+        throw new Error(result?.message || `Booking request failed (${response.status})`);
+      }
+
+      const razorpayKey = result?.data?.razorpay?.key;
+      const razorpayOrderId = result?.data?.razorpay?.order?.order_id;
+      const prefill = result?.data?.razorpay?.prefill || {};
+
+      const canOpenRazorpay = await loadRazorpayScript();
+      if (!canOpenRazorpay || !razorpayKey || !razorpayOrderId) {
+        setBookingSuccess("Booking created successfully.");
+        return;
+      }
+
+      const rzp = new window.Razorpay({
+        key: razorpayKey,
+        order_id: razorpayOrderId,
+        name: "Pilot",
+        description: selectedPackage?.name || "License Package Booking",
+        prefill: {
+          name: profile.name || "",
+          email: prefill.email || profile.email || "",
+          contact: prefill.contact || profile.contactInfo || "",
+        },
+        theme: {
+          color: "#2563eb",
+        },
+      });
+      rzp.on("payment.failed", (event) => {
+        setBookingError(event?.error?.description || "Payment failed. Please try again.");
+      });
+      rzp.open();
+      setBookingSuccess(result?.message || "Booked learner package successfully.");
+    } catch (error) {
+      setBookingError(error?.message || "Failed to create booking.");
+    } finally {
+      setIsBookingSubmitting(false);
+    }
   }
 
 
@@ -182,6 +282,16 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
           </section>
 
           <div className="lg:sticky lg:top-24 lg:h-fit">
+            {bookingSuccess ? (
+              <div className="mb-3 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-semibold text-emerald-800">
+                {bookingSuccess}
+              </div>
+            ) : null}
+            {bookingError ? (
+              <div className="mb-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                {bookingError}
+              </div>
+            ) : null}
             <PaymentSummary
               baseLabel={selectedPackage?.name || "Selected Package"}
               basePrice={basePrice}
@@ -189,6 +299,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
               taxRate={taxRate}
               actionLabel={actionLabel}
               onActionClick={handleActionClick}
+              isSubmitting={isBookingSubmitting}
             />
           </div>
         </div>

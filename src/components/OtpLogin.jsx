@@ -11,6 +11,24 @@ const AUTH_COOKIE_KEY = "pilot_auth";
 const OTP_LENGTH = 4;
 const SUCCESS_REDIRECT_DELAY_MS = 1000;
 
+function extractTokenFromPayload(payload) {
+  if (!payload || typeof payload !== "object") return "";
+  const queue = [payload];
+  while (queue.length > 0) {
+    const current = queue.shift();
+    if (!current || typeof current !== "object") continue;
+    for (const [key, value] of Object.entries(current)) {
+      if (typeof value === "string" && key.toLowerCase().includes("token") && value.trim()) {
+        return value.trim();
+      }
+      if (value && typeof value === "object") {
+        queue.push(value);
+      }
+    }
+  }
+  return "";
+}
+
 export default function OtpLogin() {
   const router = useRouter();
 
@@ -33,11 +51,20 @@ export default function OtpLogin() {
 
   // Keep authenticated users away from the login page.
   useEffect(() => {
-    const savedUser = localStorage.getItem("pilotUser");
-
+    const savedUser = sessionStorage.getItem("pilotUser");
+    const savedToken = sessionStorage.getItem("token") || sessionStorage.getItem("accessToken");
+    let tokenFromUser = "";
     if (savedUser) {
+      try {
+        tokenFromUser = extractTokenFromPayload(JSON.parse(savedUser));
+      } catch {
+        tokenFromUser = "";
+      }
+    }
+
+    if (savedUser && (savedToken || tokenFromUser)) {
       document.cookie = `${AUTH_COOKIE_KEY}=1; path=/; max-age=2592000; samesite=lax`;
-      router.replace("/");
+      router.replace("/my-account");
     }
   }, [router]);
 
@@ -137,12 +164,17 @@ export default function OtpLogin() {
         otp: otp.trim(),
       });
 
-      // Persist authenticated user payload for dashboard/session usage.
-      localStorage.setItem("pilotUser", JSON.stringify(data));
+      // Persist authenticated user payload in session storage.
+      sessionStorage.setItem("pilotUser", JSON.stringify(data));
+      const token = extractTokenFromPayload(data);
+      if (token) {
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("accessToken", token);
+      }
       document.cookie = `${AUTH_COOKIE_KEY}=1; path=/; max-age=2592000; samesite=lax`;
       setSuccessMessage("Login successful.");
       await new Promise((resolve) => setTimeout(resolve, SUCCESS_REDIRECT_DELAY_MS));
-      router.replace("/");
+      router.replace("/my-account");
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
