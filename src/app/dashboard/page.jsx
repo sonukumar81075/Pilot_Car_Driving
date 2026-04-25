@@ -15,16 +15,16 @@ export default function DashboardPage() {
       localStorage.getItem("accessToken");
 
     if (!savedUser || !token) {
-      router.replace("/login");
+      router.replace("/");
       return;
     }
 
-    router.replace("/my-account");
+    router.replace("/");
   }, [router]);
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#FFFFFF] px-4">
-      <p className="rounded-xl bg-slate-100 px-5 py-3 text-sm font-medium text-slate-600">Redirecting to My Profile...</p>
+      <p className="rounded-xl bg-slate-100 px-5 py-3 text-sm font-medium text-slate-600">Redirecting...</p>
     </main>
   );
 }

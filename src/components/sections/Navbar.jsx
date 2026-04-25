@@ -189,7 +189,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import { HiMenuAlt3 } from "react-icons/hi";
@@ -198,12 +198,15 @@ import Image from "next/image";
 import { getStoredAuthContext, normalizeLearnerProfile } from "@/lib/profile";
 
 export function Navbar({ links }) {
+  const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState(null);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const userMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -241,6 +244,32 @@ export function Navbar({ links }) {
     });
   }, [pathname]);
 
+  useEffect(() => {
+    function handleOutsideClick(event) {
+      if (!userMenuRef.current) return;
+      if (!userMenuRef.current.contains(event.target)) {
+        setIsUserMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, []);
+
+  function handleLogout() {
+    sessionStorage.removeItem("pilotUser");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("profileCompleted");
+    localStorage.removeItem("pilotUser");
+    localStorage.removeItem("token");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("profileCompleted");
+    document.cookie = "pilot_auth=; path=/; max-age=0; samesite=lax";
+    setLoggedInUser(null);
+    setIsUserMenuOpen(false);
+    router.replace("/");
+  }
+
   const leftLinks = links.slice(0, 2);
   const rightLinks = links.slice(2, 4);
 
@@ -251,12 +280,17 @@ export function Navbar({ links }) {
           }`}
       >
         {loggedInUser ? (
-          <div className="pointer-events-none absolute right-4 top-[25px] hidden md:block">
-            <Link
-              href="/my-account"
-              className="pointer-events-auto block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
+          <div ref={userMenuRef} className="pointer-events-none absolute right-4 top-[25px] hidden md:block">
+            <button
+              type="button"
+              onClick={() => setIsUserMenuOpen((prev) => !prev)}
+              className="pointer-events-auto block w-[248px] rounded-2xl text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400/70"
             >
-              <div className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white/95 px-3 py-3 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md">
+              <div
+                className={`flex items-center gap-2 border border-slate-200 bg-white/95 px-3 py-3 shadow-sm backdrop-blur transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md ${
+                  isUserMenuOpen ? "rounded-t-2xl rounded-b-none" : "rounded-2xl"
+                }`}
+              >
                 <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-[11px] font-bold text-blue-900">
                   {loggedInUser.initials}
                   <span className="absolute right-0.5 -top-1 flex h-3 w-3">
@@ -271,7 +305,20 @@ export function Navbar({ links }) {
                   <p className="truncate text-[11px] font-medium text-slate-500">{loggedInUser.email}</p>
                 </div>
               </div>
-            </Link>
+            </button>
+            <div
+              className={`pointer-events-auto absolute right-0 top-[calc(100%-2px)] w-[248px] origin-top-right rounded-b-2xl border border-slate-200 border-t-0 bg-white p-1.5 shadow-lg transition-all duration-200  pb-2 ${
+                isUserMenuOpen ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none -translate-y-1 scale-95 opacity-0"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="block w-full rounded-lg px-3 border border-red-100 py-2 text-center text-sm font-semibold text-red-600 transition hover:bg-red-100 bg-red-50"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         ) : null}
         {/* --- DESKTOP VIEW --- */}
@@ -362,17 +409,35 @@ export function Navbar({ links }) {
 
             <div className="flex items-center gap-3">
               {loggedInUser ? (
-                <Link
-                  href="/my-account"
-                  className="relative flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-[14px] font-bold text-blue-900 shadow-sm"
-                  aria-label="Go to my profile"
-                >
-                  {loggedInUser.initials}
-                  <span className="absolute right-0 top-0 flex h-3 w-3 rounded-full">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
-                    <span className="relative inline-flex h-3 w-3 rounded-full border border-white bg-blue-600" />
-                  </span>
-                </Link>
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setIsUserMenuOpen((prev) => !prev)}
+                    className={`relative flex h-10 w-10 items-center justify-center bg-blue-100 text-[14px] font-bold text-blue-900 shadow-sm ${
+                      isUserMenuOpen ? "rounded-t-full rounded-b-none" : "rounded-full"
+                    }`}
+                    aria-label="Open user menu"
+                  >
+                    {loggedInUser.initials}
+                    <span className="absolute right-0 top-0 flex h-3 w-3 rounded-full">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-75" />
+                      <span className="relative inline-flex h-3 w-3 rounded-full border border-white bg-blue-600" />
+                    </span>
+                  </button>
+                  <div
+                    className={`absolute right-0 top-[calc(100%-2px)] z-[110] w-[180px] origin-top-right rounded-b-2xl border border-slate-200 border-t-0 bg-white p-1.5 shadow-lg transition-all duration-200 ${
+                      isUserMenuOpen ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none -translate-y-1 scale-95 opacity-0"
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="block w-full rounded-lg px-3 py-2 text-center text-sm font-semibold text-red-600 transition hover:bg-red-50"
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </div>
               ) : null}
               <button
                 onClick={() => setOpen(true)}

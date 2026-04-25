@@ -6,16 +6,18 @@ export function middleware(request) {
   const { pathname } = request.nextUrl;
   const isAuthenticated = request.cookies.get(AUTH_COOKIE_KEY)?.value === "1";
 
-  // Block unauthenticated users from protected routes.
-  if (
-    !isAuthenticated &&
-    (pathname === "/" || pathname.startsWith("/dashboard") || pathname.startsWith("/my-account"))
-  ) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  // My account page is no longer part of the flow.
+  if (pathname.startsWith("/my-account")) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Keep authenticated users away from login page.
-  if (isAuthenticated && pathname.startsWith("/login")) {
+  // Dashboard route is deprecated; keep users on home.
+  if (pathname.startsWith("/dashboard")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Login page is removed from the primary flow.
+  if (pathname.startsWith("/login")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
@@ -23,5 +25,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: ["/", "/login", "/dashboard/:path*", "/my-account/:path*"],
+  matcher: ["/login", "/dashboard/:path*", "/my-account/:path*"],
 };

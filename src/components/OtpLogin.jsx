@@ -64,7 +64,7 @@ export default function OtpLogin() {
 
     if (savedUser && (savedToken || tokenFromUser)) {
       document.cookie = `${AUTH_COOKIE_KEY}=1; path=/; max-age=2592000; samesite=lax`;
-      router.replace("/my-account");
+      router.replace("/");
     }
   }, [router]);
 
@@ -174,7 +174,7 @@ export default function OtpLogin() {
       document.cookie = `${AUTH_COOKIE_KEY}=1; path=/; max-age=2592000; samesite=lax`;
       setSuccessMessage("Login successful.");
       await new Promise((resolve) => setTimeout(resolve, SUCCESS_REDIRECT_DELAY_MS));
-      router.replace("/my-account");
+      router.replace("/");
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
