@@ -12,6 +12,7 @@ export function PaymentSummary({
   actionLabel = "Interested",
   onActionClick,
   isSubmitting = false,
+  isDisabled = false,
 }) {
   const subtotal = Number(basePrice || 0) + Number(addonsTotal || 0);
   const taxAmount = subtotal * Number(taxRate || 0);
@@ -54,7 +55,7 @@ export function PaymentSummary({
       <button
         type="button"
         onClick={onActionClick}
-        disabled={isSubmitting}
+        disabled={isSubmitting || isDisabled}
         className="mt-5 sm:mt-6 w-full sm:rounded-xl rounded-full btn-gradient btn-gradient-glow py-2.5 sm:py-3.5 text-xs sm:text-base font-extrabold text-white cursor-pointer shadow-lg transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {isSubmitting ? "Processing..." : actionLabel === "Interested" ? "Interested" : actionLabel}

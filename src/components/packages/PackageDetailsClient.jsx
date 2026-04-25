@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { AddonItem } from "./AddonItem";
 import { PackageOptionCard } from "./PackageOptionCard";
 import { PaymentSummary } from "./PaymentSummary";
@@ -84,6 +84,21 @@ function isProfileReadyForPayment(profile) {
   return isEmailUpdated(profile?.email);
 }
 
+function isLearnerAlreadyBooked(learner) {
+  if (!learner || typeof learner !== "object") return false;
+  if (Boolean(learner.booked)) return true;
+  const learnerPackages = Array.isArray(learner.LearnerPackages)
+    ? learner.LearnerPackages
+    : Array.isArray(learner.learnerPackages)
+      ? learner.learnerPackages
+      : [];
+  return learnerPackages.some((pkg) => {
+    const status = String(pkg?.status || "").toLowerCase();
+    if (pkg?.subscription_id) return true;
+    return Boolean(status && !["cancelled", "canceled", "failed"].includes(status));
+  });
+}
+
 export function PackageDetailsClient({ packageOptions, initialPackageId, addons, packageTypeLabel }) {
   const [selectedPackageId, setSelectedPackageId] = useState(Number(initialPackageId));
   const [selectedAddonId, setSelectedAddonId] = useState(null);
@@ -107,6 +122,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     gender: "",
   });
   const [isProfileSubmitting, setIsProfileSubmitting] = useState(false);
+  const [isBooked, setIsBooked] = useState(false);
 
   const selectedPackage = useMemo(
     () => packageOptions.find((pkg) => pkg.package_id === selectedPackageId) || packageOptions[0],
@@ -137,7 +153,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
   const totalPrice = subtotal + taxAmount;
 
   const isLicensePackage = String(packageTypeLabel || "").toLowerCase().includes("license");
-  const actionLabel = isLicensePackage ? "Pay Now" : "Interested";
+  const actionLabel = isLicensePackage ? (isBooked ? "Booked" : "Pay Now") : "Interested";
 
   const leadModalData = {
     checkoutSummary: true,
@@ -192,6 +208,18 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     });
   }, []);
 
+  useEffect(() => {
+    if (!bookingSuccess) return undefined;
+    const timeout = setTimeout(() => setBookingSuccess(""), 3500);
+    return () => clearTimeout(timeout);
+  }, [bookingSuccess]);
+
+  useEffect(() => {
+    if (!gateSuccess) return undefined;
+    const timeout = setTimeout(() => setGateSuccess(""), 3000);
+    return () => clearTimeout(timeout);
+  }, [gateSuccess]);
+
   const delay = useCallback((ms) => new Promise((resolve) => setTimeout(resolve, ms)), []);
 
   const fetchLatestProfile = useCallback(async (token, learnerID) => {
@@ -205,7 +233,10 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
       throw new Error(result?.message || "Failed to fetch profile.");
     }
     const learnerNode = extractLearnerFromResponse(result);
-    return normalizeLearnerProfile(learnerNode);
+    return {
+      profile: normalizeLearnerProfile(learnerNode),
+      learnerNode,
+    };
   }, []);
 
   const openProfileGate = useCallback((profile) => {
@@ -257,6 +288,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
       if (!response.ok || result?.success === false) {
         throw new Error(result?.message || `Booking request failed (${response.status})`);
       }
+      setIsBooked(true);
       setBookingSuccess(result?.message || "Booking created successfully.");
       await delay(MIN_SUCCESS_DELAY_MS);
 
@@ -302,7 +334,14 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     }
 
     try {
-      const profile = await fetchLatestProfile(authContext.token, authContext.learnerID);
+      const latest = await fetchLatestProfile(authContext.token, authContext.learnerID);
+      const profile = latest.profile;
+      const alreadyBooked = isLearnerAlreadyBooked(latest.learnerNode);
+      setIsBooked(alreadyBooked);
+      if (alreadyBooked) {
+        setBookingSuccess("Package already booked.");
+        return null;
+      }
       if (!isProfileReadyForPayment(profile)) {
         openProfileGate(profile);
         return null;
@@ -319,10 +358,14 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
   const attemptLicenseCheckout = useCallback(async () => {
     setBookingError("");
     setBookingSuccess("");
+    if (isBooked) {
+      setBookingSuccess("Package already booked.");
+      return;
+    }
     const gate = await ensureCheckoutGate();
     if (!gate) return;
     await runRazorpayCheckout(gate.token, gate.learnerID, gate.profile);
-  }, [ensureCheckoutGate, runRazorpayCheckout]);
+  }, [ensureCheckoutGate, isBooked, runRazorpayCheckout]);
 
   const handleActionClick = useCallback(async () => {
     if (!isLicensePackage) {
@@ -381,7 +424,16 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
         throw new Error("Login response is missing required session data.");
       }
 
-      const profile = await fetchLatestProfile(authContext.token, authContext.learnerID);
+      const latest = await fetchLatestProfile(authContext.token, authContext.learnerID);
+      const profile = latest.profile;
+      const alreadyBooked = isLearnerAlreadyBooked(latest.learnerNode);
+      setIsBooked(alreadyBooked);
+      if (alreadyBooked) {
+        setGateSuccess("Package already booked.");
+        await delay(MIN_SUCCESS_DELAY_MS);
+        setIsGateModalOpen(false);
+        return;
+      }
       if (isProfileReadyForPayment(profile)) {
         setGateSuccess("OTP verified successfully. Continuing to payment...");
         await delay(MIN_SUCCESS_DELAY_MS);
@@ -422,12 +474,19 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
     setGateSuccess("");
     setIsProfileSubmitting(true);
     try {
-      const latestProfileBeforeUpdate = await fetchLatestProfile(authContext.token, authContext.learnerID);
-      if (isProfileReadyForPayment(latestProfileBeforeUpdate)) {
+      const latestBeforeUpdate = await fetchLatestProfile(authContext.token, authContext.learnerID);
+      if (isLearnerAlreadyBooked(latestBeforeUpdate.learnerNode)) {
+        setIsBooked(true);
+        setGateSuccess("Package already booked.");
+        await delay(MIN_SUCCESS_DELAY_MS);
+        setIsGateModalOpen(false);
+        return;
+      }
+      if (isProfileReadyForPayment(latestBeforeUpdate.profile)) {
         setGateSuccess("Profile already complete. Continuing to payment...");
         await delay(MIN_SUCCESS_DELAY_MS);
         setIsGateModalOpen(false);
-        await runRazorpayCheckout(authContext.token, authContext.learnerID, latestProfileBeforeUpdate);
+        await runRazorpayCheckout(authContext.token, authContext.learnerID, latestBeforeUpdate.profile);
         return;
       }
 
@@ -449,15 +508,15 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
         throw new Error(result?.message || "Profile update failed.");
       }
 
-      const latestProfile = await fetchLatestProfile(authContext.token, authContext.learnerID);
-      if (!isProfileReadyForPayment(latestProfile)) {
+      const latestAfterUpdate = await fetchLatestProfile(authContext.token, authContext.learnerID);
+      if (!isProfileReadyForPayment(latestAfterUpdate.profile)) {
         throw new Error("Email is not updated or profile is incomplete. Please complete your profile.");
       }
 
       setGateSuccess("Profile updated successfully. Continuing to payment...");
       await delay(MIN_SUCCESS_DELAY_MS);
       setIsGateModalOpen(false);
-      await runRazorpayCheckout(authContext.token, authContext.learnerID, latestProfile);
+      await runRazorpayCheckout(authContext.token, authContext.learnerID, latestAfterUpdate.profile);
     } catch (error) {
       setGateError(error?.message || "Failed to update profile.");
     } finally {
@@ -545,6 +604,7 @@ export function PackageDetailsClient({ packageOptions, initialPackageId, addons,
               actionLabel={actionLabel}
               onActionClick={handleActionClick}
               isSubmitting={isBookingSubmitting}
+              isDisabled={isLicensePackage && isBooked}
             />
           </div>
         </div>
