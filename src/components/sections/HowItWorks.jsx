@@ -123,9 +123,22 @@ export function HowItWorks({ steps }) {
                   </p>
                 </div>
 
-                <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] flex items-end justify-center">
-                  <div className="relative w-[85%] h-[90%]">
-                    <Image src={s.image} alt="" fill className="object-contain" />
+                <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] overflow-hidden">
+                  <div
+                    className={`absolute left-1/2 w-[82%] -translate-x-1/2 ${idx === 3
+                        ? "h-[90%] bottom-4"
+                        : idx % 2 === 0
+                          ? "h-[90%] top-4"
+                          : "h-[90%] bottom-5"
+                      }`}
+                  >
+                    <Image
+                      src={s.image}
+                      alt={s.title}
+                      fill
+                      priority
+                      className="object-contain"
+                    />
                   </div>
                 </div>
               </div>

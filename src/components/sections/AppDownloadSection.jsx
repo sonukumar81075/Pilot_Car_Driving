@@ -8,19 +8,23 @@ export function AppDownloadSection({ data }) {
   if (!data) return null;
 
   return (
-    <section className="pb-3 pt-8 sm:pt-10 font-lexend lg:px-0 md:pt-24 md:pb-4 bg-gradient-to-b from-[var(--brand-muted)] to-white">
+    <section className="pb-3 pt-8 sm:pt-10 font-lexend lg:px-0 md:pt-24  bg-gradient-to-b from-[var(--brand-muted)] to-white">
       <Container className="text-center ">
-        <div className="relative flex w-full justify-center pb-4 sm:pb-6">
+        <div className="relative flex w-full justify-center  ">
           <Image
-            src="/images/mobile_image.png"
+            src="/images/ChatGPT Image Apr 27, 2026, 04_56_58 PM.png"
             alt="driving app"
             width={550}
             height={540}
-            className="h-auto w-full max-w-[550px] transition duration-300 hover:scale-[1.03]"
+            className="h-auto w-full max-w-[650px] transition duration-300 hover:scale-[1.03]"
           />
 
           {/* Bottom Shadow Gradient */}
-          <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-100" />
+          {/* <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-95" /> */}
+
+          <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
+          <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
+          <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
         </div>
         <div className="mt-6 max-w-4xl mx-auto">
           <SectionHeading
@@ -29,7 +33,7 @@ export function AppDownloadSection({ data }) {
             highlightText="driving schools near me"
             description="Download the app and start learning to drive today."
           />
-        </div> 
+        </div>
 
         <div className="mt-6 sm:mt-8 pb-14 sm:pb-16 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           {data.appBadges?.map((b) => (

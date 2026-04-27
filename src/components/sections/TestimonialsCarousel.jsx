@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const getVariantClasses = (index) => {
- 
+
   const variants = [
     { text: "text-blue-900", border: "border-[#CBD5E1]", bg: "bg-[#CBD5E1]" },
     { text: "text-blue-900", border: "border-[#CBD5E1]", bg: "bg-[#CBD5E1]" },
@@ -66,7 +66,7 @@ export function TestimonialsCarousel({ testimonials }) {
                       <h3 className={`text-lg sm:text-xl font-black ${variant.text} leading-tight`}>
                         {item.name}
                       </h3>
-                   
+
                     </div>
                   </div>
 
