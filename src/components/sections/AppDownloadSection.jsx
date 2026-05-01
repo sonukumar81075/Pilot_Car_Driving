@@ -12,7 +12,7 @@ export function AppDownloadSection({ data }) {
       <Container className="text-center ">
         <div className="relative flex w-full justify-center  ">
           <Image
-            src="/images/ChatGPT Image Apr 27, 2026, 04_56_58 PM.png"
+            src="/images/footer_top_image.png"
             alt="driving app"
             width={550}
             height={540}
