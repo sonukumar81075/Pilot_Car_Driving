@@ -12,21 +12,21 @@ export function AppDownloadSection({ data }) {
       <Container className="text-center ">
         <div className="relative flex w-full justify-center  ">
           <Image
-            src="/images/footer_top_image.png"
+            src="/images/Group 1707480911.png"
             alt="driving app"
             width={550}
             height={540}
-            className="h-auto w-full max-w-[650px] transition duration-300 hover:scale-[1.03]"
+            className="h-auto w-full max-w-[750px] transition duration-300 hover:scale-[1.03]"
           />
 
           {/* Bottom Shadow Gradient */}
-          {/* <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-95" /> */}
+          <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-95" />
 
           <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
           <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
           <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
         </div>
-        <div className="mt-6 max-w-4xl mx-auto">
+        <div className=" max-w-4xl mx-auto">
           <SectionHeading
             // eyebrow="Get Started"
             title="Skip searching for driving schools near me."
