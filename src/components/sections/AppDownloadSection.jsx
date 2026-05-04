@@ -11,12 +11,21 @@ export function AppDownloadSection({ data }) {
     <section className="pb-3 pt-8 sm:pt-10 font-lexend lg:px-0 md:pt-24  bg-gradient-to-b from-[var(--brand-muted)] to-white">
       <Container className="text-center ">
         <div className="relative flex w-full justify-center  ">
-          <Image
+          {/* <Image
             src="/images/Group 1707480911.png"
             alt="driving app"
             width={550}
             height={540}
             className="h-auto w-full max-w-[750px] transition duration-300 hover:scale-[1.03]"
+          /> */}
+
+          <Image
+            src="/images/Group 1707480911.png"
+            alt="driving app"
+            width={1200}
+            height={1200}
+            quality={100}
+            className="h-auto object-contain w-full max-w-[800px] transition duration-300 hover:scale-[1.03]"
           />
 
         </div>
