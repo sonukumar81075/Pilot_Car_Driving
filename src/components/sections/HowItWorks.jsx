@@ -114,7 +114,7 @@ export function HowItWorks({ steps }) {
               {/* CARD */}
               <div className="relative h-full rounded-[2rem] bg-white p-6 shadow">
 
-                <div className="pt-6 mb-6">
+                <div className="pt-6 mb-6 h-[150px]">
                   <h3 className="text-[20px] font-bold mb-2">
                     {s.title}
                   </h3>
@@ -126,10 +126,10 @@ export function HowItWorks({ steps }) {
                 <div className="relative mt-auto aspect-[1/1.2] rounded-2xl bg-gradient-to-b from-[#eef4ff] to-[#f8fbff] overflow-hidden">
                   <div
                     className={`absolute left-1/2 w-[82%] -translate-x-1/2 ${idx === 3
-                        ? "h-[90%] bottom-4"
-                        : idx % 2 === 0
-                          ? "h-[90%] top-4"
-                          : "h-[90%] bottom-5"
+                      ? "h-[90%] bottom-4"
+                      : idx % 2 === 0
+                        ? "h-[90%] top-4"
+                        : "h-[90%] bottom-5"
                       }`}
                   >
                     <Image

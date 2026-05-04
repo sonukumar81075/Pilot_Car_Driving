@@ -206,7 +206,8 @@ export function Navbar({ links }) {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const lastScrollY = useRef(0);
-  const userMenuRef = useRef(null);
+  const desktopUserMenuRef = useRef(null);
+  const mobileUserMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -246,13 +247,19 @@ export function Navbar({ links }) {
 
   useEffect(() => {
     function handleOutsideClick(event) {
-      if (!userMenuRef.current) return;
-      if (!userMenuRef.current.contains(event.target)) {
+      const clickedInsideDesktop = desktopUserMenuRef.current?.contains(event.target);
+      const clickedInsideMobile = mobileUserMenuRef.current?.contains(event.target);
+      if (!clickedInsideDesktop && !clickedInsideMobile) {
         setIsUserMenuOpen(false);
       }
     }
+
     document.addEventListener("mousedown", handleOutsideClick);
-    return () => document.removeEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
   }, []);
 
   function handleLogout() {
@@ -280,7 +287,7 @@ export function Navbar({ links }) {
           }`}
       >
         {loggedInUser ? (
-          <div ref={userMenuRef} className="pointer-events-none absolute right-4 top-[25px] hidden md:block">
+          <div ref={desktopUserMenuRef} className="pointer-events-none absolute right-4 top-[25px] hidden md:block">
             <button
               type="button"
               onClick={() => setIsUserMenuOpen((prev) => !prev)}
@@ -409,7 +416,7 @@ export function Navbar({ links }) {
 
             <div className="flex items-center gap-3">
               {loggedInUser ? (
-                <div className="relative">
+                <div ref={mobileUserMenuRef} className="relative">
                   <button
                     type="button"
                     onClick={() => setIsUserMenuOpen((prev) => !prev)}
@@ -425,7 +432,7 @@ export function Navbar({ links }) {
                     </span>
                   </button>
                   <div
-                    className={`absolute right-0 top-[calc(100%-2px)] z-[110] w-[180px] origin-top-right rounded-b-2xl border border-slate-200 border-t-0 bg-white p-1.5 shadow-lg transition-all duration-200 ${
+                    className={`absolute right-0 top-full mt-2 z-[120] w-[190px] origin-top-right rounded-2xl border border-slate-200 bg-white p-1.5 shadow-lg transition-all duration-200 ${
                       isUserMenuOpen ? "translate-y-0 scale-100 opacity-100" : "pointer-events-none -translate-y-1 scale-95 opacity-0"
                     }`}
                   >

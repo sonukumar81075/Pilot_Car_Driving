@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/motion/Reveal";
-import Link from "next/link";
 
 export function Hero2({ data }) {
     return (
@@ -90,9 +89,9 @@ export function Hero2({ data }) {
 
                         {/* App Buttons */}
                         <Reveal delay={0.3}>
-                            <div className="mt-5 md:mt-6 flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4 md:justify-start">
+                            <div className="relative z-30 mt-5 md:mt-6 flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4 md:justify-start">
                                 {data?.appBadges?.map((b) => (
-                                    <Link
+                                    <a
                                         key={b.label}
                                         href={b.href}
                                         target="_blank"
@@ -110,7 +109,7 @@ export function Hero2({ data }) {
                                             height={60}
                                             className="h-[44px] w-auto sm:h-[50px] md:h-[48px] lg:h-[56px] xl:h-[60px] transition-transform duration-300 hover:scale-[1.05]"
                                         />
-                                    </Link>
+                                    </a>
                                 ))}
                             </div>
                         </Reveal>
@@ -189,7 +188,7 @@ export function Hero2({ data }) {
                                 </div>
 
                                 {/* Background Rings */}
-                                <div className="absolute left-1/2 top-1/2 -z-10">
+                                <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10">
 
                                     <div className="absolute h-[180px] w-[180px] sm:h-[250px] sm:w-[250px] md:h-[350px] md:w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--accent)]/20 animate-ping-slow" />
 

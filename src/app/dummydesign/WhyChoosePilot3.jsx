@@ -14,7 +14,7 @@ import { motion } from "framer-motion";
 
 const features = [
   {
-    title: "Doorstep Learning",
+    title: "Doorstep Pickup and Drop",
     description: "Get picked up from your preferred location and start learning with ease.",
     icon: UserCheck,
     image: "/images/whyChoose/Doorstep-Learning.png", 

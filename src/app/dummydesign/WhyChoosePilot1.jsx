@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 // ✅ Swiper  
 
 const features = [
-  { title: "Doorstep Learning", description: "Get picked up from your preferred location and start learning with ease.", icon: UserCheck },
+  { title: "Doorstep Pickup and Drop", description: "Get picked up from your preferred location and start learning with ease.", icon: UserCheck },
   { title: "Flexible Time Slots", description: "Learn when it works for you, not when a driving school says so.", icon: BookOpen },
   { title: "Trusted Instructors", description: "Learn from verified professionals who help you build confidence behind the wheel.", icon: Smartphone },
   { title: "Reschedule Anytime", description: "Plans changed? Easily reschedule your lessons without hassle.", icon: Calendar },

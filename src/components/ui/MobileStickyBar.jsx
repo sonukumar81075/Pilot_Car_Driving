@@ -50,15 +50,8 @@ export default function MobileStickyBar() {
 
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
-
-                    return (
-                        <Link
-                            key={item.label}
-                            href={item.href}
-                            target={item.isExternal ? "_blank" : "_self"}
-                            onClick={(e) => handleHomeClick(e, item.href, item.isHome)}
-                            className="flex flex-col items-center justify-center gap-1.5 min-w-[68px] transition-all active:scale-90"
-                        >
+                    const content = (
+                        <>
                             {/* Icon Styling */}
                             <div className={`${isActive ? "text-[#1e3a8a]" : "text-[#94a3b8] opacity-80"}`}>
                                 {item.icon}
@@ -69,6 +62,33 @@ export default function MobileStickyBar() {
                                 }`}>
                                 {item.label}
                             </span>
+                        </>
+                    );
+
+                    const baseClassName = "flex flex-col items-center justify-center gap-1.5 min-w-[68px] transition-all active:scale-90";
+
+                    if (item.isExternal) {
+                        return (
+                            <a
+                                key={item.label}
+                                href={item.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={baseClassName}
+                            >
+                                {content}
+                            </a>
+                        );
+                    }
+
+                    return (
+                        <Link
+                            key={item.label}
+                            href={item.href}
+                            onClick={(e) => handleHomeClick(e, item.href, item.isHome)}
+                            className={baseClassName}
+                        >
+                            {content}
                         </Link>
                     );
                 })}
