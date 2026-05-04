@@ -20,16 +20,16 @@ export function AppDownloadSection({ data }) {
           />
 
           {/* Bottom Shadow Gradient */}
-          <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-95" />
+          {/* <div className="absolute bottom-0 left-0 w-full h-52 bg-gradient-to-b from-transparent to-white opacity-95" />
 
           <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
           <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
-          <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" />
+          <div className="absolute bottom-0 left-0 w-full sm:h-52 h-32 bg-gradient-to-b from-transparent to-[#FAFCFD] opacity-95" /> */}
         </div>
-        <div className=" max-w-4xl mx-auto">
+        <div className=" max-w-4xl mx-auto -mt-8">
           <SectionHeading
             // eyebrow="Get Started"
-            title="Skip searching for driving schools near me."
+            title="Stop searching for driving schools near me."
             highlightText="driving schools near me"
             description="Download the app and start learning to drive today."
           />
